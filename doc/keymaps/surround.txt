@@ -1,0 +1,124 @@
+# nvim-surround
+
+default keymaps = {
+    ys{motion}{char}
+    ds{char}
+    cs{target}{replacement}
+}
+examples = {
+    Old text                    Command         New text
+    surr*ound_words             ysiw)           (surround_words)
+    *make strings               ys$"            "make strings"
+    [delete ar*ound me!]        ds]             delete around me!
+    remove <b>HTML t*ags</b>    dst             remove HTML tags
+    'change quot*es'            cs'"            "change quotes"
+    <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
+    delete(functi*on calls)     dsf             function calls
+}
+
+The Basics
+examples1 = {
+    Old text                    Command         New text
+    local str = H*ello          ysiw"           local str = "Hello"
+    require"nvim-surroun*d"     ysa")           require("nvim-surround")
+    char c = *x;                ysl'            char c = 'x';
+    int a[] = *32;              yst;}           int a[] = {32};
+}
+examples2 = {
+    Old text                    Command         New text ~
+    local str = *               <C-g>s"         local str = "*"
+    local tab = *               <C-g>s}         local str = {*}
+    local str = |some text|     S'              local str = 'some text'
+    |div id="test"|</div>       S>              <div id="test"></div>
+}
+examples3 = {
+    Old text                    Command         New text ~
+    '*some string'              cs'"            "some string"
+    use<*"hello">               cs>)            use("hello")
+    `some text*`                cs`}            {some text}
+}
+
+More Mappings
+examples4 = {
+    Old text                    Command         New text ~
+    hel*lo world                yss"            "hello world"
+    some content                ySStp           <p>
+                                                some content
+                                                </p>
+}
+examples5 = {
+    Old text                    Command         New text ~
+    func_name*                  <C-g>S)         func(
+                                                	*
+                                                )
+}
+examples6 = {
+    Old text                    Command         New text ~
+    func(a*rgs)                 cS))            func(
+                                                args
+                                                )
+
+}
+
+Default Pairs
+examples7 = {
+    Old text                    Command         New text ~
+    *sample_text                ysiw}           {sample_text}
+    *sample_text                ysiw{           { sample_text }
+}
+examples8 = {
+    Old text                    Command         New text ~
+    {( sa*mple_text )}          ds(             {sample_text}
+    {(sa*mple_text)}            ds(             {sample_text}
+    {(sa*mple_text )}           ds(             {sample_text}
+    {( sa*mple_text )}          ds)             { sample_text }
+}
+examples9 = {
+    Old text                    Command         New text ~
+    (sa*mple_text)              cs)}            {sample_text}
+    (sa*mple_text)              cs(}            {sample_text}
+    (sa*mple_text)              cs((            ( sample_text )
+    ( sa*mple_text )            cs()            (sample_text)
+}
+examples10 = {
+    Old text                    Command         New text ~
+    div cont*ents               ysstdiv         <div>div contents</div>
+    h1 *contents                yssth1 id="x"   <h1 id="x">h1 contents</h1>
+    <div>d*iv contents</div>    dst             div contents
+    <h1 id="head">t*ext</h1>    cstdiv          <div id="head">text</div>
+    <h1 id="head">text*</h1>    csTdiv          <div>text</div>
+}
+examples11 = {
+    Old text                    Command         New text ~
+    arg*s                       ysiwffunc       func(args)
+    f*unc_name(a, b, x)         dsf             a, b, x
+    f*unc_name(a, b, x)         csfnew_name     new_name(a, b, x)
+}
+examples12 = {
+    Old text                    Command         New text ~
+    inner text                  yssi/<CR>\      /inner text\
+}
+
+Aliasing
+examples13 = {
+    Old text                    Command         New text ~
+    sample* text                yssb            (sample text)
+    [more stuff]                dsr             more stuff
+    use["nvim*-surround"]       csrb            use("nvim-surround")
+}
+
+examples14 = {
+    Old text                    Command         New text ~
+    "Nested '*quotes'"          dsq             "Nested quotes"
+    "Nes*ted 'quotes'"          dsq             Nested 'quotes'
+    "Nes*ted 'quotes'"          csqb            (Nested 'quotes')
+}
+
+Jump
+examples15 = {
+    Old text                    Command         New text ~
+    "hello"* 'world'            dsq             "hello" world
+    "hello" world*              csqB            {hello} world
+    *some "'nested' quotes"     dsq             some 'nested' quotes
+    "'nested' quotes" t*ext     dsq             'nested' quotes text
+}
