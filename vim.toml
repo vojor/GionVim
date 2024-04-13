@@ -8,7 +8,7 @@ any = true
 [jit]
 any = true
 
-[LabVim]
+[GionVim]
 any = true
 
 [[describe.args]]
