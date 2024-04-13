@@ -1,0 +1,4 @@
+[formatting]
+column = 120
+reorder_arrays = true
+reorder_keys = true

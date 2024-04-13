@@ -1,0 +1,24 @@
+{
+    "neodev": {
+        "library": {
+            "enabled": true,
+            "plugins": true
+        }
+    },
+    "neoconf": {
+        "plugins": {
+            "lua_ls": {
+                "enabled": true
+            }
+        }
+    },
+    "lspconfig": {
+        "lua_ls": {
+            "Lua.completion.callSnippet": "Both",
+            "Lua.completion.keywordSnippet": "Both",
+            "Lua.runtime.version": "LuaJIT",
+            "Lua.workspace.checkThirdParty": false,
+            "Lua.codeLens.enable": true
+        }
+    }
+}
