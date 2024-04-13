@@ -11,6 +11,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
+_G.GionVim = require("config.util")
+
 require("lazy").setup({
     spec = {
         ---- 导入基础插件 ----
@@ -145,6 +147,3 @@ require("lazy").setup({
         },
     },
 })
-
--- 配置全局可调用配置
-_G.GionVim = require("config.util")

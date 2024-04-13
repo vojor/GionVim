@@ -96,9 +96,8 @@ return {
             end,
         },
         init = function()
-            local Util = require("config.util")
-            if not Util.has("noice.nvim") then
-                Util.on_very_lazy(function()
+            if not GionVim.has("noice.nvim") then
+                GionVim.on_very_lazy(function()
                     vim.notify = require("notify")
                 end)
             end

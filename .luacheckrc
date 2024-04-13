@@ -6,7 +6,7 @@ stds.nvim = {
         "os",
         "env",
         "vim",
-        "LabVim",
+        "GionVim",
         "vim.o",
         "vim.g",
         "vim.b",

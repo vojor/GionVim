@@ -1,5 +1,3 @@
-local Util = require("config.util")
-
 return {
     -- telescope 模糊查找
     {
@@ -13,7 +11,7 @@ return {
                 build = "make",
                 lazy = true,
                 config = function()
-                    Util.on_load("telescope.nvim", function()
+                    GionVim.on_load("telescope.nvim", function()
                         require("telescope").load_extension("fzf")
                     end)
                 end,
@@ -22,7 +20,7 @@ return {
                 "nvim-telescope/telescope-file-browser.nvim",
                 lazy = true,
                 config = function()
-                    Util.on_load("telescope.nvim", function()
+                    GionVim.on_load("telescope.nvim", function()
                         require("telescope").load_extension("file_browser")
                     end)
                 end,
@@ -31,7 +29,7 @@ return {
                 "fdschmidt93/telescope-egrepify.nvim",
                 lazy = true,
                 config = function()
-                    Util.on_load("telescope.nvim", function()
+                    GionVim.on_load("telescope.nvim", function()
                         require("telescope").load_extension("egrepify")
                     end)
                 end,
@@ -40,7 +38,7 @@ return {
                 "nvim-telescope/telescope-ui-select.nvim",
                 lazy = true,
                 config = function()
-                    Util.on_load("telescope.nvim", function()
+                    GionVim.on_load("telescope.nvim", function()
                         require("telescope").load_extension("ui-select")
                     end)
                 end,
@@ -147,12 +145,12 @@ return {
             { "<leader>fc", "<cmd>Telescope commands<CR>", desc = "Find Commands" },
             { "<leader>fC", "<cmd>Telescope command_history<CR>", desc = "Find Command History" },
             -- stylua: ignore
-            { "<leader>fd", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
+            { "<leader>fd", GionVim.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
             { "<leader>fe", "<cmd>Telescope egrepify<CR>", desc = "Egrepify Live Grep" },
-            { "<leader>ff", Util.telescope("files"), desc = "Find Files (Root Dir)" },
-            { "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (CWD)" },
-            { "<leader>fg", Util.telescope("live_grep"), desc = "Grep Text (Root Dir)" },
-            { "<leader>fG", Util.telescope("live_grep", { cwd = false }), desc = "Grep Text (CWD)" },
+            { "<leader>ff", GionVim.telescope("files"), desc = "Find Files (Root Dir)" },
+            { "<leader>fF", GionVim.telescope("files", { cwd = false }), desc = "Find Files (CWD)" },
+            { "<leader>fg", GionVim.telescope("live_grep"), desc = "Grep Text (Root Dir)" },
+            { "<leader>fG", GionVim.telescope("live_grep", { cwd = false }), desc = "Grep Text (CWD)" },
             { "<leader>fh", "<cmd>Telescope help_tags<CR>", desc = "Find Help Tags" },
             { "<leader>fi", "<cmd>Telescope registers<CR>", desc = "Find Registers" },
             { "<leader>fm", "<cmd>Telescope marks<CR>", desc = "Find Marks" },
@@ -162,7 +160,7 @@ return {
             -- stylua: ignore
             { "<leader>fT", "<cmd>Telescope file_browser path=%:p:h select_buffer=true theme=ivy<CR>", desc = "Open File Tree(CWD)" },
             -- stylua: ignore
-            { "<leader>fw", Util.telescope("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
+            { "<leader>fw", GionVim.telescope("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
             {
                 "<leader>fl",
                 function()
