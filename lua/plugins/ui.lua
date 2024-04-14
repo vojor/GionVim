@@ -106,7 +106,7 @@ return {
     -- 滚动条
     {
         "petertriho/nvim-scrollbar",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             local colors = require("tokyonight.colors").setup()
             require("scrollbar").setup({

@@ -3,7 +3,7 @@ return {
     {
         "kevinhwang91/nvim-hlslens",
         lazy = true,
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
         keys = {
             { "<leader>hg", "<cmd>HlSearchLensToggle<CR>", desc = "Toggle Highlight Search Lens" },
         },
