@@ -106,10 +106,10 @@ return {
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             -- 作为添加项而不是代替项
-            local clangd_capabilities = vim.tbl_deep_extend("keep", {}, capabilities, {
+            local clangd_capabilities = vim.tbl_deep_extend("force", {}, capabilities, {
                 offsetEncoding = { "utf-16" },
             })
-            local json_capabilities = vim.tbl_deep_extend("keep", {}, capabilities, {
+            local json_capabilities = vim.tbl_deep_extend("force", {}, capabilities, {
                 textDocument = {
                     completion = {
                         completionItem = {
@@ -118,7 +118,15 @@ return {
                     },
                 },
             })
-            local neocmake_capabilities = vim.tbl_deep_extend("keep", {}, capabilities, {
+            local yaml_capabilities = vim.tbl_deep_extend("force", {}, capabilities, {
+                textDocument = {
+                    foldingRange = {
+                        dynamicRegistration = false,
+                        lineFoldingOnly = true,
+                    },
+                },
+            })
+            local neocmake_capabilities = vim.tbl_deep_extend("force", {}, capabilities, {
                 workspace = {
                     didChangeWatchedFiles = {
                         dynamicRegistration = true,
@@ -174,6 +182,7 @@ return {
                 },
                 capabilities = json_capabilities,
             })
+
             lspconfig["yamlls"].setup({
                 settings = {
                     yaml = {
@@ -185,7 +194,7 @@ return {
                         validate = true,
                     },
                 },
-                capabilities = capabilities,
+                capabilities = yaml_capabilities,
             })
 
             lspconfig["pyright"].setup({
