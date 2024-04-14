@@ -88,4 +88,19 @@ return {
             },
         },
     },
+    {
+        "nvim-lualine/lualine.nvim",
+        optional = true,
+        opts = function(_, opts)
+            table.insert(opts.sections.lualine_c, {
+                "aerial",
+                sep = " ",
+                sep_icon = "",
+                depth = 5,
+                dense = false,
+                dense_sep = ".",
+                colored = true,
+            })
+        end,
+    },
 }
