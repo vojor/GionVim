@@ -19,6 +19,10 @@ return {
         opts = {
             auto_preview = false,
             preview = { type = "float" },
+            keys = {
+                j = "next",
+                k = "prev",
+            },
         },
     },
     {
