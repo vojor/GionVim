@@ -6,21 +6,50 @@ return {
         dependencies = { "luarocks.nvim" },
         version = "*",
         ft = "norg",
-        config = function()
-            require("neorg").setup({
-                load = {
-                    ["core.defaults"] = {},
-                    ["core.concealer"] = {},
-                    ["core.dirman"] = {
-                        config = {
-                            workspaces = {
-                                notes = "~/Notes",
-                            },
+        cmd = "Neorg",
+        opts = {
+            load = {
+                ["core.defaults"] = {},
+                ["core.completion"] = {
+                    config = {
+                        engine = "nvim-cmp",
+                    },
+                },
+                ["core.concealer"] = {},
+                ["core.dirman"] = {
+                    config = {
+                        workspaces = {
+                            notes = "~/Notes",
                         },
                     },
                 },
-            })
-        end,
+                ["core.presenter"] = {
+                    config = {
+                        zen_mode = "zen-mode",
+                    },
+                },
+                ["core.keybinds"] = {
+                    config = {
+                        hook = function(keybinds)
+                            keybinds.unmap("norg", "n", "<CR>")
+
+                            keybinds.unmap("presenter", "n", "l")
+                            keybinds.unmap("presenter", "n", "h")
+                            keybinds.unmap("presenter", "n", "<CR>")
+                            keybinds.unmap("presenter", "n", "q")
+
+                            -- Unmaps any Neorg key from the `norg` mode
+                            keybinds.remap_event("presenter", "n", "<Right>", "core.presenter.next_page")
+                            keybinds.remap_event("presenter", "n", "<C-j>", "core.presenter.next_page")
+                            keybinds.remap_event("presenter", "n", "<Left>", "core.presenter.previous_page")
+                            keybinds.remap_event("presenter", "n", "<C-k>", "core.presenter.previous_page")
+                            keybinds.remap_event("presenter", "n", "<Down>", "core.presenter.close")
+                            keybinds.map("norg", "n", "<Up>", "<CMD>Neorg presenter start<CR>")
+                        end,
+                    },
+                },
+            },
+        },
     },
     -- 处理 markdown,zettelkasten,wiki
     {
