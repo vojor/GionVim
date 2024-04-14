@@ -110,13 +110,8 @@ vim.opt.wildmenu = true
 vim.opt.showmode = false
 -- 屏幕重绘时间
 vim.opt.redrawtime = 5000
--- 菜单栏语言
--- vim.opt.langmenu = "zh_CN.UTF-8"
 -- 代码折叠
 vim.opt.foldenable = true
--- -- 折叠方法
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- -- 当前打开文件的折叠级别
 vim.opt.foldlevel = 99
 -- -- 文件初始打开的折叠级别
