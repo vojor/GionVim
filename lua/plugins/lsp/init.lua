@@ -53,14 +53,12 @@ return {
             },
         },
         config = function(_, opts)
-            if opts.inlay_hints.enabled then
-                GionVim.lsp.on_attach(function(client, buffer)
-                    if client.supports_method("textDocument/inlayHint") then
-                        GionVim.toggle.inlay_hints(buffer, true)
-                    end
-                end)
+            if GionVim.has("neoconf.nvim") then
+                local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
+                require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
             end
 
+            -- diagnostics signs
             if vim.fn.has("nvim-0.10.0") == 0 then
                 for severity, icon in pairs(opts.diagnostics.signs.text) do
                     local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
@@ -69,6 +67,16 @@ return {
                 end
             end
 
+            -- inlay hints
+            if opts.inlay_hints.enabled then
+                GionVim.lsp.on_attach(function(client, buffer)
+                    if client.supports_method("textDocument/inlayHint") then
+                        GionVim.toggle.inlay_hints(buffer, true)
+                    end
+                end)
+            end
+
+            -- code lens
             if opts.codelens.enabled and vim.lsp.codelens then
                 GionVim.lsp.on_attach(function(client, buffer)
                     if client.supports_method("textDocument/codeLens") then
@@ -94,18 +102,14 @@ return {
             end
 
             vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
-            vim.lsp.set_log_level("error")
 
-            if GionVim.has("neoconf.nvim") then
-                local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
-                require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
-            end
+            vim.lsp.set_log_level("error")
 
             local lspconfig = require("lspconfig")
 
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-            -- 作为添加项而不是代替项
+            -- 不同语言服务器的 capabilities 表有区别
             local clangd_capabilities = vim.tbl_deep_extend("force", {}, capabilities, {
                 offsetEncoding = { "utf-16" },
             })
