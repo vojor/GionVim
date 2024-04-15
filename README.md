@@ -13,7 +13,7 @@
 
 - Development
 
-  - C/C++,Java,js/ts,lua,python,cmake,bash,vimscript,xml,json support
+  - C/C++, Java, javascript and typescript, lua, python, cmake, bash, vimscript, xml, json support.
 
 - ColorScheme
 
@@ -31,13 +31,13 @@
 
   - basic: git
 
-  - lsp: Node,Python
+  - lsp: Node, Python
 
-  - treesitter: gcc/clang
+  - treesitter: gcc or clang
 
-  - mason: unzip,gzip,wget,curl,tar
+  - mason: unzip, gzip, wget, curl, tar
 
-  - telescope: make,fd,rg,fzf
+  - telescope: make, fd, ripgrep, fzf
 
   - database: sqlite3
 
@@ -49,7 +49,7 @@
 
 - others
 
-  - Windows system: Recommend using msys2 to install dependency tools,address: [msys2](https://www.msys2.org)
+  - Windows system: Recommend using msys2 to install dependency tools, address: [msys2](https://www.msys2.org)
 
   - The system can access GitHub normally
 
@@ -63,7 +63,7 @@
 
   - Windows PowerShell: `git clone https://github.com/legbor/GionVim.git $env:LOCALAPPDATA\nvim`
 
-- Enter the nvim directory: `rm -rf .git`,You can manage projects on your own.
+- Enter the nvim directory: `rm -rf .git`, You can manage projects on your own.
 
 - Terminal input nvim, plugin will automatically install.
 
@@ -73,7 +73,7 @@
 
 ### nvim-lspconfig
 
-- The language server can be installed using Mason, and the configuration file can be found in plugins/lsp/init. lua. You can first modify the configuration, delete unnecessary language servers, or add the necessary language servers yourself.
+- The language server can be installed using Mason, and the configuration file can be found in plugins/lsp/init.lua. You can first modify the configuration, delete unnecessary language servers, or add the necessary language servers yourself.
 
 ### nvim-treesitter
 
