@@ -3,6 +3,8 @@ return {
         "nvimdev/dashboard-nvim",
         event = "VimEnter",
         opts = function()
+            -- 字符生成地址
+            -- https://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=gionvim
             -- local logo = [[
             --     ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗            ▒█▒
             --     ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║         ▄▒▀  ▀▄
