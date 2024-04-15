@@ -1,3 +1,12 @@
+<h1 align="center">GionVim</h1>
+
+<div align="center">
+
+[![Neovim Version](https://img.shields.io/badge/Neovim-0.9%2B-brightblue?style=flat&logo=neovim&logoColor=green)](https://github.com/neovim/neovim)
+[![GitHub License](https://img.shields.io/github/license/legbor/GionVim?style=flat&logo=github&logoColor=orange&color=blue)](https://github.com/legbor/GionVim/blob/main/LICENSE)
+
+</div>
+
 # NeoVim 配置
 
 > 简介：个人 NeoVim 配置文件，主要用于 Linux/WSL，如果在 Windows 下使用，可能会有些卡顿
