@@ -1,3 +1,3 @@
-# 介绍
+# Description
 
-1. 一些插件的 keymaps，方便直接查看
+- Some plugins mappings
