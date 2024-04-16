@@ -81,7 +81,6 @@ return {
                 typescriptreact = { "eslint", "biomejs" },
                 json = { "jsonlint", "biomejs" },
                 jsonc = { "biomejs" },
-                lua = { "luacheck" },
                 make = { "checkmake" },
                 markdown = { "markdownlint" },
                 python = { "ruff" },
