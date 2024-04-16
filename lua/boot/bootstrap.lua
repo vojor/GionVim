@@ -67,6 +67,7 @@ require("lazy").setup({
         { import = "plugins.extras.lsp.reinforce.aerial" }, -- Code outline
         -- { import = "plugins.extras.lsp.reinforce.dropbar" }, -- Code navigate
         { import = "plugins.extras.lsp.reinforce.fidget" }, -- Progress prompt
+        { import = "plugins.extras.lsp.reinforce.garbage" }, -- disable unfocused serve
         { import = "plugins.extras.lsp.reinforce.illuminate" }, -- Display the same vocabulary under the cursor
         { import = "plugins.extras.lsp.reinforce.increname" }, -- Timely feedback rename
         { import = "plugins.extras.lsp.reinforce.lspsaga" }, -- Strengthen LSP experience
