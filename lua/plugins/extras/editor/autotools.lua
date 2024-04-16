@@ -88,15 +88,16 @@ return {
                 fast_wrap = {
                     map = "<M-e>",
                     chars = { "{", "[", "(", '"', "'" },
-                    pattern = [=[[%'%"%>%]%)%}%,]]=],
+                    pattern = ([[ [%'%"%)%>%]%)%}%,] ]]):gsub("%s+", ""),
+                    offset = 0,
                     end_key = "$",
                     before_key = "h",
                     after_key = "l",
                     cursor_pos_before = true,
                     keys = "qwertyuiopzxcvbnmasdfghjkl",
                     check_comma = true,
-                    highlight = "Search",
-                    highlight_grey = "Comment",
+                    highlight = "PmenuSel",
+                    highlight_grey = "LineNr",
                 },
             })
             local ts_conds = require("nvim-autopairs.ts-conds")
