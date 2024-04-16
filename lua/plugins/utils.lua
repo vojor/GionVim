@@ -21,7 +21,7 @@ return {
         config = function()
             local Terminal = require("toggleterm.terminal").Terminal
 
-            -- htop 终端
+            -- htop
             local htop = Terminal:new({
                 cmd = "htop",
                 hidden = true,
@@ -47,7 +47,7 @@ return {
                 htop:toggle()
             end
 
-            -- procs 终端
+            -- procs
             local procs = Terminal:new({
                 cmd = "procs -t",
                 hidden = true,
@@ -74,13 +74,21 @@ return {
             end
 
             require("toggleterm").setup({
+                highlights = {
+                    Normal = { link = "Normal" },
+                    NormalNC = { link = "NormalNC" },
+                    NormalFloat = { link = "NormalFloat" },
+                    FloatBorder = { link = "FloatBorder" },
+                    StatusLine = { link = "StatusLine" },
+                    StatusLineNC = { link = "StatusLineNC" },
+                    WinBar = { link = "WinBar" },
+                    WinBarNC = { link = "WinBarNC" },
+                },
+                shading_factor = 2,
                 persist_size = false,
                 direction = "float",
                 float_opts = {
                     border = "shadow",
-                },
-                winbar = {
-                    enable = true,
                 },
             })
         end,
