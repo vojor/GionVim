@@ -98,6 +98,20 @@ function M.get_kind_filter(buf)
         or nil
 end
 
+M.did_init = false
+function M.init()
+    if M.did_init then
+        return
+    end
+    M.did_init = true
+
+    GionVim.lazy_notify()
+
+    M.load("options")
+
+    GionVim.plugin.setup()
+end
+
 setmetatable(M, {
     __index = function(_, key)
         if options == nil then
