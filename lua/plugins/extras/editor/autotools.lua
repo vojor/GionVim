@@ -88,7 +88,7 @@ return {
                 fast_wrap = {
                     map = "<M-e>",
                     chars = { "{", "[", "(", '"', "'" },
-                    pattern = ([[ [%'%"%)%>%]%)%}%,] ]]):gsub("%s+", ""),
+                    pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
                     offset = 0,
                     end_key = "$",
                     before_key = "h",
