@@ -1,5 +1,5 @@
 return {
-    -- 使用 lua 注入诊断
+    -- 使用 lua 注入诊断，代码操作等
     {
         "nvimtools/none-ls.nvim",
         lazy = true,
@@ -23,34 +23,29 @@ return {
         },
         config = function()
             local none_ls = require("null-ls")
-            local diagnostics = none_ls.builtins.diagnostics
             local code_actions = none_ls.builtins.code_actions
+            local diagnostics = none_ls.builtins.diagnostics
 
-            local default_sources = {}
+            local sources = {
+                -- Code Action
+                code_actions.gitsigns.with({
+                    config = {
+                        filter_actions = function(title)
+                            return title:lower():match("blame") == nil
+                        end,
+                    },
+                }),
 
-            local code_actions_servers = { "gitsigns" }
-            for _, action in ipairs(code_actions_servers) do
-                table.insert(default_sources, code_actions[action])
-            end
-
-            local diagnostics_servers = { "cmake_lint", "ltrs", "selene", "dotenv_linter" }
-            for _, diag in ipairs(diagnostics_servers) do
-                table.insert(default_sources, diagnostics[diag])
-            end
-
-            local conf_sources = {
+                -- Diagnostics
+                diagnostics.cmake_lint,
+                diagnostics.ltrs,
+                diagnostics.selene,
+                diagnostics.dotenv_linter,
                 diagnostics.editorconfig_checker.with({
-                    disabled_filetypes = { "help", "log", "markdown", "norg", "tex", "text" },
+                    disabled_filetypes = { "markdown", "tex", "text", "norg" },
                 }),
             }
 
-            local sources = {}
-            for _, source in ipairs(default_sources) do
-                table.insert(sources, source)
-            end
-            for _, source in ipairs(conf_sources) do
-                table.insert(sources, source)
-            end
             none_ls.setup({
                 sources = sources,
                 border = "rounded",
@@ -67,7 +62,7 @@ return {
             })
         end,
     },
-    -- 不使用类似代码注入方式诊断的代码诊断
+    -- 内置语言服务器诊断的补充
     {
         "mfussenegger/nvim-lint",
         lazy = true,
