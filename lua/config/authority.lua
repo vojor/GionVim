@@ -49,11 +49,6 @@ local options
 function M.setup(opts)
     options = vim.tbl_deep_extend("force", defaults, opts or {}) or {}
 
-    for name, icon in pairs(require("core.icons").icons.diagnostics) do
-        name = "DiagnosticSign" .. name
-        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-    end
-
     local group = vim.api.nvim_create_augroup("GionVim", { clear = true })
     vim.api.nvim_create_autocmd("User", {
         group = group,
