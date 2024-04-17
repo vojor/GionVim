@@ -1,5 +1,5 @@
 return {
-    -- neovim的magit
+    -- neovim 的 magit
     {
         "NeogitOrg/neogit",
         lazy = true,
@@ -76,11 +76,7 @@ return {
                 desc = "Open Neogit Auto Popup",
             },
         },
-        dependencies = {
-            { "plenary.nvim" },
-            { "diffview.nvim" },
-            { "telescope.nvim" },
-        },
+        dependencies = { { "plenary.nvim" }, { "diffview.nvim" }, { "telescope.nvim" } },
         opts = {
             integrations = {
                 telescope = true,
@@ -101,10 +97,8 @@ return {
             { "<leader>dvr", "<cmd>DiffviewRefresh<CR>", desc = "Update Current Entries And File List" },
             { "<leader>dvu", "<cmd>DiffviewFocusFiles<CR>", desc = "Bring Focus To The File Panel" },
         },
-        config = function()
-            require("diffview").setup({
-                enhanced_diff_hl = true,
-            })
-        end,
+        opts = {
+            enhanced_diff_hl = true,
+        },
     },
 }

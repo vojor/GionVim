@@ -6,10 +6,8 @@ return {
         keys = {
             { "<leader>og", "<cmd>TSJToggle<CR>", desc = "Toggle Node" },
         },
-        config = function()
-            require("treesj").setup({
-                use_default_keymaps = false,
-            })
-        end,
+        opts = {
+            use_default_keymaps = false,
+        },
     },
 }
