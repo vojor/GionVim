@@ -76,6 +76,7 @@ return {
                 typescriptreact = { "eslint", "biomejs" },
                 json = { "jsonlint", "biomejs" },
                 jsonc = { "biomejs" },
+                -- lua = { "selene" },
                 make = { "checkmake" },
                 markdown = { "markdownlint" },
                 python = { "ruff" },
@@ -85,7 +86,13 @@ return {
                 zsh = { "zsh" },
                 ["*"] = { "typos" },
             },
-            linters = {},
+            linters = {
+                -- selene = {
+                --     condition = function(ctx)
+                --         return vim.fs.find({ "selene.toml" }, { path = ctx.filename, upward = true })[1]
+                --     end,
+                -- },
+            },
         },
         config = function(_, opts)
             local M = {}
