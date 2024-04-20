@@ -1,5 +1,5 @@
 return {
-    -- 改进了默认vim.ui界面
+    -- 改进了默认 vim.ui 界面
     {
         "stevearc/dressing.nvim",
         lazy = true,
@@ -15,7 +15,7 @@ return {
         end,
         opts = {},
     },
-    -- 完善旧的quickfix窗口
+    -- 完善旧的 quickfix 窗口
     {
         "kevinhwang91/nvim-bqf",
         lazy = true,
@@ -128,40 +128,30 @@ return {
             quit = false,
         },
     },
-    -- 更加便捷文件操作
+    -- 便捷文件操作
     {
         "chrisgrieser/nvim-genghis",
         lazy = true,
-        keys = {
-            { "<leader>yp", desc = "Copy File Path" },
-            { "<leader>ym", desc = "Copy File Name" },
-            { "<leader>yx", desc = "Make File Chmod +X" },
-            { "<leader>yf", desc = "Rename File" },
-            { "<leader>yo", desc = "Move And Rename File" },
-            { "<leader>yn", desc = "Create New File" },
-            { "<leader>yu", desc = "Duplicate File" },
-            { "<leader>yR", desc = "File Trash" },
-            { "<leader>ys", mode = "x", desc = "Move Selection To New File" },
-        },
+        keys = function()
+            local genghis = require("genghis")
+            local keys = {
+                { "<leader>yp", genghis.copyFilepath, desc = "Copy File Path" },
+                { "<leader>ym", genghis.copyFilename, desc = "Copy File Name" },
+                { "<leader>yx", genghis.chmodx, desc = "Make File Chmod +X" },
+                { "<leader>yf", genghis.renameFile, desc = "Rename File" },
+                { "<leader>yo", genghis.moveAndRenameFile, desc = "Move And Rename File" },
+                { "<leader>yn", genghis.createNewFile, desc = "Create New File" },
+                { "<leader>yu", genghis.duplicateFile, desc = "Duplicate File" },
+                { "<leader>yR", genghis.trashFile, desc = "File Trash" },
+                { "<leader>ys", genghis.moveSelectionToNewFile, mode = "x", desc = "Move Selection To New File" },
+            }
+            return keys
+        end,
         init = function()
             vim.g.genghis_use_systemclipboard = true
             vim.g.genghis_disable_commands = true
         end,
         dependencies = { "dressing.nvim" },
-        config = function()
-            local genghis = require("genghis")
-            vim.keymap.set("n", "<leader>yp", genghis.copyFilepath)
-            vim.keymap.set("n", "<leader>ym", genghis.copyFilename)
-            vim.keymap.set("n", "<leader>yx", genghis.chmodx)
-            vim.keymap.set("n", "<leader>yf", genghis.renameFile)
-            vim.keymap.set("n", "<leader>yo", genghis.moveAndRenameFile)
-            vim.keymap.set("n", "<leader>yn", genghis.createNewFile)
-            vim.keymap.set("n", "<leader>yu", genghis.duplicateFile)
-            vim.keymap.set("n", "<leader>yR", function()
-                genghis.trashFile({ trashLocation = "/home/alour/.cache/.Trash/" })
-            end)
-            vim.keymap.set("x", "<leader>ys", genghis.moveSelectionToNewFile)
-        end,
     },
     -- 改进了Yank和Put功能
     {
