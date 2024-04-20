@@ -94,30 +94,57 @@ return {
         end,
     },
     -- 文本移动
+    -- {
+    --     "hinell/move.nvim",
+    --     enabled = false,
+    --     lazy = true,
+    --     keys = {
+    --         { "<M-j>", mode = { "n", "x" }, desc = "Down Move" },
+    --         { "<M-k>", mode = { "n", "x" }, desc = "Up Move" },
+    --         { "<M-l>", mode = { "n", "v" }, desc = "Right Move" },
+    --         { "<M-h>", mode = { "n", "v" }, desc = "Left Move" },
+    --         { "<leader>wl", desc = "Char Right Move" },
+    --         { "<leader>wh", desc = "Char Left Move" },
+    --     },
+    --     config = function()
+    --         local kopts = { noremap = true, silent = true }
+    --         vim.keymap.set("n", "<M-j>", ":MoveLine 1<CR>", kopts)
+    --         vim.keymap.set("n", "<M-k>", ":MoveLine -1<CR>", kopts)
+    --         vim.keymap.set("n", "<M-l>", ":MoveHchar 1", kopts)
+    --         vim.keymap.set("n", "<M-h>", ":MoveHchar -1<CR>", kopts)
+    --         vim.keymap.set("n", "<leader>wl", ":MoveWord 1<CR>", kopts)
+    --         vim.keymap.set("n", "<leader>wh", ":MoveWord -1<CR>", kopts)
+
+    --         vim.keymap.set("x", "<M-j>", ":MoveBlock 1<CR>", kopts)
+    --         vim.keymap.set("x", "<M-k>", ":MoveBlock -1<CR>", kopts)
+    --         vim.keymap.set("v", "<M-l>", ":MoveHBlock 1<CR>", kopts)
+    --         vim.keymap.set("v", "<M-h>", ":MoveHBlock -1<CR>", kopts)
+    --     end,
+    -- },
     {
-        "hinell/move.nvim",
+        "fedepujol/move.nvim",
         lazy = true,
         keys = {
-            { "<M-j>", mode = { "n", "x" }, desc = "Down Move" },
-            { "<M-k>", mode = { "n", "x" }, desc = "Up Move" },
-            { "<M-R>", mode = { "n", "v" }, desc = "Right Move" },
-            { "<M-E>", mode = { "n", "v" }, desc = "Left Move" },
+            { "<M-j>", mode = { "n", "v" }, desc = "Down Move" },
+            { "<M-k>", mode = { "n", "v" }, desc = "Up Move" },
+            { "<M-l>", mode = { "n", "v" }, desc = "Right Move" },
+            { "<M-h>", mode = { "n", "v" }, desc = "Left Move" },
             { "<leader>wl", desc = "Char Right Move" },
             { "<leader>wh", desc = "Char Left Move" },
         },
         config = function()
             local kopts = { noremap = true, silent = true }
-            vim.keymap.set("n", "<M-j>", ":MoveLine 1<CR>", kopts)
-            vim.keymap.set("n", "<M-k>", ":MoveLine -1<CR>", kopts)
-            vim.keymap.set("n", "<M-R>", ":MoveHchar 1", kopts)
-            vim.keymap.set("n", "<M-E>", ":MoveHchar -1<CR>", kopts)
-            vim.keymap.set("n", "<leader>wl", ":MoveWord 1<CR>", kopts)
-            vim.keymap.set("n", "<leader>wh", ":MoveWord -1<CR>", kopts)
+            vim.keymap.set("n", "<M-j>", ":MoveLine(1)<CR>", kopts)
+            vim.keymap.set("n", "<M-k>", ":MoveLine(-1)<CR>", kopts)
+            vim.keymap.set("n", "<M-l>", ":MoveHchar(1)", kopts)
+            vim.keymap.set("n", "<M-h>", ":MoveHchar(-1)<CR>", kopts)
+            vim.keymap.set("n", "<leader>wl", ":MoveWord(1)<CR>", kopts)
+            vim.keymap.set("n", "<leader>wh", ":MoveWord(-1)<CR>", kopts)
 
-            vim.keymap.set("x", "<M-j>", ":MoveBlock 1<CR>", kopts)
-            vim.keymap.set("x", "<M-k>", ":MoveBlock -1<CR>", kopts)
-            vim.keymap.set("v", "<M-R>", ":MoveHBlock 1<CR>", kopts)
-            vim.keymap.set("v", "<M-E>", ":MoveHBlock -1<CR>", kopts)
+            vim.keymap.set("v", "<M-j>", ":MoveBlock(1)<CR>", kopts)
+            vim.keymap.set("v", "<M-k>", ":MoveBlock(-1)<CR>", kopts)
+            vim.keymap.set("v", "<M-l>", ":MoveHBlock(1)<CR>", kopts)
+            vim.keymap.set("v", "<M-h>", ":MoveHBlock(-1)<CR>", kopts)
         end,
     },
     -- 文本替换
