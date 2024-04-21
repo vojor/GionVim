@@ -73,8 +73,8 @@ require("lazy").setup({
         { import = "plugins.extras.lsp.reinforce.lspsaga" }, -- Strengthen LSP experience
         { import = "plugins.extras.lsp.reinforce.naybuddy" }, -- Float navigate
         { import = "plugins.extras.lsp.reinforce.outline" }, -- Symbols Outline
-        -- search
-        { import = "plugins.extras.fzf" },
+        -- seek
+        { import = "plugins.extras.seek.fzf" },
         -- treesitter
         { import = "plugins.extras.treesitter.treesj" }, -- Splitting or merging code
         { import = "plugins.extras.treesitter.context" },
