@@ -110,10 +110,10 @@ return {
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             -- 不同语言服务器的 capabilities 表有区别
-            local clangd_capabilities = vim.tbl_deep_extend("force", {}, capabilities, {
+            local clangd_capabilities = vim.tbl_deep_extend("force", capabilities, {
                 offsetEncoding = { "utf-16" },
             })
-            local json_capabilities = vim.tbl_deep_extend("force", {}, capabilities, {
+            local json_capabilities = vim.tbl_deep_extend("force", capabilities, {
                 textDocument = {
                     completion = {
                         completionItem = {
@@ -122,7 +122,7 @@ return {
                     },
                 },
             })
-            local yaml_capabilities = vim.tbl_deep_extend("force", {}, capabilities, {
+            local yaml_capabilities = vim.tbl_deep_extend("force", capabilities, {
                 textDocument = {
                     foldingRange = {
                         dynamicRegistration = false,
@@ -130,7 +130,7 @@ return {
                     },
                 },
             })
-            local neocmake_capabilities = vim.tbl_deep_extend("force", {}, capabilities, {
+            local neocmake_capabilities = vim.tbl_deep_extend("force", capabilities, {
                 workspace = {
                     didChangeWatchedFiles = {
                         dynamicRegistration = true,

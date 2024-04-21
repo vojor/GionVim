@@ -5,7 +5,7 @@ return {
         ft = "java",
         config = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            local jdtls_capabilities = vim.tbl_deep_extend("force", {}, capabilities, {
+            local jdtls_capabilities = vim.tbl_deep_extend("force", capabilities, {
                 workspace = {
                     configuration = true,
                 },
