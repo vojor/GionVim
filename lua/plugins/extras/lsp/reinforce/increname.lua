@@ -3,17 +3,18 @@ return {
         "smjonas/inc-rename.nvim",
         lazy = true,
         keys = {
-            { "<leader>iN", desc = "Rename (Not Retained Cursor Word)" },
-            { "<leader>in", desc = "Rename (Reserve Cursor Word)" },
+            { "<leader>rn", desc = "Rename (Reserve Cursor Word)" },
+            { "<leader>rN", ":IncRename ", desc = "Rename (Not Retained Cursor Word)" },
         },
-        config = function()
-            require("inc_rename").setup({
-                preview_empty_name = true,
-            })
-            vim.keymap.set("n", "<leader>iN", ":IncRename ")
-            vim.keymap.set("n", "<leader>in", function()
+        opts = {
+            preview_empty_name = true,
+        },
+        config = function(_, opts)
+            require("inc_rename").setup(opts)
+            vim.keymap.set("n", "<leader>rn", function()
                 return ":IncRename " .. vim.fn.expand("<cword>")
             end, { expr = true })
+            vim.keymap.set("n", "<leader>rN", ":IncRename ")
         end,
     },
 }

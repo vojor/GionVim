@@ -21,17 +21,17 @@ map("t", "<C-/>", "<cmd>close<CR>", { desc = "Hide Terminal" })
 map("t", "<C-_>", "<cmd>close<CR>", { desc = "which_key_ignore" })
 
 -- lazygit
-map("n", "<leader>tg", function()
+map("n", "<leader>glb", GionVim.lazygit.blame_line, { desc = "Git Blame Line" })
+map("n", "<leader>glr", function()
     GionVim.lazygit({ cwd = GionVim.root.git() })
 end, { desc = "Lazygit (Root Dir)" })
-map("n", "<leader>tG", function()
+map("n", "<leader>glR", function()
     GionVim.lazygit()
 end, { desc = "Lazygit (CWD)" })
-map("n", "<leader>tb", GionVim.lazygit.blame_line, { desc = "Git Blame Line" })
-map("n", "<leader>tf", function()
+map("n", "<leader>glh", function()
     local git_path = vim.api.nvim_buf_get_name(0)
     GionVim.lazygit({ args = { "-f", vim.trim(git_path) } })
-end, { desc = "Lazygit current file history" })
+end, { desc = "Lazygit Current File History" })
 
 -- toggle options
 map("n", "<leader>os", function()
@@ -62,7 +62,7 @@ map("n", "<leader>ot", function()
     end
 end, { desc = "Toggle Treesitter Highlight" })
 
--- file operate
+-- operate
 map("n", "<leader>ce", "<cmd>enew<CR>", { desc = "New File" })
 map("n", "<leader>cw", "<cmd>w<CR>", { desc = "Buffer Write File" })
 map("n", "<leader>cW", "<cmd>wa<CR>", { desc = "Write All File" })
