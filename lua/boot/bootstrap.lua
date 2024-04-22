@@ -95,6 +95,7 @@ require("lazy").setup({
         { import = "plugins.extras.ui.indentstyle" },
         -- utils
         { import = "plugins.extras.utils.startuptime" }, -- Measure startup time
+        { import = "plugins.extras.utils.dot" }, -- add filetypes
     },
     defaults = { version = false },
     install = { colorscheme = { "tokyonight", "nightfox", "habamax" } },
