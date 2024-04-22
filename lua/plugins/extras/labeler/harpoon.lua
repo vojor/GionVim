@@ -6,13 +6,16 @@ return {
             menu = {
                 width = vim.api.nvim_win_get_width(0) - 4,
             },
+            settings = {
+                save_on_toggle = true,
+            },
         },
         keys = function()
             local keys = {
                 {
                     "<leader>mf",
                     function()
-                        require("harpoon"):list():append()
+                        require("harpoon"):list():add()
                     end,
                     desc = "Harpoon File",
                 },
