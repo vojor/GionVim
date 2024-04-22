@@ -64,7 +64,7 @@ return {
                         end,
                         pinned = true,
                         open = function()
-                            vim.api.nvim_input("<esc><space>ng")
+                            require("neo-tree.command").execute({ dir = GionVim.root() })
                         end,
                         size = { height = 0.5 },
                     },
