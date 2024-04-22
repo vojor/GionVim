@@ -50,7 +50,8 @@ require("lazy").setup({
         -- git
         { import = "plugins.extras.git.neogit" }, -- Neovim's magit
         { import = "plugins.extras.git.diffview" }, -- git history difference
-        { import = "plugins.extras.git.git-prompt" }, -- add statusline git prompt
+        -- -- encoding support error
+        -- { import = "plugins.extras.git.git-prompt" }, -- add statusline git prompt
         -- labeler
         { import = "plugins.extras.labeler.harpoon" }, -- File mark
         { import = "plugins.extras.labeler.marks" }, -- Line mark
