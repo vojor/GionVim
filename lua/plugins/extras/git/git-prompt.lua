@@ -2,7 +2,6 @@ return {
     {
         "mikesmithgh/git-prompt-string-lualine.nvim",
         lazy = true,
-        event = "VeryLazy",
     },
     {
         "nvim-lualine/lualine.nvim",
