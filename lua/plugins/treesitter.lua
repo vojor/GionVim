@@ -78,7 +78,7 @@ return {
             ignore_install = {},
             highlight = {
                 enable = true,
-                -- 大于2M文件关闭treesitter
+                -- filesize >= 2M, disable treesitter
                 disable = function(lang, buf)
                     local max_filesize = 2000 * 1024
                     local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
