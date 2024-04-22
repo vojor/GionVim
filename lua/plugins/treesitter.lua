@@ -8,6 +8,8 @@ return {
         init = function(plugin)
             require("lazy.core.loader").add_to_rtp(plugin)
             require("nvim-treesitter.query_predicates")
+            vim.opt.foldmethod = "expr"
+            vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
         end,
         dependencies = {
             -- 文本对象操作：选择、移动、交换
@@ -55,7 +57,6 @@ return {
                 "javascript",
                 "json",
                 "jsonc",
-                "json5",
                 "lua",
                 "luadoc",
                 "make",
@@ -66,7 +67,6 @@ return {
                 "query",
                 "regex",
                 "toml",
-                "tsx",
                 "typescript",
                 "vim",
                 "vimdoc",
@@ -183,9 +183,6 @@ return {
                 end, opts.ensure_installed)
             end
             require("nvim-treesitter.configs").setup(opts)
-
-            vim.opt.foldmethod = "expr"
-            vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
         end,
     },
 }
