@@ -41,14 +41,16 @@ require("lazy").setup({
         -- { import = "plugins.extras.editor.coerce" }, -- Keyword capitalization conversion
         -- { import = "plugins.extras.develop.refactor" }, -- Refactor code
         -- elevate
-        { import = "plugins.extras.elevate.scope" }, -- Enhace Buffer scope
+        { import = "plugins.extras.elevate.scope" }, -- Enhance Buffer scope
         { import = "plugins.extras.elevate.escape" }, -- More user-friendly mode switching
         { import = "plugins.extras.elevate.scroll" }, -- Smooth scrolling
         { import = "plugins.extras.elevate.substitute" }, -- Replace neovim built-in 'substitute'
         -- explorer
         { import = "plugins.extras.explorer" }, -- More explorer
         -- git
-        { import = "plugins.extras.git" }, -- Improve git
+        { import = "plugins.extras.git.neogit" }, -- Neovim's magit
+        { import = "plugins.extras.git.diffview" }, -- git history difference
+        { import = "plugins.extras.git.git-prompt" }, -- add statusline git prompt
         -- labeler
         { import = "plugins.extras.labeler.harpoon" }, -- File mark
         { import = "plugins.extras.labeler.marks" }, -- Line mark
