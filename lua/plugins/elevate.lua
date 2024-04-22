@@ -198,5 +198,10 @@ return {
     {
         "2KAbhishek/termim.nvim",
         cmd = { "Fterm", "FTerm", "Sterm", "STerm", "Vterm", "VTerm" },
+        keys = {
+            { "<leader>tf", ":Fterm", desc = "Open Terminal In New Tab" },
+            { "<leader>ts", ":Sterm", desc = "Open Terminal In New Horizontal Split" },
+            { "<leader>tv", ":Vterm", desc = "Open Terminal In New Vertical Split" },
+        },
     },
 }
