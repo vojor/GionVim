@@ -7,11 +7,30 @@ return {
         event = "InsertEnter",
         dependencies = { "rafamadriz/friendly-snippets" },
         config = function()
+            local types = require("luasnip.util.types")
+
+            -- load snippets
             require("luasnip.loaders.from_vscode").lazy_load()
             require("luasnip.loaders.from_snipmate").lazy_load({ path = { vim.fn.stdpath("config") .. "snippets" } })
+
+            -- configuration
             require("luasnip").setup({
                 update_events = { "TextChanged", "TextChangedI" },
                 delete_check_events = "TextChanged",
+            })
+            require("luasnip").config.setup({
+                ext_opts = {
+                    [types.choiceNode] = {
+                        active = {
+                            virt_text = { { "●", "GruvboxOrange" } },
+                        },
+                    },
+                    [types.insertNode] = {
+                        active = {
+                            virt_text = { { "●", "GruvboxBlue" } },
+                        },
+                    },
+                },
             })
         end,
     },
@@ -89,27 +108,36 @@ return {
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(),
                     ["<C-e>"] = cmp.mapping.abort(),
-                    ["<CR>"] = cmp.mapping.confirm({
-                        behavior = cmp.ConfirmBehavior.Replace,
-                        select = true,
-                    }),
+                    ["<CR>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            if luasnip.expandable() then
+                                luasnip.expand()
+                            else
+                                cmp.confirm({
+                                    select = true,
+                                })
+                            end
+                        else
+                            fallback()
+                        end
+                    end),
                     ["<C-CR>"] = function(fallback)
                         cmp.abort()
                         fallback()
                     end,
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
-                            cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-                        elseif luasnip.expand_or_jumpable() then
-                            luasnip.expand_or_jump()
+                            cmp.select_next_item()
+                        elseif luasnip.locally_jumpable(1) then
+                            luasnip.jump(1)
                         else
                             fallback()
                         end
                     end, { "i", "s" }),
                     ["<S-Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
-                            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-                        elseif luasnip.jumpable(-1) then
+                            cmp.select_prev_item()
+                        elseif luasnip.locally_jumpable(-1) then
                             luasnip.jump(-1)
                         else
                             fallback()
@@ -127,9 +155,9 @@ return {
 
             cmp.setup.cmdline({ "/", "?" }, {
                 mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({
+                sources = {
                     { name = "buffer" },
-                }),
+                },
             })
             cmp.setup.cmdline(":", {
                 mapping = cmp.mapping.preset.cmdline(),
@@ -138,6 +166,7 @@ return {
                 }, {
                     { name = "cmdline" },
                 }),
+                matching = { disallow_symbol_nonprefix_matching = false },
             })
 
             cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
