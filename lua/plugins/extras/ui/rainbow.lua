@@ -15,7 +15,7 @@ return {
                     [""] = "rainbow-delimiters",
                     lua = "rainbow-blocks",
                     javascript = "rainbow-delimiters-react",
-                    tsx = "rainbow-parens",
+                    -- tsx = "rainbow-parens",
                 },
                 highlight = {
                     "RainbowDelimiterRed",
