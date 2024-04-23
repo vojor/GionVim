@@ -1,4 +1,4 @@
-std = "neovim"
+std = "vim"
 
 [lints]
 global_usage = "allow"
