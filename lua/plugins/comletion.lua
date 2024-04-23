@@ -82,7 +82,7 @@ return {
                 formatting = {
                     format = function(entry, vim_item)
                         vim_item.kind =
-                            string.format("%s %s", require("core.icons").icons.kinds[vim_item.kind], vim_item.kind)
+                            string.format("%s %s", require("config.accredit").icons.kinds[vim_item.kind], vim_item.kind)
                         vim_item.menu = ({
                             async_path = "[Path]",
                             buffer = "[Buffer]",

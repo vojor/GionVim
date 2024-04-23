@@ -7,14 +7,14 @@ return {
             { "<leader>nn", "<cmd>AerialNavToggle<CR>", desc = "Toggle Aerial Navigator" },
         },
         opts = function()
-            local Config = require("config.authority")
-            local icons = vim.deepcopy(require("core.icons").icons.kinds)
+            local Config = require("config.accredit")
+            local icons = vim.deepcopy(require("config.accredit").icons.kinds)
 
             icons.lua = { Package = icons.Control }
 
             local filter_kind = false
-            if Config.filter.kind_filter then
-                filter_kind = assert(vim.deepcopy(Config.filter.kind_filter))
+            if Config.kind_filter then
+                filter_kind = assert(vim.deepcopy(Config.kind_filter))
                 filter_kind._ = filter_kind.default
                 filter_kind.default = nil
             end
