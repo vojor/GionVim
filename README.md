@@ -17,11 +17,11 @@
 
 - ColorScheme
 
-  - Carefully selected themes
+  - Carefully selected themes.
 
 - Custom
 
-  - Highly customizable configuration
+  - Highly customizable configuration.
 
 ## Requirement
 
@@ -43,19 +43,17 @@
 
 - Modify Configuration(plugin)
 
-  - nvim-genghis: trashFile Change to your own directory.
-
   - sqlite.lua: Go to [sqlite.lua](https://github.com/kkharji/sqlite.lua) to view detailed configurations.
 
 - others
 
   - Windows system: Recommend using msys2 to install dependency tools, address: [msys2](https://www.msys2.org)
 
-  - The system can access GitHub normally
+  - The system can access GitHub normally.
 
 ## Installation
 
-- linux:
+- Linux:
 
   - Terminal command: `git clone https://github.com/legbor/GionVim.git ~/.config/nvim`
 
@@ -63,9 +61,9 @@
 
   - Windows PowerShell: `git clone https://github.com/legbor/GionVim.git $env:LOCALAPPDATA\nvim`
 
-- Enter the nvim directory: `rm -rf .git`, You can manage projects on your own.
+- Access the nvim directory: `rm -rf .git`, You can manage projects on your own.
 
-- Terminal input nvim, plugin will automatically install.
+- Terminal enter nvim, plugin will automatically install.
 
 - After the plugin installation is completed, use the `checkhealth ` command in neovim to check for any errors. Note: Due to the use of lazy loading in many plugins, to complete the configuration check, all plugins need to be started.
 
