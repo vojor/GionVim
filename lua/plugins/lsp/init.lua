@@ -27,10 +27,10 @@ return {
             diagnostics = {
                 signs = {
                     text = {
-                        [vim.diagnostic.severity.ERROR] = require("config.accredit").icons.diagnostics.Error,
-                        [vim.diagnostic.severity.WARN] = require("config.accredit").icons.diagnostics.Warn,
-                        [vim.diagnostic.severity.HINT] = require("config.accredit").icons.diagnostics.Hint,
-                        [vim.diagnostic.severity.INFO] = require("config.accredit").icons.diagnostics.Info,
+                        [vim.diagnostic.severity.ERROR] = require("config.norm").icons.diagnostics.Error,
+                        [vim.diagnostic.severity.WARN] = require("config.norm").icons.diagnostics.Warn,
+                        [vim.diagnostic.severity.HINT] = require("config.norm").icons.diagnostics.Hint,
+                        [vim.diagnostic.severity.INFO] = require("config.norm").icons.diagnostics.Info,
                     },
                 },
                 underline = true,
