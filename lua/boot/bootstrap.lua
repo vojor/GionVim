@@ -22,17 +22,17 @@ require("lazy").setup({
         -- colorscheme
         -- { import = "plugins.extras.colorscheme.nightfox" },
         -- dap
-        { import = "plugins.extras.dap.luadap" }, -- neovim lua debug
+        { import = "plugins.extras.dap.luadap" }, -- Neovim lua debug
         -- develop
-        { import = "plugins.extras.develop.bigfile" }, -- big file control
-        { import = "plugins.extras.develop.comments" }, -- quick comment
+        { import = "plugins.extras.develop.bigfile" }, -- Big file control
+        { import = "plugins.extras.develop.comments" }, -- Quick comment
         { import = "plugins.extras.develop.compiler" }, -- Code build and run
         { import = "plugins.extras.develop.font-icon" }, -- Select icon
         { import = "plugins.extras.develop.commander" }, -- Find plugin keymaps
         -- diagnostics
         { import = "plugins.extras.diagnostics.trouble" }, -- Look diagnostics result
         -- editor
-        { import = "plugins.extras.editor.autotools" }, -- Auto pairs save and go last place
+        { import = "plugins.extras.editor.autotools" }, -- Auto pairs and save
         { import = "plugins.extras.editor.replacer" }, -- Factor replace
         { import = "plugins.extras.editor.portal" }, -- Local list navigate
         { import = "plugins.extras.editor.surround" }, -- Surround modify
@@ -55,8 +55,8 @@ require("lazy").setup({
         -- -- lang
         { import = "plugins.extras.lsp.langlarge.clangd" }, -- C/C++
         -- { import = "plugins.extras.lsp.langlarge.java" }, -- Java
-        { import = "plugins.extras.lsp.langlarge.jqx" }, -- json/yaml
-        { import = "plugins.extras.lsp.langlarge.typescript" }, -- javascript/typescript
+        { import = "plugins.extras.lsp.langlarge.jqx" }, -- Json/Yaml
+        { import = "plugins.extras.lsp.langlarge.typescript" }, -- Javascript/Typescript
         -- -- util
         { import = "plugins.extras.lsp.boost.aerial" }, -- Code outline
         -- { import = "plugins.extras.lsp.boost.dropbar" }, -- Code navigate
@@ -80,11 +80,11 @@ require("lazy").setup({
         { import = "plugins.extras.ui.edgy" }, -- Predefined layout
         { import = "plugins.extras.ui.hlslens" }, -- Highlight entries during search
         { import = "plugins.extras.ui.rainbow" }, -- Rainbow brackets
-        { import = "plugins.extras.ui.indentstyle" }, -- indent format
+        { import = "plugins.extras.ui.indentstyle" }, -- Indent format
         -- { import = "plugins.extras.ui.hot" }, -- Hot reload language
         -- utils
         { import = "plugins.extras.utils.startuptime" }, -- Measure startup time
-        { import = "plugins.extras.utils.dot" }, -- add filetypes
+        { import = "plugins.extras.utils.dot" }, -- Add more filetypes
     },
     defaults = { version = false },
     install = { colorscheme = { "tokyonight", "nightfox", "habamax" } },

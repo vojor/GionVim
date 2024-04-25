@@ -148,19 +148,16 @@ end
 function M.get_kind_filter(buf)
     buf = (buf == nil or buf == 0) and vim.api.nvim_get_current_buf() or buf
     local ft = vim.bo[buf].filetype
-    if M.filter.kind_filter == false then
+    if M.kind_filter == false then
         return
     end
-    if M.filter.kind_filter[ft] == false then
+    if M.kind_filter[ft] == false then
         return
     end
-    if type(M.filter.kind_filter[ft]) == "table" then
-        return M.filter.kind_filter[ft]
+    if type(M.kind_filter[ft]) == "table" then
+        return M.kind_filter[ft]
     end
-    return type(M.filter.kind_filter) == "table"
-            and type(M.filter.kind_filter.default) == "table"
-            and M.filter.kind_filter.default
-        or nil
+    return type(M.kind_filter) == "table" and type(M.kind_filter.default) == "table" and M.kind_filter.default or nil
 end
 
 function M.load(name)

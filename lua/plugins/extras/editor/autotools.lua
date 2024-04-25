@@ -1,5 +1,4 @@
 return {
-    -- 自动保存
     {
         "okuuva/auto-save.nvim",
         event = { "InsertLeave", "TextChanged" },
@@ -27,7 +26,7 @@ return {
                     "Trouble",
                 }
 
-                -- 不保存指定文件类型
+                -- Not save designate filetyps
                 if utils.not_in(fn.getbufvar(buf, "&filetype"), exclude_filetypes) then
                     return true
                 end
@@ -35,40 +34,6 @@ return {
             end,
         },
     },
-    -- 自动恢复光标位置
-    {
-        "vladdoster/remember.nvim",
-        lazy = true,
-        event = "BufReadPost",
-        opts = {
-            ignore_buftype = {
-                "acwrite",
-                "quickfix",
-                "nofile",
-                "nowrite",
-                "help",
-                "terminal",
-                "popup",
-                "main",
-                "prompt",
-            },
-            ignore_filetype = {
-                "aerial",
-                "alpha",
-                "dashboard",
-                "gitcommit",
-                "gitrebase",
-                "hgcommit",
-                "lazy",
-                "neo-tree",
-                "spectre_panel",
-                "starter",
-                "svn",
-            },
-            open_folds = true,
-        },
-    },
-    -- 自动匹配括号
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
