@@ -103,10 +103,38 @@ return {
             { "<leader>dj", "<cmd>DapLoadLaunchJSON<CR>", desc = "Direct Load Json File Debug" },
 
             -- 小部件 UI
-            { "<leader>dwh", mode = { "n", "v" }, desc = "dap.ui.widgets hover" },
-            { "<Leader>dwp", mode = { "n", "v" }, desc = "dap.ui.widgets preview" },
-            { "<Leader>dwc", desc = "dap.ui.widgets float centered frames" },
-            { "<Leader>dws", desc = "dap.ui.widgets float centered scopes" },
+            {
+                "<leader>dwh",
+                function()
+                    require("dap.ui.widgets").hover()
+                end,
+                mode = { "n", "v" },
+                desc = "dap.ui.widgets hover",
+            },
+            {
+                "<Leader>dwp",
+                function()
+                    require("dap.ui.widgets").preview()
+                end,
+                mode = { "n", "v" },
+                desc = "dap.ui.widgets preview",
+            },
+            {
+                "<Leader>dwc",
+                function()
+                    local widgets = require("dap.ui.widgets")
+                    widgets.centered_float(widgets.frames)
+                end,
+                desc = "dap.ui.widgets float centered frames",
+            },
+            {
+                "<Leader>dws",
+                function()
+                    local widgets = require("dap.ui.widgets")
+                    widgets.centered_float(widgets.scopes)
+                end,
+                desc = "dap.ui.widgets float centered scopes",
+            },
         },
         dependencies = {
             {
@@ -168,23 +196,19 @@ return {
             { "telescope.nvim" },
         },
         config = function()
-            require("debugger.dapsettings")
-            require("debugger.dapstartup")
-            -- 小部件 UI
-            vim.keymap.set({ "n", "v" }, "<Leader>dwh", function()
-                require("dap.ui.widgets").hover()
-            end)
-            vim.keymap.set({ "n", "v" }, "<Leader>dwp", function()
-                require("dap.ui.widgets").preview()
-            end)
-            vim.keymap.set("n", "<Leader>dwc", function()
-                local widgets = require("dap.ui.widgets")
-                widgets.centered_float(widgets.frames)
-            end)
-            vim.keymap.set("n", "<Leader>dws", function()
-                local widgets = require("dap.ui.widgets")
-                widgets.centered_float(widgets.scopes)
-            end)
+            vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+            vim.api.nvim_set_hl(0, "DapBreakpoint", { ctermbg = 0, fg = "#993939", bg = "#31353f" })
+            vim.api.nvim_set_hl(0, "DapLogPoint", { ctermbg = 0, fg = "#61afef", bg = "#31353f" })
+            vim.api.nvim_set_hl(0, "DapStopped", { ctermbg = 0, fg = "#98c379", bg = "#31353f" })
+
+            for name, sign in pairs(require("config.norm").icons.dap) do
+                sign = type(sign) == "table" and sign or { sign }
+                vim.fn.sign_define(
+                    "Dap" .. name,
+                    { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
+                )
+            end
+            require("debugger.dapstart")
         end,
     },
 }
