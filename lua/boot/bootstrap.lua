@@ -81,6 +81,7 @@ require("lazy").setup({
         { import = "plugins.extras.ui.hlslens" }, -- Highlight entries during search
         { import = "plugins.extras.ui.rainbow" }, -- Rainbow brackets
         { import = "plugins.extras.ui.indentstyle" }, -- indent format
+        -- { import = "plugins.extras.ui.hot" }, -- Hot reload language
         -- utils
         { import = "plugins.extras.utils.startuptime" }, -- Measure startup time
         { import = "plugins.extras.utils.dot" }, -- add filetypes
