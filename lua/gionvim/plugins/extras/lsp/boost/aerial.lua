@@ -7,8 +7,8 @@ return {
             { "<leader>nn", "<cmd>AerialNavToggle<CR>", desc = "Toggle Aerial Navigator" },
         },
         opts = function()
-            local Config = require("config.norm")
-            local icons = vim.deepcopy(require("config.norm").icons.kinds)
+            local Config = require("gionvim.config")
+            local icons = vim.deepcopy(require("gionvim.config").icons.kinds)
 
             icons.lua = { Package = icons.Control }
 

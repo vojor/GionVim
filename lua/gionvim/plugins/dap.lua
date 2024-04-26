@@ -201,14 +201,14 @@ return {
             vim.api.nvim_set_hl(0, "DapLogPoint", { ctermbg = 0, fg = "#61afef", bg = "#31353f" })
             vim.api.nvim_set_hl(0, "DapStopped", { ctermbg = 0, fg = "#98c379", bg = "#31353f" })
 
-            for name, sign in pairs(require("config.norm").icons.dap) do
+            for name, sign in pairs(require("gionvim.config").icons.dap) do
                 sign = type(sign) == "table" and sign or { sign }
                 vim.fn.sign_define(
                     "Dap" .. name,
                     { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
                 )
             end
-            require("debugger.dapstart")
+            require("gionvim.debugger.dapstart")
         end,
     },
 }

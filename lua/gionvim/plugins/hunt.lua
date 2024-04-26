@@ -165,7 +165,7 @@ return {
                 "<leader>fl",
                 function()
                     require("telescope.builtin").lsp_document_symbols({
-                        symbols = require("config.norm").get_kind_filter(),
+                        symbols = require("gionvim.config").get_kind_filter(),
                     })
                 end,
                 desc = "Goto Symbol",
@@ -174,7 +174,7 @@ return {
                 "<leader>fL",
                 function()
                     require("telescope.builtin").lsp_dynamic_workspace_symbols({
-                        symbols = require("config.norm").get_kind_filter(),
+                        symbols = require("gionvim.config").get_kind_filter(),
                     })
                 end,
                 desc = "Goto Symbol (Workspace)",

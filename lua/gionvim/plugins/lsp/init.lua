@@ -27,10 +27,10 @@ return {
             diagnostics = {
                 signs = {
                     text = {
-                        [vim.diagnostic.severity.ERROR] = require("config.norm").icons.diagnostics.Error,
-                        [vim.diagnostic.severity.WARN] = require("config.norm").icons.diagnostics.Warn,
-                        [vim.diagnostic.severity.HINT] = require("config.norm").icons.diagnostics.Hint,
-                        [vim.diagnostic.severity.INFO] = require("config.norm").icons.diagnostics.Info,
+                        [vim.diagnostic.severity.ERROR] = require("gionvim.config").icons.diagnostics.Error,
+                        [vim.diagnostic.severity.WARN] = require("gionvim.config").icons.diagnostics.Warn,
+                        [vim.diagnostic.severity.HINT] = require("gionvim.config").icons.diagnostics.Hint,
+                        [vim.diagnostic.severity.INFO] = require("gionvim.config").icons.diagnostics.Info,
                     },
                 },
                 underline = true,
@@ -221,7 +221,7 @@ return {
                 })
             end
 
-            require("plugins.lsp.keymaps")
+            require("gionvim.plugins.lsp.keymaps")
         end,
     },
 }

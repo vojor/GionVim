@@ -6,6 +6,7 @@ local defaults = {
     colorscheme = function()
         require("tokyonight").load()
     end,
+
     icons = {
         misc = {
             dots = "󰇘",
@@ -167,6 +168,9 @@ function M.load(name)
                 require(mod)
             end, { msg = "Failed loading " .. mod })
         end
+    end
+    if M.defaults[name] or name == "options" then
+        _load("gionvim.config." .. name)
     end
     _load("config." .. name)
     if vim.bo.filetype == "lazy" then

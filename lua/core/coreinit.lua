@@ -1,5 +1,0 @@
-require("core.basis")
-require("core.options")
-require("boot.bootstrap")
-require("core.autocmds")
-require("core.keymaps")

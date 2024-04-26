@@ -20,14 +20,14 @@ return {
                 symbols = {},
                 symbol_blacklist = {},
             }
-            local filter = require("config.norm").kind_filter
+            local filter = require("gionvim.config").kind_filter
 
             if type(filter) == "table" then
                 filter = filter.default
                 if type(filter) == "table" then
                     for kind, symbol in pairs(defaults.symbols) do
                         opts.symbols[kind] = {
-                            icon = require("config.norm").icons.kinds[kind] or symbol.icon,
+                            icon = require("gionvim.config").icons.kinds[kind] or symbol.icon,
                             hl = symbol.hl,
                         }
                         if not vim.tbl_contains(filter, kind) then

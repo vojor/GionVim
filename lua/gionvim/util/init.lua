@@ -24,10 +24,10 @@ setmetatable(M, {
             local mod = type(dep) == "table" and dep[1] or dep
             local key = type(dep) == "table" and dep[2] or k
             M.deprecate([[GionVim.]] .. k, [[GionVim.]] .. mod .. "." .. key)
-            t[mod] = require("config.util." .. mod)
+            t[mod] = require("gionvim.util." .. mod)
             return t[mod][key]
         end
-        t[k] = require("config.util." .. k)
+        t[k] = require("gionvim.util." .. k)
         return t[k]
     end,
 })

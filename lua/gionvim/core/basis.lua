@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup(opts)
-  require("config.norm").setup(opts)
+    require("gionvim.config").setup(opts)
 end
 
 return M
