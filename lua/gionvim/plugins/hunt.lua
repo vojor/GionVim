@@ -49,9 +49,9 @@ return {
             local actions = require("telescope.actions")
             local egrep_actions = require("telescope._extensions.egrepify.actions")
 
-            local open_with_trouble = require("trouble.sources.telescope").open
-
-            -- local add_to_trouble = require("trouble.sources.telescope").add
+            local open_with_trouble = function(...)
+                return require("trouble.providers.telescope").open_with_trouble(...)
+            end
 
             local open_selected_with_trouble = function(...)
                 return require("trouble.providers.telescope").open_selected_with_trouble(...)
@@ -95,7 +95,6 @@ return {
                             ["<C-B>"] = actions.preview_scrolling_up,
                         },
                         n = {
-                            ["<M-t>"] = open_with_trouble,
                             ["q"] = actions.close,
                         },
                     },

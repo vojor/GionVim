@@ -75,4 +75,23 @@ return {
             end
         end,
     },
+    {
+        "nvim-telescope/telescope.nvim",
+        optional = true,
+        opts = function(_, opts)
+            local open_with_trouble = require("trouble.sources.telescope").open
+            return vim.tbl_deep_extend("force", opts, {
+                defaults = {
+                    mappings = {
+                        i = {
+                            ["<M-t>"] = open_with_trouble,
+                        },
+                        n = {
+                            ["<M-t>"] = open_with_trouble,
+                        },
+                    },
+                },
+            })
+        end,
+    },
 }
