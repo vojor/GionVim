@@ -1,7 +1,7 @@
 return {
     -- 在函数、方法、语句等之后显示当前上下文的虚拟文本
     {
-        "haringsrob/nvim_context_vt",
+        "andersevenrud/nvim_context_vt",
         lazy = true,
         ft = { "c", "cpp", "java", "lua", "python", "typescript", "javascript", "typescriptreact", "javascriptreact" },
         opts = {

@@ -1,5 +1,5 @@
 return {
-    -- 跳转
+    -- Jump
     {
         "folke/flash.nvim",
         event = "VeryLazy",
@@ -62,7 +62,7 @@ return {
             },
         },
     },
-    -- flash 配置 telescpe
+    -- Flash configure telescope
     {
         "nvim-telescope/telescope.nvim",
         optional = true,
@@ -93,7 +93,7 @@ return {
             })
         end,
     },
-    -- 文本移动
+    -- Text Move
     {
         "hinell/move.nvim",
         lazy = true,
@@ -120,7 +120,7 @@ return {
             vim.keymap.set("v", "<M-h>", ":MoveHBlock -1<CR>", kopts)
         end,
     },
-    -- 文本替换
+    -- Text replace
     {
         "nvim-pack/nvim-spectre",
         build = false,
@@ -207,7 +207,7 @@ return {
             },
         },
     },
-    -- 字符、颜色、数字增量/减量
+    -- character、color、number 增量/减量
     {
         "monaqa/dial.nvim",
         lazy = true,
@@ -314,7 +314,7 @@ return {
             end, { noremap = true })
         end,
     },
-    -- 处理空格和空白行
+    -- Tickle space and blank
     {
         "echasnovski/mini.trailspace",
         version = false,
