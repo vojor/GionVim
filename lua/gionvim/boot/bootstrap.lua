@@ -20,7 +20,7 @@ require("lazy").setup({
 
         ---- Extras plugin ----
         -- colorscheme
-        -- { import = "plugins.extras.colorscheme.nightfox" },
+        -- { import = "gionvim.plugins.extras.colorscheme.nightfox" },
         -- dap
         { import = "gionvim.plugins.extras.dap.luadap" }, -- Neovim lua debug
         -- develop
