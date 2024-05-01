@@ -1,5 +1,5 @@
 return {
-    -- telescope 模糊查找
+    -- telescope fuzzy find
     {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",

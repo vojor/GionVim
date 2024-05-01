@@ -10,7 +10,7 @@ return {
             require("nvim-treesitter.query_predicates")
         end,
         dependencies = {
-            -- 文本对象操作：选择、移动、交换
+            -- Text object operate：select、move、swap
             {
                 "nvim-treesitter/nvim-treesitter-textobjects",
                 config = function()
@@ -86,7 +86,6 @@ return {
                 end,
                 additional_vim_regex_highlighting = false,
             },
-            -- 增量选择
             incremental_selection = {
                 enable = true,
                 keymaps = {

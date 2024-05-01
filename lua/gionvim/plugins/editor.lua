@@ -207,7 +207,7 @@ return {
             },
         },
     },
-    -- character、color、number 增量/减量
+    -- character、color、number increment or decrement
     {
         "monaqa/dial.nvim",
         lazy = true,
@@ -223,7 +223,7 @@ return {
             local augend = require("dial.augend")
 
             require("dial.config").augends:register_group({
-                -- 字符循环跳转
+                -- Character
                 chars_dial = {
                     augend.constant.new({ elements = { "true", "false" }, word = true, cyclic = true }),
                     augend.constant.new({ elements = { "and", "or", "not" }, word = true, cyclic = true }),
@@ -272,13 +272,15 @@ return {
                         cyclic = true,
                     }),
                 },
-                -- 颜色增加或减少
+
+                -- Color
                 color_dial = {
                     augend.hexcolor.new({
                         case = "lower",
                     }),
                 },
-                -- 日期增加/减少
+
+                -- Date
                 date_dial = {
                     augend.date.new({
                         pattern = "%Y/%m/%d",

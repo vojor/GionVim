@@ -1,5 +1,5 @@
 return {
-    -- 改进了默认 vim.ui 界面
+    -- Enhance default vim.ui interface
     {
         "stevearc/dressing.nvim",
         lazy = true,
@@ -15,7 +15,7 @@ return {
         end,
         opts = {},
     },
-    -- 完善旧的 quickfix 窗口
+    -- Prefect old quickfix window
     {
         "kevinhwang91/nvim-bqf",
         lazy = true,
@@ -103,7 +103,7 @@ return {
             require("bqf").setup(opts)
         end,
     },
-    -- 增强了w,e,b的功能
+    -- Strengthen w,e,b function
     {
         "chrisgrieser/nvim-spider",
         lazy = true,
@@ -113,7 +113,7 @@ return {
             { "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
         },
     },
-    -- 改进缓冲区删除
+    -- Improeve buffer close
     {
         "ojroques/nvim-bufdel",
         lazy = true,
@@ -128,7 +128,7 @@ return {
             quit = false,
         },
     },
-    -- 便捷文件操作
+    -- Convenient file operate
     {
         "chrisgrieser/nvim-genghis",
         lazy = true,
@@ -153,7 +153,7 @@ return {
         end,
         dependencies = { "dressing.nvim" },
     },
-    -- 改进了Yank和Put功能
+    -- Enhance Yank and Put function
     {
         "gbprod/yanky.nvim",
         lazy = true,
@@ -194,7 +194,7 @@ return {
             },
         },
     },
-    -- 终端改进
+    -- Enhance terminal
     {
         "2KAbhishek/termim.nvim",
         cmd = { "Fterm", "FTerm", "Sterm", "STerm", "Vterm", "VTerm" },

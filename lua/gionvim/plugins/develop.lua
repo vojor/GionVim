@@ -1,5 +1,5 @@
 return {
-    -- 工程管理
+    -- Manage projects
     {
         "telescope.nvim",
         dependencies = {
@@ -21,7 +21,7 @@ return {
             },
         },
     },
-    -- 会话管理
+    -- Manage session
     {
         "folke/persistence.nvim",
         lazy = true,

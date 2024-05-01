@@ -1,5 +1,5 @@
 return {
-    -- 终端
+    -- Terminal
     {
         "akinsho/toggleterm.nvim",
         version = "*",
@@ -93,7 +93,7 @@ return {
             })
         end,
     },
-    -- 弹出按键绑定和输入命令窗口
+    -- Pop-up key bindings and command window
     {
         "folke/which-key.nvim",
         lazy = true,
@@ -150,7 +150,7 @@ return {
             wk.register(opts.defaults)
         end,
     },
-    -- 非活动代码变暗
+    -- Inactive code dimmed
     {
         "folke/twilight.nvim",
         lazy = true,
@@ -164,7 +164,7 @@ return {
             exclude = { "norg", "markdown", "tex", "text" },
         },
     },
-    -- 禅模式
+    -- Zen mode
     {
         "folke/zen-mode.nvim",
         lazy = true,

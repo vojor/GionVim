@@ -1,5 +1,5 @@
 return {
-    -- git 集成
+    -- Git integration
     {
         "lewis6991/gitsigns.nvim",
         lazy = true,

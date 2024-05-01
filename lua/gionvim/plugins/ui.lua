@@ -1,5 +1,5 @@
 return {
-    -- 高度实验性插件
+    -- Experimental beautification
     {
         "folke/noice.nvim",
         event = "VeryLazy",
@@ -69,7 +69,7 @@ return {
             },
         },
     },
-    -- 消息弹窗
+    -- Message inform
     {
         "rcarriga/nvim-notify",
         event = "VeryLazy",
@@ -103,7 +103,7 @@ return {
             end
         end,
     },
-    -- 滚动条
+    -- Scroll bar
     {
         "petertriho/nvim-scrollbar",
         event = { "BufReadPost", "BufNewFile" },

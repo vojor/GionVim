@@ -1,5 +1,5 @@
 return {
-    -- 使用 lua 注入诊断，代码操作等
+    -- Use lua inject diagnostic，code action, etc
     {
         "nvimtools/none-ls.nvim",
         lazy = true,
@@ -62,7 +62,7 @@ return {
             })
         end,
     },
-    -- 内置语言服务器诊断的补充
+    -- Supplement built-in diagnostic
     {
         "mfussenegger/nvim-lint",
         lazy = true,

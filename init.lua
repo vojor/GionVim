@@ -1,4 +1,4 @@
--- 实验性 lua 加载器
+-- Enable the experimental lua loader
 vim.loader.enable()
--- 启动配置
+-- Start configuration
 require("gionvim.core")

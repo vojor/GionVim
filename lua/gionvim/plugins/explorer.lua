@@ -1,5 +1,5 @@
 return {
-    -- 文件目录树
+    -- File content
     {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
@@ -53,11 +53,7 @@ return {
                 end
             end
         end,
-        dependencies = {
-            { "nvim-web-devicons" },
-            { "plenary.nvim" },
-            { "nui.nvim" },
-        },
+        dependencies = { { "nvim-web-devicons" }, { "plenary.nvim" }, { "nui.nvim" } },
         opts = {
             sources = { "filesystem", "buffers", "git_status", "document_symbols" },
             open_files_do_not_replace_types = {

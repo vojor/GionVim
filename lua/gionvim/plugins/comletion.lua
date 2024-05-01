@@ -1,5 +1,5 @@
 return {
-    -- 片段支持
+    -- Snippets support
     {
         "L3MON4D3/luasnip",
         build = "make install_jsregexp",
@@ -34,6 +34,7 @@ return {
             })
         end,
     },
+    -- Code completion
     {
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "CmdlineEnter" },

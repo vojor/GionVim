@@ -1,43 +1,43 @@
 return {
-    -- 减少 lua 函数的编写
+    -- Reduce lua function writing
     {
         "nvim-lua/plenary.nvim",
         lazy = true,
     },
-    -- neovim 的 UI 组件库
+    -- Neovim UI module
     {
         "MunifTanjim/nui.nvim",
         lazy = true,
     },
-    -- 图标支持插件
+    -- Icons support
     {
         "nvim-tree/nvim-web-devicons",
         lazy = true,
         opts = {},
     },
-    -- 提供对 sqlite 数据库的操作
+    -- Sqlite operate
     {
         "kkharji/sqlite.lua",
         lazy = true,
     },
-    -- 提供对 json,yaml 文件的 schemascore 访问
+    -- Uphold json and yaml files schemascore access
     {
 
         "b0o/SchemaStore.nvim",
         lazy = true,
     },
-    -- 异步IO库
+    -- Async IO library
     {
         "nvim-neotest/nvim-nio",
         lazy = true,
     },
-    -- 简化luarocks包安装
+    -- Simply luarocks package installed
     {
         "vhyrro/luarocks.nvim",
         priority = 1000,
         config = true,
     },
-    -- 管理lsp,dap,diagnostics,formatting服务的安装
+    -- Manage lsp,dap,diagnostics,formatting serve install
     {
         "williamboman/mason.nvim",
         build = ":MasonUpdate",

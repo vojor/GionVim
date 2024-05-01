@@ -1,6 +1,6 @@
 -- 笔记和任务清单
 return {
-    -- 结构化笔记、项目和任务管理、时间跟踪、幻灯片、编写排版文档
+    -- Structure notes、manage project and task, etc
     {
         "nvim-neorg/neorg",
         dependencies = { "luarocks.nvim" },
@@ -51,7 +51,7 @@ return {
             },
         },
     },
-    -- 处理 markdown,zettelkasten,wiki
+    -- Handle markdown,zettelkasten,wiki
     {
         "renerocksai/telekasten.nvim",
         lazy = true,
