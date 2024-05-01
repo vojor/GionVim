@@ -5,7 +5,7 @@ mappings = {
     ["<space>"] = "none"
     ["<2-LeftMouse>"] = "open",
     ["<cr>"] = "open",
-    ["<esc>"] = "cancel", 
+    ["<esc>"] = "cancel",
     ["P"] = { "toggle_preview", config = { use_float = true } },
     ["l"] = "focus_preview",
     ["S"] = "open_split",
@@ -14,7 +14,7 @@ mappings = {
     ["w"] = "open_with_window_picker",
     ["C"] = "close_node",
     ["z"] = "close_all_nodes",
-    ["a"] = { 
+    ["a"] = {
         "add",
         config = {
         show_path = "none"
