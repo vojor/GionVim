@@ -56,6 +56,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.lsp.langlarge.clangd" }, -- C/C++
         -- { import = "gionvim.plugins.extras.lsp.langlarge.java" }, -- Java
         { import = "gionvim.plugins.extras.lsp.langlarge.jqx" }, -- Json/Yaml
+        { import = "gionvim.plugins.extras.lsp.langlarge.markdown" }, -- markdown
         { import = "gionvim.plugins.extras.lsp.langlarge.typescript" }, -- Javascript/Typescript
         -- -- util
         { import = "gionvim.plugins.extras.lsp.boost.aerial" }, -- Code outline
