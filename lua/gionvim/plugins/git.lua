@@ -15,6 +15,8 @@ return {
                     changedelete = { text = "▎" },
                     untracked = { text = "★" },
                 },
+                numhl = true,
+                attach_to_untracked = true,
                 on_attach = function(buffer)
                     local gitsigns = require("gitsigns")
 
