@@ -124,7 +124,7 @@ function M.setup()
         GionVim.root.info()
     end, { desc = "GionVim roots for the current buffer" })
 
-    vim.api.nvim_create_autocmd({ "LspAttach", "BufWritePost", "DirChanged" }, {
+    vim.api.nvim_create_autocmd({ "LspAttach", "BufWritePost", "DirChanged", "BufEnter" }, {
         group = vim.api.nvim_create_augroup("gionvim_root_cache", { clear = true }),
         callback = function(event)
             M.cache[event.buf] = nil
