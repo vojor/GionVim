@@ -10,9 +10,20 @@ return {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 build = "make",
                 lazy = true,
-                config = function()
+                config = function(plugin)
                     GionVim.on_load("telescope.nvim", function()
-                        require("telescope").load_extension("fzf")
+                        local ok, err = pcall(require("telescope").load_extension, "fzf")
+                        if not ok then
+                            local lib = plugin.dir .. "/build/libfzf." .. (GionVim.is_win() and "dll" or "so")
+                            if not vim.uv.fs_stat(lib) then
+                                GionVim.warn("`telescope-fzf-native.nvim` not built. Rebuilding...")
+                                require("lazy").build({ plugins = { plugin }, show = false }):wait(function()
+                                    GionVim.info("Rebuilding `telescope-fzf-native.nvim` done.\nPlease restart Neovim.")
+                                end)
+                            else
+                                GionVim.error("Failed to load `telescope-fzf-native.nvim`:\n" .. err)
+                            end
+                        end
                     end)
                 end,
             },
