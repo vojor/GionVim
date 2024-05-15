@@ -185,13 +185,8 @@ return {
             ring = {
                 history_length = 200,
                 storage = "sqlite",
-                storage_path = vim.fn.stdpath("data") .. "/databases/yanky.db",
-                sync_with_numbered_registers = true,
-                cancel_event = "update",
             },
-            textobject = {
-                enabled = true,
-            },
+            highlight = { timer = 150 },
         },
     },
     -- Enhance terminal

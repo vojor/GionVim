@@ -67,6 +67,13 @@ return {
                 end,
                 desc = "Dismiss All",
             },
+            {
+                "<leader>up",
+                function()
+                    require("noice").cmd("telescope")
+                end,
+                desc = "Noice Telescope",
+            },
         },
     },
     -- Message inform

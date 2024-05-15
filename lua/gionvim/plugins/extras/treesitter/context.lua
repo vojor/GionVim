@@ -35,6 +35,7 @@ return {
         },
         config = function()
             require("treesitter-context").setup({
+                mode = "cursor",
                 max_lines = 3,
             })
             vim.keymap.set("n", "[x", function()

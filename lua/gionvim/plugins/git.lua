@@ -38,6 +38,12 @@ return {
                             gitsigns.nav_hunk("prev")
                         end
                     end, "Prev Hunk")
+                    map("n", "]H", function()
+                        gitsigns.nav_hunk("last")
+                    end, "Last Hunk")
+                    map("n", "[H", function()
+                        gitsigns.nav_hunk("first")
+                    end, "First Hunk")
                     map("n", "<leader>gs", gitsigns.stage_hunk, "Stage Hunk")
                     map("n", "<leader>gr", gitsigns.reset_hunk, "Reset Hunk")
                     map("v", "<leader>gs", function()

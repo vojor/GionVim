@@ -60,10 +60,12 @@ return {
 
             -- diagnostics signs
             if vim.fn.has("nvim-0.10.0") == 0 then
-                for severity, icon in pairs(opts.diagnostics.signs.text) do
-                    local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
-                    name = "DiagnosticSign" .. name
-                    vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+                if type(opts.diagnostics.signs) ~= "boolean" then
+                    for severity, icon in pairs(opts.diagnostics.signs.text) do
+                        local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
+                        name = "DiagnosticSign" .. name
+                        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+                    end
                 end
             end
 
@@ -92,7 +94,7 @@ return {
             if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
                 opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
                     or function(diagnostic)
-                        local icons = require("core.icons").icons.diagnostics
+                        local icons = require("gionvim.config").icons.diagnostics
                         for d, icon in pairs(icons) do
                             if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
                                 return icon

@@ -73,6 +73,7 @@ require("lazy").setup({
         -- treesitter
         { import = "gionvim.plugins.extras.treesitter.treesj" }, -- Splitting or merging code
         { import = "gionvim.plugins.extras.treesitter.context" },
+        { import = "gionvim.plugins.extras.treesitter.textobjects" },
         { import = "gionvim.plugins.extras.treesitter.autotag" }, -- Auto close tag
         { import = "gionvim.plugins.extras.treesitter.commentstring" },
         -- ui

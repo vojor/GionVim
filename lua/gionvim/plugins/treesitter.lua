@@ -1,8 +1,9 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        version = false,
         build = { ":TSUpdate" },
-        lazy = true,
+        lazy = vim.fn.argc(-1) == 0,
         event = { "BufReadPost", "BufNewFile" },
         cmd = { "TSUpdate", "TSUpdateSync", "TSUninstall" },
         init = function(plugin)
@@ -10,31 +11,7 @@ return {
             require("nvim-treesitter.query_predicates")
         end,
         dependencies = {
-            -- Text object operate：select、move、swap
-            {
-                "nvim-treesitter/nvim-treesitter-textobjects",
-                config = function()
-                    local move = require("nvim-treesitter.textobjects.move")
-                    local configs = require("nvim-treesitter.configs")
-                    for name, fn in pairs(move) do
-                        if name:find("goto") == 1 then
-                            move[name] = function(q, ...)
-                                if vim.wo.diff then
-                                    local config = configs.get_module("textobjects.move")[name]
-                                    for key, query in pairs(config or {}) do
-                                        if q == query and key:find("[%]%[][cC]") then
-                                            vim.cmd("normal! " .. key)
-                                            return
-                                        end
-                                    end
-                                end
-                                return fn(q, ...)
-                            end
-                        end
-                    end
-                end,
-            },
-            -- 为lua,vim,bash,fish文件内部函数添加end
+            -- 为 lua,vim,bash,fish 文件内部函数添加 end
             { "RRethy/nvim-treesitter-endwise" },
         },
         keys = {
@@ -180,6 +157,9 @@ return {
                 end, opts.ensure_installed)
             end
             require("nvim-treesitter.configs").setup(opts)
+            vim.schedule(function()
+                require("lazy").load({ plugins = { "nvim-treesitter-textobjects" } })
+            end)
 
             -- enable treesitter fold
             vim.opt.foldmethod = "expr"
