@@ -14,11 +14,18 @@
     },
     "lspconfig": {
         "lua_ls": {
+            "Lua.codeLens.enable": true,
             "Lua.completion.callSnippet": "Both",
             "Lua.completion.keywordSnippet": "Both",
+            "Lua.doc.privateName": ["^_"],
+            "Lua.hint.enable": true,
+            "Lua.hint.arrayIndex": "Disable",
+            "Lua.hint.paramType": true,
+            "Lua.hint.paramName": "Disable",
+            "Lua.hint.semicolon": "Disable",
+            "Lua.hint.setType": false,
             "Lua.runtime.version": "LuaJIT",
-            "Lua.workspace.checkThirdParty": false,
-            "Lua.codeLens.enable": true
+            "Lua.workspace.checkThirdParty": false
         }
     }
 }
