@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Neovim Version](https://img.shields.io/badge/Neovim-0.9%2B-brightblue?style=flat&logo=neovim&logoColor=green)](https://github.com/neovim/neovim)
+[![Neovim Version](https://img.shields.io/badge/Neovim-0.10%2B-brightblue?style=flat&logo=neovim&logoColor=green)](https://github.com/neovim/neovim)
 [![GitHub License](https://img.shields.io/github/license/legbor/GionVim?style=flat&logo=github&logoColor=orange&color=blue)](https://github.com/legbor/GionVim/blob/main/LICENSE)
 
 </div>

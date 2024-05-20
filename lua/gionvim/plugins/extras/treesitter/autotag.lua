@@ -5,7 +5,7 @@ return {
         lazy = true,
         ft = { "xml", "html", "markdown", "javascript", "typescript", "javascriptreact", "typescriptreact" },
         config = function()
-            require("autotag").setup({
+            require("nvim-ts-autotag").setup({
                 opts = {
                     enable = true,
                     enable_rename = true,
