@@ -13,7 +13,7 @@ M.theme = {
     inactiveBorderColor = { fg = "FloatBorder" },
     optionsTextColor = { fg = "Function" },
     searchingActiveBorderColor = { fg = "MatchParen", bold = true },
-    selectedLineBgColor = { bg = "Visual" },
+    selectedLineBgColor = { bg = "Visual" }, -- set to `default` to have no background colour
     unstagedChangesColor = { fg = "DiagnosticError" },
 }
 
@@ -115,6 +115,7 @@ gui:
     M.dirty = false
 end
 
+---@param opts? {count?: number}|LazyCmdOptions
 function M.blame_line(opts)
     opts = vim.tbl_deep_extend("force", {
         count = 3,
@@ -126,7 +127,7 @@ function M.blame_line(opts)
         border = "rounded",
     }, opts or {})
     local cursor = vim.api.nvim_win_get_cursor(0)
-    local line = cursor[1] - 1
+    local line = cursor[1]
     local file = vim.api.nvim_buf_get_name(0)
     local cmd = { "git", "log", "-n", opts.count, "-u", "-L", line .. ",+1:" .. file }
     return require("lazy.util").float_cmd(cmd, opts)

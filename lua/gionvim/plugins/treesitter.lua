@@ -147,19 +147,9 @@ return {
         },
         config = function(_, opts)
             if type(opts.ensure_installed) == "table" then
-                local added = {}
-                opts.ensure_installed = vim.tbl_filter(function(lang)
-                    if added[lang] then
-                        return false
-                    end
-                    added[lang] = true
-                    return true
-                end, opts.ensure_installed)
+                opts.ensure_installed = GionVim.dedup(opts.ensure_installed)
             end
             require("nvim-treesitter.configs").setup(opts)
-            vim.schedule(function()
-                require("lazy").load({ plugins = { "nvim-treesitter-textobjects" } })
-            end)
 
             -- enable treesitter fold
             vim.opt.foldmethod = "expr"

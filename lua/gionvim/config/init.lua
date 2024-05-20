@@ -191,6 +191,10 @@ function M.init()
 
     M.load("options")
 
+    if vim.g.deprecation_warnings == false then
+        vim.deprecate = function() end
+    end
+
     GionVim.plugin.setup()
 end
 

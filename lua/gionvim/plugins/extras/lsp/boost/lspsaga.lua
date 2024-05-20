@@ -40,7 +40,7 @@ return {
             require("lspsaga").setup({
                 -- neovim version >= 0.10,use dropbar.nvim,disable option
                 symbol_in_winbar = {
-                    enable = true,
+                    enable = false,
                 },
                 code_action = {
                     num_shortcut = true,

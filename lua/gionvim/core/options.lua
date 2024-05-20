@@ -11,6 +11,10 @@ vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 vim.g.python3_host_prog = "/usr/bin/python"
 -- 设置 lazygit 主题
 vim.g.lazygit_config = true
+-- 隐藏弃用警告
+vim.g.deprecation_warnings = false
+-- 修复 markdown 缩进
+vim.g.markdown_recommended_style = 0
 
 ------------ 选项配置 ------------
 -- 控制隐藏文本级别

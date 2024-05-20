@@ -105,12 +105,6 @@ return {
                 },
                 right = {
                     {
-                        title = "SagaOutline",
-                        ft = "sagaoutline",
-                        pinned = true,
-                        open = "Lspsaga outline",
-                    },
-                    {
                         title = "Outline",
                         ft = "Outline",
                         pinned = true,

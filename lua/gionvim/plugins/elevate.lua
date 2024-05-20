@@ -118,7 +118,7 @@ return {
         "ojroques/nvim-bufdel",
         lazy = true,
         keys = {
-            { "<leader>bd", "<cmd>BufDel<CR>", desc = "Close Current Buffer" },
+            { "<leader>be", "<cmd>BufDel<CR>", desc = "Close Current Buffer" },
             { "<leader>bi", "<cmd>BufDel!<CR>", desc = "Close Current Buffer And Ignore Modify" },
             { "<leader>ba", "<cmd>BufDelAll<CR>", desc = "Close All Buffers" },
             { "<leader>bo", "<cmd>BufDelOthers<CR>", desc = "Close Others Buffer" },
@@ -156,6 +156,8 @@ return {
     -- Enhance Yank and Put function
     {
         "gbprod/yanky.nvim",
+        recommended = true,
+        desc = "Better Yank/Paste",
         lazy = true,
         keys = {
             { "<leader>yr", "<cmd>YankyRingHistory<CR>", desc = "Show Yanky History" },

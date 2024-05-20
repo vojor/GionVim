@@ -36,7 +36,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.editor.replacer" }, -- Factor replace
         { import = "gionvim.plugins.extras.editor.portal" }, -- Local list navigate
         { import = "gionvim.plugins.extras.editor.surround" }, -- Surround modify
-        -- { import = "gionvim.plugins.extras.develop.refactor" }, -- Refactor code
+        { import = "gionvim.plugins.extras.develop.refactor" }, -- Refactor code
         -- elevate
         { import = "gionvim.plugins.extras.elevate.scope" }, -- Enhance Buffer scope
         { import = "gionvim.plugins.extras.elevate.escape" }, -- More user-friendly mode switching
@@ -60,10 +60,10 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.lsp.langlarge.typescript" }, -- Javascript/Typescript
         -- -- util
         { import = "gionvim.plugins.extras.lsp.boost.aerial" }, -- Code outline
-        -- { import = "gionvim.plugins.extras.lsp.boost.dropbar" }, -- Code navigate
+        { import = "gionvim.plugins.extras.lsp.boost.dropbar" }, -- Code navigate
         { import = "gionvim.plugins.extras.lsp.boost.fidget" }, -- Progress prompt
         { import = "gionvim.plugins.extras.lsp.boost.garbage" }, -- disable unfocused serve
-        { import = "gionvim.plugins.extras.lsp.boost.illuminate" }, -- Display the same vocabulary under the cursor
+        -- { import = "gionvim.plugins.extras.lsp.boost.illuminate" }, -- Display the same vocabulary under the cursor
         { import = "gionvim.plugins.extras.lsp.boost.increname" }, -- Timely feedback rename
         { import = "gionvim.plugins.extras.lsp.boost.lspsaga" }, -- Strengthen LSP experience
         { import = "gionvim.plugins.extras.lsp.boost.naybuddy" }, -- Float navigate

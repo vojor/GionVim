@@ -46,17 +46,21 @@ return {
                 },
             },
             inlay_hints = {
-                enabled = false,
+                enabled = true,
             },
             codelens = {
                 enabled = false,
             },
+            document_highlight = {
+                enabled = true,
+            },
         },
         config = function(_, opts)
             if GionVim.has("neoconf.nvim") then
-                local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
-                require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
+                require("neoconf").setup(GionVim.opts("neoconf.nvim"))
             end
+
+            GionVim.lsp.words.setup(opts.document_highlight)
 
             -- diagnostics signs
             if vim.fn.has("nvim-0.10.0") == 0 then
@@ -70,25 +74,23 @@ return {
             end
 
             -- inlay hints
-            if opts.inlay_hints.enabled then
-                GionVim.lsp.on_attach(function(client, buffer)
-                    if client.supports_method("textDocument/inlayHint") then
+            if vim.fn.has("nvim-0.10") == 1 then
+                if opts.inlay_hints.enabled then
+                    GionVim.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
                         GionVim.toggle.inlay_hints(buffer, true)
-                    end
-                end)
-            end
+                    end)
+                end
 
-            -- code lens
-            if opts.codelens.enabled and vim.lsp.codelens then
-                GionVim.lsp.on_attach(function(client, buffer)
-                    if client.supports_method("textDocument/codeLens") then
+                -- code lens
+                if opts.codelens.enabled and vim.lsp.codelens then
+                    Gion.lsp.on_supports_method("textDocument/codeLens", function(client, buffer)
                         vim.lsp.codelens.refresh()
                         vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
                             buffer = buffer,
                             callback = vim.lsp.codelens.refresh,
                         })
-                    end
-                end)
+                    end)
+                end
             end
 
             if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then

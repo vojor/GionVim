@@ -150,7 +150,7 @@ return {
                 desc = "Search Current Word",
             },
             {
-                "<leader>rf",
+                "<leader>rt",
                 function()
                     require("spectre").open_file_search({ select_word = true })
                 end,

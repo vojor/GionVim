@@ -81,11 +81,13 @@ map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 map("n", "<leader>ch", "<cmd>checkhealth<CR>", { desc = "Neovim Health Check" })
 
 -- buffers
-map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
-map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-map("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
-map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+map("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "Prev buffer" })
+map("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Next buffer" })
+map("n", "[b", "<cmd>bprevious<CR>", { desc = "Prev buffer" })
+map("n", "]b", "<cmd>bnext<CR>", { desc = "Next buffer" })
+map("n", "<leader>bb", "<cmd>e #<CR>", { desc = "Switch to Other Buffer" })
+map("n", "<leader>bd", GionVim.ui.bufremove, { desc = "Delete Buffer" })
+map("n", "<leader>bD", "<cmd>:bd<CR>", { desc = "Delete Buffer and Window" })
 
 -- window
 map("n", "gh", "<c-w>h", { desc = "Goto left window" })

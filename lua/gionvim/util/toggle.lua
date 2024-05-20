@@ -35,7 +35,9 @@ end
 
 local enabled = true
 function M.diagnostics()
-    if vim.diagnostic.is_disabled then
+    if vim.diagnostic.is_enabled then
+        enabled = vim.diagnostic.is_enabled()
+    elseif vim.diagnostic.is_disabled then
         enabled = not vim.diagnostic.is_disabled()
     end
     enabled = not enabled
@@ -55,7 +57,7 @@ function M.inlay_hints(buf, value)
         ih(buf, value)
     elseif type(ih) == "table" and ih.enable then
         if value == nil then
-            value = not ih.is_enabled(buf)
+            value = not ih.is_enabled({ bufnr = buf or 0 })
         end
         ih.enable(value, { bufnr = buf })
     end

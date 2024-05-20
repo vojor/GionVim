@@ -122,6 +122,10 @@ return {
                             fallback()
                         end
                     end),
+                    ["<S-CR>"] = cmp.mapping.confirm({
+                        behavior = cmp.ConfirmBehavior.Replace,
+                        select = true,
+                    }),
                     ["<C-CR>"] = function(fallback)
                         cmp.abort()
                         fallback()
