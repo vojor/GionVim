@@ -1,5 +1,4 @@
 return {
-    -- 显示十六进制颜色
     {
         "NvChad/nvim-colorizer.lua",
         lazy = true,
@@ -17,5 +16,12 @@ return {
                 tailwind = true,
             },
         },
+    },
+    {
+        "rachartier/tiny-devicons-auto-colors.nvim",
+        lazy = true,
+        event = "VeryLazy",
+        dependencies = { "nvim-web-devicons" },
+        opts = {},
     },
 }
