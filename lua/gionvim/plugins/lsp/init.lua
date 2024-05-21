@@ -60,6 +60,8 @@ return {
                 require("neoconf").setup(GionVim.opts("neoconf.nvim"))
             end
 
+            GionVim.lsp.setup()
+
             GionVim.lsp.words.setup(opts.document_highlight)
 
             -- diagnostics signs
@@ -73,8 +75,8 @@ return {
                 end
             end
 
-            -- inlay hints
             if vim.fn.has("nvim-0.10") == 1 then
+                -- inlay hints
                 if opts.inlay_hints.enabled then
                     GionVim.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
                         GionVim.toggle.inlay_hints(buffer, true)
