@@ -1,5 +1,4 @@
 return {
-    recommended = true,
     {
         "folke/trouble.nvim",
         branch = "dev",

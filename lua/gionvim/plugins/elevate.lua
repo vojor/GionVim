@@ -156,8 +156,6 @@ return {
     -- Enhance Yank and Put function
     {
         "gbprod/yanky.nvim",
-        recommended = true,
-        desc = "Better Yank/Paste",
         lazy = true,
         keys = {
             { "<leader>yr", "<cmd>YankyRingHistory<CR>", desc = "Show Yanky History" },

@@ -115,7 +115,6 @@ gui:
     M.dirty = false
 end
 
----@param opts? {count?: number}|LazyCmdOptions
 function M.blame_line(opts)
     opts = vim.tbl_deep_extend("force", {
         count = 3,
