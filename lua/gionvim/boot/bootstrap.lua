@@ -78,7 +78,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.treesitter.commentstring" },
         -- ui
         { import = "gionvim.plugins.extras.ui.dashboard" }, -- Interface
-        { import = "gionvim.plugins.extras.ui.colorizer" }, -- Display hexadecimal colors
+        { import = "gionvim.plugins.extras.ui.colorizer" }, -- Display hexadecimal colors and auto devicons color
         { import = "gionvim.plugins.extras.ui.edgy" }, -- Predefined layout
         { import = "gionvim.plugins.extras.ui.hlslens" }, -- Highlight entries during search
         { import = "gionvim.plugins.extras.ui.rainbow" }, -- Rainbow brackets
