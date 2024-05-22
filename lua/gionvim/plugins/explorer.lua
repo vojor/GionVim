@@ -83,6 +83,12 @@ return {
                     expander_expanded = "",
                     expander_highlight = "NeoTreeExpander",
                 },
+                git_status = {
+                    symbols = {
+                        unstaged = "󰄱",
+                        staged = "󰱒",
+                    },
+                },
             },
             window = {
                 mappings = {
