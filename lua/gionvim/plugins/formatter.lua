@@ -21,7 +21,7 @@ return {
                     end)
                 end,
                 mode = { "n", "v" },
-                desc = "Format",
+                desc = "Format Buffer",
             },
         },
         opts = {
@@ -38,7 +38,7 @@ return {
                 lua = { "stylua" },
                 markdown = { "mdformat", "injected" },
                 norg = { "injected" },
-                python = { "ruff_format", "ruff_fix" },
+                python = { "ruff_format", "ruff_fix", "ruff_organize_imports" },
                 sh = { "shellharden", "shfmt" },
                 toml = { "taplo" },
                 yaml = { "yamlfmt" },
