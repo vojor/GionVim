@@ -79,13 +79,15 @@ return {
                 -- inlay hints
                 if opts.inlay_hints.enabled then
                     GionVim.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
-                        GionVim.toggle.inlay_hints(buffer, true)
+                        if vim.api.nvim_buf_is_valid(buffer) and vim.bo[buffer].buftype == "" then
+                            GionVim.toggle.inlay_hints(buffer, true)
+                        end
                     end)
                 end
 
                 -- code lens
                 if opts.codelens.enabled and vim.lsp.codelens then
-                    Gion.lsp.on_supports_method("textDocument/codeLens", function(client, buffer)
+                    GionVim.lsp.on_supports_method("textDocument/codeLens", function(client, buffer)
                         vim.lsp.codelens.refresh()
                         vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
                             buffer = buffer,
