@@ -1,5 +1,4 @@
 return {
-    -- 自动关闭和重命名标签
     {
         "windwp/nvim-ts-autotag",
         lazy = true,

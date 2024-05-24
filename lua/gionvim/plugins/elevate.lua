@@ -113,7 +113,7 @@ return {
             { "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
         },
     },
-    -- Improeve buffer close
+    -- Improve buffer close
     {
         "ojroques/nvim-bufdel",
         lazy = true,

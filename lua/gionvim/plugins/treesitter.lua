@@ -11,7 +11,7 @@ return {
             require("nvim-treesitter.query_predicates")
         end,
         dependencies = {
-            -- 为 lua,vim,bash,fish 文件内部函数添加 end
+            -- lua, vim, bash, fish files, internal function add end
             { "RRethy/nvim-treesitter-endwise" },
         },
         keys = {

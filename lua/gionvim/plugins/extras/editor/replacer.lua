@@ -1,5 +1,4 @@
 return {
-    -- 多个参数替换
     {
         "AckslD/muren.nvim",
         lazy = true,

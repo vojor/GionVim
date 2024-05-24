@@ -1,5 +1,4 @@
 return {
-    -- 文件浏览和导航
     {
         "echasnovski/mini.files",
         version = false,

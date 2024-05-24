@@ -1,5 +1,4 @@
 return {
-    -- 缩进线
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
@@ -39,7 +38,6 @@ return {
             })
         end,
     },
-    -- 可视化缩进范围
     {
         "echasnovski/mini.indentscope",
         version = false,

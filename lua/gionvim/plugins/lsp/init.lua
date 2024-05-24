@@ -1,5 +1,5 @@
 return {
-    -- LSP 基础服务
+    -- LSP basic service
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
@@ -117,7 +117,7 @@ return {
 
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-            -- 不同语言服务器的 capabilities 表有区别
+            -- Capabilities are different for different language servers
             local clangd_capabilities = vim.tbl_deep_extend("force", capabilities, {
                 offsetEncoding = { "utf-16" },
             })
@@ -229,6 +229,7 @@ return {
                 })
             end
 
+            -- Transfer keybinds
             require("gionvim.plugins.lsp.keymaps")
         end,
     },

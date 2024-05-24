@@ -3,7 +3,7 @@ return {
         "nvimdev/dashboard-nvim",
         lazy = false,
         opts = function()
-            -- 字符生成地址
+            -- Generate character address
             -- https://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=gionvim
             -- local logo = [[
             --     ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗            ▒█▒

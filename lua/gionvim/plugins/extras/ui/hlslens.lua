@@ -1,5 +1,4 @@
 return {
-    -- 搜索时显示条目
     {
         "kevinhwang91/nvim-hlslens",
         lazy = true,

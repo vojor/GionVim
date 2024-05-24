@@ -1,5 +1,5 @@
 return {
-    -- 在函数、方法、语句等之后显示当前上下文的虚拟文本
+    -- In function, method, etc show context virtual text
     {
         "andersevenrud/nvim_context_vt",
         lazy = true,
@@ -13,7 +13,7 @@ return {
             { "<leader>ov", "<cmd>NvimContextVtToggle<CR>", desc = "Toggle Context Virtual Text" },
         },
     },
-    -- 将函数头显示在界面前几行
+    -- Exhibit function head
     {
         "nvim-treesitter/nvim-treesitter-context",
         lazy = true,

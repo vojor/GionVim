@@ -1,5 +1,4 @@
 return {
-    -- 预定义窗口布局
     {
         "folke/edgy.nvim",
         event = "VeryLazy",

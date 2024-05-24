@@ -102,7 +102,7 @@ return {
             { "<leader>dk", "<cmd>DapRestartFrame<CR>", desc = "Dap Restart Frame" },
             { "<leader>dj", "<cmd>DapLoadLaunchJSON<CR>", desc = "Direct Load Json File Debug" },
 
-            -- 小部件 UI
+            -- Widgets UI
             {
                 "<leader>dwh",
                 function()

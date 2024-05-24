@@ -1,4 +1,5 @@
 return {
+    -- Format
     {
         "stevearc/conform.nvim",
         lazy = true,

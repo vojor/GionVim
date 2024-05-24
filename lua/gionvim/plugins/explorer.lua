@@ -73,7 +73,6 @@ return {
                 "qf",
                 "Outline",
                 "aerial",
-                "sagaoutline",
                 "lazyterm",
             },
             default_component_configs = {

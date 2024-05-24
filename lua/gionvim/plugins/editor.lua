@@ -342,7 +342,6 @@ return {
                     "notify",
                     "Outline",
                     "qf",
-                    "sagaoutline",
                     "spectre_panel",
                     "starter",
                     "Trouble",
