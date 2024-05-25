@@ -116,12 +116,14 @@ vim.opt.showmode = false
 vim.opt.redrawtime = 5000
 -- 代码折叠
 vim.opt.foldenable = true
+vim.opt.smoothscroll = true
+vim.opt.foldexpr = [[%!v:lua.require'gionvim.util'.ui.foldexpr()]]
+vim.opt.foldmethod = "expr"
+vim.opt.foldtext = ""
 -- -- 当前打开文件的折叠级别
 vim.opt.foldlevel = 99
 -- -- 文件初始打开的折叠级别
 vim.opt.foldlevelstart = 99
--- -- 折叠文本
-vim.opt.foldtext = "v:lua.require'gionvim.util'.ui.foldtext()"
 -- -- 设定指示折叠的列宽度
 vim.opt.foldcolumn = "1"
 -- 筛选设置

@@ -33,6 +33,11 @@ return {
             })
         end,
     },
+    -- {
+    --     "folke/ts-comments.nvim",
+    --     event = "VeryLazy",
+    --     opts = {},
+    -- },
     {
         "folke/todo-comments.nvim",
         lazy = true,
@@ -74,7 +79,6 @@ return {
             },
         },
     },
-    -- 注释生成器
     {
         "danymat/neogen",
         lazy = true,
@@ -85,8 +89,6 @@ return {
             { "<leader>et", "<cmd>Neogen type<CR>", desc = "Generate Type Comment" },
             { "<leader>ei", "<cmd>Neogen file<CR>", desc = "Generate File Comment" },
         },
-        opts = {
-            snippet_engine = "luasnip",
-        },
+        opts = {},
     },
 }

@@ -150,10 +150,6 @@ return {
                 opts.ensure_installed = GionVim.dedup(opts.ensure_installed)
             end
             require("nvim-treesitter.configs").setup(opts)
-
-            -- enable treesitter fold
-            vim.opt.foldmethod = "expr"
-            vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
         end,
     },
 }

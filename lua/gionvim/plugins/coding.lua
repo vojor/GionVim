@@ -1,45 +1,18 @@
 return {
-    -- Snippets support
-    {
-        "L3MON4D3/luasnip",
-        build = "make install_jsregexp",
-        lazy = true,
-        event = "InsertEnter",
-        dependencies = { "rafamadriz/friendly-snippets" },
-        config = function()
-            local types = require("luasnip.util.types")
-
-            -- load snippets
-            require("luasnip.loaders.from_vscode").lazy_load()
-            require("luasnip.loaders.from_snipmate").lazy_load({ path = { vim.fn.stdpath("config") .. "snippets" } })
-
-            -- configuration
-            require("luasnip").setup({
-                update_events = { "TextChanged", "TextChangedI" },
-                delete_check_events = "TextChanged",
-            })
-            require("luasnip").config.setup({
-                ext_opts = {
-                    [types.choiceNode] = {
-                        active = {
-                            virt_text = { { "●", "GruvboxOrange" } },
-                        },
-                    },
-                    [types.insertNode] = {
-                        active = {
-                            virt_text = { { "●", "GruvboxBlue" } },
-                        },
-                    },
-                },
-            })
-        end,
-    },
     -- Code completion
     {
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
-            { "saadparwaiz1/cmp_luasnip" },
+            {
+                "garymjr/nvim-snippets",
+                opts = {
+                    friendly_snippets = true,
+                    global_snippets = { "all", "global" },
+                    search_paths = { vim.fn.stdpath("config") .. "/snippets" },
+                },
+                dependencies = { "rafamadriz/friendly-snippets" },
+            },
             { "hrsh7th/cmp-nvim-lsp" },
             { "hrsh7th/cmp-buffer" },
             { "hrsh7th/cmp-cmdline" },
@@ -50,7 +23,6 @@ return {
         },
         opts = function()
             local defaults = require("cmp.config.default")()
-            local luasnip = require("luasnip")
             local cmp = require("cmp")
             vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
@@ -61,7 +33,7 @@ return {
                 },
                 snippet = {
                     expand = function(args)
-                        luasnip.lsp_expand(args.body)
+                        vim.snippet.expand(args.body)
                     end,
                 },
                 window = {
@@ -70,7 +42,7 @@ return {
                 },
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
-                    { name = "luasnip" },
+                    { name = "snippets" },
                     { name = "async_path" },
                     { name = "buffer" },
                     {
@@ -88,7 +60,7 @@ return {
                             async_path = "[Path]",
                             buffer = "[Buffer]",
                             cmdline = "[Cmdline]",
-                            luasnip = "[LuaSnip]",
+                            snippets = "[Snippets]",
                             nvim_lsp = "[LSP]",
                             rg = "[Rg]",
                             spell = "[Spell]",
@@ -109,19 +81,7 @@ return {
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(),
                     ["<C-e>"] = cmp.mapping.abort(),
-                    ["<CR>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            if luasnip.expandable() then
-                                luasnip.expand()
-                            else
-                                cmp.confirm({
-                                    select = true,
-                                })
-                            end
-                        else
-                            fallback()
-                        end
-                    end),
+                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
                     ["<S-CR>"] = cmp.mapping.confirm({
                         behavior = cmp.ConfirmBehavior.Replace,
                         select = true,
@@ -133,8 +93,10 @@ return {
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()
-                        elseif luasnip.locally_jumpable(1) then
-                            luasnip.jump(1)
+                        elseif vim.snippet.active({ direction = 1 }) then
+                            feedkey("<cmd>lua vim.snippet.jump(1)<CR>", "")
+                        elseif has_words_before() then
+                            cmp.complete()
                         else
                             fallback()
                         end
@@ -142,10 +104,8 @@ return {
                     ["<S-Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item()
-                        elseif luasnip.locally_jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
+                        elseif vim.snippet.active({ direction = -1 }) then
+                            feedkey("lua vim.snippet.jump(-1)<CR>")
                         end
                     end, { "i", "s" }),
                 }),
