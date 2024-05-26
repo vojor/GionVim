@@ -13,6 +13,12 @@ vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Diagnost
 vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Diagnostic Warning" })
 vim.keymap.set("n", "<leader>lw", vim.diagnostic.open_float, { desc = "Float Window View Diagnostic" })
 vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "QuickFix Window View Diagnostic" })
+vim.keymap.set("n", "]]", function()
+    GionVim.lsp.words.jump(vim.v.count1)
+end, { desc = "Next Reference" })
+vim.keymap.set("n", "[[", function()
+    GionVim.lsp.words.jump(-vim.v.count1)
+end, { desc = "Prev Reference" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConifg", {}),

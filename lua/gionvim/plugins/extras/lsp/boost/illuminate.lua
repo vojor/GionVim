@@ -14,10 +14,10 @@ return {
         config = function(_, opts)
             require("illuminate").configure(opts)
 
-            vim.keymap.set("n", "[l", function()
+            vim.keymap.set("n", "[[]", function()
                 require("illuminate").goto_prev_reference()
             end, { desc = "Prev Match Word" })
-            vim.keymap.set("n", "]l", function()
+            vim.keymap.set("n", "]]", function()
                 require("illuminate").goto_next_reference()
             end, { desc = "Next Match Word" })
         end,
