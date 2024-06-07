@@ -10,8 +10,6 @@ return {
             { "<leader>ur", "<cmd>LspRestart<CR>", desc = "Restart LspConfig" },
         },
         dependencies = {
-            { "folke/neodev.nvim", opts = {} },
-            { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
             {
                 "williamboman/mason-lspconfig.nvim",
                 lazy = true,
@@ -23,43 +21,50 @@ return {
                 },
             },
         },
-        opts = {
-            diagnostics = {
-                signs = {
-                    text = {
-                        [vim.diagnostic.severity.ERROR] = require("gionvim.config").icons.diagnostics.Error,
-                        [vim.diagnostic.severity.WARN] = require("gionvim.config").icons.diagnostics.Warn,
-                        [vim.diagnostic.severity.HINT] = require("gionvim.config").icons.diagnostics.Hint,
-                        [vim.diagnostic.severity.INFO] = require("gionvim.config").icons.diagnostics.Info,
+        opts = function()
+            return {
+                diagnostics = {
+                    signs = {
+                        text = {
+                            [vim.diagnostic.severity.ERROR] = require("gionvim.config").icons.diagnostics.Error,
+                            [vim.diagnostic.severity.WARN] = require("gionvim.config").icons.diagnostics.Warn,
+                            [vim.diagnostic.severity.HINT] = require("gionvim.config").icons.diagnostics.Hint,
+                            [vim.diagnostic.severity.INFO] = require("gionvim.config").icons.diagnostics.Info,
+                        },
+                    },
+                    underline = true,
+                    update_in_insert = false,
+                    severity_sort = true,
+                    virtual_text = {
+                        spacing = 4,
+                        prefix = "●",
+                        source = "if_many",
+                    },
+                    float = {
+                        source = "if_many",
                     },
                 },
-                underline = true,
-                update_in_insert = false,
-                severity_sort = true,
-                virtual_text = {
-                    spacing = 4,
-                    prefix = "●",
-                    source = "if_many",
+                inlay_hints = {
+                    enabled = true,
+                    exclude = {},
                 },
-                float = {
-                    source = "if_many",
+                codelens = {
+                    enabled = false,
                 },
-            },
-            inlay_hints = {
-                enabled = true,
-            },
-            codelens = {
-                enabled = false,
-            },
-            document_highlight = {
-                enabled = true,
-            },
-        },
+                document_highlight = {
+                    enabled = false,
+                },
+                capabilities = {
+                    workspace = {
+                        fileOperations = {
+                            didRename = true,
+                            willRename = true,
+                        },
+                    },
+                },
+            }
+        end,
         config = function(_, opts)
-            if GionVim.has("neoconf.nvim") then
-                require("neoconf").setup(GionVim.opts("neoconf.nvim"))
-            end
-
             GionVim.lsp.setup()
 
             GionVim.lsp.words.setup(opts.document_highlight)
@@ -79,7 +84,11 @@ return {
                 -- inlay hints
                 if opts.inlay_hints.enabled then
                     GionVim.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
-                        if vim.api.nvim_buf_is_valid(buffer) and vim.bo[buffer].buftype == "" then
+                        if
+                            vim.api.nvim_buf_is_valid(buffer)
+                            and vim.bo[buffer].buftype == ""
+                            and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
+                        then
                             GionVim.toggle.inlay_hints(buffer, true)
                         end
                     end)
@@ -118,10 +127,10 @@ return {
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             -- Capabilities are different for different language servers
-            local clangd_capabilities = vim.tbl_deep_extend("force", capabilities, {
+            local clangd_capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {}, {
                 offsetEncoding = { "utf-16" },
             })
-            local json_capabilities = vim.tbl_deep_extend("force", capabilities, {
+            local json_capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {}, {
                 textDocument = {
                     completion = {
                         completionItem = {
@@ -130,7 +139,7 @@ return {
                     },
                 },
             })
-            local yaml_capabilities = vim.tbl_deep_extend("force", capabilities, {
+            local yaml_capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {}, {
                 textDocument = {
                     foldingRange = {
                         dynamicRegistration = false,
@@ -138,7 +147,7 @@ return {
                     },
                 },
             })
-            local neocmake_capabilities = vim.tbl_deep_extend("force", capabilities, {
+            local neocmake_capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {}, {
                 workspace = {
                     didChangeWatchedFiles = {
                         dynamicRegistration = true,
@@ -225,7 +234,7 @@ return {
 
             for _, lsp in ipairs(servers) do
                 lspconfig[lsp].setup({
-                    capabilities = capabilities,
+                    capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {}),
                 })
             end
 

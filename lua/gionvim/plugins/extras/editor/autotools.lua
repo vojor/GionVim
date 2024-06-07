@@ -10,7 +10,6 @@ return {
                 local fn = vim.fn
                 local utils = require("auto-save.utils.data")
                 local exclude_filetypes = {
-                    "aerial",
                     "alpha",
                     "dashboard",
                     "neo-tree",

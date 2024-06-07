@@ -72,7 +72,6 @@ return {
                 "trouble",
                 "qf",
                 "Outline",
-                "aerial",
                 "lazyterm",
             },
             default_component_configs = {

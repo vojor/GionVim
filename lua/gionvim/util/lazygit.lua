@@ -13,11 +13,11 @@ M.theme = {
     inactiveBorderColor = { fg = "FloatBorder" },
     optionsTextColor = { fg = "Function" },
     searchingActiveBorderColor = { fg = "MatchParen", bold = true },
-    selectedLineBgColor = { bg = "Visual" }, -- set to `default` to have no background colour
+    selectedLineBgColor = { bg = "Visual" },
     unstagedChangesColor = { fg = "DiagnosticError" },
 }
 
-M.theme_path = vim.fn.stdpath("cache") .. "/lazygit-theme.yml"
+M.theme_path = GionVim.norm(vim.fn.stdpath("cache") .. "/lazygit-theme.yml")
 
 M.dirty = true
 
@@ -50,7 +50,7 @@ function M.open(opts)
             local ok, lines = pcall(Process.exec, { "lazygit", "-cd" })
             if ok then
                 M.config_dir = lines[1]
-                vim.env.LG_CONFIG_FILE = M.config_dir .. "/config.yml" .. "," .. M.theme_path
+                vim.env.LG_CONFIG_FILE = GionVim.norm(M.config_dir .. "/config.yml" .. "," .. M.theme_path)
             else
                 GionVim.error({
                     "Failed to get **lazygit** config directory.",
@@ -128,8 +128,41 @@ function M.blame_line(opts)
     local cursor = vim.api.nvim_win_get_cursor(0)
     local line = cursor[1]
     local file = vim.api.nvim_buf_get_name(0)
-    local cmd = { "git", "log", "-n", opts.count, "-u", "-L", line .. ",+1:" .. file }
+    local root = GionVim.root.detectors.pattern(0, { ".git" })[1]
+    local cmd = { "git", "-C", root, "log", "-n", opts.count, "-u", "-L", line .. ",+1:" .. file }
     return require("lazy.util").float_cmd(cmd, opts)
+end
+
+function M.browse()
+    local config = require("lazy.manage.git").get_config(GionVim.root.detectors.pattern(0, { ".git" })[1])
+    local remotes = {}
+    for name, url in pairs(config) do
+        name = name:match("^remote%.(.-)%.url$")
+        if name then
+            url = url:gsub("git@github.com:", "https://github.com/"):gsub("%.git$", "")
+            table.insert(remotes, { name = name, url = url })
+        end
+    end
+
+    local function open(remote)
+        if remote then
+            GionVim.info(("Opening [%s](%s)"):format(remote.name, remote.url))
+            vim.ui.open(remote.url)
+        end
+    end
+
+    if #remotes == 0 then
+        return GionVim.error("No git remotes found")
+    elseif #remotes == 1 then
+        return open(remotes[1])
+    end
+
+    vim.ui.select(remotes, {
+        prompt = "Select remote to browse",
+        format_item = function(item)
+            return item.name .. (" "):rep(8 - #item.name) .. " 🔗 " .. item.url
+        end,
+    }, open)
 end
 
 return M

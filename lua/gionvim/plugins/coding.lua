@@ -9,6 +9,11 @@ return {
                 opts = {
                     friendly_snippets = true,
                     global_snippets = { "all", "global" },
+                    extended_filetypes = {
+                        typescript = { "javascript" },
+                        typescriptreact = { "javascript" },
+                        javascriptreact = { "javascript" },
+                    },
                     search_paths = { vim.fn.stdpath("config") .. "/snippets" },
                 },
                 dependencies = { "rafamadriz/friendly-snippets" },
@@ -45,12 +50,10 @@ return {
                     { name = "snippets" },
                     { name = "async_path" },
                     { name = "buffer" },
-                    {
-                        name = "rg",
-                        keyword_length = 3,
-                    },
+                    { name = "rg", keyword_length = 3 },
                     { name = "spell" },
                     { name = "dotenv" },
+                    { name = "lazydev", group_index = 0 },
                 }),
                 formatting = {
                     format = function(entry, vim_item)
@@ -65,6 +68,7 @@ return {
                             rg = "[Rg]",
                             spell = "[Spell]",
                             dotenv = "[Dotenv]",
+                            lazydev = "[Lazydev]",
                         })[entry.source.name]
                         return vim_item
                     end,
@@ -136,5 +140,15 @@ return {
 
             cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
         end,
+    },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        cmd = "LazyDev",
+        opts = {
+            library = {
+                { path = "luvit-meta/library", words = { "vim%.uv" } },
+            },
+        },
     },
 }

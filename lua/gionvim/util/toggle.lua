@@ -63,6 +63,39 @@ function M.inlay_hints(buf, value)
     end
 end
 
+M._maximized = nil
+function M.maximize(state)
+    if state == (M._maximized ~= nil) then
+        return
+    end
+    if M._maximized then
+        for _, opt in ipairs(M._maximized) do
+            vim.o[opt.k] = opt.v
+        end
+        M._maximized = nil
+        vim.cmd("wincmd =")
+    else
+        M._maximized = {}
+        local function set(k, v)
+            table.insert(M._maximized, 1, { k = k, v = vim.o[k] })
+            vim.o[k] = v
+        end
+        set("winwidth", 999)
+        set("winheight", 999)
+        set("winminwidth", 10)
+        set("winminheight", 4)
+        vim.cmd("wincmd =")
+    end
+    vim.api.nvim_create_autocmd("ExitPre", {
+        once = true,
+        group = vim.api.nvim_create_augroup("gionvim_restore_max_exit_pre", { clear = true }),
+        desc = "Restore width/height when close Neovim while maximized",
+        callback = function()
+            M.maximize(false)
+        end,
+    })
+end
+
 setmetatable(M, {
     __call = function(m, ...)
         return m.option(...)

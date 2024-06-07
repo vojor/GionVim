@@ -13,6 +13,7 @@ vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Diagnost
 vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Diagnostic Warning" })
 vim.keymap.set("n", "<leader>lw", vim.diagnostic.open_float, { desc = "Float Window View Diagnostic" })
 vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "QuickFix Window View Diagnostic" })
+vim.keymap.set("n", "<leader>lR", GionVim.lsp.rename_file, { desc = "Rename File" })
 vim.keymap.set("n", "]]", function()
     GionVim.lsp.words.jump(vim.v.count1)
 end, { desc = "Next Reference" })
@@ -29,9 +30,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = ev.buf, desc = "Goto Implementation" })
         vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, { buffer = ev.buf, desc = "Goto Type Definition" })
         vim.keymap.set({ "n", "v" }, "<leader>lc", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Code Action" })
-        vim.keymap.set("n", "<leader>lC", function()
-            vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostics = {} } })
-        end, { buffer = ev.buf, desc = "Source Action" })
+        vim.keymap.set("n", "<leader>lC", GionVim.lsp.action.source, { buffer = ev.buf, desc = "Source Action" })
         vim.keymap.set({ "n", "v" }, "<leader>le", vim.lsp.codelens.run, { buffer = ev.buf, desc = "Run Codelens" })
         -- stylua: ignore
         vim.keymap.set("n", "<leader>lE", vim.lsp.codelens.refresh, { buffer = ev.buf, desc = "Refresh & Display Codelens" })

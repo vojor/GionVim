@@ -61,12 +61,9 @@ return {
             local egrep_actions = require("telescope._extensions.egrepify.actions")
 
             local open_with_trouble = function(...)
-                return require("trouble.providers.telescope").open_with_trouble(...)
+                return require("trouble.sources.telescope").open(...)
             end
 
-            local open_selected_with_trouble = function(...)
-                return require("trouble.providers.telescope").open_selected_with_trouble(...)
-            end
             local find_files_no_ignore = function()
                 local action_state = require("telescope.actions.state")
                 local line = action_state.get_current_line()
@@ -97,7 +94,6 @@ return {
                         i = {
                             ["<M-w>"] = "which_key",
                             ["<M-t>"] = open_with_trouble,
-                            ["<M-a>"] = open_selected_with_trouble,
                             ["<M-i>"] = find_files_no_ignore,
                             ["<M-h>"] = find_files_with_hidden,
                             ["<C-Down>"] = actions.cycle_history_next,

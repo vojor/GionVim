@@ -133,6 +133,7 @@ return {
                 ["<leader>p"] = { name = "+portal" },
                 ["<leader>q"] = { name = "+session" },
                 ["<leader>r"] = { name = "+replace/rename" },
+                ["<leader>rf"] = { name = "+refactor" },
                 ["<leader>rr"] = { name = "+muren" },
                 ["<leader>s"] = { name = "+show/search" },
                 ["<leader>t"] = { name = "+terminal/todo" },

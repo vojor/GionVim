@@ -37,6 +37,10 @@ return {
         priority = 1000,
         config = true,
     },
+    {
+        "Bilal2453/luvit-meta",
+        lazy = true,
+    },
     -- Manage lsp,dap,diagnostics,formatting serve install
     {
         "williamboman/mason.nvim",

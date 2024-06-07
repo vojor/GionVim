@@ -100,21 +100,59 @@ function M.on_supports_method(method, fn)
     })
 end
 
-function M.on_rename(from, to)
+function M.rename_file()
+    local buf = vim.api.nvim_get_current_buf()
+    local old = assert(GionVim.root.realpath(vim.api.nvim_buf_get_name(buf)))
+    local root = assert(GionVim.root.realpath(GionVim.root.get({ normalize = true })))
+    assert(old:find(root, 1, true) == 1, "File not in project root")
+
+    local extra = old:sub(#root + 2)
+
+    vim.ui.input({
+        prompt = "New File Name: ",
+        default = extra,
+    }, function(new)
+        if not new or new == "" or new == extra then
+            return
+        end
+        new = GionVim.norm(root .. "/" .. new)
+        vim.fn.mkdir(vim.fs.dirname(new), "p")
+        M.on_rename(old, new, function()
+            vim.fn.rename(old, new)
+            vim.cmd.edit(new)
+            vim.api.nvim_buf_delete(buf, { force = true })
+            vim.fn.delete(old)
+        end)
+    end)
+end
+
+function M.on_rename(from, to, rename)
+    local changes = {
+        files = {
+            {
+                oldUri = vim.uri_from_fname(from),
+                newUri = vim.uri_from_fname(to),
+            },
+        },
+    }
+
     local clients = M.get_clients()
     for _, client in ipairs(clients) do
         if client.supports_method("workspace/willRenameFiles") then
-            local resp = client.request_sync("workspace/willRenameFiles", {
-                files = {
-                    {
-                        oldUri = vim.uri_from_fname(from),
-                        newUri = vim.uri_from_fname(to),
-                    },
-                },
-            }, 1000, 0)
+            local resp = client.request_sync("workspace/willRenameFiles", changes, 1000, 0)
             if resp and resp.result ~= nil then
                 vim.lsp.util.apply_workspace_edit(resp.result, client.offset_encoding)
             end
+        end
+    end
+
+    if rename then
+        rename()
+    end
+
+    for _, client in ipairs(clients) do
+        if client.supports_method("workspace/didRenameFiles") then
+            client.notify("workspace/didRenameFiles", changes)
         end
     end
 end
@@ -122,6 +160,11 @@ end
 function M.get_config(server)
     local configs = require("lspconfig.configs")
     return rawget(configs, server)
+end
+
+function M.is_enabled(server)
+    local c = M.get_config(server)
+    return c and c.enabled ~= false
 end
 
 function M.disable(server, cond)
@@ -180,6 +223,7 @@ function M.format(opts)
 end
 
 M.words = {}
+M.words.enabled = false
 M.words.ns = vim.api.nvim_create_namespace("vim_lsp_references")
 
 function M.words.setup(opts)
@@ -187,11 +231,13 @@ function M.words.setup(opts)
     if not opts.enabled then
         return
     end
+    M.words.enabled = true
     local handler = vim.lsp.handlers["textDocument/documentHighlight"]
     vim.lsp.handlers["textDocument/documentHighlight"] = function(err, result, ctx, config)
         if not vim.api.nvim_buf_is_loaded(ctx.bufnr) then
             return
         end
+        vim.lsp.buf.clear_references()
         return handler(err, result, ctx, config)
     end
 
@@ -200,7 +246,10 @@ function M.words.setup(opts)
             group = vim.api.nvim_create_augroup("lsp_word_" .. buf, { clear = true }),
             buffer = buf,
             callback = function(ev)
-                if not M.words.at() then
+                if not require("gionvim.plugins.lsp.keymaps").has(buf, "documentHighlight") then
+                    return false
+                end
+                if not ({ M.words.get() })[2] then
                     if ev.event:find("CursorMoved") then
                         vim.lsp.buf.clear_references()
                     else
@@ -214,40 +263,61 @@ end
 
 function M.words.get()
     local cursor = vim.api.nvim_win_get_cursor(0)
-    return vim.tbl_map(function(extmark)
-        local ret = {
+    local current, ret = nil, {}
+    for _, extmark in ipairs(vim.api.nvim_buf_get_extmarks(0, M.words.ns, 0, -1, { details = true })) do
+        local w = {
             from = { extmark[2] + 1, extmark[3] },
             to = { extmark[4].end_row + 1, extmark[4].end_col },
         }
-        if
-            cursor[1] >= ret.from[1]
-            and cursor[1] <= ret.to[1]
-            and cursor[2] >= ret.from[2]
-            and cursor[2] <= ret.to[2]
-        then
-            ret.current = true
-        end
-        return ret
-    end, vim.api.nvim_buf_get_extmarks(0, M.words.ns, 0, -1, { details = true }))
-end
-
-function M.words.at(words)
-    for idx, word in ipairs(words or M.words.get()) do
-        if word.current then
-            return word, idx
+        ret[#ret + 1] = w
+        if cursor[1] >= w.from[1] and cursor[1] <= w.to[1] and cursor[2] >= w.from[2] and cursor[2] <= w.to[2] then
+            current = #ret
         end
     end
+    return ret, current
 end
 
-function M.words.jump(count)
-    local words = M.words.get()
-    local _, idx = M.words.at(words)
+function M.words.jump(count, cycle)
+    local words, idx = M.words.get()
     if not idx then
         return
     end
-    local target = words[idx + count]
+    idx = idx + count
+    if cycle then
+        idx = (idx - 1) % #words + 1
+    end
+    local target = words[idx]
     if target then
         vim.api.nvim_win_set_cursor(0, target.from)
+    end
+end
+
+M.action = setmetatable({}, {
+    __index = function(_, action)
+        return function()
+            vim.lsp.buf.code_action({
+                apply = true,
+                context = {
+                    only = { action },
+                    diagnostics = {},
+                },
+            })
+        end
+    end,
+})
+
+function M.execute(opts)
+    local params = {
+        command = opts.command,
+        arguments = opts.arguments,
+    }
+    if opts.open then
+        require("trouble").open({
+            mode = "lsp_command",
+            params = params,
+        })
+    else
+        return vim.lsp.buf_request(0, "workspace/executeCommand", params)
     end
 end
 

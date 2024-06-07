@@ -59,14 +59,14 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.lsp.langlarge.markdown" }, -- markdown
         { import = "gionvim.plugins.extras.lsp.langlarge.typescript" }, -- Javascript/Typescript
         -- -- util
-        { import = "gionvim.plugins.extras.lsp.boost.aerial" }, -- Code outline
         { import = "gionvim.plugins.extras.lsp.boost.dropbar" }, -- Code navigate
         { import = "gionvim.plugins.extras.lsp.boost.fidget" }, -- Progress prompt
         { import = "gionvim.plugins.extras.lsp.boost.garbage" }, -- disable unfocused serve
-        -- { import = "gionvim.plugins.extras.lsp.boost.illuminate" }, -- Display the same vocabulary under the cursor
+        { import = "gionvim.plugins.extras.lsp.boost.illuminate" }, -- Display the same vocabulary under the cursor
         { import = "gionvim.plugins.extras.lsp.boost.increname" }, -- Timely feedback rename
         { import = "gionvim.plugins.extras.lsp.boost.lspsaga" }, -- Strengthen LSP experience
         { import = "gionvim.plugins.extras.lsp.boost.naybuddy" }, -- Float navigate
+        { import = "gionvim.plugins.extras.lsp.boost.neoconf" },
         { import = "gionvim.plugins.extras.lsp.boost.outline" }, -- Symbols Outline
         -- seek
         { import = "gionvim.plugins.extras.seek.fzf" },

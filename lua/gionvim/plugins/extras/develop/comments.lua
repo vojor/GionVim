@@ -60,7 +60,12 @@ return {
             { "<leader>tdf", "<cmd>TodoTelescope<CR>", desc = "Find Todo Tag" },
             { "<leader>tdg", ":TodoTelescope keywords=", desc = "Find Filter Todo Keyswords" },
             { "<leader>tdw", ":TodoTelescope cwd=", desc = "Find Directory Todo Tag" },
-            { "<leader>tdt", "<cmd>TodoTrouble<CR>", desc = "List Todo Tag" },
+            { "<leader>tdt", "<cmd>Trouble todo<CR>", desc = "Todo (Trouble)" },
+            {
+                "<leader>tdr",
+                "<cmd>Trouble todo filter = {tag = {TODO,FIX,FIXME}}<CR>",
+                desc = "Todo/Fix/Fixme (Trouble)",
+            },
             { "<leader>tdd", ":TodoTrouble cwd=", desc = "List Directory Todo Tag" },
             { "<leader>tde", ":TodoTrouble keywords=", desc = "List Filter Todo Keyswords" },
             { "<leader>tdq", "<cmd>TodoQuickFix<CR>", desc = "Use QuickFix Show Todo Tag" },
@@ -89,6 +94,8 @@ return {
             { "<leader>et", "<cmd>Neogen type<CR>", desc = "Generate Type Comment" },
             { "<leader>ei", "<cmd>Neogen file<CR>", desc = "Generate File Comment" },
         },
-        opts = {},
+        opts = {
+            snippet_engine = "nvim",
+        },
     },
 }

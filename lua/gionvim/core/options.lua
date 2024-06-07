@@ -15,6 +15,13 @@ vim.g.lazygit_config = true
 vim.g.deprecation_warnings = false
 -- 修复 markdown 缩进
 vim.g.markdown_recommended_style = 0
+-- 全局设置 trouble lualine
+vim.g.trouble_lualine = true
+-- Options for the GionVim statuscolumn
+vim.g.gionvim_statuscolumn = {
+    folds_open = false,
+    folds_githl = false,
+}
 
 ------------ 选项配置 ------------
 -- 控制隐藏文本级别
@@ -62,6 +69,7 @@ vim.opt.hlsearch = true
 -- 拼写建议
 vim.opt.spell = true
 vim.opt.spelllang = { "en_us" }
+vim.opt.spelloptions:append("noplainbuffer")
 -- 鼠标支持
 vim.opt.mouse = "a"
 -- 启用系统剪切板
