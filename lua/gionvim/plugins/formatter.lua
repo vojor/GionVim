@@ -66,17 +66,6 @@ return {
             vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
         end,
         config = function(_, opts)
-            for name, formatter in pairs(opts.formatters or {}) do
-                if type(formatter) == "table" then
-                    if formatter.extra_args then
-                        formatter.prepend_args = formatter.extra_args
-                        GionVim.deprecate(
-                            ("opts.formatters.%s.extra_args"):format(name),
-                            ("opts.formatters.%s.prepend_args"):format(name)
-                        )
-                    end
-                end
-            end
             require("conform").setup(opts)
         end,
     },

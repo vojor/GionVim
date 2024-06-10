@@ -11,6 +11,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
+_G.gionvim_docs = true
 _G.GionVim = require("gionvim.util")
 
 require("lazy").setup({

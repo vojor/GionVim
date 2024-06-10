@@ -15,12 +15,12 @@ function M.get_clients(opts)
     return opts and opts.filter and vim.tbl_filter(opts.filter, ret) or ret
 end
 
-function M.on_attach(on_attach)
+function M.on_attach(on_attach, name)
     return vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
             local buffer = args.buf
             local client = vim.lsp.get_client_by_id(args.data.client_id)
-            if client then
+            if client and (not name or client.name == name) then
                 return on_attach(client, buffer)
             end
         end,
@@ -317,7 +317,7 @@ function M.execute(opts)
             params = params,
         })
     else
-        return vim.lsp.buf_request(0, "workspace/executeCommand", params)
+        return vim.lsp.buf_request(0, "workspace/executeCommand", params, opts.handler)
     end
 end
 

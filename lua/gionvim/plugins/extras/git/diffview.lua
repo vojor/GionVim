@@ -4,6 +4,7 @@ return {
         lazy = true,
         cmd = { "DiffviewOpen", "DiffviewFileHistory" },
         keys = {
+            { "<leader>dv", "", desc = "diff" },
             { "<leader>dvp", "<cmd>DiffviewOpen<CR>", desc = "Open New Diffview " },
             { "<leader>dvc", "<cmd>DiffviewClose<CR>", desc = "Close Current Diffview " },
             { "<leader>dvh", "<cmd>DiffviewFileHistory<CR>", desc = "View Files History Diff" },

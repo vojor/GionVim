@@ -4,6 +4,7 @@ return {
         lazy = true,
         cmd = "Refactor",
         keys = {
+            { "<leader>rf", "", desc = "refactoring", mode = { "n", "x" } },
             {
                 "<leader>rfe",
                 function()
