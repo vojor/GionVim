@@ -70,9 +70,9 @@ return {
             {
                 "<leader>up",
                 function()
-                    require("noice").cmd("telescope")
+                    require("noice").cmd("pick")
                 end,
-                desc = "Noice Telescope",
+                desc = "Noice Pick Telescope/FzfLua",
             },
         },
     },

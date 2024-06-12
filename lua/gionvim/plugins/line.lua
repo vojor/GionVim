@@ -2,7 +2,6 @@ return {
     -- bufferline
     {
         "akinsho/bufferline.nvim",
-        version = "*",
         event = "VeryLazy",
         keys = {
             { "<leader>bl", "<cmd>BufferLineCloseLeft<CR>", desc = "Close Left Buffer" },
@@ -12,11 +11,19 @@ return {
             { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
             { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
             { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+            { "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
+            { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
         },
         dependencies = { "nvim-web-devicons" },
         opts = {
             options = {
-                numbers = "ordinal",
+                close_command = function(n)
+                    GionVim.ui.bufremove(n)
+                end,
+                right_mouse_command = function(n)
+                    GionVim.ui.bufremove(n)
+                end,
+                -- numbers = "ordinal",
                 diagnostics = "nvim_lsp",
                 always_show_bufferline = false,
                 separator_style = "thin",

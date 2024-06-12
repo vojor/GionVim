@@ -211,10 +211,11 @@ local cache = {}
 function M.memoize(fn)
     return function(...)
         local key = vim.inspect({ ... })
-        if cache[key] == nil then
-            cache[key] = fn(...)
+        cache[fn] = cache[fn] or {}
+        if cache[fn][key] == nil then
+            cache[fn][key] = fn(...)
         end
-        return cache[key]
+        return cache[fn][key]
     end
 end
 

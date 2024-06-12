@@ -67,12 +67,12 @@ return {
             local find_files_no_ignore = function()
                 local action_state = require("telescope.actions.state")
                 local line = action_state.get_current_line()
-                GionVim.telescope("find_files", { no_ignore = true, default_text = line })()
+                GionVim.pick("find_files", { no_ignore = true, default_text = line })()
             end
             local find_files_with_hidden = function()
                 local action_state = require("telescope.actions.state")
                 local line = action_state.get_current_line()
-                GionVim.telescope("find_files", { hidden = true, default_text = line })()
+                GionVim.pick("find_files", { hidden = true, default_text = line })()
             end
 
             return {
@@ -153,22 +153,23 @@ return {
             { "<leader>fc", "<cmd>Telescope commands<CR>", desc = "Find Commands" },
             { "<leader>fC", "<cmd>Telescope command_history<CR>", desc = "Find Command History" },
             -- stylua: ignore
-            { "<leader>fd", GionVim.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
+            { "<leader>fd", GionVim.pick("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
             { "<leader>fe", "<cmd>Telescope egrepify<CR>", desc = "Egrepify Live Grep" },
-            { "<leader>ff", GionVim.telescope("files"), desc = "Find Files (Root Dir)" },
-            { "<leader>fF", GionVim.telescope("files", { cwd = false }), desc = "Find Files (CWD)" },
-            { "<leader>fg", GionVim.telescope("live_grep"), desc = "Grep Text (Root Dir)" },
-            { "<leader>fG", GionVim.telescope("live_grep", { cwd = false }), desc = "Grep Text (CWD)" },
+            { "<leader>ff", GionVim.pick("auto"), desc = "Find Files (Root Dir)" },
+            { "<leader>fF", GionVim.pick("auto", { root = false }), desc = "Find Files (CWD)" },
+            { "<leader>fg", GionVim.pick("live_grep"), desc = "Grep Text (Root Dir)" },
+            { "<leader>fG", GionVim.pick("live_grep", { root = false }), desc = "Grep Text (CWD)" },
             { "<leader>fh", "<cmd>Telescope help_tags<CR>", desc = "Find Help Tags" },
             { "<leader>fi", "<cmd>Telescope registers<CR>", desc = "Find Registers" },
             { "<leader>fm", "<cmd>Telescope marks<CR>", desc = "Find Marks" },
             { "<leader>fn", "<cmd>Telescope vim_options<cr>", desc = "Find Vim Options" },
             { "<leader>fr", "<cmd>Telescope oldfiles theme=ivy<CR>", desc = "Find Old Files" },
+            { "<leader>fR", GionVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
             { "<leader>ft", "<cmd>Telescope file_browser theme=ivy<CR>", desc = "Open File Tree" },
             -- stylua: ignore
             { "<leader>fT", "<cmd>Telescope file_browser path=%:p:h select_buffer=true theme=ivy<CR>", desc = "Open File Tree(CWD)" },
-            -- stylua: ignore
-            { "<leader>fw", GionVim.telescope("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
+            { "<leader>sw", GionVim.pick("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
+            { "<leader>sW", GionVim.pick("grep_string", { root = false, word_match = "-w" }), desc = "Word (cwd)" },
             {
                 "<leader>fl",
                 function()

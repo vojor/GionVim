@@ -1,24 +1,6 @@
 return {
     {
         "echasnovski/mini.files",
-        version = false,
-        lazy = true,
-        keys = {
-            {
-                "<leader>nm",
-                function()
-                    require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
-                end,
-                desc = "Open MiniFiles (Current File Dir)",
-            },
-            {
-                "<leader>nM",
-                function()
-                    require("mini.files").open(vim.uv.cwd(), true)
-                end,
-                desc = "Open MiniFiles (CWD)",
-            },
-        },
         opts = {
             windows = {
                 preview = true,
@@ -27,6 +9,22 @@ return {
             },
             options = {
                 use_as_default_explorer = false,
+            },
+        },
+        keys = {
+            {
+                "<leader>nm",
+                function()
+                    require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
+                end,
+                desc = "Open mini.files (Directory of Current File)",
+            },
+            {
+                "<leader>nM",
+                function()
+                    require("mini.files").open(vim.uv.cwd(), true)
+                end,
+                desc = "Open mini.files (cwd)",
             },
         },
         config = function(_, opts)
@@ -83,22 +81,27 @@ return {
 
                     vim.keymap.set(
                         "n",
-                        opts.mappings.toggle_hidden,
+                        opts.mappings and opts.mappings.toggle_hidden or "g.",
                         toggle_dotfiles,
                         { buffer = buf_id, desc = "Toggle hidden files" }
                     )
 
                     vim.keymap.set(
                         "n",
-                        opts.mappings.change_cwd,
+                        opts.mappings and opts.mappings.change_cwd or "gc",
                         files_set_cwd,
                         { buffer = args.data.buf_id, desc = "Set cwd" }
                     )
 
-                    map_split(buf_id, opts.mappings.go_in_horizontal, "horizontal", false)
-                    map_split(buf_id, opts.mappings.go_in_vertical, "vertical", false)
-                    map_split(buf_id, opts.mappings.go_in_horizontal_plus, "horizontal", true)
-                    map_split(buf_id, opts.mappings.go_in_vertical_plus, "vertical", true)
+                    map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal or "<C-w>s", "horizontal", false)
+                    map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical or "<C-w>v", "vertical", false)
+                    map_split(
+                        buf_id,
+                        opts.mappings and opts.mappings.go_in_horizontal_plus or "<C-w>S",
+                        "horizontal",
+                        true
+                    )
+                    map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical_plus or "<C-w>V", "vertical", true)
                 end,
             })
 

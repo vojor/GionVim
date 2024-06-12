@@ -59,7 +59,7 @@ function M.format(component, text, hl_group)
         lualine_hl_group = component:create_hl({
             fg = utils.extract_highlight_colors(hl_group, "fg"),
             gui = #gui > 0 and table.concat(gui, ",") or nil,
-        }, "LV_" .. hl_group) --[[@as string]]
+        }, "LV_" .. hl_group)
         component.hl_cache[hl_group] = lualine_hl_group
     end
     return component:format_hl(lualine_hl_group) .. text .. component:get_default_hl()
@@ -72,6 +72,7 @@ function M.pretty_path(opts)
         directory_hl = "",
         filename_hl = "Bold",
         modified_sign = "",
+        readonly_icon = " 󰌾 ",
         length = 3,
     }, opts or {})
 
@@ -112,7 +113,11 @@ function M.pretty_path(opts)
             dir = M.format(self, dir .. sep, opts.directory_hl)
         end
 
-        return dir .. parts[#parts]
+        local readonly = ""
+        if vim.bo.readonly then
+            readonly = M.format(self, opts.readonly_icon, opts.modified_hl)
+        end
+        return dir .. parts[#parts] .. readonly
     end
 end
 

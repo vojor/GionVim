@@ -4,6 +4,9 @@ return {
         lazy = true,
         cmd = "FzfLua",
         keys = {
+            { "<leader>k", "", desc = "fuzzy" },
+            { "<c-j>", "<Down>", ft = "fzf", mode = "t", nowait = true },
+            { "<c-k>", "<Up>", ft = "fzf", mode = "t", nowait = true },
             { "<leader>kl", "<cmd>FzfLua<CR>", desc = "Fzf Args Select List" },
             { "<leader>kf", "<cmd>FzfLua files<CR>", desc = "Fzf Find Files" },
             { "<leader>kg", "<cmd>FzfLua live_grep<CR>", desc = "Fzf Find Text" },

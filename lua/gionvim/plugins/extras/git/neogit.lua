@@ -4,6 +4,7 @@ return {
         lazy = true,
         cmd = "Neogit",
         keys = {
+            { "<leader>gn", "", desc = "neogit" },
             {
                 "<leader>gnn",
                 function()
