@@ -34,7 +34,7 @@ return {
                     header = vim.split(logo, "\n"),
                     center = {
                         {
-                            action = GionVim.pick(),
+                            action = "lua GionVim.pick()()",
                             desc = " Find File",
                             icon = " ",
                             key = "f",
@@ -46,7 +46,7 @@ return {
                             key = "p",
                         },
                         {
-                            action = GionVim.pick("oldfiles"),
+                            action = 'lua GionVim.pick("oldfiles")()',
                             desc = " Recent Files",
                             icon = " ",
                             key = "r",
@@ -58,7 +58,7 @@ return {
                             key = "g",
                         },
                         {
-                            action = GionVim.pick.config_files(),
+                            action = "lua GionVim.pick.config_files()()",
                             desc = " Config",
                             icon = " ",
                             key = "c",

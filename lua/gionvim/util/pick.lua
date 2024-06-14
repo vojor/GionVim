@@ -4,11 +4,35 @@ local M = setmetatable({}, {
     end,
 })
 
+M.picker = nil
+
 M.commands = {
     files = "find_files",
 }
 
+function M.register(picker)
+    if vim.v.vim_did_enter == 1 then
+        return true
+    end
+    if M.picker and M.picker.name ~= picker.name then
+        GionVim.warn(
+            "`GionVim.pick`: picker already set to `"
+                .. M.picker.name
+                .. "`,\nignoring new picker `"
+                .. picker.name
+                .. "`"
+        )
+        return false
+    end
+    M.picker = picker
+    return true
+end
+
 function M.open(command, opts)
+    if not M.picker then
+        return GionVim.error("GionVim.pick: picker not set")
+    end
+
     command = command or "auto"
     opts = opts or {}
 
@@ -35,19 +59,15 @@ function M.open(command, opts)
             opts.show_untracked = opts.show_untracked ~= false
         end
     end
-    command = M.commands[command] or command
-    M._open(command, opts)
+    command = M.picker.commands[command] or command
+    M.picker.open(command, opts)
 end
 
 function M.wrap(command, opts)
     opts = opts or {}
     return function()
-        M.open(command, vim.deepcopy(opts))
+        GionVim.pick.open(command, vim.deepcopy(opts))
     end
-end
-
-function M._open(command, opts)
-    return GionVim.telescope.open(command, opts)
 end
 
 function M.config_files()
