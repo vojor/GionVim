@@ -6,10 +6,6 @@ local M = setmetatable({}, {
 
 M.picker = nil
 
-M.commands = {
-    files = "find_files",
-}
-
 function M.register(picker)
     if vim.v.vim_did_enter == 1 then
         return true

@@ -73,7 +73,7 @@ function M.extend(t, key, values)
 end
 
 function M.opts(name)
-    local plugin = require("lazy.core.config").spec.plugins[name]
+    local plugin = M.get_plugin(name)
     if not plugin then
         return {}
     end

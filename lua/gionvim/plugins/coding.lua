@@ -29,13 +29,15 @@ return {
         opts = function()
             local defaults = require("cmp.config.default")()
             local cmp = require("cmp")
+            local auto_select = true
             vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
             return {
                 auto_brackets = {},
                 completion = {
-                    completeopt = "menu,menuone,noinsert",
+                    completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
                 },
+                preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
                 snippet = {
                     expand = function(args)
                         vim.snippet.expand(args.body)

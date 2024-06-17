@@ -5,6 +5,7 @@ local picker = {
     },
     open = function(builtin, opts)
         opts = opts or {}
+        opts.follow = opts.follow ~= false
         if opts.cwd and opts.cwd ~= vim.uv.cwd() then
             local function open_cwd_dir()
                 local action_state = require("telescope.actions.state")

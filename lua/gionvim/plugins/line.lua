@@ -42,7 +42,7 @@ return {
                     },
                 },
                 get_element_icon = function(opts)
-                    return GionVim.config.icons.ft[opts.filetype]
+                    return require("gionvim.config").icons.ft[opts.filetype]
                 end,
             },
         },

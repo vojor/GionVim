@@ -19,6 +19,10 @@ return {
                 },
                 symbols = {},
                 symbol_blacklist = {},
+                keymaps = {
+                    up_and_jump = "<up>",
+                    down_and_jump = "<down>",
+                },
             }
             local filter = require("gionvim.config").kind_filter
 
