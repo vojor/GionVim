@@ -142,6 +142,7 @@ vim.opt.grepprg = "ugrep -RInk -j -u --tabs=1 --ignore-files"
 -- vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.grepformat = "%f:%l:%c:%m,%f+%l+%c+%m,%-G%f\\|%l\\|%c\\|%m"
 -- 格式化行为
+vim.opt.formatexpr = "v:lua.require'gionvim.util'.format.formatexpr()"
 vim.opt.formatoptions = "jcroqlnt"
 -- 会话
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }

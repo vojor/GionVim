@@ -134,10 +134,14 @@ function M.statuscolumn()
     local is_num = vim.wo[win].number
     local is_relnum = vim.wo[win].relativenumber
     if (is_num or is_relnum) and vim.v.virtnum == 0 then
-        if vim.v.relnum == 0 then
-            components[2] = is_num and "%l" or "%r"
+        if vim.fn.has("nvim-0.11") == 1 then
+            components[2] = "%l"
         else
-            components[2] = is_relnum and "%r" or "%l"
+            if vim.v.relnum == 0 then
+                components[2] = is_num and "%l" or "%r"
+            else
+                components[2] = is_relnum and "%r" or "%l"
+            end
         end
         components[2] = "%=" .. components[2] .. " "
     end
