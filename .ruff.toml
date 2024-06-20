@@ -1,15 +1,19 @@
 indent-width = 4
 line-length = 120
-target-version = "py311"
-task-tags = ["FIX", "HACK", "NOTE", "PERF", "TODO", "WARN", "XXX"]
+show-fixes = true
+target-version = "py312"
+task-tags = ["FIX", "FIXME", "HACK", "NOTE", "PERF", "TODO", "WARN", "XXX"]
+unsafe-fixes = true
 
 [lint]
+extend-select = ["UP"]
 select = ["B", "E", "F", "Q"]
 
 [format]
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
 indent-style = "space"
 line-ending = "lf"
-quote-style = "double"
 
 [lint.isort]
 case-sensitive = true
