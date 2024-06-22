@@ -122,7 +122,7 @@ function M.statuscolumn()
             elseif
                 show_open_folds
                 and not GionVim.ui.skip_foldexpr[buf]
-                and vim.treesitter.foldexpr(vim.v.lnum):sub(1, 1) == ">"
+                and tostring(vim.treesitter.foldexpr(vim.v.lnum)):sub(1, 1) == ">"
             then
                 fold = { text = vim.opt.fillchars:get().foldopen or "", texthl = githl }
             end

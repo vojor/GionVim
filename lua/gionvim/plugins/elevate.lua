@@ -132,25 +132,80 @@ return {
     {
         "chrisgrieser/nvim-genghis",
         lazy = true,
-        keys = function()
-            local genghis = require("genghis")
-            local keys = {
-                { "<leader>yp", genghis.copyFilepath, desc = "Copy File Path" },
-                { "<leader>ym", genghis.copyFilename, desc = "Copy File Name" },
-                { "<leader>yx", genghis.chmodx, desc = "Make File Chmod +X" },
-                { "<leader>yf", genghis.renameFile, desc = "Rename File" },
-                { "<leader>yo", genghis.moveAndRenameFile, desc = "Move And Rename File" },
-                { "<leader>yn", genghis.createNewFile, desc = "Create New File" },
-                { "<leader>yu", genghis.duplicateFile, desc = "Duplicate File" },
-                { "<leader>yR", genghis.trashFile, desc = "File Trash" },
-                { "<leader>ys", genghis.moveSelectionToNewFile, mode = "x", desc = "Move Selection To New File" },
-            }
-            return keys
-        end,
-        init = function()
-            vim.g.genghis_use_systemclipboard = true
-            vim.g.genghis_disable_commands = true
-        end,
+        cmd = "Genghis",
+        keys = {
+            {
+                "<leader>yu",
+                function()
+                    require("genghis").duplicateFile()
+                end,
+                desc = "Duplicate File",
+            },
+            {
+                "<leader>yp",
+                function()
+                    require("genghis").copyFilepath()
+                end,
+                desc = "Copy File Path",
+            },
+            {
+                "<leader>ym",
+                function()
+                    require("genghis").copyFilename()
+                end,
+                desc = "Copy File Name",
+            },
+            {
+                "<leader>yx",
+                function()
+                    require("genghis").chmodx()
+                end,
+                desc = "Make File Chmod +X",
+            },
+            {
+                "<leader>yn",
+                function()
+                    require("genghis").createNewFile()
+                end,
+                desc = "Create New File",
+            },
+            {
+                "<leader>yf",
+                function()
+                    require("genghis").renameFile()
+                end,
+                desc = "Rename File",
+            },
+            {
+                "<leader>yo",
+                function()
+                    require("genghis").moveAndRenameFile()
+                end,
+                desc = "Move And Rename File",
+            },
+            {
+                "<leader>yR",
+                function()
+                    require("genghis").trashFile()
+                end,
+                desc = "File Trash",
+            },
+            {
+                "<leader>ys",
+                function()
+                    require("genghis").moveSelectionToNewFile()
+                end,
+                mode = "x",
+                desc = "Move Selection To New File",
+            },
+            {
+                "<leader>yT",
+                function()
+                    require("genghis").moveToFolderInCwd()
+                end,
+                desc = "Move File To Current CWD",
+            },
+        },
         dependencies = { "dressing.nvim" },
     },
     -- Enhance Yank and Put function

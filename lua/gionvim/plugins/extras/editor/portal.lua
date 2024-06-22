@@ -4,6 +4,7 @@ return {
         lazy = true,
         cmd = "Portal",
         keys = {
+            { "<leader>p", "", desc = "portal" },
             {
                 "<leader>pb",
                 function()

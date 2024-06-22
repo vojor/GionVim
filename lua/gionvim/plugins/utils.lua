@@ -125,7 +125,6 @@ return {
                 ["<leader>m"] = { name = "+manager/mark" },
                 ["<leader>n"] = { name = "+filetree" },
                 ["<leader>o"] = { name = "+option" },
-                ["<leader>p"] = { name = "+portal" },
                 ["<leader>q"] = { name = "+session" },
                 ["<leader>r"] = { name = "+replace/rename" },
                 ["<leader>rr"] = { name = "+muren" },
