@@ -5,6 +5,8 @@ return {
         keys = {
             { "<leader>jd", "<cmd>RenderMarkdownToggle<CR>", desc = "Preview Markdown" },
         },
-        opts = {},
+        opts = {
+            latex_enabled = false,
+        },
     },
 }

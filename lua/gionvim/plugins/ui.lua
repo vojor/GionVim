@@ -75,6 +75,12 @@ return {
                 desc = "Noice Pick Telescope/FzfLua",
             },
         },
+        config = function(_, opts)
+            if vim.o.filetype == "lazy" then
+                vim.cmd([[messages clear]])
+            end
+            require("noice").setup(opts)
+        end,
     },
     -- Message inform
     {
