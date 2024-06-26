@@ -22,6 +22,7 @@ vim.g.gionvim_statuscolumn = {
     folds_open = false,
     folds_githl = false,
 }
+vim.g.bigfile_size = 1024 * 1024 * 1.5
 
 ------------ 选项配置 ------------
 -- 控制隐藏文本级别

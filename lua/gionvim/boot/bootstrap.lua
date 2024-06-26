@@ -25,7 +25,6 @@ require("lazy").setup({
         -- dap
         { import = "gionvim.plugins.extras.dap.luadap" }, -- Neovim lua debug
         -- develop
-        { import = "gionvim.plugins.extras.develop.bigfile" }, -- Big file control
         { import = "gionvim.plugins.extras.develop.comments" }, -- Quick comment
         { import = "gionvim.plugins.extras.develop.compiler" }, -- Code build and run
         { import = "gionvim.plugins.extras.develop.font-icon" }, -- Select icon
