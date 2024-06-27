@@ -9,7 +9,7 @@ return {
             {
                 "<leader>F",
                 function()
-                    require("conform").format({ async = true, lsp_fallback = true }, function(err)
+                    require("conform").format({ async = true, lsp_format = "fallback" }, function(err)
                         if not err then
                             if vim.startswith(vim.api.nvim_get_mode().mode:lower(), "v") then
                                 vim.api.nvim_feedkeys(
@@ -29,7 +29,7 @@ return {
             formatters_by_ft = {
                 c = { "clang-format" },
                 cpp = { "clang-format" },
-                cmake = { "cmake_format" },
+                cmake = { "gersemi" },
                 json = { "biome", "biome-check" },
                 jsonc = { "biome", "biome-check" },
                 javascript = { "biome", "biome-check" },
@@ -67,6 +67,7 @@ return {
         end,
         config = function(_, opts)
             require("conform").setup(opts)
+            vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
         end,
     },
 }
