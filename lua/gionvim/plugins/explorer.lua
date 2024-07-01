@@ -2,7 +2,6 @@ return {
     -- File content
     {
         "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
         lazy = true,
         cmd = "Neotree",
         keys = {
@@ -34,13 +33,6 @@ return {
                 end,
                 desc = "Buffer explorer",
             },
-            {
-                "<leader>nd",
-                function()
-                    require("neo-tree.command").execute({ source = "document_symbols", toggle = true })
-                end,
-                desc = "Document Symbols Explorer",
-            },
         },
         deactivate = function()
             vim.cmd([[Neotree close]])
@@ -64,7 +56,7 @@ return {
         end,
         dependencies = { { "nvim-web-devicons" }, { "plenary.nvim" }, { "nui.nvim" } },
         opts = {
-            sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+            sources = { "filesystem", "buffers", "git_status" },
             open_files_do_not_replace_types = {
                 "terminal",
                 "toggleterm",
@@ -90,6 +82,8 @@ return {
             },
             window = {
                 mappings = {
+                    ["l"] = "open",
+                    ["h"] = "close_node",
                     ["<space>"] = "none",
                     ["Y"] = {
                         function(state)
@@ -97,7 +91,7 @@ return {
                             local path = node:get_id()
                             vim.fn.setreg("+", path, "c")
                         end,
-                        desc = "copy path to clipboard",
+                        desc = "Copy Path to Clipboard",
                     },
                     ["O"] = {
                         function(state)
@@ -105,12 +99,18 @@ return {
                         end,
                         desc = "open with system application",
                     },
+                    ["P"] = { "toggle_preview", config = { use_float = false } },
                 },
             },
             filesystem = {
                 bind_to_cwd = false,
                 follow_current_file = { enable = true },
                 use_libuv_file_watcher = true,
+                -- filtered_items = {
+                --     hide_dotfiles = false,
+                --     hide_gitignored = true,
+                --     hide_by_name = { ".git" },
+                -- },
             },
             source_selector = {
                 winbar = true,
