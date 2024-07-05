@@ -35,7 +35,7 @@ return {
             -- terminal
             { "<leader>lgm", "<cmd>Lspsaga term_toggle<CR>", desc = "Float Terminal" },
         },
-        dependencies = { { "nvim-web-devicons" }, { "nvim-treesitter" } },
+        dependencies = { "nvim-treesitter" },
         config = function()
             require("lspsaga").setup({
                 -- neovim version >= 0.10,use dropbar.nvim,disable option

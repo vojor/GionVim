@@ -54,7 +54,7 @@ return {
                 end,
             })
         end,
-        dependencies = { { "nvim-web-devicons" }, { "plenary.nvim" }, { "nui.nvim" } },
+        dependencies = { { "plenary.nvim" }, { "nui.nvim" } },
         opts = {
             sources = { "filesystem", "buffers", "git_status" },
             open_files_do_not_replace_types = {

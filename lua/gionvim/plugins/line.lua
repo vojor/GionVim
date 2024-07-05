@@ -14,7 +14,6 @@ return {
             { "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
             { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
         },
-        dependencies = { "nvim-web-devicons" },
         opts = {
             options = {
                 close_command = function(n)

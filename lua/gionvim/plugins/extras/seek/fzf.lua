@@ -12,7 +12,6 @@ return {
             { "<leader>kg", "<cmd>FzfLua live_grep<CR>", desc = "Fzf Find Text" },
             { "<leader>kj", "<cmd>FzfLua jumps<CR>", desc = "Fzf Jump" },
         },
-        dependencies = { "nvim-web-devicons" },
         opts = {
             winopts = {
                 title = "Fzf Search",
