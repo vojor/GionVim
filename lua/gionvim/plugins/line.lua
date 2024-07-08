@@ -163,7 +163,7 @@ return {
                 extensions = { "neo-tree", "lazy" },
             }
 
-            if vim.g.trouble_lualine then
+            if vim.g.trouble_lualine and GionVim.has("trouble.nvim") then
                 local trouble = require("trouble")
                 local symbols = trouble.statusline
                     and trouble.statusline({
