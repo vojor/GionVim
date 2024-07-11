@@ -5,6 +5,9 @@ return {
         ft = { "c", "cpp" },
         config = function()
             require("clangd_extensions").setup({
+                inlay_hints = {
+                    inline = true,
+                },
                 ast = {
                     role_icons = {
                         type = "",

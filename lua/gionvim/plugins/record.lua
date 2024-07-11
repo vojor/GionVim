@@ -2,10 +2,10 @@ return {
     -- Structure notes、manage project and task, etc
     {
         "nvim-neorg/neorg",
-        dependencies = { "luarocks.nvim" },
         version = "*",
         ft = "norg",
         cmd = "Neorg",
+        dependencies = { "luarocks.nvim" },
         opts = {
             load = {
                 ["core.defaults"] = {},

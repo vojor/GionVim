@@ -321,37 +321,6 @@ return {
         "echasnovski/mini.trailspace",
         version = false,
         lazy = true,
-        event = { "BufReadPost", "BufNewFile" },
-        config = function()
-            require("mini.trailspace").setup()
-        end,
-        init = function()
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = {
-                    "alpha",
-                    "checkhealth",
-                    "dashboard",
-                    "help",
-                    "jqx",
-                    "lazy",
-                    "lazyterm",
-                    "lspinfo",
-                    "mason",
-                    "neo-tree",
-                    "notify",
-                    "Outline",
-                    "qf",
-                    "spectre_panel",
-                    "starter",
-                    "Trouble",
-                    "trouble",
-                    "toggleterm",
-                },
-                callback = function()
-                    vim.b.minitrailspace_disable = true
-                end,
-            })
-        end,
         keys = {
             {
                 "<leader>rb",
@@ -368,5 +337,34 @@ return {
                 desc = "Trail All Blank Line",
             },
         },
+
+        config = function()
+            require("mini.trailspace").setup()
+        end,
+        init = function()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = {
+                    "checkhealth",
+                    "dashboard",
+                    "help",
+                    "jqx",
+                    "lazy",
+                    "lazyterm",
+                    "lspinfo",
+                    "mason",
+                    "neo-tree",
+                    "notify",
+                    "Outline",
+                    "qf",
+                    "spectre_panel",
+                    "Trouble",
+                    "trouble",
+                    "toggleterm",
+                },
+                callback = function()
+                    vim.b.minitrailspace_disable = true
+                end,
+            })
+        end,
     },
 }

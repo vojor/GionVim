@@ -69,7 +69,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.treesitter.context" },
         { import = "gionvim.plugins.extras.treesitter.textobjects" },
         { import = "gionvim.plugins.extras.treesitter.autotag" }, -- Auto close tag
-        { import = "gionvim.plugins.extras.treesitter.commentstring" },
         -- ui
         { import = "gionvim.plugins.extras.ui.dashboard" }, -- Interface
         { import = "gionvim.plugins.extras.ui.colorizer" }, -- Display hexadecimal colors and auto devicons color

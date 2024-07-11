@@ -4,7 +4,18 @@ end
 
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
     group = augroup("checktime"),
-    command = "checktime",
+    callback = function()
+        if vim.o.buftype ~= "nofile" then
+            vim.cmd("checktime")
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = augroup("highlight_yank"),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
 
 vim.api.nvim_create_autocmd({ "VimResized" }, {
@@ -42,16 +53,35 @@ vim.api.nvim_create_autocmd("FileType", {
         "man",
         "notify",
         "qf",
-        "jqx",
         "spectre_panel",
         "startuptime",
+        "jqx",
+        "tsplayground",
         "checkhealth",
-        "DiffviewFiles",
+        "dbout",
         "gitsigns.blame",
+        "DiffviewFiles",
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false
         vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = augroup("man_unlisted"),
+    pattern = { "man" },
+    callback = function(event)
+        vim.bo[event.buf].buflisted = false
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = augroup("wrap_spell"),
+    pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
+    callback = function()
+        vim.opt_local.wrap = true
+        vim.opt_local.spell = true
     end,
 })
 

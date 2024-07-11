@@ -1,43 +1,9 @@
 return {
     {
-        "numToStr/Comment.nvim",
-        lazy = true,
-        keys = {
-            { "gc", mode = { "v", "n" }, desc = "Comment toggle linewise" },
-            { "gb", mode = { "v", "n" }, desc = "Comment toggle blockwise" },
-        },
-        config = function()
-            require("Comment").setup({
-                padding = true,
-                sticky = true,
-                ignore = "^$",
-                toggler = {
-                    line = "gcc",
-                    block = "gbc",
-                },
-                opleader = {
-                    line = "gc",
-                    block = "gb",
-                },
-                extra = {
-                    above = "gcO",
-                    below = "gco",
-                    eol = "gcA",
-                },
-                mappings = {
-                    basic = true,
-                    extra = true,
-                },
-                pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-                post_hook = nil,
-            })
-        end,
+        "folke/ts-comments.nvim",
+        event = "VeryLazy",
+        opts = {},
     },
-    -- {
-    --     "folke/ts-comments.nvim",
-    --     event = "VeryLazy",
-    --     opts = {},
-    -- },
     {
         "folke/todo-comments.nvim",
         lazy = true,

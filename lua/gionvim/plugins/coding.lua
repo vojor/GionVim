@@ -31,6 +31,14 @@ return {
             local cmp = require("cmp")
             local auto_select = true
             vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+            local has_words_before = function()
+                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+                return col ~= 0
+                    and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+            end
+            local feedkey = function(key, mode)
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+            end
 
             return {
                 auto_brackets = {},
@@ -97,21 +105,21 @@ return {
                         fallback()
                     end,
                     ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif vim.snippet.active({ direction = 1 }) then
+                        if vim.snippet.active({ direction = 1 }) then
                             feedkey("<cmd>lua vim.snippet.jump(1)<CR>", "")
+                        elseif cmp.visible() then
+                            cmp.select_next_item()
                         elseif has_words_before() then
                             cmp.complete()
                         else
-                            fallback()
+                            fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
                         end
                     end, { "i", "s" }),
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
+                    ["<S-Tab>"] = cmp.mapping(function()
+                        if vim.snippet.active({ direction = -1 }) then
+                            feedkey("<cmd>lua vim.snippet.jump(-1)<CR>", "")
+                        elseif cmp.visible() then
                             cmp.select_prev_item()
-                        elseif vim.snippet.active({ direction = -1 }) then
-                            feedkey("lua vim.snippet.jump(-1)<CR>")
                         end
                     end, { "i", "s" }),
                 }),
@@ -150,6 +158,8 @@ return {
         opts = {
             library = {
                 { path = "luvit-meta/library", words = { "vim%.uv" } },
+                { path = "LazyVim", words = { "GionVim" } },
+                { path = "lazy.nvim", words = { "GionVim" } },
             },
         },
     },
