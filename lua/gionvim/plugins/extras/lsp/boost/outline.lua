@@ -19,7 +19,7 @@ return {
                 },
                 symbols = {
                     icons = {},
-                    filter = require("gionvim.config").kind_filter,
+                    filter = vim.deepcopy(require("gionvim.config").kind_filter),
                 },
                 keymaps = {
                     up_and_jump = "<up>",

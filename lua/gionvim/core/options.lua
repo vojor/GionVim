@@ -7,6 +7,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 -- 根目录检测
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
+vim.g.gionvim_picker = "auto"
 -- 设置 python3_host_prog 地址
 vim.g.python3_host_prog = "/usr/bin/python"
 -- 设置 lazygit 主题

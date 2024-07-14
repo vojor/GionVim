@@ -4,6 +4,7 @@ return {
         lazy = true,
         cmd = "Trouble",
         keys = {
+            { "<leader>x", "", desc = "diagnostics" },
             { "<leader>xg", "<cmd>Trouble diagnostics toggle<CR>", desc = "Diagnostics (Trouble)" },
             { "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", desc = "Buffer Diagnostics (Trouble)" },
             { "<leader>xd", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
@@ -27,6 +28,20 @@ return {
                     end
                 end,
                 desc = "Previous Trouble/Quickfix Item",
+            },
+            {
+                "]Q",
+                function()
+                    if require("trouble").is_open() then
+                        require("trouble").next({ skip_groups = true, jump = true })
+                    else
+                        local ok, err = pcall(vim.cmd.cnext)
+                        if not ok then
+                            vim.notify(err, vim.log.levels.ERROR)
+                        end
+                    end
+                end,
+                desc = "Next Trouble/Quickfix Item",
             },
         },
         opts = {

@@ -4,6 +4,7 @@ return {
         "ziontee113/icon-picker.nvim",
         lazy = true,
         keys = {
+            { "<leader>i", "", desc = "icons" },
             { "<leader>ic", "<cmd>IconPickerNormal<CR>", desc = "Select Icon Insert Buffer" },
             { "<leader>iy", "<cmd>IconPickerYank<CR>", desc = "Select Icon Yank To Register" },
         },

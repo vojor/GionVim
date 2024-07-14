@@ -30,6 +30,7 @@ return {
             options = vim.opt.sessionoptions:get(),
         },
         keys = {
+            { "<leader>q", "", desc = "session" },
             {
                 "<leader>qr",
                 "<cmd>lua require('persistence').load()<CR>",

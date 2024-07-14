@@ -55,6 +55,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "qf",
         "spectre_panel",
         "startuptime",
+        "OverseerList",
         "jqx",
         "tsplayground",
         "checkhealth",

@@ -10,6 +10,11 @@ function M.register(picker)
     if vim.v.vim_did_enter == 1 then
         return true
     end
+
+    if M.picker and M.picker.name ~= M.want() then
+        M.picker = nil
+    end
+
     if M.picker and M.picker.name ~= picker.name then
         GionVim.warn(
             "`GionVim.pick`: picker already set to `"
@@ -24,12 +29,20 @@ function M.register(picker)
     return true
 end
 
+function M.want()
+    vim.g.gionvim_picker = vim.g.gionvim_picker or "auto"
+    if vim.g.gionvim_picker == "auto" then
+        return "telescope"
+    end
+    return vim.g.gionvim_picker
+end
+
 function M.open(command, opts)
     if not M.picker then
         return GionVim.error("GionVim.pick: picker not set")
     end
 
-    command = command or "auto"
+    command = command ~= "auto" and command or "files"
     opts = opts or {}
 
     opts = vim.deepcopy(opts)
@@ -43,21 +56,6 @@ function M.open(command, opts)
         opts.cwd = GionVim.root({ buf = opts.buf })
     end
 
-    local cwd = opts.cwd or vim.uv.cwd()
-    if command == "auto" then
-        command = "files"
-        if
-            vim.uv.fs_stat(cwd .. "/.git")
-            and not vim.uv.fs_stat(cwd .. "/.ignore")
-            and not vim.uv.fs_stat(cwd .. "/.rgignore")
-        then
-            command = "git_files"
-            if opts.show_untracked == nil then
-                opts.show_untracked = true
-                opts.recurse_submodules = false
-            end
-        end
-    end
     command = M.picker.commands[command] or command
     M.picker.open(command, opts)
 end

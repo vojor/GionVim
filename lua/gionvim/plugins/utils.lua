@@ -98,50 +98,60 @@ return {
         "folke/which-key.nvim",
         lazy = true,
         event = "VeryLazy",
+        opts_extend = { "spec" },
         opts = {
-            window = {
-                border = "shadow",
+            defaults = {},
+            spec = {
+                {
+                    mode = { "n", "v" },
+                    { "<leader><tab>", group = "tabs" },
+                    { "<leader>a", group = "action/text" },
+                    { "<leader>b", group = "buffer" },
+                    { "<leader>c", group = "command" },
+                    { "<leader>e", group = "generate/editor" },
+                    { "<leader>ep", group = "compiler" },
+                    { "<leader>f", group = "find" },
+                    { "<leader>g", group = "git" },
+                    { "<leader>gl", group = "lazygit" },
+                    { "<leader>h", group = "highlight" },
+                    { "<leader>j", group = "langextra" },
+                    { "<leader>l", group = "lsp" },
+                    { "<leader>lg", group = "lspsaga" },
+                    { "<leader>m", group = "+manager/mark" },
+                    { "<leader>n", group = "filetree" },
+                    { "<leader>o", group = "option" },
+                    { "<leader>r", group = "replace/regroup" },
+                    { "<leader>rr", group = "muren" },
+                    { "<leader>s", group = "show/search" },
+                    { "<leader>t", group = "terminal/todo" },
+                    { "<leader>td", group = "todo" },
+                    { "<leader>tt", group = "toggleterm" },
+                    { "<leader>u", group = "ui/message" },
+                    { "<leader>w", group = "window" },
+                    { "<leader>y", group = "operate/yank" },
+                    { "[", group = "prev" },
+                    { "]", group = "next" },
+                    { "g", group = "goto" },
+                    { "z", group = "fold" },
+                },
             },
-            defaults = {
-                mode = { "n", "v" },
-                ["g"] = { name = "+goto" },
-                ["z"] = { name = "+fold" },
-                ["]"] = { name = "+next" },
-                ["["] = { name = "+prev" },
-                ["<leader><tab>"] = { name = "+tabs" },
-                ["<leader>a"] = { name = "+action/text" },
-                ["<leader>b"] = { name = "+buffer" },
-                ["<leader>c"] = { name = "+command" },
-                ["<leader>e"] = { name = "+generate/editor" },
-                ["<leader>ep"] = { name = "+compiler" },
-                ["<leader>f"] = { name = "+find" },
-                ["<leader>g"] = { name = "+git" },
-                ["<leader>gl"] = { name = "+lazygit" },
-                ["<leader>h"] = { name = "+highlight" },
-                ["<leader>i"] = { name = "+icon" },
-                ["<leader>j"] = { name = "+langextra" },
-                ["<leader>l"] = { name = "+lsp" },
-                ["<leader>lg"] = { name = "+lspsaga" },
-                ["<leader>m"] = { name = "+manager/mark" },
-                ["<leader>n"] = { name = "+filetree" },
-                ["<leader>o"] = { name = "+option" },
-                ["<leader>q"] = { name = "+session" },
-                ["<leader>r"] = { name = "+replace/rename" },
-                ["<leader>rr"] = { name = "+muren" },
-                ["<leader>s"] = { name = "+show/search" },
-                ["<leader>t"] = { name = "+terminal/todo" },
-                ["<leader>td"] = { name = "+todo" },
-                ["<leader>tt"] = { name = "+toggleterm" },
-                ["<leader>u"] = { name = "+ui/message" },
-                ["<leader>w"] = { name = "+window" },
-                ["<leader>x"] = { name = "+diagnostics" },
-                ["<leader>y"] = { name = "+operate/yank" },
+        },
+        keys = {
+            {
+                "<leader>?",
+                function()
+                    require("which-key").show({ global = false })
+                end,
+                desc = "Buffer Local Keymaps (which-key)",
             },
         },
         config = function(_, opts)
             local wk = require("which-key")
             wk.setup(opts)
-            wk.register(opts.defaults)
+            if not vim.tbl_isempty(opts.defaults) then
+                GionVim.warn("which-key: opts.defaults is deprecated. Please use opts.spec instead.")
+                wk.register(opts.defaults)
+            end
         end,
     },
     -- Inactive code dimmed

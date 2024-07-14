@@ -45,9 +45,9 @@ return {
         "folke/which-key.nvim",
         optional = true,
         opts = {
-            defaults = {
-                ["<leader>jc"] = { name = "clangd" },
-            },
+            spec = { {
+                { "<leader>jc", group = "clangd" },
+            } },
         },
     },
 }

@@ -138,7 +138,12 @@ return {
                         },
                     },
                 },
-                pickers = {},
+                pickers = {
+                    find_files = {
+                        find_command = { "fd", "--type", "f", "--color", "never", "-E", ".git" },
+                        hidden = true,
+                    },
+                },
                 extensions = {
                     fzf = {
                         fuzzy = true,
@@ -187,8 +192,8 @@ return {
             -- stylua: ignore
             { "<leader>fd", GionVim.pick("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
             { "<leader>fe", "<cmd>Telescope egrepify<CR>", desc = "Egrepify Live Grep" },
-            { "<leader>ff", GionVim.pick("auto"), desc = "Find Files (Root Dir)" },
-            { "<leader>fF", GionVim.pick("auto", { root = false }), desc = "Find Files (CWD)" },
+            { "<leader>ff", GionVim.pick("files"), desc = "Find Files (Root Dir)" },
+            { "<leader>fF", GionVim.pick("files", { root = false }), desc = "Find Files (CWD)" },
             { "<leader>fg", GionVim.pick("live_grep"), desc = "Grep Text (Root Dir)" },
             { "<leader>fG", GionVim.pick("live_grep", { root = false }), desc = "Grep Text (CWD)" },
             { "<leader>fh", "<cmd>Telescope help_tags<CR>", desc = "Find Help Tags" },
