@@ -26,9 +26,7 @@ return {
         "folke/persistence.nvim",
         lazy = true,
         event = "BufReadPre",
-        opts = {
-            options = vim.opt.sessionoptions:get(),
-        },
+        opts = {},
         keys = {
             { "<leader>q", "", desc = "session" },
             {
