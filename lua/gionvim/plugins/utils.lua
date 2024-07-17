@@ -106,7 +106,13 @@ return {
                     mode = { "n", "v" },
                     { "<leader><tab>", group = "tabs" },
                     { "<leader>a", group = "action/text" },
-                    { "<leader>b", group = "buffer" },
+                    {
+                        "<leader>b",
+                        group = "buffer",
+                        expand = function()
+                            return require("which-key.extras").expand.buf()
+                        end,
+                    },
                     { "<leader>c", group = "command" },
                     { "<leader>e", group = "generate/editor" },
                     { "<leader>ep", group = "compiler" },
@@ -127,7 +133,14 @@ return {
                     { "<leader>td", group = "todo" },
                     { "<leader>tt", group = "toggleterm" },
                     { "<leader>u", group = "ui/message" },
-                    { "<leader>w", group = "window" },
+                    {
+                        "<leader>w",
+                        group = "windows",
+                        proxy = "<c-w>",
+                        expand = function()
+                            return require("which-key.extras").expand.win()
+                        end,
+                    },
                     { "<leader>y", group = "operate/yank" },
                     { "[", group = "prev" },
                     { "]", group = "next" },
@@ -142,7 +155,14 @@ return {
                 function()
                     require("which-key").show({ global = false })
                 end,
-                desc = "Buffer Local Keymaps (which-key)",
+                desc = "Buffer Keymaps (which-key)",
+            },
+            {
+                "<c-w><space>",
+                function()
+                    require("which-key").show({ keys = "<c-w>", loop = true })
+                end,
+                desc = "Window Hydra Mode (which-key)",
             },
         },
         config = function(_, opts)

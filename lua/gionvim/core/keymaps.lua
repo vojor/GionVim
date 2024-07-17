@@ -41,34 +41,21 @@ end, { desc = "Lazygit Log (cwd)" })
 map("n", "<leader>glB", GionVim.lazygit.browse, { desc = "Git Browse" })
 
 -- toggle options
-map("n", "<leader>os", function()
-    GionVim.toggle("spell")
-end, { desc = "Toggle Spelling" })
-map("n", "<leader>ow", function()
-    GionVim.toggle("wrap")
-end, { desc = "Toggle Word Wrap" })
-map("n", "<leader>oN", function()
-    GionVim.toggle("relativenumber")
-end, { desc = "Toggle Relative Line Numbers" })
-map("n", "<leader>on", function()
-    GionVim.toggle.number()
-end, { desc = "Toggle Line Numbers" })
-map("n", "<leader>od", function()
-    GionVim.toggle.diagnostics()
-end, { desc = "Toggle Diagnostics" })
-if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
-    map("n", "<leader>oh", function()
-        GionVim.toggle.inlay_hints()
-    end, { desc = "Toggle Inlay Hints" })
-end
-map("n", "<leader>ot", function()
-    if vim.b.ts_highlight then
-        vim.treesitter.stop()
-    else
-        vim.treesitter.start()
-    end
-end, { desc = "Toggle Treesitter Highlight" })
+GionVim.toggle.map("<leader>os", GionVim.toggle("spell", { name = "Spelling" }))
+GionVim.toggle.map("<leader>ow", GionVim.toggle("wrap", { name = "Wrap" }))
+GionVim.toggle.map("<leader>oL", GionVim.toggle("relativenumber", { name = "Relative Number" }))
+GionVim.toggle.map("<leader>od", GionVim.toggle.diagnostics)
 
+GionVim.toggle.map("<leader>ol", GionVim.toggle.number)
+GionVim.toggle.map(
+    "<leader>oC",
+    GionVim.toggle("conceallevel", { values = { 0, vim.o.conceallevel > 0 and vim.o.conceallevel or 2 } })
+)
+GionVim.toggle.map("<leader>ot", GionVim.toggle.treesitter)
+GionVim.toggle.map("<leader>ob", GionVim.toggle("background", { values = { "light", "dark" }, name = "Background" }))
+if vim.lsp.inlay_hint then
+    GionVim.toggle.map("<leader>oh", GionVim.toggle.inlay_hints)
+end
 -- operate
 map("n", "<leader>ce", "<cmd>enew<CR>", { desc = "New File" })
 map("n", "<leader>cw", "<cmd>w<CR>", { desc = "Buffer Write File" })
@@ -101,13 +88,9 @@ map("n", "gh", "<c-w>h", { desc = "Goto left window" })
 map("n", "gj", "<c-w>j", { desc = "Goto lower window" })
 map("n", "gk", "<c-w>k", { desc = "Goto upper window" })
 map("n", "gl", "<c-w>l", { desc = "Goto right window" })
-map("n", "<leader>wv", "<C-W>v", { desc = "Horizontal addition window", remap = true })
-map("n", "<leader>ws", "<C-W>s", { desc = "Vertical addition window", remap = true })
-map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
-map("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })
-map("n", "<leader>wm", function()
-    GionVim.toggle.maximize()
-end, { desc = "Maximize Toggle" })
+map("n", "<leader>w", "<c-w>", { desc = "Windows", remap = true })
+map("n", "<c-w>d", "<C-W>c", { desc = "Delete Window", remap = true })
+GionVim.toggle.map("<c-w>m", GionVim.toggle.maximize)
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })

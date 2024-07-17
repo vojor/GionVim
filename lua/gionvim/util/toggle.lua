@@ -1,100 +1,161 @@
 local M = {}
 
-function M.option(option, silent, values)
-    if values then
-        if vim.opt_local[option]:get() == values[1] then
-            vim.opt_local[option] = values[2]
-        else
-            vim.opt_local[option] = values[1]
-        end
-        return GionVim.info("Set " .. option .. " to " .. vim.opt_local[option]:get(), { title = "Option" })
-    end
-    vim.opt_local[option] = not vim.opt_local[option]:get()
-    if not silent then
-        if vim.opt_local[option]:get() then
-            GionVim.info("Enabled " .. option, { title = "Option" })
-        else
-            GionVim.warn("Disabled " .. option, { title = "Option" })
-        end
-    end
-end
-
-local nu = { number = true, relativenumber = true }
-function M.number()
-    if vim.opt_local.number:get() or vim.opt_local.relativenumber:get() then
-        nu = { number = vim.opt_local.number:get(), relativenumber = vim.opt_local.relativenumber:get() }
-        vim.opt_local.number = false
-        vim.opt_local.relativenumber = false
-        GionVim.warn("Disabled line numbers", { title = "Option" })
-    else
-        vim.opt_local.number = nu.number
-        vim.opt_local.relativenumber = nu.relativenumber
-        GionVim.info("Enabled line numbers", { title = "Option" })
-    end
-end
-
-local enabled = true
-function M.diagnostics()
-    if vim.diagnostic.is_enabled then
-        enabled = vim.diagnostic.is_enabled()
-    elseif vim.diagnostic.is_disabled then
-        enabled = not vim.diagnostic.is_disabled()
-    end
-    enabled = not enabled
-
-    if enabled then
-        vim.diagnostic.enable()
-        GionVim.info("Enabled diagnostics", { title = "Diagnostics" })
-    else
-        vim.diagnostic.disable()
-        GionVim.warn("Disabled diagnostics", { title = "Diagnostics" })
-    end
-end
-
-function M.inlay_hints(buf, value)
-    local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-    if type(ih) == "function" then
-        ih(buf, value)
-    elseif type(ih) == "table" and ih.enable then
-        if value == nil then
-            value = not ih.is_enabled({ bufnr = buf or 0 })
-        end
-        ih.enable(value, { bufnr = buf })
-    end
-end
-
-M._maximized = nil
-function M.maximize(state)
-    if state == (M._maximized ~= nil) then
-        return
-    end
-    if M._maximized then
-        for _, opt in ipairs(M._maximized) do
-            vim.o[opt.k] = opt.v
-        end
-        M._maximized = nil
-        vim.cmd("wincmd =")
-    else
-        M._maximized = {}
-        local function set(k, v)
-            table.insert(M._maximized, 1, { k = k, v = vim.o[k] })
-            vim.o[k] = v
-        end
-        set("winwidth", 999)
-        set("winheight", 999)
-        set("winminwidth", 10)
-        set("winminheight", 4)
-        vim.cmd("wincmd =")
-    end
-    vim.api.nvim_create_autocmd("ExitPre", {
-        once = true,
-        group = vim.api.nvim_create_augroup("gionvim_restore_max_exit_pre", { clear = true }),
-        desc = "Restore width/height when close Neovim while maximized",
-        callback = function()
-            M.maximize(false)
+function M.wrap(toggle)
+    return setmetatable(toggle, {
+        __call = function()
+            toggle.set(not toggle.get())
+            local state = toggle.get()
+            if state then
+                GionVim.info("Enabled " .. toggle.name, { title = toggle.name })
+            else
+                GionVim.warn("Disabled " .. toggle.name, { title = toggle.name })
+            end
+            return state
         end,
     })
 end
+
+function M.map(lhs, toggle)
+    local t = M.wrap(toggle)
+    GionVim.safe_keymap_set("n", lhs, function()
+        t()
+    end, { desc = "Toggle " .. toggle.name })
+    M.wk(lhs, toggle)
+end
+
+function M.wk(lhs, toggle)
+    if not GionVim.has("which-key.nvim") then
+        return
+    end
+    require("which-key").add({
+        {
+            lhs,
+            icon = function()
+                return toggle.get() and { icon = " ", color = "green" } or { icon = " ", color = "yellow" }
+            end,
+            desc = function()
+                return (toggle.get() and "Disable " or "Enable ") .. toggle.name
+            end,
+        },
+    })
+end
+
+M.treesitter = M.wrap({
+    name = "Treesitter Highlight",
+    get = function()
+        return vim.b.ts_highlight
+    end,
+    set = function(state)
+        if state then
+            vim.treesitter.start()
+        else
+            vim.treesitter.stop()
+        end
+    end,
+})
+
+function M.format(buf)
+    return M.wrap({
+        name = "Auto Format (" .. (buf and "Buffer" or "Global") .. ")",
+        get = function()
+            if not buf then
+                return vim.g.autoformat == nil or vim.g.autoformat
+            end
+            return GionVim.format.enabled()
+        end,
+        set = function(state)
+            GionVim.format.enable(state, buf)
+        end,
+    })
+end
+
+function M.option(option, opts)
+    opts = opts or {}
+    local name = opts.name or option
+    local on = opts.values and opts.values[2] or true
+    local off = opts.values and opts.values[1] or false
+    return M.wrap({
+        name = name,
+        get = function()
+            return vim.opt_local[option]:get() == on
+        end,
+        set = function(state)
+            vim.opt_local[option] = state and on or off
+        end,
+    })
+end
+
+local nu = { number = true, relativenumber = true }
+M.number = M.wrap({
+    name = "Line Numbers",
+    get = function()
+        return vim.opt_local.number:get() or vim.opt_local.relativenumber:get()
+    end,
+    set = function(state)
+        if state then
+            vim.opt_local.number = nu.number
+            vim.opt_local.relativenumber = nu.relativenumber
+        else
+            nu = { number = vim.opt_local.number:get(), relativenumber = vim.opt_local.relativenumber:get() }
+            vim.opt_local.number = false
+            vim.opt_local.relativenumber = false
+        end
+    end,
+})
+
+M.diagnostics = M.wrap({
+    name = "Diagnostics",
+    get = function()
+        return vim.diagnostic.is_enabled and vim.diagnostic.is_enabled()
+    end,
+    set = vim.diagnostic.enable,
+})
+
+M.inlay_hints = M.wrap({
+    name = "Inlay Hints",
+    get = function()
+        return vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+    end,
+    set = function(state)
+        vim.lsp.inlay_hint.enable(state, { bufnr = 0 })
+    end,
+})
+
+M._maximized = nil
+M.maximize = M.wrap({
+    name = "Maximize",
+    get = function()
+        return M._maximized ~= nil
+    end,
+    set = function(state)
+        if state then
+            M._maximized = {}
+            local function set(k, v)
+                table.insert(M._maximized, 1, { k = k, v = vim.o[k] })
+                vim.o[k] = v
+            end
+            set("winwidth", 999)
+            set("winheight", 999)
+            set("winminwidth", 10)
+            set("winminheight", 4)
+            vim.cmd("wincmd =")
+            vim.api.nvim_create_autocmd("ExitPre", {
+                once = true,
+                group = vim.api.nvim_create_augroup("gionvim_restore_max_exit_pre", { clear = true }),
+                desc = "Restore width/height when close Neovim while maximized",
+                callback = function()
+                    M.maximize.set(false)
+                end,
+            })
+        else
+            for _, opt in ipairs(M._maximized) do
+                vim.o[opt.k] = opt.v
+            end
+            M._maximized = nil
+            vim.cmd("wincmd =")
+        end
+    end,
+})
 
 setmetatable(M, {
     __call = function(m, ...)

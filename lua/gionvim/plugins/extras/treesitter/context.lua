@@ -18,29 +18,37 @@ return {
         "nvim-treesitter/nvim-treesitter-context",
         lazy = true,
         event = { "BufReadPost", "BufNewFile" },
-        keys = {
-            {
-                "<leader>oc",
-                function()
-                    local tsc = require("treesitter-context")
-                    tsc.toggle()
-                    if GionVim.inject.get_upvalue(tsc.toggle, "enabled") then
-                        GionVim.info("Enabled Treesitter Context", { title = "Option" })
+        keys = function()
+            local tsc = require("treesitter-context")
+
+            local key = {
+                {
+                    "[x",
+                    function()
+                        tsc.go_to_context()
+                    end,
+                    desc = "Goto Code Start",
+                },
+            }
+
+            return key
+        end,
+        opts = function()
+            local tsc = require("treesitter-context")
+
+            GionVim.toggle.map("<leader>ot", {
+                name = "Treesitter Context",
+                get = tsc.enabled,
+                set = function(state)
+                    if state then
+                        tsc.enable()
                     else
-                        GionVim.warn("Disabled Treesitter Context", { title = "Option" })
+                        tsc.disable()
                     end
                 end,
-                desc = "Toggle Treesitter Context",
-            },
-        },
-        config = function()
-            require("treesitter-context").setup({
-                mode = "cursor",
-                max_lines = 3,
             })
-            vim.keymap.set("n", "[x", function()
-                require("treesitter-context").go_to_context()
-            end, { silent = true, desc = "Goto Code Context Start" })
+
+            return { mode = "cursor", max_lines = 3 }
         end,
     },
 }
