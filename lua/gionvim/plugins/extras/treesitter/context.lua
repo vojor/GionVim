@@ -36,7 +36,7 @@ return {
         opts = function()
             local tsc = require("treesitter-context")
 
-            GionVim.toggle.map("<leader>ot", {
+            GionVim.toggle.map("<leader>oT", {
                 name = "Treesitter Context",
                 get = tsc.enabled,
                 set = function(state)

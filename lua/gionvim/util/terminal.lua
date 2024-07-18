@@ -69,6 +69,7 @@ function M.open(cmd, opts)
                 vim.cmd.startinsert()
             end,
         })
+        vim.cmd("noh")
     end
 
     return terminals[termkey]
