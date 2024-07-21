@@ -7,7 +7,6 @@ return {
         },
         opts = {
             condition = function(buf)
-                local fn = vim.fn
                 local utils = require("auto-save.utils.data")
                 local exclude_filetypes = {
                     "alpha",
@@ -23,10 +22,11 @@ return {
                     "starter",
                     "trouble",
                     "Trouble",
+                    "grug-far",
                 }
 
-                -- Not save designate filetyps
-                if utils.not_in(fn.getbufvar(buf, "&filetype"), exclude_filetypes) then
+                -- Not save designate filetypes
+                if utils.not_in(vim.fn.getbufvar(buf, "&filetype"), exclude_filetypes) then
                     return true
                 end
                 return false
@@ -41,7 +41,7 @@ return {
             local Rule = require("nvim-autopairs.rule")
 
             npairs.setup({
-                disable_filetype = { "TelescopePrompt", "spectre_panel" },
+                disable_filetype = { "TelescopePrompt", "spectre_panel", "grug-far" },
                 check_ts = true,
                 ts_config = {
                     lua = { "string" },

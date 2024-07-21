@@ -163,24 +163,21 @@ return {
                 extensions = { "neo-tree", "lazy" },
             }
 
-            if
-                vim.g.trouble_lualine_enabled ~= false
-                and vim.b.trouble_lualine_enabled ~= false
-                and GionVim.has("trouble.nvim")
-            then
+            if vim.g.trouble_lualine and GionVim.has("trouble.nvim") then
                 local trouble = require("trouble")
-                local symbols = trouble.statusline
-                    and trouble.statusline({
-                        mode = "symbols",
-                        groups = {},
-                        title = false,
-                        filter = { range = true },
-                        format = "{kind_icon}{symbol.name:Normal}",
-                        hl_group = "lualine_c_normal",
-                    })
+                local symbols = trouble.statusline({
+                    mode = "symbols",
+                    groups = {},
+                    title = false,
+                    filter = { range = true },
+                    format = "{kind_icon}{symbol.name:Normal}",
+                    hl_group = "lualine_c_normal",
+                })
                 table.insert(opts.sections.lualine_c, {
                     symbols and symbols.get,
-                    cond = symbols and symbols.has,
+                    cond = function()
+                        return vim.b.trouble_lualine ~= false and symbols.has()
+                    end,
                 })
             end
 

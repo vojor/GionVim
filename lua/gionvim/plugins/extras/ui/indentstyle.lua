@@ -4,37 +4,47 @@ return {
         main = "ibl",
         lazy = true,
         event = { "BufReadPost", "BufNewFile" },
-        config = function()
-            require("ibl").setup({
-                scope = { enabled = false },
+        opts = function()
+            GionVim.toggle.map("<leader>ug", {
+                name = "Indention Guides",
+                get = function()
+                    return require("ibl.config").get_config(0).enabled
+                end,
+                set = function(state)
+                    require("ibl").setup_buffer(0, { enabled = state })
+                end,
+            })
+
+            return {
                 indent = {
                     char = "│",
                     tab_char = "│",
                 },
+                scope = { show_start = false, show_end = false },
                 exclude = {
                     filetypes = {
-                        "alpha",
                         "checkhealth",
-                        "dashboard",
-                        "help",
                         "jqx",
-                        "lazy",
-                        "lazyterm",
-                        "lspinfo",
-                        "mason",
+                        "help",
+                        "alpha",
+                        "dashboard",
                         "neo-tree",
-                        "notify",
-                        "Outline",
-                        "qf",
-                        "sagaoutline",
-                        "spectre_panel",
-                        "starter",
                         "Trouble",
                         "trouble",
+                        "lazy",
+                        "lspinfo",
+                        "grug-far",
+                        "mason",
+                        "notify",
                         "toggleterm",
+                        "Outline",
+                        "qf",
+                        "lazyterm",
+                        "sagaoutline",
+                        "spectre_panel",
                     },
                 },
-            })
+            }
         end,
     },
     {

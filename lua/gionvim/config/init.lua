@@ -119,6 +119,7 @@ local defaults = {
 }
 
 local options
+local lazy_clipboard
 
 function M.setup(opts)
     options = vim.tbl_deep_extend("force", defaults, opts or {}) or {}
@@ -128,6 +129,9 @@ function M.setup(opts)
         group = group,
         pattern = "VeryLazy",
         callback = function()
+            if lazy_clipboard ~= nil then
+                vim.opt.clipboard = lazy_clipboard
+            end
             GionVim.root.setup()
         end,
     })
@@ -194,6 +198,9 @@ function M.init()
     GionVim.lazy_notify()
 
     M.load("options")
+
+    lazy_clipboard = vim.opt.clipboard
+    vim.opt.clipboard = ""
 
     if vim.g.deprecation_warnings == false then
         vim.deprecate = function() end

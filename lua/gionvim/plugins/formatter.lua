@@ -1,3 +1,14 @@
+local function first(bufnr, ...)
+    local conform = require("conform")
+    for i = 1, select("#", ...) do
+        local formatter = select(i, ...)
+        if conform.get_formatter_info(formatter, bufnr).available then
+            return formatter
+        end
+    end
+    return select(1, ...)
+end
+
 return {
     -- Format
     {
@@ -9,9 +20,10 @@ return {
             {
                 "<leader>F",
                 function()
-                    require("conform").format({ async = true, lsp_format = "fallback" }, function(err)
+                    require("conform").format({ async = true }, function(err)
                         if not err then
-                            if vim.startswith(vim.api.nvim_get_mode().mode:lower(), "v") then
+                            local mode = vim.api.nvim_get_mode().mode
+                            if vim.startswith(string.lower(mode), "v") then
                                 vim.api.nvim_feedkeys(
                                     vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
                                     "n",
@@ -26,6 +38,9 @@ return {
             },
         },
         opts = {
+            default_format_opts = {
+                lsp_format = "fallback",
+            },
             formatters_by_ft = {
                 c = { "clang-format" },
                 cpp = { "clang-format" },
@@ -37,7 +52,9 @@ return {
                 typescript = { "biome", "biome-check" },
                 typescriptreact = { "biome", "biome-check" },
                 lua = { "stylua" },
-                markdown = { "mdformat", "injected" },
+                markdown = function(bufnr)
+                    return { first(bufnr, "mdformat"), "injected" }
+                end,
                 norg = { "injected" },
                 python = { "ruff_format", "ruff_fix", "ruff_organize_imports" },
                 sh = { "shellharden", "shfmt" },
@@ -46,7 +63,6 @@ return {
                 ["_"] = { "trim_whitespace", "trim_newlines" },
                 ["*"] = { "autocorrect" },
             },
-            log_level = vim.log.levels.ERROR,
             format_after_save = function(bufnr)
                 if vim.b[bufnr].disable_autoformat then
                     return
