@@ -158,7 +158,7 @@ return {
         opts = {
             library = {
                 { path = "luvit-meta/library", words = { "vim%.uv" } },
-                { path = "LazyVim", words = { "GionVim" } },
+                { path = "GionVim", words = { "GionVim" } },
                 { path = "lazy.nvim", words = { "GionVim" } },
             },
         },

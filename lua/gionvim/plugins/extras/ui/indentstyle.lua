@@ -6,7 +6,7 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         opts = function()
             GionVim.toggle.map("<leader>ug", {
-                name = "Indention Guides",
+                name = "Indentation Guides",
                 get = function()
                     return require("ibl.config").get_config(0).enabled
                 end,
@@ -71,6 +71,7 @@ return {
                     "notify",
                     "Outline",
                     "qf",
+                    "grug-far",
                     "sagaoutline",
                     "spectre_panel",
                     "starter",

@@ -126,7 +126,7 @@ return {
                     { "<leader>m", group = "+manager/mark" },
                     { "<leader>n", group = "filetree" },
                     { "<leader>o", group = "option" },
-                    { "<leader>r", group = "replace/regroup" },
+                    { "<leader>r", group = "replace/rename" },
                     { "<leader>rr", group = "muren" },
                     { "<leader>s", group = "show/search" },
                     { "<leader>t", group = "terminal/todo" },
