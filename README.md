@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Neovim Version](https://img.shields.io/badge/Neovim-0.10%2B-brightblue?style=flat&logo=neovim&logoColor=green)](https://github.com/neovim/neovim)
-[![GitHub License](https://img.shields.io/github/license/legbor/GionVim?style=flat&logo=github&logoColor=orange&color=blue)](https://github.com/legbor/GionVim/blob/main/LICENSE)
+[![GitHub License](https://img.shields.io/github/license/sejonir/GionVim?style=flat&logo=github&logoColor=orange&color=blue)](https://github.com/sejonir/GionVim/blob/main/LICENSE)
 
 </div>
 
@@ -55,11 +55,11 @@
 
 - Linux:
 
-  - Terminal command: `git clone https://github.com/legbor/GionVim.git ~/.config/nvim`
+  - Terminal command: `git clone https://github.com/sejonir/GionVim.git ~/.config/nvim`
 
 - Windows:
 
-  - Windows PowerShell: `git clone https://github.com/legbor/GionVim.git $env:LOCALAPPDATA\nvim`
+  - Windows PowerShell: `git clone https://github.com/sejonir/GionVim.git $env:LOCALAPPDATA\nvim`
 
 - Access the nvim directory: `rm -rf .git`, You can manage projects on your own.
 
