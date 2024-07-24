@@ -77,6 +77,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.ui.hlslens" }, -- Highlight entries during search
         { import = "gionvim.plugins.extras.ui.rainbow" }, -- Rainbow brackets
         { import = "gionvim.plugins.extras.ui.indentstyle" }, -- Indent format
+        -- { import = "gionvim.plugins.extras.ui.iconcolor" }, -- improve devicons color
         -- { import = "gionvim.plugins.extras.ui.hot" }, -- Hot reload language
         -- utils
         { import = "gionvim.plugins.extras.utils.startuptime" }, -- Measure startup time
