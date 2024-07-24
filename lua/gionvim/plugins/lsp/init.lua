@@ -35,6 +35,7 @@ return {
                     underline = true,
                     update_in_insert = false,
                     severity_sort = true,
+                    -- virtual_text = false,
                     virtual_text = {
                         spacing = 4,
                         prefix = "●",

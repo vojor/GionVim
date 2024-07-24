@@ -67,7 +67,7 @@ return {
                 if vim.b[bufnr].disable_autoformat then
                     return
                 end
-                return { timeout_ms = 5000, lsp_format = "fallback" }
+                return { timeout_ms = 3000, lsp_format = "fallback" }
             end,
             formatters = {
                 injected = {
@@ -83,7 +83,6 @@ return {
         end,
         config = function(_, opts)
             require("conform").setup(opts)
-            vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
         end,
     },
 }
