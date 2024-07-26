@@ -1,17 +1,14 @@
 return {
     {
         "MeanderingProgrammer/markdown.nvim",
+        main = "render-markdown",
         name = "render-markdown",
         lazy = true,
         keys = {
-            { "<leader>jd", "<cmd>RenderMarkdownToggle<CR>", desc = "Preview Markdown" },
+            { "<leader>jd", "<cmd>RenderMarkdown toggle<CR>", desc = "Preview Markdown" },
         },
-        dependencies = { "mini.icons" },
-        opts = { latex = {
-            enabled = false,
-        } },
-        config = function(_, opts)
-            require("render-markdown").setup(opts)
-        end,
+        opts = {
+            latex = { enabled = false },
+        },
     },
 }
