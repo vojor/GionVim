@@ -127,12 +127,13 @@ return {
             local lspconfig = require("lspconfig")
 
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            local new_capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {})
 
             -- Capabilities are different for different language servers
-            local clangd_capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {}, {
+            local clangd_capabilities = vim.tbl_deep_extend("force", vim.deepcopy(new_capabilities), {
                 offsetEncoding = { "utf-16" },
             })
-            local json_capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {}, {
+            local json_capabilities = vim.tbl_deep_extend("force", vim.deepcopy(new_capabilities), {
                 textDocument = {
                     completion = {
                         completionItem = {
@@ -141,7 +142,7 @@ return {
                     },
                 },
             })
-            local yaml_capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {}, {
+            local yaml_capabilities = vim.tbl_deep_extend("force", vim.deepcopy(new_capabilities), {
                 textDocument = {
                     foldingRange = {
                         dynamicRegistration = false,
@@ -149,7 +150,7 @@ return {
                     },
                 },
             })
-            local neocmake_capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {}, {
+            local neocmake_capabilities = vim.tbl_deep_extend("force", vim.deepcopy(new_capabilities), {
                 workspace = {
                     didChangeWatchedFiles = {
                         dynamicRegistration = true,
@@ -157,7 +158,7 @@ return {
                 },
             })
 
-            local servers = { "vimls", "bashls", "marksman", "lemminx", "lua_ls", "taplo" }
+            local servers = { "vimls", "bashls", "marksman", "lemminx", "taplo" }
 
             lspconfig["clangd"].setup({
                 cmd = {
@@ -220,9 +221,9 @@ return {
                 capabilities = yaml_capabilities,
             })
 
-            lspconfig["pyright"].setup({
+            lspconfig["basedpyright"].setup({
                 settings = {
-                    python = {
+                    basedpyright = {
                         analysis = {
                             autoSearchPaths = true,
                             diagnosticMode = "workspace",
@@ -231,12 +232,44 @@ return {
                         },
                     },
                 },
-                capabilities = capabilities,
+                capabilities = vim.deepcopy(new_capabilities),
+            })
+
+            lspconfig["lua_ls"].setup({
+                settings = {
+                    Lua = {
+                        workspace = {
+                            checkThirdParty = false,
+                        },
+                        runtime = {
+                            version = "LuaJIT",
+                        },
+                        codeLens = {
+                            enable = true,
+                        },
+                        completion = {
+                            callSnippet = "Both",
+                            keywordSnippet = "Both",
+                        },
+                        doc = {
+                            privateName = { "^_" },
+                        },
+                        hint = {
+                            enable = true,
+                            setType = false,
+                            paramType = true,
+                            paramName = "Disable",
+                            semicolon = "Disable",
+                            arrayIndex = "Disable",
+                        },
+                    },
+                },
+                capabilities = vim.deepcopy(new_capabilities),
             })
 
             for _, lsp in ipairs(servers) do
                 lspconfig[lsp].setup({
-                    capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {}),
+                    capabilities = vim.deepcopy(new_capabilities),
                 })
             end
 

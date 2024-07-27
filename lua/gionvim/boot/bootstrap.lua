@@ -60,7 +60,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.lsp.boost.increname" }, -- Timely feedback rename
         { import = "gionvim.plugins.extras.lsp.boost.lspsaga" }, -- Strengthen LSP experience
         { import = "gionvim.plugins.extras.lsp.boost.naybuddy" }, -- Float navigate
-        { import = "gionvim.plugins.extras.lsp.boost.neoconf" },
         { import = "gionvim.plugins.extras.lsp.boost.outline" }, -- Symbols Outline
         -- { import = "gionvim.plugins.extras.lsp.boost.better-diagnostic-virtual-text" }, -- improve diagnostic virtual text
         -- seek

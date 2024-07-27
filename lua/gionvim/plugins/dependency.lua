@@ -42,7 +42,7 @@ return {
         "kkharji/sqlite.lua",
         lazy = true,
     },
-    -- Uphold json and yaml files schemascore access
+    -- Uphold json and yaml files schemastore access
     {
 
         "b0o/SchemaStore.nvim",

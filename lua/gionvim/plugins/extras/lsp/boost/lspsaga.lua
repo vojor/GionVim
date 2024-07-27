@@ -38,7 +38,6 @@ return {
         dependencies = { "nvim-treesitter" },
         config = function()
             require("lspsaga").setup({
-                -- neovim version >= 0.10,use dropbar.nvim,disable option
                 symbol_in_winbar = {
                     enable = false,
                 },

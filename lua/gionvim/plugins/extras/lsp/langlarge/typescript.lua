@@ -11,7 +11,6 @@ return {
                     includeCompletionsForModuleExports = true,
                     quotePreference = "auto",
                 },
-                code_lens = "implementations_only",
             },
         },
     },

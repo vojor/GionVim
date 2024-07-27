@@ -5,7 +5,7 @@ return {
         lazy = true,
         event = { "BufReadPost", "BufNewFile" },
         keys = {
-            { "<leader>un", "<cmd>NullLsInfo<CR>", desc = "Show Null-ls Info" },
+            { "<leader>un", "<cmd>NullLsInfo<CR>", desc = "Show None-ls Info" },
         },
         dependencies = {
             {
@@ -28,13 +28,7 @@ return {
 
             local sources = {
                 -- Code Action
-                code_actions.gitsigns.with({
-                    config = {
-                        filter_actions = function(title)
-                            return title:lower():match("blame") == nil
-                        end,
-                    },
-                }),
+                code_actions.refactoring,
 
                 -- Diagnostics
                 diagnostics.cmake_lint,
