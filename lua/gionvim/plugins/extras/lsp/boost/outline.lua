@@ -19,7 +19,7 @@ return {
                 },
                 symbols = {
                     icons = {},
-                    filter = vim.deepcopy(require("gionvim.config").kind_filter),
+                    filter = vim.deepcopy(GionConfig.kind_filter),
                 },
                 keymaps = {
                     up_and_jump = "<up>",
@@ -29,7 +29,7 @@ return {
 
             for kind, symbol in pairs(defaults.symbols.icons) do
                 opts.symbols.icons[kind] = {
-                    icon = require("gionvim.config").icons.kinds[kind] or symbol.icon,
+                    icon = GionConfig.icons.kinds[kind] or symbol.icon,
                     hl = symbol.hl,
                 }
             end

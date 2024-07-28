@@ -27,7 +27,7 @@ return {
                 always_show_bufferline = false,
                 separator_style = "thin",
                 diagnostics_indicator = function(_, _, diag)
-                    local diagnostics_icons = require("gionvim.config").icons.diagnostics
+                    local diagnostics_icons = GionConfig.icons.diagnostics
                     local ret = (diag.error and diagnostics_icons.Error .. diag.error .. " " or "")
                         .. (diag.warning and diagnostics_icons.Warn .. diag.warning or "")
                     return vim.trim(ret)
@@ -41,7 +41,7 @@ return {
                     },
                 },
                 get_element_icon = function(opts)
-                    return require("gionvim.config").icons.ft[opts.filetype]
+                    return GionConfig.icons.ft[opts.filetype]
                 end,
             },
         },
@@ -72,7 +72,7 @@ return {
             local lualine_require = require("lualine_require")
             lualine_require.require = require
 
-            local icons = require("gionvim.config").icons
+            local icons = GionConfig.icons
 
             vim.o.laststatus = vim.g.lualine_laststatus
 

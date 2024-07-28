@@ -26,10 +26,10 @@ return {
                 diagnostics = {
                     signs = {
                         text = {
-                            [vim.diagnostic.severity.ERROR] = require("gionvim.config").icons.diagnostics.Error,
-                            [vim.diagnostic.severity.WARN] = require("gionvim.config").icons.diagnostics.Warn,
-                            [vim.diagnostic.severity.HINT] = require("gionvim.config").icons.diagnostics.Hint,
-                            [vim.diagnostic.severity.INFO] = require("gionvim.config").icons.diagnostics.Info,
+                            [vim.diagnostic.severity.ERROR] = GionConfig.icons.diagnostics.Error,
+                            [vim.diagnostic.severity.WARN] = GionConfig.icons.diagnostics.Warn,
+                            [vim.diagnostic.severity.HINT] = GionConfig.icons.diagnostics.Hint,
+                            [vim.diagnostic.severity.INFO] = GionConfig.icons.diagnostics.Info,
                         },
                     },
                     underline = true,
@@ -111,7 +111,7 @@ return {
             if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
                 opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
                     or function(diagnostic)
-                        local icons = require("gionvim.config").icons.diagnostics
+                        local icons = GionConfig.icons.diagnostics
                         for d, icon in pairs(icons) do
                             if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
                                 return icon

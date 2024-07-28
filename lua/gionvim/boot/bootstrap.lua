@@ -7,6 +7,7 @@ vim.opt.rtp:prepend(lazypath)
 
 _G.gionvim_docs = true
 _G.GionVim = require("gionvim.util")
+_G.GionConfig = require("gionvim.config")
 
 require("lazy").setup({
     spec = {

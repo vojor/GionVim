@@ -67,8 +67,7 @@ return {
                 }),
                 formatting = {
                     format = function(entry, vim_item)
-                        vim_item.kind =
-                            string.format("%s %s", require("gionvim.config").icons.kinds[vim_item.kind], vim_item.kind)
+                        vim_item.kind = string.format("%s %s", GionConfig.icons.kinds[vim_item.kind], vim_item.kind)
                         vim_item.menu = ({
                             async_path = "[Path]",
                             buffer = "[Buffer]",
@@ -112,7 +111,7 @@ return {
                         elseif has_words_before() then
                             cmp.complete()
                         else
-                            fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+                            fallback()
                         end
                     end, { "i", "s" }),
                     ["<S-Tab>"] = cmp.mapping(function()

@@ -294,6 +294,7 @@ return {
                     "neo-tree",
                     "notify",
                     "Outline",
+                    "grug-far",
                     "qf",
                     "spectre_panel",
                     "Trouble",

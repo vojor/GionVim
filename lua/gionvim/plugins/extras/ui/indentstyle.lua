@@ -26,7 +26,6 @@ return {
                         "checkhealth",
                         "jqx",
                         "help",
-                        "alpha",
                         "dashboard",
                         "neo-tree",
                         "Trouble",
@@ -58,7 +57,6 @@ return {
         init = function()
             vim.api.nvim_create_autocmd("FileType", {
                 pattern = {
-                    "alpha",
                     "checkhealth",
                     "dashboard",
                     "help",
@@ -74,7 +72,6 @@ return {
                     "grug-far",
                     "sagaoutline",
                     "spectre_panel",
-                    "starter",
                     "Trouble",
                     "trouble",
                     "toggleterm",
