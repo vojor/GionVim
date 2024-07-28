@@ -4,6 +4,8 @@ name: vim
 globals:
   GionVim:
     any: true
+  GionConfig:
+    any: true
   jit:
     any: true
   vim:
