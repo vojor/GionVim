@@ -36,7 +36,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.elevate.scope" }, -- Enhance Buffer scope
         { import = "gionvim.plugins.extras.elevate.escape" }, -- More user-friendly mode switching
         { import = "gionvim.plugins.extras.elevate.scroll" }, -- Smooth scrolling
-        { import = "gionvim.plugins.extras.elevate.substitute" }, -- Replace neovim built-in 'substitute'
+        { import = "gionvim.plugins.extras.elevate.substitute" }, -- Replace Neovim built-in 'substitute'
         -- explorer
         { import = "gionvim.plugins.extras.explorer" }, -- More explorer
         -- git
@@ -64,11 +64,11 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.lsp.boost.outline" }, -- Symbols Outline
         -- { import = "gionvim.plugins.extras.lsp.boost.better-diagnostic-virtual-text" }, -- improve diagnostic virtual text
         -- seek
-        { import = "gionvim.plugins.extras.seek.fzf" },
+        { import = "gionvim.plugins.extras.seek.fzf" }, -- fuzzy find
         -- treesitter
         { import = "gionvim.plugins.extras.treesitter.treesj" }, -- Splitting or merging code
-        { import = "gionvim.plugins.extras.treesitter.context" },
-        { import = "gionvim.plugins.extras.treesitter.textobjects" },
+        { import = "gionvim.plugins.extras.treesitter.context" }, -- Code context
+        { import = "gionvim.plugins.extras.treesitter.textobjects" }, -- Code text objects
         { import = "gionvim.plugins.extras.treesitter.autotag" }, -- Auto close tag
         -- ui
         { import = "gionvim.plugins.extras.ui.dashboard" }, -- Interface

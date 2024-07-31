@@ -133,6 +133,17 @@ function M.setup(opts)
                 vim.opt.clipboard = lazy_clipboard
             end
             GionVim.root.setup()
+
+            vim.api.nvim_create_user_command("LazyHealth", function()
+                vim.cmd([[Lazy! load all]])
+                vim.cmd([[checkhealth]])
+            end, { desc = "Load all plugins and run :checkhealth" })
+
+            local health = require("lazy.health")
+            vim.list_extend(health.valid, {
+                "recommended",
+                "desc",
+            })
         end,
     })
 

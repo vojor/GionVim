@@ -23,12 +23,12 @@ return {
         },
         config = function()
             local none_ls = require("null-ls")
-            local code_actions = none_ls.builtins.code_actions
+            -- local code_actions = none_ls.builtins.code_actions
             local diagnostics = none_ls.builtins.diagnostics
 
             local sources = {
                 -- Code Action
-                code_actions.refactoring,
+                -- code_actions.refactoring,
 
                 -- Diagnostics
                 diagnostics.cmake_lint,
