@@ -1,12 +1,8 @@
 return {
     {
-        "MeanderingProgrammer/markdown.nvim",
-        main = "render-markdown",
-        name = "render-markdown",
+        "MeanderingProgrammer/render-markdown.nvim",
         lazy = true,
-        keys = {
-            { "<leader>jd", "<cmd>RenderMarkdown toggle<CR>", desc = "Preview Markdown" },
-        },
+        cmd = "RenderMarkdown",
         opts = {
             latex = { enabled = false },
         },
