@@ -1,5 +1,5 @@
 {
-    "$schema": "https://biomejs.dev/schemas/1.9.0/schema.json",
+    "$schema": "https://biomejs.dev/schemas/1.9.1/schema.json",
     "organizeImports": {
         "enabled": true
     },
@@ -16,7 +16,6 @@
         "enabled": true,
         "formatWithErrors": true,
         "indentStyle": "space",
-        "indentSize": 4,
         "indentWidth": 4,
         "lineWidth": 120
     },
@@ -26,7 +25,6 @@
         },
         "formatter": {
             "indentStyle": "space",
-            "indentSize": 4,
             "indentWidth": 4,
             "lineWidth": 120,
             "semicolons": "asNeeded",
@@ -40,7 +38,6 @@
         },
         "formatter": {
             "indentStyle": "space",
-            "indentSize": 4,
             "indentWidth": 4,
             "lineWidth": 120
         }

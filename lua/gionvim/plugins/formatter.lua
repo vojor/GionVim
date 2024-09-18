@@ -45,12 +45,12 @@ return {
                 c = { "clang-format" },
                 cpp = { "clang-format" },
                 cmake = { "gersemi" },
-                json = { "biome", "biome-check" },
-                jsonc = { "biome", "biome-check" },
-                javascript = { "biome", "biome-check" },
-                javascriptreact = { "biome", "biome-check" },
-                typescript = { "biome", "biome-check" },
-                typescriptreact = { "biome", "biome-check" },
+                json = { "biome" },
+                jsonc = { "biome" },
+                javascript = { "biome" },
+                javascriptreact = { "biome" },
+                typescript = { "biome" },
+                typescriptreact = { "biome" },
                 lua = { "stylua" },
                 markdown = function(bufnr)
                     return { first(bufnr, "mdformat"), "injected" }
