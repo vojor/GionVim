@@ -38,7 +38,8 @@ function M.wk(lhs, toggle)
         {
             lhs,
             icon = function()
-                return safe_get() and { icon = " ", color = "green" } or { icon = " ", color = "yellow" }
+                return safe_get() and { icon = toggle.icon or " ", color = toggle.color_enabled or "green" }
+                    or { icon = toggle.icon or " ", color = toggle.color_disabled or "yellow" }
             end,
             desc = function()
                 return (safe_get() and "Disable " or "Enable ") .. toggle.name
