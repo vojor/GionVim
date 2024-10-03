@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "OverseerList",
         "jqx",
         "checkhealth",
-        "gitsigns.blame",
+        "gitsigns-blame",
         "grug-far",
         "DiffviewFiles",
     },

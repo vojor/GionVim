@@ -1,28 +1,30 @@
--- neovim 基础选项设置
--- 日志等级级别："TRACE","DEBUG","INFO","WARN","ERROR","OFF"
+-- Log Level："TRACE","DEBUG","INFO","WARN","ERROR","OFF"
 
------------- 全局设置 ------------
--- 设置 leader
+------------ Global Set ------------
+-- Setting leader
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
--- 根目录检测
+-- Root directory detect
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 vim.g.gionvim_picker = "auto"
--- 设置 python3_host_prog 地址
+-- Setting python3_host_prog address
 vim.g.python3_host_prog = "/usr/bin/python"
--- 设置 lazygit 主题
+-- Setting lazygit theme
 vim.g.lazygit_config = true
--- 隐藏弃用警告
+-- Lsp ignore service
+vim.g.root_lsp_ignore = { "copilot" }
+-- Conceal deprecation warning
 vim.g.deprecation_warnings = false
--- 修复 markdown 缩进
+-- Fix markdown indent
 vim.g.markdown_recommended_style = 0
--- 全局设置 trouble lualine
+-- Setting lualine for trouble
 vim.g.trouble_lualine = true
 -- Options for the GionVim statuscolumn
 vim.g.gionvim_statuscolumn = {
     folds_open = false,
     folds_githl = false,
 }
+-- Big file control
 vim.g.bigfile_size = 1024 * 1024 * 1.5
 
 ------------ 选项配置 ------------
