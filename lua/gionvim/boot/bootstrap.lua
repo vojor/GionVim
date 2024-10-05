@@ -60,7 +60,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.lsp.langlarge.clangd" }, -- C/C++
         -- { import = "gionvim.plugins.extras.lsp.langlarge.java" }, -- Java
         { import = "gionvim.plugins.extras.lsp.langlarge.jqx" }, -- Json/Yaml
-        { import = "gionvim.plugins.extras.lsp.langlarge.markdown" }, -- markdown
+        { import = "gionvim.plugins.extras.lsp.langlarge.markdown" }, -- Markdown
         { import = "gionvim.plugins.extras.lsp.langlarge.typescript" }, -- Javascript/Typescript
         -- -- util
         { import = "gionvim.plugins.extras.lsp.boost.dropbar" }, -- Code navigate
@@ -86,7 +86,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.ui.hlslens" }, -- Highlight entries during search
         { import = "gionvim.plugins.extras.ui.rainbow" }, -- Rainbow brackets
         { import = "gionvim.plugins.extras.ui.indentstyle" }, -- Indent format
-        -- { import = "gionvim.plugins.extras.ui.iconcolor" }, -- improve devicons color
+        -- { import = "gionvim.plugins.extras.ui.iconcolor" }, -- Improve devicons color
         -- { import = "gionvim.plugins.extras.ui.hot" }, -- Hot reload language
         -- utils
         { import = "gionvim.plugins.extras.utils.startuptime" }, -- Measure startup time
