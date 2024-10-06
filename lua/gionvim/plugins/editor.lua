@@ -130,7 +130,7 @@ return {
         },
         keys = {
             {
-                "<leader>rR",
+                "<leader>rg",
                 function()
                     local grug = require("grug-far")
                     local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")

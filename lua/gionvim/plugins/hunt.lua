@@ -19,7 +19,7 @@ local picker = {
                 )
             end
             opts.attach_mappings = function(_, map)
-                map("i", "<a-c>", open_cwd_dir, { desc = "Open cwd Directory" })
+                map("i", "<m-c>", open_cwd_dir, { desc = "Open cwd Directory" })
                 return true
             end
         end
@@ -74,15 +74,6 @@ return {
                 config = function()
                     GionVim.on_load("telescope.nvim", function()
                         require("telescope").load_extension("egrepify")
-                    end)
-                end,
-            },
-            {
-                "nvim-telescope/telescope-ui-select.nvim",
-                lazy = true,
-                config = function()
-                    GionVim.on_load("telescope.nvim", function()
-                        require("telescope").load_extension("ui-select")
                     end)
                 end,
             },
@@ -167,9 +158,6 @@ return {
                     },
                     file_browser = {
                         hijack_netrw = true,
-                    },
-                    ["ui-select"] = {
-                        require("telescope.themes").get_dropdown({}),
                     },
                     egrepify = {
                         AND = true,

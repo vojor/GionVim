@@ -53,7 +53,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.git.diffview" }, -- Git history difference
         { import = "gionvim.plugins.extras.git.git-prompt" }, -- Add status line git prompt
         -- labeler
-        { import = "gionvim.plugins.extras.labeler.harpoon" }, -- File mark
+        { import = "gionvim.plugins.extras.labeler.arrow" }, -- File mark
         { import = "gionvim.plugins.extras.labeler.marks" }, -- Line mark
         -- lsp
         -- -- lang
