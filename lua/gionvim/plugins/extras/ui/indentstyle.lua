@@ -40,7 +40,6 @@ return {
                         "qf",
                         "lazyterm",
                         "sagaoutline",
-                        "spectre_panel",
                     },
                 },
             }
@@ -71,7 +70,6 @@ return {
                     "qf",
                     "grug-far",
                     "sagaoutline",
-                    "spectre_panel",
                     "Trouble",
                     "trouble",
                     "toggleterm",

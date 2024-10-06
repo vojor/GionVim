@@ -296,7 +296,6 @@ return {
                     "Outline",
                     "grug-far",
                     "qf",
-                    "spectre_panel",
                     "Trouble",
                     "trouble",
                     "toggleterm",

@@ -18,14 +18,13 @@ return {
                     "Outline",
                     "qf",
                     "sagaoutline",
-                    "spectre_panel",
                     "starter",
                     "trouble",
                     "Trouble",
                     "grug-far",
                 }
 
-                -- Not save designate filetypes
+                -- Not save designate file types
                 if utils.not_in(vim.fn.getbufvar(buf, "&filetype"), exclude_filetypes) then
                     return true
                 end
@@ -41,7 +40,7 @@ return {
             local Rule = require("nvim-autopairs.rule")
 
             npairs.setup({
-                disable_filetype = { "TelescopePrompt", "spectre_panel", "grug-far" },
+                disable_filetype = { "TelescopePrompt", "grug-far" },
                 check_ts = true,
                 ts_config = {
                     lua = { "string" },

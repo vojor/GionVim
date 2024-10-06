@@ -52,7 +52,6 @@ return {
                             return vim.bo[buf].buftype == "help"
                         end,
                     },
-                    { title = "Spectre", ft = "spectre_panel", size = { height = 0.4 } },
                 },
                 left = {},
                 right = {
