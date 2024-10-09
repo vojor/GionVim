@@ -6,12 +6,12 @@ return {
         ft = { "c", "cpp", "java", "lua", "python", "typescript", "javascript", "typescriptreact", "javascriptreact" },
         opts = {
             prefix = "",
-            disable_ft = { "markdown" },
             disable_virtual_lines_ft = { "yaml", "toml" },
         },
-        keys = {
-            { "<leader>ov", "<cmd>NvimContextVtToggle<CR>", desc = "Toggle Context Virtual Text" },
-        },
+        config = function(opts)
+            require("nvim_context_vt").setup(opts)
+            vim.keymap.set("n", "<leader>ov", "<cmd>NvimContextVtToggle<CR>", { desc = "Toggle Context Virtual Text" })
+        end,
     },
     -- Exhibit function head
     {
