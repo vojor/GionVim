@@ -8,7 +8,7 @@ return {
             prefix = "",
             disable_virtual_lines_ft = { "yaml", "toml" },
         },
-        config = function(opts)
+        config = function(_, opts)
             require("nvim_context_vt").setup(opts)
             vim.keymap.set("n", "<leader>ov", "<cmd>NvimContextVtToggle<CR>", { desc = "Toggle Context Virtual Text" })
         end,
