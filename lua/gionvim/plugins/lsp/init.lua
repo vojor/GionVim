@@ -160,7 +160,7 @@ return {
 
             local servers = { "vimls", "bashls", "marksman", "lemminx", "taplo" }
 
-            lspconfig["clangd"].setup({
+            lspconfig.clangd.setup({
                 cmd = {
                     "clangd",
                     "--background-index",
@@ -181,7 +181,7 @@ return {
                 capabilities = clangd_capabilities,
             })
 
-            lspconfig["neocmake"].setup({
+            lspconfig.neocmake.setup({
                 cmd = { "neocmakelsp", "--stdio" },
                 filetypes = { "cmake" },
                 root_dir = function(fname)
@@ -197,7 +197,7 @@ return {
                 capabilities = neocmake_capabilities,
             })
 
-            lspconfig["jsonls"].setup({
+            lspconfig.jsonls.setup({
                 settings = {
                     json = {
                         schemas = require("schemastore").json.schemas(),
@@ -207,7 +207,7 @@ return {
                 capabilities = json_capabilities,
             })
 
-            lspconfig["yamlls"].setup({
+            lspconfig.yamlls.setup({
                 settings = {
                     yaml = {
                         schemaStore = {
@@ -221,7 +221,7 @@ return {
                 capabilities = yaml_capabilities,
             })
 
-            lspconfig["basedpyright"].setup({
+            lspconfig.basedpyrigh.setup({
                 settings = {
                     basedpyright = {
                         analysis = {
@@ -235,7 +235,7 @@ return {
                 capabilities = vim.deepcopy(new_capabilities),
             })
 
-            lspconfig["lua_ls"].setup({
+            lspconfig.lua_ls.setup({
                 settings = {
                     Lua = {
                         workspace = {
