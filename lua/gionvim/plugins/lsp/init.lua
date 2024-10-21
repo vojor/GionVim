@@ -221,7 +221,7 @@ return {
                 capabilities = yaml_capabilities,
             })
 
-            lspconfig.basedpyrigh.setup({
+            lspconfig.basedpyright.setup({
                 settings = {
                     basedpyright = {
                         analysis = {
