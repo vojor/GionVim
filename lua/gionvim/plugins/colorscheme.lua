@@ -2,17 +2,18 @@ return {
     {
         "folke/tokyonight.nvim",
         priority = 1000,
-        config = function()
-            require("tokyonight").setup({
-                style = "moon",
-                styles = {
-                    comments = { italic = true },
-                    keywords = { italic = false, bold = true },
-                    functions = { bold = true },
-                    variables = { bold = true },
-                },
-                sidebars = { "qf", "terminal", "neo-tree", "toggleterm", "lazyterm" },
-            })
+        opts = {
+            style = "moon",
+            styles = {
+                comments = { italic = true },
+                keywords = { italic = false, bold = true },
+                functions = { bold = true },
+                variables = { bold = true },
+            },
+            sidebars = { "qf", "terminal", "neo-tree", "toggleterm", "lazyterm" },
+        },
+        config = function(_, opts)
+            require("tokyonight").setup(opts)
             vim.cmd.colorscheme("tokyonight")
         end,
     },

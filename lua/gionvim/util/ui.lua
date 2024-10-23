@@ -182,7 +182,7 @@ function M.foldexpr()
         return "0"
     end
 
-    if vim.bo[buf].buftype ~= "" then
+    if vim.bo[buf].buftype ~= "terminal" then
         return "0"
     end
 
