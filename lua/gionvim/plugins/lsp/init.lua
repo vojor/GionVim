@@ -63,6 +63,7 @@ return {
                         },
                     },
                 },
+                servers = { "vimls", "bashls", "marksman", "lemminx", "taplo" },
             }
             return ret
         end,
@@ -126,7 +127,7 @@ return {
 
             local lspconfig = require("lspconfig")
 
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            local capabilities = require("blink.cmp").get_lsp_capabilities()
             local new_capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {})
 
             -- Capabilities are different for different language servers
@@ -158,7 +159,7 @@ return {
                 },
             })
 
-            local servers = { "vimls", "bashls", "marksman", "lemminx", "taplo" }
+            local servers = opts.servers
 
             lspconfig.clangd.setup({
                 cmd = {

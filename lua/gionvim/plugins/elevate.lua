@@ -207,6 +207,7 @@ return {
             },
         },
         dependencies = { "dressing.nvim" },
+        opts = {},
     },
     -- Enhance Yank and Put function
     {
