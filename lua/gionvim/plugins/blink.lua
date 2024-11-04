@@ -1,21 +1,21 @@
 return {
     {
         "saghen/blink.cmp",
-        version = false,
+        version = "*",
         opts_extend = { "sources.completion.enabled_providers" },
         dependencies = {
             "rafamadriz/friendly-snippets",
         },
         event = "InsertEnter",
         opts = {
+            highlight = {
+                use_nvim_cmp_as_default = false,
+            },
             fuzzy = {
                 prebuilt_binaries = {
                     download = true,
-                    force_version = "v0.5.0",
+                    force_version = "v0.5.1",
                 },
-            },
-            highlight = {
-                use_nvim_cmp_as_default = false,
             },
             nerd_font_variant = "mono",
             windows = {
