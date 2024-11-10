@@ -5,7 +5,7 @@ return {
         lazy = true,
         event = { "BufReadPost", "BufNewFile" },
         opts = function()
-            GionVim.toggle.map("<leader>ug", {
+            Snacks.toggle({
                 name = "Indentation Guides",
                 get = function()
                     return require("ibl.config").get_config(0).enabled
@@ -13,7 +13,7 @@ return {
                 set = function(state)
                     require("ibl").setup_buffer(0, { enabled = state })
                 end,
-            })
+            }):map("<leader>ug")
 
             return {
                 indent = {
@@ -38,8 +38,10 @@ return {
                         "toggleterm",
                         "Outline",
                         "qf",
-                        "lazyterm",
                         "sagaoutline",
+                        "snacks_notif",
+                        "snacks_terminal",
+                        "snacks_win",
                     },
                 },
             }
@@ -61,7 +63,6 @@ return {
                     "help",
                     "jqx",
                     "lazy",
-                    "lazyterm",
                     "lspinfo",
                     "mason",
                     "neo-tree",
@@ -73,6 +74,9 @@ return {
                     "Trouble",
                     "trouble",
                     "toggleterm",
+                    "snacks_notif",
+                    "snacks_terminal",
+                    "snacks_win",
                 },
                 callback = function()
                     vim.b.miniindentscope_disable = true

@@ -6,11 +6,11 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 -- Root directory detect
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
+-- disable auto format
+vim.g.autoformat = false
 vim.g.gionvim_picker = "auto"
 -- Setting python3_host_prog address
 vim.g.python3_host_prog = "/usr/bin/python"
--- Setting lazygit theme
-vim.g.lazygit_config = true
 -- Lsp ignore service
 vim.g.root_lsp_ignore = { "copilot" }
 -- Conceal deprecation warning
@@ -19,13 +19,6 @@ vim.g.deprecation_warnings = false
 vim.g.markdown_recommended_style = 0
 -- Setting lualine for trouble
 vim.g.trouble_lualine = true
--- Options for the GionVim statuscolumn
-vim.g.gionvim_statuscolumn = {
-    folds_open = false,
-    folds_githl = false,
-}
--- Big file control
-vim.g.bigfile_size = 1024 * 1024 * 1.5
 
 ------------ 选项配置 ------------
 -- 控制隐藏文本级别
@@ -59,8 +52,6 @@ vim.opt.fileencodings = { "ucs-bom", "utf-8", "utf-16", "utf-32", "gb18030", "gb
 vim.opt.fileformats = { "unix", "dos" }
 -- 显示左侧图标指示列
 vim.opt.signcolumn = "yes"
--- 状态指示器
-vim.opt.statuscolumn = [[%!v:lua.require'gionvim.util'.ui.statuscolumn()]]
 -- 搜索设置
 -- -- 搜索忽略大小写
 vim.opt.ignorecase = true
@@ -129,7 +120,7 @@ vim.opt.redrawtime = 5000
 -- 代码折叠
 vim.opt.foldenable = true
 vim.opt.smoothscroll = true
-vim.opt.foldexpr = [[%!v:lua.require'gionvim.util'.ui.foldexpr()]]
+vim.opt.foldexpr = "v:lua.require'gionvimvim.util'.ui.foldexpr()"
 vim.opt.foldmethod = "expr"
 vim.opt.foldtext = ""
 -- -- 当前打开文件的折叠级别

@@ -6,6 +6,8 @@ globals:
     any: true
   GionConfig:
     any: true
+  Snacks:
+    any: true
   jit:
     any: true
   vim:

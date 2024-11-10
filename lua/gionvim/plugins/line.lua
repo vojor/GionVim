@@ -17,10 +17,10 @@ return {
         opts = {
             options = {
                 close_command = function(n)
-                    GionVim.ui.bufremove(n)
+                    Snacks.bufdelete(n)
                 end,
                 right_mouse_command = function(n)
-                    GionVim.ui.bufremove(n)
+                    Snacks.bufdelete(n)
                 end,
                 -- numbers = "ordinal",
                 diagnostics = "nvim_lsp",

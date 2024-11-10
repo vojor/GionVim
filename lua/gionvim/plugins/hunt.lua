@@ -186,8 +186,11 @@ return {
             }
         end,
         keys = {
-            -- stylua: ignore
-            { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true theme=ivy<CR>", desc = "Find Buffers" },
+            {
+                "<leader>fb",
+                "<cmd>Telescope buffers sort_mru=true sort_lastused=true ignore_current_buffer=true theme=ivy<cr>",
+                desc = " Find Buffers",
+            },
             { "<leader>fB", "<cmd>Telescope scope buffers<CR>", desc = "Find Scope buffers" },
             { "<leader>fc", "<cmd>Telescope commands<CR>", desc = "Find Commands" },
             { "<leader>fC", "<cmd>Telescope command_history<CR>", desc = "Find Command History" },

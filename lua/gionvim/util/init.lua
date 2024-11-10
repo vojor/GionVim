@@ -2,32 +2,16 @@ local LazyUtil = require("lazy.core.util")
 
 local M = {}
 
-local deprecated = {
-    get_clients = "lsp",
-    on_attach = "lsp",
-    on_rename = "lsp",
-    root_patterns = { "root", "patterns" },
-    get_root = { "root", "get" },
-    float_term = { "terminal", "open" },
-    toggle_diagnostics = { "toggle", "diagnostics" },
-    toggle_number = { "toggle", "number" },
-    fg = "ui",
-}
-
 setmetatable(M, {
     __index = function(t, k)
         if LazyUtil[k] then
             return LazyUtil[k]
         end
-        local dep = deprecated[k]
-        if dep then
-            local mod = type(dep) == "table" and dep[1] or dep
-            local key = type(dep) == "table" and dep[2] or k
-            M.deprecate([[GionVim.]] .. k, [[GionVim.]] .. mod .. "." .. key)
-            t[mod] = require("gionvim.util." .. mod)
-            return t[mod][key]
+        if k == "lazygit" or k == "toggle" then
+            return M.deprecated[k]()
         end
         t[k] = require("gionvim.util." .. k)
+        M.deprecated.decorate(k, t[k])
         return t[k]
     end,
 })
@@ -155,7 +139,7 @@ function M.safe_keymap_set(mode, lhs, rhs, opts)
     if #modes > 0 then
         opts = opts or {}
         opts.silent = opts.silent ~= false
-        if opts.remap then
+        if opts.remap and not vim.g.vscode then
             opts.remap = nil
         end
         vim.keymap.set(modes, lhs, rhs, opts)

@@ -11,16 +11,9 @@ return {
             highlight = {
                 use_nvim_cmp_as_default = false,
             },
-            fuzzy = {
-                prebuilt_binaries = {
-                    download = true,
-                    force_version = "v0.5.1",
-                },
-            },
             nerd_font_variant = "mono",
             windows = {
                 autocomplete = {
-                    draw = "reversed",
                     winblend = vim.o.pumblend,
                 },
                 documentation = {

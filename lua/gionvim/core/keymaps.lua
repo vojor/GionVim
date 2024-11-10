@@ -1,62 +1,7 @@
 local map = GionVim.safe_keymap_set
 
--- lazy
-map("n", "<leader>ml", "<cmd>Lazy<CR>", { desc = "Open Lazy Manager Interface" })
-
--- Lazy terminal
-map("n", "<leader>tl", function()
-    GionVim.terminal(nil, { cwd = GionVim.root() })
-end, { desc = "Lazy Terminal (Root Dir)" })
-map("n", "<leader>tL", function()
-    GionVim.terminal()
-end, { desc = "Lazy Terminal (CWD)" })
-
--- terminal mappings
-map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
-map("t", "<C-h>", "<cmd>wincmd h<CR>", { desc = "Go to left window" })
-map("t", "<C-j>", "<cmd>wincmd j<CR>", { desc = "Go to lower window" })
-map("t", "<C-k>", "<cmd>wincmd k<CR>", { desc = "Go to upper window" })
-map("t", "<C-l>", "<cmd>wincmd l<CR>", { desc = "Go to right window" })
-map("t", "<C-/>", "<cmd>close<CR>", { desc = "Hide Terminal" })
-map("t", "<C-_>", "<cmd>close<CR>", { desc = "which_key_ignore" })
-
--- lazygit
-map("n", "<leader>glb", GionVim.lazygit.blame_line, { desc = "Git Blame Line" })
-map("n", "<leader>glr", function()
-    GionVim.lazygit({ cwd = GionVim.root.git() })
-end, { desc = "Lazygit (Root Dir)" })
-map("n", "<leader>glR", function()
-    GionVim.lazygit()
-end, { desc = "Lazygit (CWD)" })
-map("n", "<leader>glh", function()
-    local git_path = vim.api.nvim_buf_get_name(0)
-    GionVim.lazygit({ args = { "-f", vim.trim(git_path) }, cwd = GionVim.root.git() })
-end, { desc = "Lazygit Current File History" })
-map("n", "<leader>gll", function()
-    GionVim.lazygit({ args = { "log" }, cwd = GionVim.root.git() })
-end, { desc = "Lazygit Log" })
-map("n", "<leader>glL", function()
-    GionVim.lazygit({ args = { "log" } })
-end, { desc = "Lazygit Log (cwd)" })
-map("n", "<leader>glB", GionVim.lazygit.browse, { desc = "Git Browse" })
-
--- toggle options
-GionVim.toggle.map("<leader>os", GionVim.toggle("spell", { name = "Spelling" }))
-GionVim.toggle.map("<leader>ow", GionVim.toggle("wrap", { name = "Wrap" }))
-GionVim.toggle.map("<leader>oL", GionVim.toggle("relativenumber", { name = "Relative Number" }))
-GionVim.toggle.map("<leader>od", GionVim.toggle.diagnostics)
-
-GionVim.toggle.map("<leader>ol", GionVim.toggle.number)
-GionVim.toggle.map(
-    "<leader>oC",
-    GionVim.toggle("conceallevel", { values = { 0, vim.o.conceallevel > 0 and vim.o.conceallevel or 2 } })
-)
-GionVim.toggle.map("<leader>ot", GionVim.toggle.treesitter)
-GionVim.toggle.map("<leader>ob", GionVim.toggle("background", { values = { "light", "dark" }, name = "Background" }))
-if vim.lsp.inlay_hint then
-    GionVim.toggle.map("<leader>oh", GionVim.toggle.inlay_hints)
-end
--- operate
+---- Basic operate ----
+-- file command
 map("n", "<leader>ce", "<cmd>enew<CR>", { desc = "New File" })
 map("n", "<leader>cw", "<cmd>w<CR>", { desc = "Buffer Write File" })
 map("n", "<leader>cW", "<cmd>wa<CR>", { desc = "Write All File" })
@@ -65,14 +10,96 @@ map("n", "<leader>cq", "<cmd>q<CR>", { desc = "Quit" })
 map("n", "<leader>cQ", "<cmd>q!<CR>", { desc = "Force Quit" })
 map("n", "<leader>cx", "<cmd>x<CR>", { desc = "Save And Quit" })
 
+-- up/down
+map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+
 -- quickfix/locallist
 map("n", "<leader>cc", "<cmd>copen<CR>", { desc = "Open Quickfix" })
 map("n", "<leader>cl", "<cmd>lopen<CR>", { desc = "Open Locationlist" })
 map("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
+-- indent
+map("v", "<", "<gv")
+map("v", ">", ">gv")
+
+-- Add undo break-points
+map("i", ",", ",<C-g>u")
+map("i", ".", ".<C-g>u")
+map("i", ";", ";<C-g>u")
+
+-- lazy
+map("n", "<leader>ml", "<cmd>Lazy<CR>", { desc = "Open Lazy Manager Interface" })
+
+-- Floating terminal
+map("n", "<leader>tl", function()
+    Snacks.terminal()
+end, { desc = "Terminal (cwd)" })
+map("n", "<leader>tL", function()
+    Snacks.terminal(nil, { cwd = GionVim.root() })
+end, { desc = "Terminal (Root Dir)" })
+map("n", "<c-/>", function()
+    Snacks.terminal(nil, { cwd = GionVim.root() })
+end, { desc = "Terminal (Root Dir)" })
+map("n", "<c-_>", function()
+    Snacks.terminal(nil, { cwd = GionVim.root() })
+end, { desc = "which_key_ignore" })
+
+-- terminal mappings
+map("t", "<C-/>", "<cmd>close<CR>", { desc = "Hide Terminal" })
+map("t", "<C-_>", "<cmd>close<CR>", { desc = "which_key_ignore" })
+
+-- lazygit
+if vim.fn.executable("lazygit") == 1 then
+    map("n", "<leader>glR", function()
+        Snacks.lazygit({ cwd = GionVim.root.git() })
+    end, { desc = "Lazygit (Root Dir)" })
+    map("n", "<leader>glr", function()
+        Snacks.lazygit()
+    end, { desc = "Lazygit (cwd)" })
+    map("n", "<leader>glb", function()
+        Snacks.git.blame_line()
+    end, { desc = "Git Blame Line" })
+    map("n", "<leader>glB", function()
+        Snacks.gitbrowse()
+    end, { desc = "Git Browse" })
+    map("n", "<leader>glh", function()
+        Snacks.lazygit.log_file()
+    end, { desc = "Lazygit Current File History" })
+    map("n", "<leader>gll", function()
+        Snacks.lazygit.log({ cwd = GionVim.root.git() })
+    end, { desc = "Lazygit Log" })
+    map("n", "<leader>glL", function()
+        Snacks.lazygit.log()
+    end, { desc = "Lazygit Log (cwd)" })
+end
+
+-- toggle options
+GionVim.format.snacks_toggle():map("<leader>of")
+GionVim.format.snacks_toggle(true):map("<leader>oF")
+Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>os")
+Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>ow")
+Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>oL")
+Snacks.toggle.diagnostics():map("<leader>od")
+Snacks.toggle.line_number():map("<leader>ol")
+Snacks.toggle
+    .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+    :map("<leader>oC")
+Snacks.toggle.treesitter():map("<leader>ot")
+Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ob")
+if vim.lsp.inlay_hint then
+    Snacks.toggle.inlay_hints():map("<leader>oh")
+end
+
 -- checkhealth
 map("n", "<leader>ch", "<cmd>checkhealth<CR>", { desc = "Neovim Health Check" })
+
+-- commenting
+map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<CR>fxa<bs>", { desc = "Add Comment Below" })
+map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<CR>fxa<bs>", { desc = "Add Comment Above" })
 
 -- buffers
 map("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "Prev buffer" })
@@ -80,17 +107,22 @@ map("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 map("n", "[b", "<cmd>bprevious<CR>", { desc = "Prev buffer" })
 map("n", "]b", "<cmd>bnext<CR>", { desc = "Next buffer" })
 map("n", "<leader>bb", "<cmd>e #<CR>", { desc = "Switch to Other Buffer" })
-map("n", "<leader>bd", GionVim.ui.bufremove, { desc = "Delete Buffer" })
+map("n", "<leader>bd", function()
+    Snacks.bufdelete()
+end, { desc = "Delete Buffer" })
+map("n", "<leader>bo", function()
+    Snacks.bufdelete.other()
+end, { desc = "Delete Other Buffers" })
 map("n", "<leader>bD", "<cmd>:bd<CR>", { desc = "Delete Buffer and Window" })
 
+-- Move to window
+map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
+map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
+map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
+map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+
 -- window
-map("n", "gh", "<c-w>h", { desc = "Goto left window" })
-map("n", "gj", "<c-w>j", { desc = "Goto lower window" })
-map("n", "gk", "<c-w>k", { desc = "Goto upper window" })
-map("n", "gl", "<c-w>l", { desc = "Goto right window" })
-map("n", "<leader>w", "<c-w>", { desc = "Windows", remap = true })
-map("n", "<leader>wc", "<C-W>c", { desc = "Delete Window", remap = true })
-GionVim.toggle.map("<leader>wm", GionVim.toggle.maximize)
+GionVim.ui.maximize():map("<leader>wm")
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
@@ -104,27 +136,13 @@ map("n", "<leader><tab>]", "<cmd>tabnext<CR>", { desc = "Next Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<CR>", { desc = "Previous Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<CR>", { desc = "Close Tab" })
 
--- up/down
-map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-
--- indent
-map("v", "<", "<gv")
-map("v", ">", ">gv")
-
--- Add undo break-points
-map("i", ",", ",<C-g>u")
-map("i", ".", ".<C-g>u")
-map("i", ";", ";<C-g>u")
-
 -- keywordprg
 map("n", "<leader>K", "<cmd>norm! K<CR>", { desc = "Keywordprg" })
 
 -- search/highlight
 map("n", "<leader>se", "/\\<lt>\\><left><left>")
 map("n", "<leader>so", vim.show_pos, { desc = "Inspect Pos" })
+map("n", "<leader>sO", "<cmd>InspectTree<CR>", { desc = "Inspect Tree" })
 map({ "i", "n" }, "<esc>", "<cmd>noh<CR><esc>", { desc = "Escape and clear hlsearch" })
 map(
     "n",

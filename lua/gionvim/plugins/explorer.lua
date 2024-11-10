@@ -119,7 +119,7 @@ return {
         },
         config = function(_, opts)
             local function on_move(data)
-                GionVim.lsp.on_rename(data.source, data.destination)
+                Snacks.rename.on_rename_file(data.source, data.destination)
             end
 
             local events = require("neo-tree.events")
