@@ -1,9 +1,6 @@
 -- Log Level："TRACE","DEBUG","INFO","WARN","ERROR","OFF"
 
 ------------ Global Set ------------
--- Setting leader
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
 -- Root directory detect
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 -- disable auto format
@@ -52,6 +49,8 @@ vim.opt.fileencodings = { "ucs-bom", "utf-8", "utf-16", "utf-32", "gb18030", "gb
 vim.opt.fileformats = { "unix", "dos" }
 -- 显示左侧图标指示列
 vim.opt.signcolumn = "yes"
+-- 设置状态指示
+vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 -- 搜索设置
 -- -- 搜索忽略大小写
 vim.opt.ignorecase = true
@@ -120,7 +119,7 @@ vim.opt.redrawtime = 5000
 -- 代码折叠
 vim.opt.foldenable = true
 vim.opt.smoothscroll = true
-vim.opt.foldexpr = "v:lua.require'gionvimvim.util'.ui.foldexpr()"
+vim.opt.foldexpr = "v:lua.require'gionvim.util'.ui.foldexpr()"
 vim.opt.foldmethod = "expr"
 vim.opt.foldtext = ""
 -- -- 当前打开文件的折叠级别
@@ -143,8 +142,6 @@ vim.opt.formatoptions = "jcroqlnt"
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 -- 短消息显示
 vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
--- 命令行高度
--- vim.opt.cmdheight = 0
 -- 增量预览
 vim.opt.inccommand = "nosplit"
 -- 可见窗口的顶部和底部之间保留的上下滚动行数

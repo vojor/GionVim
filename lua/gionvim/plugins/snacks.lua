@@ -15,6 +15,7 @@ return {
         opts = function()
             return {
                 toggle = { map = GionVim.safe_keymap_set },
+                statuscolumn = { enabled = false },
                 terminal = {
                     win = {
                         keys = {
