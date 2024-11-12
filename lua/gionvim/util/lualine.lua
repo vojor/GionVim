@@ -1,45 +1,5 @@
 local M = {}
 
-function M.cmp_source(name, icon)
-    local started = false
-    local function status()
-        if not package.loaded["cmp"] then
-            return
-        end
-        for _, s in ipairs(require("cmp").core.sources or {}) do
-            if s.name == name then
-                if s.source:is_available() then
-                    started = true
-                else
-                    return started and "error" or nil
-                end
-                if s.status == s.SourceStatus.FETCHING then
-                    return "pending"
-                end
-                return "ok"
-            end
-        end
-    end
-
-    local colors = {
-        ok = GionVim.ui.fg("Special"),
-        error = GionVim.ui.fg("DiagnosticError"),
-        pending = GionVim.ui.fg("DiagnosticWarn"),
-    }
-
-    return {
-        function()
-            return icon or GionConfig.icons.kinds[name:sub(1, 1):upper() .. name:sub(2)]
-        end,
-        cond = function()
-            return status() ~= nil
-        end,
-        color = function()
-            return colors[status()] or colors.ok
-        end,
-    }
-end
-
 function M.format(component, text, hl_group)
     text = text:gsub("%%", "%%%%")
     if not hl_group or hl_group == "" then

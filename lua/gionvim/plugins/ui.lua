@@ -8,7 +8,6 @@ return {
                 override = {
                     ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
                     ["vim.lsp.util.stylize_markdown"] = true,
-                    ["cmp.entry.get_documentation"] = true,
                 },
             },
             presets = {
@@ -119,14 +118,9 @@ return {
                 },
                 excluded_buftypes = { "terminal", "nofile", "prompt", "popup", "quickfix" },
                 excluded_filetypes = {
-                    "cmp_docs",
-                    "cmp_menu",
                     "noice",
-                    "notify",
                     "TelescopePrompt",
-                    "alpha",
                     "dashboard",
-                    "starter",
                 },
                 handlers = {
                     gitsigns = true,
