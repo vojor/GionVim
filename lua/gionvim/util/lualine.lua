@@ -83,6 +83,7 @@ function M.pretty_path(opts)
             return ""
         end
 
+        path = GionVim.norm(path)
         local root = GionVim.root.get({ normalize = true })
         local cwd = GionVim.root.cwd()
 
