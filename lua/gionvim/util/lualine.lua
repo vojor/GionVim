@@ -1,5 +1,24 @@
 local M = {}
 
+function M.status(icon, status)
+    local colors = {
+        ok = GionVim.ui.fg("Special"),
+        error = GionVim.ui.fg("DiagnosticError"),
+        pending = GionVim.ui.fg("DiagnosticWarn"),
+    }
+    return {
+        function()
+            return icon
+        end,
+        cond = function()
+            return status() ~= nil
+        end,
+        color = function()
+            return colors[status()] or colors.ok
+        end,
+    }
+end
+
 function M.format(component, text, hl_group)
     text = text:gsub("%%", "%%%%")
     if not hl_group or hl_group == "" then

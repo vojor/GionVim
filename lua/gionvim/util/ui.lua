@@ -1,77 +1,24 @@
 local M = {}
 
 function M.foldtext()
-    local ok = pcall(vim.treesitter.get_parser, vim.api.nvim_get_current_buf())
-    local ret = ok and vim.treesitter.foldtext and vim.treesitter.foldtext()
-    if not ret or type(ret) == "string" then
-        ret = { { vim.api.nvim_buf_get_lines(0, vim.v.lnum - 1, vim.v.lnum, false)[1], {} } }
-    end
-    table.insert(ret, { " " .. GionConfig.icons.misc.dots })
-
-    if not vim.treesitter.foldtext then
-        return table.concat(
-            vim.tbl_map(function(line)
-                return line[1]
-            end, ret),
-            " "
-        )
-    end
-    return ret
+    return vim.api.nvim_buf_get_lines(0, vim.v.lnum - 1, vim.v.lnum, false)[1]
 end
-
-function M.fg(name)
-    local color = M.color(name)
-    return color and { fg = color } or nil
-end
-
-function M.color(name, bg)
-    local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name, link = false })
-        or vim.api.nvim_get_hl_by_name(name, true)
-    local color = nil
-    if hl then
-        if bg then
-            color = hl.bg or hl.background
-        else
-            color = hl.fg or hl.foreground
-        end
-    end
-    return color and string.format("#%06x", color) or nil
-end
-
-M.skip_foldexpr = {}
-local skip_check = assert(vim.uv.new_check())
 
 function M.foldexpr()
     local buf = vim.api.nvim_get_current_buf()
-
-    if not vim.b[buf].ts_highlight then
-        return "0"
+    if vim.b[buf].ts_folds == nil then
+        if vim.bo[buf].filetype == "" then
+            return "0"
+        end
+        vim.b[buf].ts_folds = pcall(vim.treesitter.get_parser, buf)
     end
+    return vim.b[buf].ts_folds and vim.treesitter.foldexpr() or "0"
+end
 
-    if M.skip_foldexpr[buf] then
-        return "0"
-    end
-
-    if vim.bo[buf].buftype == "terminal" then
-        return "0"
-    end
-
-    if vim.bo[buf].filetype == "" then
-        return "0"
-    end
-
-    local ok = pcall(vim.treesitter.get_parser, buf)
-
-    if ok then
-        return vim.treesitter.foldexpr()
-    end
-
-    M.skip_foldexpr[buf] = true
-    skip_check:start(function()
-        M.skip_foldexpr = {}
-        skip_check:stop()
-    end)
-    return "0"
+function M.fg(name)
+    local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+    local fg = hl and hl.fg or hl.foreground
+    return fg and { fg = string.format("#%06x", fg) } or nil
 end
 
 function M.maximize()
