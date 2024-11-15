@@ -14,6 +14,10 @@ return {
         lazy = false,
         opts = function()
             return {
+                notifier = { enabled = true },
+                quickfile = { enabled = true },
+                bigfile = { enabled = true },
+                words = { enabled = true },
                 toggle = { map = GionVim.safe_keymap_set },
                 statuscolumn = { enabled = false },
                 terminal = {
