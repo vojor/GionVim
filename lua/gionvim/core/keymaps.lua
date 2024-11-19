@@ -63,7 +63,7 @@ if vim.fn.executable("lazygit") == 1 then
     map("n", "<leader>glb", function()
         Snacks.git.blame_line()
     end, { desc = "Git Blame Line" })
-    map("n", "<leader>glB", function()
+    map({ "n", "x" }, "<leader>glB", function()
         Snacks.gitbrowse()
     end, { desc = "Git Browse" })
     map("n", "<leader>glh", function()

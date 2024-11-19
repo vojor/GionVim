@@ -80,7 +80,7 @@ return {
                 options = {
                     theme = "auto",
                     globalstatus = vim.o.laststatus == 3,
-                    disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
+                    disabled_filetypes = { statusline = { "dashboard", "snacks_dashboard" } },
                 },
                 sections = {
                     lualine_a = { "mode" },

@@ -41,5 +41,13 @@ return {
                 desc = "Dismiss All Notifications",
             },
         },
+        config = function(_, opts)
+            local notify = vim.notify
+            require("snacks").setup(opts)
+
+            if GionVim.has("noice.nvim") then
+                vim.notify = notify
+            end
+        end,
     },
 }
