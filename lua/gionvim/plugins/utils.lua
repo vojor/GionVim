@@ -113,7 +113,7 @@ return {
                             return require("which-key.extras").expand.buf()
                         end,
                     },
-                    { "<leader>c", group = "command" },
+                    { "<leader>c", group = "command/cut" },
                     { "<leader>e", group = "generate/editor" },
                     { "<leader>ep", group = "compiler" },
                     { "<leader>f", group = "find" },
@@ -126,8 +126,7 @@ return {
                     { "<leader>m", group = "+manager" },
                     { "<leader>n", group = "filetree" },
                     { "<leader>o", group = "option" },
-                    { "<leader>r", group = "replace" },
-                    { "<leader>rr", group = "muren" },
+                    { "<leader>r", group = "replace/refactor" },
                     { "<leader>s", group = "show" },
                     { "<leader>t", group = "terminal/todo" },
                     { "<leader>td", group = "todo" },

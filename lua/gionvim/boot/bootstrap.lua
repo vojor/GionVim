@@ -54,7 +54,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.explorer" }, -- More explorer
         -- git
         { import = "gionvim.plugins.extras.git.diffview" }, -- Git history difference
-        { import = "gionvim.plugins.extras.git.git-prompt" }, -- Add status line git prompt
         { import = "gionvim.plugins.extras.git.neogit" }, -- Neovim's magit
         -- labeler
         { import = "gionvim.plugins.extras.labeler.arrow" }, -- File mark

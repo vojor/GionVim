@@ -2,7 +2,7 @@ return {
     {
         "Zeioth/garbage-day.nvim",
         lazy = true,
-        event = { "BufReadPost", "BufNewFile" },
+        event = "LspAttach",
         opts = {
             aggressive_mode = false,
             excluded_lsp_clients = {

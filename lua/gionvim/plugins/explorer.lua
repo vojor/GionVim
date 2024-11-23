@@ -64,7 +64,6 @@ return {
                 "trouble",
                 "qf",
                 "Outline",
-                "lazyterm",
             },
             default_component_configs = {
                 indent = {

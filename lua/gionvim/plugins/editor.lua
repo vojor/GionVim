@@ -262,14 +262,14 @@ return {
         lazy = true,
         keys = {
             {
-                "<leader>rb",
+                "<leader>cb",
                 function()
                     require("mini.trailspace").trim()
                 end,
                 desc = "Trail All End of Line Space",
             },
             {
-                "<leader>rc",
+                "<leader>cB",
                 function()
                     require("mini.trailspace").trim_last_lines()
                 end,
@@ -284,11 +284,9 @@ return {
             vim.api.nvim_create_autocmd("FileType", {
                 pattern = {
                     "checkhealth",
-                    "dashboard",
                     "help",
                     "jqx",
                     "lazy",
-                    "lazyterm",
                     "lspinfo",
                     "mason",
                     "neo-tree",

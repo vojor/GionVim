@@ -67,21 +67,6 @@ return {
             { "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
         },
     },
-    -- Improve buffer close
-    {
-        "ojroques/nvim-bufdel",
-        lazy = true,
-        keys = {
-            { "<leader>be", "<cmd>BufDel<CR>", desc = "Close Current Buffer" },
-            { "<leader>bi", "<cmd>BufDel!<CR>", desc = "Close Current Buffer And Ignore Modify" },
-            { "<leader>ba", "<cmd>BufDelAll<CR>", desc = "Close All Buffers" },
-            { "<leader>bo", "<cmd>BufDelOthers<CR>", desc = "Close Others Buffer" },
-            { "<leader>bs", ":BufDel ", desc = "Close Specify Buffer(Name Number Use '')" },
-        },
-        opts = {
-            quit = false,
-        },
-    },
     -- Convenient file operate
     {
         "chrisgrieser/nvim-genghis",

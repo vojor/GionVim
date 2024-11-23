@@ -18,21 +18,15 @@ return {
         "nvim-treesitter/nvim-treesitter-context",
         lazy = true,
         event = { "BufReadPost", "BufNewFile" },
-        keys = function()
-            local tsc = require("treesitter-context")
-
-            local key = {
-                {
-                    "[x",
-                    function()
-                        tsc.go_to_context()
-                    end,
-                    desc = "Goto Code Start",
-                },
-            }
-
-            return key
-        end,
+        keys = {
+            {
+                "[x",
+                function()
+                    require("treesitter-context").go_to_context()
+                end,
+                desc = "Goto Code Start",
+            },
+        },
         opts = function()
             local tsc = require("treesitter-context")
 
