@@ -35,7 +35,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.develop.comments" }, -- Quick comment
         { import = "gionvim.plugins.extras.develop.compiler" }, -- Code build and run
         { import = "gionvim.plugins.extras.develop.commander" }, -- Find plugin keymaps
-        { import = "gionvim.plugins.extras.develop.font-icon" }, -- Select icon
         { import = "gionvim.plugins.extras.develop.lazydev" }, -- lua development
         { import = "gionvim.plugins.extras.develop.refactor" }, -- Refactor code
         -- diagnostics
