@@ -8,13 +8,18 @@ return {
         },
         dependencies = {
             "rafamadriz/friendly-snippets",
+            {
+                "saghen/blink.compat",
+                optional = true,
+                opts = {},
+                version = "*",
+            },
         },
         event = "InsertEnter",
         opts = {
             highlight = {
                 use_nvim_cmp_as_default = false,
             },
-            nerd_font_variant = "mono",
             windows = {
                 autocomplete = {
                     winblend = vim.o.pumblend,
@@ -32,16 +37,7 @@ return {
             sources = {
                 compat = {},
                 completion = {
-                    enabled_providers = { "lsp", "path", "snippets", "buffer", "lazydev" },
-                },
-                providers = {
-                    lsp = {
-                        fallback_for = { "lazydev" },
-                    },
-                    lazydev = {
-                        name = "LazyDev",
-                        module = "lazydev.integrations.blink",
-                    },
+                    enabled_providers = { "lsp", "path", "snippets", "buffer" },
                 },
             },
 
@@ -64,5 +60,24 @@ return {
             end
             require("blink.cmp").setup(opts)
         end,
+    },
+    {
+        "saghen/blink.cmp",
+        opts = {
+            sources = {
+                completion = {
+                    enabled_providers = { "lazydev" },
+                },
+                providers = {
+                    lsp = {
+                        fallback_for = { "lazydev" },
+                    },
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                    },
+                },
+            },
+        },
     },
 }
