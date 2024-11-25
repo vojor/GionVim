@@ -6,7 +6,6 @@ return {
             { "<leader>hc", "<cmd>ColorizerToggle<CR>", desc = "Toggle Display Hexadecimal Color" },
         },
         opts = {
-            filetypes = { "*" },
             user_default_options = {
                 RRGGBBAA = true,
                 AARRGGBB = true,
