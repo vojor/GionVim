@@ -1,6 +1,7 @@
 return {
     {
         "okuuva/auto-save.nvim",
+        lazy = true,
         event = { "InsertLeave", "TextChanged" },
         keys = {
             { "<leader>oa", "<cmd>ASToggle<CR>", desc = "Toggle Auto Save" },
@@ -9,8 +10,6 @@ return {
             condition = function(buf)
                 local utils = require("auto-save.utils.data")
                 local exclude_filetypes = {
-                    "alpha",
-                    "dashboard",
                     "neo-tree",
                     "noice",
                     "notify",
@@ -18,10 +17,12 @@ return {
                     "Outline",
                     "qf",
                     "sagaoutline",
-                    "starter",
                     "trouble",
                     "Trouble",
                     "grug-far",
+                    "lazy",
+                    "mason",
+                    "lspinfo",
                 }
 
                 -- Not save designate file types

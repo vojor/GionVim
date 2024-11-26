@@ -65,7 +65,14 @@ if vim.fn.executable("lazygit") == 1 then
     end, { desc = "Git Blame Line" })
     map({ "n", "x" }, "<leader>glB", function()
         Snacks.gitbrowse()
-    end, { desc = "Git Browse" })
+    end, { desc = "Git Browse (open)" })
+    map({ "n", "x" }, "<leader>glY", function()
+        Snacks.gitbrowse({
+            open = function(url)
+                vim.fn.setreg("+", url)
+            end,
+        })
+    end, { desc = "Git Browse (copy)" })
     map("n", "<leader>glh", function()
         Snacks.lazygit.log_file()
     end, { desc = "Lazygit Current File History" })
