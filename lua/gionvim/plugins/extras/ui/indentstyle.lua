@@ -26,7 +26,6 @@ return {
                         "checkhealth",
                         "jqx",
                         "help",
-                        "dashboard",
                         "neo-tree",
                         "Trouble",
                         "trouble",
@@ -42,6 +41,7 @@ return {
                         "snacks_notif",
                         "snacks_terminal",
                         "snacks_win",
+                        "snacks_dashboard",
                     },
                 },
             }
@@ -59,7 +59,6 @@ return {
             vim.api.nvim_create_autocmd("FileType", {
                 pattern = {
                     "checkhealth",
-                    "dashboard",
                     "help",
                     "jqx",
                     "lazy",
@@ -77,6 +76,7 @@ return {
                     "snacks_notif",
                     "snacks_terminal",
                     "snacks_win",
+                    "snacks_dashboard",
                 },
                 callback = function()
                     vim.b.miniindentscope_disable = true
