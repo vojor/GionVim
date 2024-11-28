@@ -20,12 +20,13 @@ return {
             highlight = {
                 use_nvim_cmp_as_default = false,
             },
-            windows = {
-                autocomplete = {
+            completion = {
+                menu = {
                     winblend = vim.o.pumblend,
                 },
                 documentation = {
                     auto_show = true,
+                    auto_show_delay_ms = 200,
                 },
                 ghost_text = {
                     enabled = true,
