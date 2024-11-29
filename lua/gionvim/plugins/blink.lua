@@ -45,7 +45,6 @@ return {
             keymap = {
                 preset = "enter",
             },
-            kind_icons = GionConfig.icons.kinds,
         },
         config = function(_, opts)
             local enabled = opts.sources.completion.enabled_providers
@@ -60,6 +59,13 @@ return {
                 end
             end
             require("blink.cmp").setup(opts)
+        end,
+    },
+    {
+        "saghen/blink.cmp",
+        opts = function(_, opts)
+            opts.appearance = opts.appearance or {}
+            opts.appearance.kind_icons = GionConfig.icons.kinds
         end,
     },
     {
