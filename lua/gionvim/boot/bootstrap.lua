@@ -68,7 +68,7 @@ require("lazy").setup({
         -- { import = "gionvim.plugins.extras.lsp.boost.better-diagnostic-virtual-text" }, -- improve diagnostic virtual text
         { import = "gionvim.plugins.extras.lsp.boost.dropbar" }, -- Code navigate
         { import = "gionvim.plugins.extras.lsp.boost.fidget" }, -- Progress prompt
-        { import = "gionvim.plugins.extras.lsp.boost.garbage" }, -- disable unfocused serve
+        { import = "gionvim.plugins.extras.lsp.boost.garbage" }, -- Disable unfocused serve
         { import = "gionvim.plugins.extras.lsp.boost.illuminate" }, -- Display the same vocabulary under the cursor
         { import = "gionvim.plugins.extras.lsp.boost.increname" }, -- Timely feedback rename
         { import = "gionvim.plugins.extras.lsp.boost.lspsaga" }, -- Strengthen LSP experience
@@ -82,11 +82,9 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.treesitter.textobjects" }, -- Code text objects
         { import = "gionvim.plugins.extras.treesitter.treesj" }, -- Splitting or merging code
         -- ui
-        { import = "gionvim.plugins.extras.ui.colorizer" }, -- Display hexadecimal colors and auto devicons color
+        { import = "gionvim.plugins.extras.ui.colorizer" }, -- Display hexadecimal colors
         { import = "gionvim.plugins.extras.ui.edgy" }, -- Predefined layout
         { import = "gionvim.plugins.extras.ui.hlslens" }, -- Highlight entries during search
-        -- { import = "gionvim.plugins.extras.ui.hot" }, -- Hot reload language
-        -- { import = "gionvim.plugins.extras.ui.iconcolor" }, -- Improve devicons color
         { import = "gionvim.plugins.extras.ui.indentstyle" }, -- Indent format
         { import = "gionvim.plugins.extras.ui.rainbow" }, -- Rainbow brackets
         -- utils

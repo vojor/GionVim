@@ -13,6 +13,7 @@ return {
             { "<leader>kj", "<cmd>FzfLua jumps<CR>", desc = "Fzf Jump" },
         },
         opts = {
+            fzf_bin = "sk",
             winopts = {
                 title = "Fzf Search",
                 title_pos = "center",
@@ -21,6 +22,9 @@ return {
                         relativenumber = true,
                     },
                 },
+            },
+            defaults = {
+                formatter = "path.dirname_first",
             },
             fzf_colors = {
                 ["fg"] = { "fg", "CursorLine" },
@@ -45,6 +49,18 @@ return {
                 git_icons = true,
                 finder = {
                     git_icons = true,
+                },
+                symbols = {
+                    symbol_hl = function(s)
+                        return "TroubleIcon" .. s
+                    end,
+                    symbol_fmt = function(s)
+                        return s:lower() .. "\t"
+                    end,
+                    child_prefix = false,
+                },
+                code_actions = {
+                    previewer = vim.fn.executable("delta") == 1 and "codeaction_native" or nil,
                 },
             },
             diagnostics = {
