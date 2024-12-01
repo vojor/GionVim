@@ -4,10 +4,11 @@ return {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         keys = {
-            { "<leader>ui", "<cmd>LspInfo<CR>", desc = "Show Lspconfig Info" },
-            { "<leader>us", "<cmd>LspStart<CR>", desc = "Start LspConfig" },
-            { "<leader>ut", "<cmd>LspStop<CR>", desc = "Stop Lspconfig" },
-            { "<leader>ur", "<cmd>LspRestart<CR>", desc = "Restart LspConfig" },
+            { "<leader>L", desc = "LSPControl" },
+            { "<leader>Li", "<cmd>LspInfo<CR>", desc = "Show Lspconfig Info" },
+            { "<leader>Ls", "<cmd>LspStart<CR>", desc = "Start LspConfig" },
+            { "<leader>Lt", "<cmd>LspStop<CR>", desc = "Stop Lspconfig" },
+            { "<leader>Lr", "<cmd>LspRestart<CR>", desc = "Restart LspConfig" },
         },
         dependencies = {
             {
