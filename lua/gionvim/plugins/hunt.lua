@@ -205,8 +205,7 @@ return {
             { "<leader>fi", "<cmd>Telescope registers<CR>", desc = "Find Registers" },
             { "<leader>fm", "<cmd>Telescope marks<CR>", desc = "Find Marks" },
             { "<leader>fn", "<cmd>Telescope vim_options<cr>", desc = "Find Vim Options" },
-            { "<leader>fr", "<cmd>Telescope oldfiles theme=ivy<CR>", desc = "Find Old Files" },
-            { "<leader>fR", GionVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
+            { "<leader>fr", GionVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
             { "<leader>ft", "<cmd>Telescope file_browser theme=ivy<CR>", desc = "Open File Tree" },
             -- stylua: ignore
             { "<leader>fT", "<cmd>Telescope file_browser path=%:p:h select_buffer=true theme=ivy<CR>", desc = "Open File Tree(CWD)" },
