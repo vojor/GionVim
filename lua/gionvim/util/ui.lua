@@ -27,7 +27,7 @@ end
 
 function M.maximize()
     local maximized = nil
-    return Snacks.toggle({
+    local toggle = Snacks.toggle({
         name = "Maximize",
         get = function()
             return maximized ~= nil
@@ -44,14 +44,6 @@ function M.maximize()
                 set("winminwidth", 10)
                 set("winminheight", 4)
                 vim.cmd("wincmd =")
-                vim.api.nvim_create_autocmd("ExitPre", {
-                    once = true,
-                    group = vim.api.nvim_create_augroup("gionvim_restore_max_exit_pre", { clear = true }),
-                    desc = "Restore width/height when close Neovim while maximized",
-                    callback = function()
-                        M.maximize.set(false)
-                    end,
-                })
             else
                 for _, opt in ipairs(maximized) do
                     vim.o[opt.k] = opt.v
@@ -61,6 +53,17 @@ function M.maximize()
             end
         end,
     })
+
+    vim.api.nvim_create_autocmd("ExitPre", {
+        group = vim.api.nvim_create_augroup("gionvim_restore_max_exit_pre", { clear = true }),
+        desc = "Restore width/height when close Neovim while maximized",
+        callback = function()
+            if toggle:get() then
+                toggle:set(false)
+            end
+        end,
+    })
+    return toggle
 end
 
 return M

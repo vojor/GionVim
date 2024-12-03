@@ -71,6 +71,7 @@ if vim.fn.executable("lazygit") == 1 then
             open = function(url)
                 vim.fn.setreg("+", url)
             end,
+            notify = false,
         })
     end, { desc = "Git Browse (copy)" })
     map("n", "<leader>glh", function()
