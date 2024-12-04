@@ -22,8 +22,9 @@ return {
             },
             completion = {
                 menu = {
-                    winblend = vim.o.pumblend,
-                    draw = { treesitter = true },
+                    draw = {
+                        treesitter = true,
+                    },
                 },
                 documentation = {
                     auto_show = true,
@@ -59,6 +60,21 @@ return {
                     table.insert(enabled, source)
                 end
             end
+
+            for _, provider in pairs(opts.sources.providers or {}) do
+                if provider.kind then
+                    require("blink.cmp.types").CompletionItemKind[provider.kind] = provider.kind
+                    local transform_items = provider.transform_items
+                    provider.transform_items = function(ctx, items)
+                        items = transform_items and transform_items(ctx, items) or items
+                        for _, item in ipairs(items) do
+                            item.kind = provider.kind or item.kind
+                        end
+                        return items
+                    end
+                end
+            end
+
             require("blink.cmp").setup(opts)
         end,
     },
