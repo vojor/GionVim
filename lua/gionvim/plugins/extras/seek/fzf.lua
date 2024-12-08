@@ -10,6 +10,7 @@ return {
             { "<leader>kl", "<cmd>FzfLua<CR>", desc = "Fzf Args Select List" },
             { "<leader>kf", "<cmd>FzfLua files<CR>", desc = "Fzf Find Files" },
             { "<leader>kg", "<cmd>FzfLua live_grep<CR>", desc = "Fzf Find Text" },
+            { "<leader>kc", "<cmd>FzfLua grep_curbuf<CR>", desc = "Fzf Find Text (current buffer)" },
             { "<leader>kj", "<cmd>FzfLua jumps<CR>", desc = "Fzf Jump" },
         },
         opts = {

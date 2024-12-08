@@ -19,7 +19,7 @@ return {
         lazy = true,
         keys = {
             { "<leader>d", "", desc = "debug", mode = { "n", "v" } },
-            { "<leader>dw", "", desc = "widgets debug", mode = { "n", "v" } },
+            { "<leader>dw", "", desc = "Widgets Debug", mode = { "n", "v" } },
             {
                 "<leader>dc",
                 function()

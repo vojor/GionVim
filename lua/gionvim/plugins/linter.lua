@@ -5,7 +5,7 @@ return {
         lazy = true,
         event = { "BufReadPost", "BufNewFile" },
         keys = {
-            { "<leader>Ln", "<cmd>NullLsInfo<CR>", desc = "Show None-ls Info" },
+            { "<leader>in", "<cmd>NullLsInfo<CR>", desc = "None-ls Information" },
         },
         dependencies = {
             {

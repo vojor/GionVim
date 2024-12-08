@@ -3,7 +3,7 @@
 ------------ Global Set ------------
 -- Root directory detect
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
--- disable auto format
+-- Disable auto format
 vim.g.autoformat = false
 vim.g.gionvim_picker = "auto"
 -- Setting python3_host_prog address
@@ -17,73 +17,79 @@ vim.g.markdown_recommended_style = 0
 -- Setting lualine for trouble
 vim.g.trouble_lualine = true
 
------------- 选项配置 ------------
--- 控制隐藏文本级别
+------------ Option Configuration ------------
+
+--------  Basic requirements  --------
+-- Text conceal level
 vim.opt.conceallevel = 2
--- 防止包裹
+-- Prevent wrap
 vim.opt.wrap = false
--- 默认新窗口在右和下
-vim.opt.splitright = true
-vim.opt.splitbelow = true
--- 拆分文档时行为
+-- Document Split behavior
 vim.opt.splitkeep = "screen"
--- 行号显示 绝对行号和相对行号
+-- Show number and relative number
 vim.opt.number = true
 vim.opt.relativenumber = true
--- 显示标尺
+-- Show ruler
 vim.opt.ruler = true
--- 无操作时候交换文件写入磁盘等待的时间
+-- File write to disk wait time
 vim.opt.updatetime = 200
--- 高亮当前文本行
+-- Screen redraw time
+vim.opt.redrawtime = 5000
+-- Highlight current text line
 vim.opt.cursorline = true
--- 等待按键时长的时间
+-- Continue key and time
 vim.opt.timeout = true
 vim.opt.timeoutlen = 500
--- 外部修改时自动加载
+-- Auto loaded when external modify
 vim.opt.autowrite = true
 vim.opt.autoread = true
--- 退出时提示确认
+-- Exit use confirm
 vim.opt.confirm = true
--- 编码设置和检测
+
+--------  Encoding  --------
+-- Encoding set and detect
 vim.opt.fileencodings = { "ucs-bom", "utf-8", "utf-16", "utf-32", "gb18030", "gbk", "gb2312", "latin1" }
+-- Encoding format
 vim.opt.fileformats = { "unix", "dos" }
--- 显示左侧图标指示列
-vim.opt.signcolumn = "yes"
--- 设置状态指示
-vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
--- 搜索设置
--- -- 搜索忽略大小写
+
+--------  Search  --------
+-- Ignore case
 vim.opt.ignorecase = true
--- -- 模式中有大写字母时不忽略大小写
+-- Mode use capital don't ignore case
 vim.opt.smartcase = true
--- -- 搜索高亮匹配
+-- Highlight match
 vim.opt.incsearch = true
--- -- 高亮最近的匹配搜索模式
+-- Highlight recent matching search patterns
 vim.opt.hlsearch = true
--- 拼写建议
+-- Increment preview
+vim.opt.inccommand = "nosplit"
+
+--------  Spelling  --------
 vim.opt.spell = true
 vim.opt.spelllang = { "en_us" }
 vim.opt.spelloptions:append("noplainbuffer")
--- 鼠标支持
+-- Support mouse
 vim.opt.mouse = "a"
--- 启用系统剪切板
+-- Enable system clipboard
 vim.opt.clipboard = "unnamedplus"
--- 缓存文件设置
+
+--------  Backup  --------
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
--- 显示特殊字符
+
+-------- Character  --------
+-- Show special characters
 vim.opt.list = true
--- 使用不可见字符的显示方式
+-- How invisible characters are displayed
 vim.opt.listchars = { space = "·", tab = "▸ ", eol = "↴", trail = "•" }
--- 操作填充字符
+-- Operate fill character
 vim.opt.fillchars = { foldopen = "", foldclose = "", fold = " ", foldsep = " ", diff = "╱", eob = " " }
--- 终端真颜色支持
-vim.opt.termguicolors = true
--- 设置缩进
--- -- 保证在折行时维持缩进不变
+
+--------  Indent  --------
+-- Keep indentation unchanged
 vim.opt.breakindent = true
 -- -- 根据上一行决定新行的缩进
 vim.opt.smartindent = true
@@ -93,7 +99,7 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 -- -- 编辑时 tab 使用的空格数
 vim.opt.softtabstop = 4
--- -- 按下 tab 时替换为空格
+-- Expand tab to space
 vim.opt.expandtab = true
 -- -- 缩进列数对齐到 shiftwidth 的整数倍
 vim.opt.shiftround = true
@@ -103,52 +109,66 @@ vim.opt.showmatch = true
 vim.opt.whichwrap = "<,>,[,]"
 -- 在视觉块模式下，允许光标在没有文字的地方移动
 vim.opt.virtualedit = "block"
--- 补全优化
--- -- 补全菜单背景透明
+
+--------  Completion  --------
+-- 补全菜单背景透明
 vim.opt.pumblend = 10
--- -- 补全菜单长度
+-- 补全菜单长度
 vim.opt.pumheight = 12
--- -- 'wildchar' 命令行扩展所用的模式
+--'wildchar' 命令行扩展所用的模式
 vim.opt.wildmode = "longest:full,full"
--- -- 增强模式的命令行补全
+-- 增强模式的命令行补全
 vim.opt.wildmenu = true
--- 使用增强状态栏插件后不再需要 vim 的模式提示
-vim.opt.showmode = false
--- 屏幕重绘时间
-vim.opt.redrawtime = 5000
--- 代码折叠
+
+--------  Fold  --------
 vim.opt.foldenable = true
-vim.opt.smoothscroll = true
 vim.opt.foldexpr = "v:lua.require'gionvim.util'.ui.foldexpr()"
 vim.opt.foldmethod = "expr"
 vim.opt.foldtext = ""
--- -- 当前打开文件的折叠级别
 vim.opt.foldlevel = 99
--- -- 文件初始打开的折叠级别
 vim.opt.foldlevelstart = 99
--- -- 设定指示折叠的列宽度
 vim.opt.foldcolumn = "1"
--- 筛选设置
--- -- :grep 使用的程序
+
+--------  Grep  --------
+-- -- “grep" program
 -- vim.opt.grepprg = "rg --vimgrep"
 vim.opt.grepprg = "ugrep -RInk -j -u --tabs=1 --ignore-files"
--- -- grepprg 输出格式
+-- -- "grep" output format
 -- vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.grepformat = "%f:%l:%c:%m,%f+%l+%c+%m,%-G%f\\|%l\\|%c\\|%m"
--- 格式化行为
+
+--------  Format  --------
+-- Format behavior
 vim.opt.formatexpr = "v:lua.require'gionvim.util'.format.formatexpr()"
 vim.opt.formatoptions = "jcroqlnt"
--- 会话
+
+--------  Message and Session
+-- Session option
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
--- 短消息显示
+-- Setting Short Message
 vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
--- 增量预览
-vim.opt.inccommand = "nosplit"
--- 可见窗口的顶部和底部之间保留的上下滚动行数
+
+--------  UI  --------
+-- Smooth scroll
+vim.opt.smoothscroll = true
+-- Show left Sign
+vim.opt.signcolumn = "yes"
+-- Status instruct
+vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
+-- Terminal color
+vim.opt.termguicolors = true
+-- Unnecessary Vim mode hint
+vim.opt.showmode = false
+
+--------  Window  --------
+-- Visible window the top and bottom between remain scroll line
 vim.opt.scrolloff = 4
--- 窗口左右保留的字符列数
+-- Window side reserve character column
 vim.opt.sidescrolloff = 8
--- 始终显示状态栏，一个文件时自动隐藏
+-- Status line behavior
 vim.opt.laststatus = 3
--- 窗口最小宽度
+-- Window min width
 vim.opt.winminwidth = 5
+-- Default new window in blow and right
+vim.opt.splitright = true
+vim.opt.splitbelow = true
