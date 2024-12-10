@@ -60,7 +60,6 @@ vim.api.nvim_create_autocmd("FileType", {
         "gitsigns-blame",
         "grug-far",
         "DiffviewFiles",
-        "snacks_win",
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false

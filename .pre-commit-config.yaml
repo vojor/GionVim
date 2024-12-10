@@ -3,13 +3,29 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
+      # 防止提交巨型文件
+      - id: check-added-large-files
+        args: ['--maxkb=2048']
+      # 检查不区分大小写的文件系统
+      - id: check-case-conflict
+      # 检查代码放在文档字符串之前的常见错误
+      - id: check-docstring-first
+      # 加载所有json文件验证语法
+      - id: check-json
+      # 检查未指向任何内容的符号链接
+      - id: check-symlinks
+      # 加载所有toml文件验证语法
+      - id: check-toml
+      # 加载所有xml文件验证语法
+      - id: check-xml
+      # 加载所有yaml文件验证语法
+      - id: check-yaml
+      # 检测符号链接是否更改为常规文件
+      - id: destroyed-symlinks
+      # 确保文件以换行符结尾
+      - id: end-of-file-fixer
+      # 删除UTF-8字节标记
+      - id: fix-byte-order-marker
+      # 修剪尾随空格
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
-      - id: end-of-file-fixer
-      - id: check-case-conflict
-      - id: check-docstring-first
-      - id: check-symlinks
-      - id: check-toml
-      - id: check-yaml
-      - id: check-json
-      - id: check-added-large-files
