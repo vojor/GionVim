@@ -101,6 +101,7 @@ return {
                         { GionVim.lualine.pretty_path() },
                     },
                     lualine_x = {
+                        Snacks.profiler.status(),
                         {
                             function()
                                 return require("noice").api.status.command.get()
@@ -109,7 +110,7 @@ return {
                                 return package.loaded["noice"] and require("noice").api.status.command.has()
                             end,
                             color = function()
-                                return GionVim.ui.fg("Statement")
+                                return { fg = Snacks.util.color("Statement") }
                             end,
                         },
                         {
@@ -120,14 +121,14 @@ return {
                                 return package.loaded["noice"] and require("noice").api.status.mode.has()
                             end,
                             color = function()
-                                return GionVim.ui.fg("Constant")
+                                return { fg = Snacks.util.color("Constant") }
                             end,
                         },
                         {
                             require("lazy.status").updates,
                             cond = require("lazy.status").has_updates,
                             color = function()
-                                return GionVim.ui.fg("Special")
+                                return { fg = Snacks.util.color("Special") }
                             end,
                         },
                         {

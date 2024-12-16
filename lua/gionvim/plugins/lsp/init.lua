@@ -71,53 +71,37 @@ return {
         config = function(_, opts)
             GionVim.lsp.setup()
 
-            -- diagnostics signs
-            if vim.fn.has("nvim-0.10.0") == 0 then
-                if type(opts.diagnostics.signs) ~= "boolean" then
-                    for severity, icon in pairs(opts.diagnostics.signs.text) do
-                        local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
-                        name = "DiagnosticSign" .. name
-                        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+            if opts.inlay_hints.enabled then
+                GionVim.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
+                    if
+                        vim.api.nvim_buf_is_valid(buffer)
+                        and vim.bo[buffer].buftype == ""
+                        and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
+                    then
+                        vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
                     end
-                end
+                end)
             end
 
-            if vim.fn.has("nvim-0.10") == 1 then
-                -- inlay hints
-                if opts.inlay_hints.enabled then
-                    GionVim.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
-                        if
-                            vim.api.nvim_buf_is_valid(buffer)
-                            and vim.bo[buffer].buftype == ""
-                            and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
-                        then
-                            vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
-                        end
-                    end)
-                end
-
-                -- code lens
-                if opts.codelens.enabled and vim.lsp.codelens then
-                    GionVim.lsp.on_supports_method("textDocument/codeLens", function(client, buffer)
-                        vim.lsp.codelens.refresh()
-                        vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-                            buffer = buffer,
-                            callback = vim.lsp.codelens.refresh,
-                        })
-                    end)
-                end
+            if opts.codelens.enabled and vim.lsp.codelens then
+                GionVim.lsp.on_supports_method("textDocument/codeLens", function(client, buffer)
+                    vim.lsp.codelens.refresh()
+                    vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+                        buffer = buffer,
+                        callback = vim.lsp.codelens.refresh,
+                    })
+                end)
             end
 
             if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
-                opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-                    or function(diagnostic)
-                        local icons = GionConfig.icons.diagnostics
-                        for d, icon in pairs(icons) do
-                            if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                                return icon
-                            end
+                opts.diagnostics.virtual_text.prefix = function(diagnostic)
+                    local icons = GionConfig.icons.diagnostics
+                    for d, icon in pairs(icons) do
+                        if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                            return icon
                         end
                     end
+                end
             end
 
             vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
@@ -129,7 +113,6 @@ return {
             local capabilities = require("blink.cmp").get_lsp_capabilities()
             local new_capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {})
 
-            -- Capabilities are different for different language servers
             local clangd_capabilities = vim.tbl_deep_extend("force", vim.deepcopy(new_capabilities), {
                 offsetEncoding = { "utf-16" },
             })

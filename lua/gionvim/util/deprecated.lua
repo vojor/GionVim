@@ -13,6 +13,12 @@ M.moved = {
     ui = {
         statuscolumn = { "Snacks.statuscolumn" },
         bufremove = { "Snacks.bufdelete" },
+        fg = {
+            "{ fg = Snacks.util.color(...) }",
+            fn = function(...)
+                return { fg = Snacks.util.color(...) }
+            end,
+        },
     },
 }
 
@@ -31,6 +37,9 @@ function M.decorate(name, mod)
             if M.moved[name][k] then
                 local to = M.moved[name][k][1]
                 GionVim.deprecate("GionVim." .. name .. "." .. k, to)
+                if M.moved[name][k].fn then
+                    return M.moved[name][k].fn
+                end
                 local ret = vim.tbl_get(_G, unpack(vim.split(to, ".", { plain = true })))
                 return ret
             end

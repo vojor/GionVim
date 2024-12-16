@@ -5,6 +5,7 @@ return {
         opts_extend = {
             "sources.completion.enabled_providers",
             "sources.compat",
+            "sources.default",
         },
         dependencies = {
             "rafamadriz/friendly-snippets",
@@ -19,16 +20,12 @@ return {
         opts = {
             appearance = {
                 use_nvim_cmp_as_default = false,
+                nerd_font_variant = "mono",
             },
             completion = {
-                accept = {
-                    auto_brackets = {
-                        enabled = true,
-                    },
-                },
                 menu = {
                     draw = {
-                        treesitter = true,
+                        treesitter = { "lsp" },
                     },
                 },
                 documentation = {
@@ -42,17 +39,17 @@ return {
 
             sources = {
                 compat = {},
-                completion = {
-                    enabled_providers = { "lsp", "path", "snippets", "buffer" },
-                },
+                default = { "lsp", "path", "snippets", "buffer" },
+                cmdline = {},
             },
 
             keymap = {
                 preset = "enter",
+                ["<C-y>"] = { "select_and_accept" },
             },
         },
         config = function(_, opts)
-            local enabled = opts.sources.completion.enabled_providers
+            local enabled = opts.sources.default
             for _, source in ipairs(opts.sources.compat or {}) do
                 opts.sources.providers[source] = vim.tbl_deep_extend(
                     "force",
@@ -64,17 +61,26 @@ return {
                 end
             end
 
+            opts.sources.compat = nil
+
             for _, provider in pairs(opts.sources.providers or {}) do
                 if provider.kind then
-                    require("blink.cmp.types").CompletionItemKind[provider.kind] = provider.kind
+                    local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+                    local kind_idx = #CompletionItemKind + 1
+
+                    CompletionItemKind[kind_idx] = provider.kind
+                    CompletionItemKind[provider.kind] = kind_idx
+
                     local transform_items = provider.transform_items
                     provider.transform_items = function(ctx, items)
                         items = transform_items and transform_items(ctx, items) or items
                         for _, item in ipairs(items) do
-                            item.kind = provider.kind or item.kind
+                            item.kind = kind_idx or item.kind
                         end
                         return items
                     end
+
+                    provider.kind = nil
                 end
             end
 
@@ -85,23 +91,21 @@ return {
         "saghen/blink.cmp",
         opts = function(_, opts)
             opts.appearance = opts.appearance or {}
-            opts.appearance.kind_icons = GionConfig.icons.kinds
+            opts.appearance.kind_icons = vim.tbl_extend("keep", {
+                Color = "██",
+            }, GionConfig.icons.kinds)
         end,
     },
     {
         "saghen/blink.cmp",
         opts = {
             sources = {
-                completion = {
-                    enabled_providers = { "lazydev" },
-                },
+                default = { "lazydev" },
                 providers = {
-                    lsp = {
-                        fallback_for = { "lazydev" },
-                    },
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
+                        score_offset = 100,
                     },
                 },
             },

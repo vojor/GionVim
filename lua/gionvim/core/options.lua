@@ -6,6 +6,7 @@ vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 -- Disable auto format
 vim.g.autoformat = false
 vim.g.gionvim_picker = "auto"
+vim.g.snacks_animate = true
 -- Setting python3_host_prog address
 vim.g.python3_host_prog = "/usr/bin/python"
 -- Lsp ignore service

@@ -96,8 +96,17 @@ Snacks.toggle.line_number():map("<leader>ol")
 Snacks.toggle
     .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" })
     :map("<leader>oC")
+Snacks.toggle
+    .option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" })
+    :map("<leader>oA")
 Snacks.toggle.treesitter():map("<leader>ot")
 Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ob")
+Snacks.toggle.dim():map("<leader>oD")
+Snacks.toggle.animate():map("<leader>om")
+Snacks.toggle.indent():map("<leader>oi")
+Snacks.toggle.scroll():map("<leader>oS")
+Snacks.toggle.profiler():map("<leader>op")
+Snacks.toggle.profiler_highlights():map("<leader>oH")
 if vim.lsp.inlay_hint then
     Snacks.toggle.inlay_hints():map("<leader>oh")
 end
@@ -130,11 +139,12 @@ map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
 -- window
-GionVim.ui.maximize():map("<leader>wm")
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+Snacks.toggle.zoom():map("<leader>wm"):map("<leader>wZ")
+Snacks.toggle.zen():map("<leader>wz")
 
 -- tabs
 map("n", "<leader><tab>l", "<cmd>tablast<CR>", { desc = "Last Tab" })
@@ -158,3 +168,8 @@ map(
     "<cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
     { silent = true, noremap = true, desc = "Redraw / Clear Hlsearch / Diff Update" }
 )
+map({ "i", "n", "s" }, "<esc>", function()
+    vim.cmd("noh")
+    GionVim.cmp.actions.snippet_stop()
+    return "<esc>"
+end, { expr = true, desc = "Escape and Clear hlsearch" })
