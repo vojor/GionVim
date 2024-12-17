@@ -13,12 +13,10 @@ return {
         priority = 1000,
         lazy = false,
         opts = {
-            input = { enabled = true },
             scroll = { enabled = true },
             notifier = { enabled = true },
             quickfile = { enabled = true },
             bigfile = { enabled = true },
-            words = { enabled = true },
             toggle = { map = GionVim.safe_keymap_set },
             statuscolumn = { enabled = false },
             terminal = {

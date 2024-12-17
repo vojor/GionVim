@@ -61,6 +61,21 @@ return {
                 end
             end
 
+            if not opts.keymap["<Tab>"] then
+                if opts.keymap.preset == "super-tab" then
+                    opts.keymap["<Tab>"] = {
+                        require("blink.cmp.keymap.presets")["super-tab"]["<Tab>"][1],
+                        GionVim.cmp.map({ "snippet_forward" }),
+                        "fallback",
+                    }
+                else
+                    opts.keymap["<Tab>"] = {
+                        GionVim.cmp.map({ "snippet_forward" }),
+                        "fallback",
+                    }
+                end
+            end
+
             opts.sources.compat = nil
 
             for _, provider in pairs(opts.sources.providers or {}) do

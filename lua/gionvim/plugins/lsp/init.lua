@@ -53,9 +53,6 @@ return {
                 codelens = {
                     enabled = false,
                 },
-                document_highlight = {
-                    enabled = false,
-                },
                 capabilities = {
                     workspace = {
                         fileOperations = {
