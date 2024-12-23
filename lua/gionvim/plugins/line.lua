@@ -161,7 +161,7 @@ return {
                         end,
                     },
                 },
-                extensions = { "neo-tree", "lazy" },
+                extensions = { "neo-tree", "lazy", "fzf" },
             }
 
             if vim.g.trouble_lualine and GionVim.has("trouble.nvim") then
