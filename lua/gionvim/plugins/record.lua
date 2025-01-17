@@ -45,17 +45,4 @@ return {
             },
         },
     },
-    -- Handle markdown,zettelkasten,wiki
-    {
-        "renerocksai/telekasten.nvim",
-        lazy = true,
-        cmd = "Telekasten",
-        keys = {
-            { "<leader>ea", "<cmd>Telekasten panel<CR>", desc = "Open Telekasten Commands Panel" },
-        },
-        dependencies = { "telescope.nvim" },
-        opts = {
-            home = vim.fn.expand("~/Notes/zettelkasten"),
-        },
-    },
 }

@@ -41,7 +41,7 @@ return {
             local Rule = require("nvim-autopairs.rule")
 
             npairs.setup({
-                disable_filetype = { "TelescopePrompt", "grug-far" },
+                disable_filetype = { "grug-far", "snacks_picker_input" },
                 check_ts = true,
                 ts_config = {
                     lua = { "string" },

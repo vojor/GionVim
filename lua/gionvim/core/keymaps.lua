@@ -53,37 +53,37 @@ map("t", "<C-/>", "<cmd>close<CR>", { desc = "Hide Terminal" })
 map("t", "<C-_>", "<cmd>close<CR>", { desc = "which_key_ignore" })
 
 -- lazygit
-if vim.fn.executable("lazygit") == 1 then
-    map("n", "<leader>glR", function()
-        Snacks.lazygit({ cwd = GionVim.root.git() })
-    end, { desc = "Lazygit (Root Dir)" })
-    map("n", "<leader>glr", function()
-        Snacks.lazygit()
-    end, { desc = "Lazygit (cwd)" })
-    map("n", "<leader>glb", function()
-        Snacks.git.blame_line()
-    end, { desc = "Git Blame Line" })
-    map({ "n", "x" }, "<leader>glB", function()
-        Snacks.gitbrowse()
-    end, { desc = "Git Browse (open)" })
-    map({ "n", "x" }, "<leader>glY", function()
-        Snacks.gitbrowse({
-            open = function(url)
-                vim.fn.setreg("+", url)
-            end,
-            notify = false,
-        })
-    end, { desc = "Git Browse (copy)" })
-    map("n", "<leader>glh", function()
-        Snacks.lazygit.log_file()
-    end, { desc = "Lazygit Current File History" })
-    map("n", "<leader>gll", function()
-        Snacks.lazygit.log({ cwd = GionVim.root.git() })
-    end, { desc = "Lazygit Log" })
-    map("n", "<leader>glL", function()
-        Snacks.lazygit.log()
-    end, { desc = "Lazygit Log (cwd)" })
-end
+map("n", "<leader>glR", function()
+    Snacks.lazygit({ cwd = GionVim.root.git() })
+end, { desc = "Lazygit (Root Dir)" })
+map("n", "<leader>glr", function()
+    Snacks.lazygit()
+end, { desc = "Lazygit (cwd)" })
+map({ "n", "x" }, "<leader>glB", function()
+    Snacks.gitbrowse()
+end, { desc = "Git Browse (open)" })
+map({ "n", "x" }, "<leader>glY", function()
+    Snacks.gitbrowse({
+        open = function(url)
+            vim.fn.setreg("+", url)
+        end,
+        notify = false,
+    })
+end, { desc = "Git Browse (copy)" })
+
+map("n", "<leader>glh", function()
+    Snacks.picker.git_log_file()
+end, { desc = "Git Current File History" })
+map("n", "<leader>gll", function()
+    Snacks.picker.git_log({ cwd = GionVim.root.git() })
+end, { desc = "Git Log" })
+map("n", "<leader>glL", function()
+    Snacks.picker.git_log()
+end, { desc = "Git Log (cwd)" })
+
+map("n", "<leader>glb", function()
+    Snacks.picker.git_log_line()
+end, { desc = "Git Blame Line" })
 
 -- toggle options
 GionVim.format.snacks_toggle():map("<leader>of")

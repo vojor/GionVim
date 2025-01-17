@@ -7,7 +7,7 @@ return {
     {
         "folke/todo-comments.nvim",
         lazy = true,
-        cmd = { "TodoTrouble", "TodoTelescope" },
+        cmd = "TodoTrouble",
         keys = {
             {
                 "[t",
@@ -23,14 +23,19 @@ return {
                 end,
                 desc = "Next Jump Todo",
             },
-            { "<leader>tdf", "<cmd>TodoTelescope<CR>", desc = "Find Todo Tag" },
-            { "<leader>tdg", ":TodoTelescope keywords=", desc = "Find Filter Todo Keyswords" },
-            { "<leader>tdw", ":TodoTelescope cwd=", desc = "Find Directory Todo Tag" },
-            { "<leader>tdt", "<cmd>Trouble todo<CR>", desc = "Todo (Trouble)" },
+            {
+                "<leader>tdt",
+                function()
+                    Snacks.picker.todo_comments()
+                end,
+                desc = "Todo",
+            },
             {
                 "<leader>tdr",
-                "<cmd>Trouble todo filter = {tag = {TODO,FIX,FIXME}}<CR>",
-                desc = "Todo/Fix/Fixme (Trouble)",
+                function()
+                    Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
+                end,
+                desc = "Todo/Fix/Fixme",
             },
             { "<leader>tdd", ":TodoTrouble cwd=", desc = "List Directory Todo Tag" },
             { "<leader>tde", ":TodoTrouble keywords=", desc = "List Filter Todo Keyswords" },

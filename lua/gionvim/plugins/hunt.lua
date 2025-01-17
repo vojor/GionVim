@@ -1,255 +1,248 @@
-local picker = {
-    name = "telescope",
-    commands = {
-        files = "find_files",
-    },
-    open = function(builtin, opts)
-        opts = opts or {}
-        opts.follow = opts.follow ~= false
-        if opts.cwd and opts.cwd ~= vim.uv.cwd() then
-            local function open_cwd_dir()
-                local action_state = require("telescope.actions.state")
-                local line = action_state.get_current_line()
-                GionVim.pick.open(
-                    builtin,
-                    vim.tbl_deep_extend("force", {}, opts or {}, {
-                        root = false,
-                        default_text = line,
-                    })
-                )
-            end
-            opts.attach_mappings = function(_, map)
-                map("i", "<m-c>", open_cwd_dir, { desc = "Open cwd Directory" })
-                return true
-            end
-        end
+if gionvim_docs then
+    vim.g.gionvim_picker = "snacks"
+end
 
-        require("telescope.builtin")[builtin](opts)
+local picker = {
+    name = "snacks",
+    commands = {
+        files = "files",
+        live_grep = "grep",
+        oldfiles = "recent",
+    },
+
+    open = function(source, opts)
+        return Snacks.picker.pick(source, opts)
     end,
 }
 if not GionVim.pick.register(picker) then
     return {}
 end
+
 return {
-    -- telescope fuzzy find
     {
-        "nvim-telescope/telescope.nvim",
-        branch = "0.1.x",
-        lazy = true,
-        cmd = "Telescope",
-        dependencies = {
-            {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                build = "make",
-                lazy = true,
-                config = function(plugin)
-                    GionVim.on_load("telescope.nvim", function()
-                        local ok, err = pcall(require("telescope").load_extension, "fzf")
-                        if not ok then
-                            local lib = plugin.dir .. "/build/libfzf." .. (GionVim.is_win() and "dll" or "so")
-                            if not vim.uv.fs_stat(lib) then
-                                GionVim.warn("`telescope-fzf-native.nvim` not built. Rebuilding...")
-                                require("lazy").build({ plugins = { plugin }, show = false }):wait(function()
-                                    GionVim.info("Rebuilding `telescope-fzf-native.nvim` done.\nPlease restart Neovim.")
-                                end)
-                            else
-                                GionVim.error("Failed to load `telescope-fzf-native.nvim`:\n" .. err)
-                            end
-                        end
-                    end)
-                end,
-            },
-            {
-                "nvim-telescope/telescope-file-browser.nvim",
-                lazy = true,
-                config = function()
-                    GionVim.on_load("telescope.nvim", function()
-                        require("telescope").load_extension("file_browser")
-                    end)
-                end,
-            },
-            {
-                "fdschmidt93/telescope-egrepify.nvim",
-                lazy = true,
-                config = function()
-                    GionVim.on_load("telescope.nvim", function()
-                        require("telescope").load_extension("egrepify")
-                    end)
-                end,
-            },
-            { "plenary.nvim" },
+        "folke/snacks.nvim",
+        opts = {
+            picker = {},
         },
-        opts = function()
-            local actions = require("telescope.actions")
-            local egrep_actions = require("telescope._extensions.egrepify.actions")
-
-            local open_with_trouble = function(...)
-                return require("trouble.sources.telescope").open(...)
-            end
-
-            local find_files_no_ignore = function()
-                local action_state = require("telescope.actions.state")
-                local line = action_state.get_current_line()
-                GionVim.pick("find_files", { no_ignore = true, default_text = line })()
-            end
-            local find_files_with_hidden = function()
-                local action_state = require("telescope.actions.state")
-                local line = action_state.get_current_line()
-                GionVim.pick("find_files", { hidden = true, default_text = line })()
-            end
-
-            local function find_command()
-                if 1 == vim.fn.executable("rg") then
-                    return { "rg", "--files", "--color", "never", "-g", "!.git" }
-                elseif 1 == vim.fn.executable("fd") then
-                    return { "fd", "--type", "f", "--color", "never", "-E", ".git" }
-                elseif 1 == vim.fn.executable("fdfind") then
-                    return { "fdfind", "--type", "f", "--color", "never", "-E", ".git" }
-                elseif 1 == vim.fn.executable("find") and vim.fn.has("win32") == 0 then
-                    return { "find", ".", "-type", "f" }
-                elseif 1 == vim.fn.executable("where") then
-                    return { "where", "/r", ".", "*" }
-                end
-            end
-
-            return {
-                defaults = {
-                    prompt_prefix = " ",
-                    selection_caret = " ",
-                    get_selection_window = function()
-                        local wins = vim.api.nvim_list_wins()
-                        table.insert(wins, 1, vim.api.nvim_get_current_win())
-                        for _, win in ipairs(wins) do
-                            local buf = vim.api.nvim_win_get_buf(win)
-                            if vim.bo[buf].buftype == "" then
-                                return win
-                            end
-                        end
-                        return 0
-                    end,
-                    mappings = {
-                        i = {
-                            ["<M-w>"] = "which_key",
-                            ["<M-t>"] = open_with_trouble,
-                            ["<M-i>"] = find_files_no_ignore,
-                            ["<M-h>"] = find_files_with_hidden,
-                            ["<C-Down>"] = actions.cycle_history_next,
-                            ["<C-Up>"] = actions.cycle_history_prev,
-                            ["<C-F>"] = actions.preview_scrolling_down,
-                            ["<C-B>"] = actions.preview_scrolling_up,
-                        },
-                        n = {
-                            ["q"] = actions.close,
-                        },
-                    },
-                },
-                pickers = {
-                    find_files = {
-                        find_command = find_command,
-                        hidden = true,
-                    },
-                },
-                extensions = {
-                    fzf = {
-                        fuzzy = true,
-                        override_generic_sorter = true,
-                        override_file_sorter = true,
-                        case_mode = "smart_case",
-                    },
-                    file_browser = {
-                        hijack_netrw = true,
-                    },
-                    egrepify = {
-                        AND = true,
-                        permutations = false,
-                        lnum = true,
-                        lnum_hl = "EgrepifyLnum",
-                        col = false,
-                        col_hl = "EgrepifyCol",
-                        title = true,
-                        filename_hl = "EgrepifyFile",
-                        prefixes = {
-                            ["!"] = {
-                                flag = "invert-match",
-                            },
-                            ["^"] = false,
-                        },
-                        mappings = {
-                            i = {
-                                ["<C-z>"] = egrep_actions.toggle_prefixes,
-                                ["<C-a>"] = egrep_actions.toggle_and,
-                                ["<C-r>"] = egrep_actions.toggle_permutations,
-                            },
-                        },
-                    },
-                },
-            }
-        end,
         keys = {
             {
                 "<leader>fb",
-                "<cmd>Telescope buffers sort_mru=true sort_lastused=true ignore_current_buffer=true theme=ivy<cr>",
-                desc = " Find Buffers",
-            },
-            { "<leader>fB", "<cmd>Telescope scope buffers<CR>", desc = "Find Scope buffers" },
-            { "<leader>fc", "<cmd>Telescope commands<CR>", desc = "Find Commands" },
-            { "<leader>fC", "<cmd>Telescope command_history<CR>", desc = "Find Command History" },
-            -- stylua: ignore
-            { "<leader>fd", GionVim.pick("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
-            { "<leader>fe", "<cmd>Telescope egrepify<CR>", desc = "Egrepify Live Grep" },
-            { "<leader>ff", GionVim.pick("files"), desc = "Find Files (Root Dir)" },
-            { "<leader>fF", GionVim.pick("files", { root = false }), desc = "Find Files (CWD)" },
-            { "<leader>fg", GionVim.pick("live_grep"), desc = "Grep Text (Root Dir)" },
-            { "<leader>fG", GionVim.pick("live_grep", { root = false }), desc = "Grep Text (CWD)" },
-            { "<leader>fh", "<cmd>Telescope help_tags<CR>", desc = "Find Help Tags" },
-            { "<leader>fi", "<cmd>Telescope registers<CR>", desc = "Find Registers" },
-            { "<leader>fm", "<cmd>Telescope marks<CR>", desc = "Find Marks" },
-            { "<leader>fn", "<cmd>Telescope vim_options<cr>", desc = "Find Vim Options" },
-            { "<leader>fr", GionVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
-            { "<leader>ft", "<cmd>Telescope file_browser theme=ivy<CR>", desc = "Open File Tree" },
-            -- stylua: ignore
-            { "<leader>fT", "<cmd>Telescope file_browser path=%:p:h select_buffer=true theme=ivy<CR>", desc = "Open File Tree(CWD)" },
-            { "<leader>sw", GionVim.pick("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
-            { "<leader>sW", GionVim.pick("grep_string", { root = false, word_match = "-w" }), desc = "Word (cwd)" },
-            {
-                "<leader>fl",
                 function()
-                    require("telescope.builtin").lsp_document_symbols({
-                        symbols = GionConfig.get_kind_filter(),
-                    })
+                    Snacks.picker.buffers()
                 end,
-                desc = "Goto Symbol",
+                desc = "Buffers",
             },
+            {
+                "<leader>fC",
+                function()
+                    Snacks.picker.command_history()
+                end,
+                desc = "Command History",
+            },
+            { "<leader>fn", GionVim.pick.config_files(), desc = "Find Config File" },
+            { "<leader>ff", GionVim.pick("files"), desc = "Find Files (Root Dir)" },
+            { "<leader>fF", GionVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+            {
+                "<leader>fg",
+                function()
+                    Snacks.picker.git_files()
+                end,
+                desc = "Find Files (git-files)",
+            },
+            { "<leader>fr", GionVim.pick("oldfiles"), desc = "Recent" },
+            { "<leader>fR", GionVim.pick("oldfiles", { filter = { cwd = true } }), desc = "Recent (cwd)" },
+            -- git
             {
                 "<leader>fL",
                 function()
-                    require("telescope.builtin").lsp_dynamic_workspace_symbols({
-                        symbols = GionConfig.get_kind_filter(),
-                    })
+                    Snacks.picker.git_log()
                 end,
-                desc = "Goto Symbol (Workspace)",
+                desc = "Git Log",
+            },
+            {
+                "<leader>fd",
+                function()
+                    Snacks.picker.git_diff()
+                end,
+                desc = "Git Diff (hunks)",
+            },
+            {
+                "<leader>fs",
+                function()
+                    Snacks.picker.git_status()
+                end,
+                desc = "Git Status",
+            },
+            -- Grep
+            {
+                "<leader>fe",
+                function()
+                    Snacks.picker.lines()
+                end,
+                desc = "Buffer Lines",
+            },
+            {
+                "<leader>fB",
+                function()
+                    Snacks.picker.grep_buffers()
+                end,
+                desc = "Grep Open Buffers",
+            },
+            { "<leader>fg", GionVim.pick("live_grep"), desc = "Grep (Root Dir)" },
+            { "<leader>fG", GionVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
+            {
+                "<leader>fw",
+                GionVim.pick("grep_word"),
+                desc = "Visual selection or word (Root Dir)",
+                mode = { "n", "x" },
+            },
+            {
+                "<leader>fW",
+                GionVim.pick("grep_word", { root = false }),
+                desc = "Visual selection or word (cwd)",
+                mode = { "n", "x" },
+            },
+            {
+                "<leader>fi",
+                function()
+                    Snacks.picker.registers()
+                end,
+                desc = "Registers",
+            },
+            {
+                "<leader>fa",
+                function()
+                    Snacks.picker.autocmds()
+                end,
+                desc = "Autocmds",
+            },
+            {
+                "<leader>fc",
+                function()
+                    Snacks.picker.command_history()
+                end,
+                desc = "Command History",
+            },
+            {
+                "<leader>fC",
+                function()
+                    Snacks.picker.commands()
+                end,
+                desc = "Commands",
             },
             {
                 "<leader>fD",
                 function()
-                    require("telescope.builtin").lsp_definitions({ reuse_win = true })
+                    Snacks.picker.diagnostics()
                 end,
-                desc = "Goto Definition",
+                desc = "Diagnostics",
             },
             {
-                "<leader>fy",
+                "<leader>fh",
                 function()
-                    require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
+                    Snacks.picker.help()
                 end,
-                desc = "Goto T[y]pe Definition",
+                desc = "Help Pages",
             },
             {
-                "<leader>fI",
+                "<leader>fH",
                 function()
-                    require("telescope.builtin").lsp_implementations({ reuse_win = true })
+                    Snacks.picker.highlights()
                 end,
-                desc = "Goto Implementation",
+                desc = "Highlights",
+            },
+            {
+                "<leader>fj",
+                function()
+                    Snacks.picker.jumps()
+                end,
+                desc = "Jumps",
+            },
+            {
+                "<leader>fk",
+                function()
+                    Snacks.picker.keymaps()
+                end,
+                desc = "Keymaps",
+            },
+            {
+                "<leader>fl",
+                function()
+                    Snacks.picker.loclist()
+                end,
+                desc = "Location List",
+            },
+            {
+                "<leader>fM",
+                function()
+                    Snacks.picker.man()
+                end,
+                desc = "Man Pages",
+            },
+            {
+                "<leader>fm",
+                function()
+                    Snacks.picker.marks()
+                end,
+                desc = "Marks",
+            },
+            {
+                "<leader>fu",
+                function()
+                    Snacks.picker.resume()
+                end,
+                desc = "Resume",
+            },
+            {
+                "<leader>fq",
+                function()
+                    Snacks.picker.qflist()
+                end,
+                desc = "Quickfix List",
+            },
+            {
+                "<leader>fo",
+                function()
+                    Snacks.picker.colorschemes()
+                end,
+                desc = "Colorschemes",
+            },
+            {
+                "<leader>fp",
+                function()
+                    Snacks.picker.projects()
+                end,
+                desc = "Projects",
+            },
+            {
+                "<leader>fS",
+                function()
+                    Snacks.picker.lsp_symbols({ filter = GionConfig.kind_filter })
+                end,
+                desc = "LSP Symbols",
             },
         },
+    },
+    {
+        "folke/snacks.nvim",
+        opts = function(_, opts)
+            if GionVim.has("trouble.nvim") then
+                return vim.tbl_deep_extend("force", opts or {}, {
+                    picker = {
+                        actions = require("trouble.sources.snacks").actions,
+                        win = {
+                            input = {
+                                keys = {
+                                    ["<c-t>"] = {
+                                        "trouble_open",
+                                        mode = { "n", "i" },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                })
+            end
+        end,
     },
 }

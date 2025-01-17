@@ -34,7 +34,6 @@ require("lazy").setup({
         -- develop
         { import = "gionvim.plugins.extras.develop.comments" }, -- Quick comment
         { import = "gionvim.plugins.extras.develop.compiler" }, -- Code build and run
-        { import = "gionvim.plugins.extras.develop.commander" }, -- Find plugin keymaps
         { import = "gionvim.plugins.extras.develop.lazydev" }, -- lua development
         { import = "gionvim.plugins.extras.develop.refactor" }, -- Refactor code
         -- diagnostics
@@ -46,7 +45,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.editor.surround" }, -- Surround modify
         -- elevate
         { import = "gionvim.plugins.extras.elevate.escape" }, -- More user-friendly mode switching
-        { import = "gionvim.plugins.extras.elevate.scope" }, -- Enhance Buffer scope
         { import = "gionvim.plugins.extras.elevate.scroll" }, -- Smooth scrolling
         { import = "gionvim.plugins.extras.elevate.substitute" }, -- Replace Neovim built-in 'substitute'
         -- explorer

@@ -200,7 +200,6 @@ return {
                 lazy = true,
                 opts = {},
             },
-            { "telescope.nvim" },
         },
         config = function()
             vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })

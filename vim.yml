@@ -8,6 +8,8 @@ globals:
     any: true
   Snacks:
     any: true
+  gionvim_docs:
+    any: true
   jit:
     any: true
   vim:

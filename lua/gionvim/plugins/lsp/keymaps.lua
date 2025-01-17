@@ -15,13 +15,7 @@ vim.keymap.set("n", "<leader>lw", vim.diagnostic.open_float, { desc = "Float Win
 vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "QuickFix Window View Diagnostic" })
 vim.keymap.set("n", "<leader>lR", function()
     Snacks.rename.rename_file()
-end, { desc = "Rename" })
-vim.keymap.set("n", "]]", function()
-    GionVim.lsp.words.jump(vim.v.count1)
-end, { desc = "Next Reference" })
-vim.keymap.set("n", "[[", function()
-    GionVim.lsp.words.jump(-vim.v.count1)
-end, { desc = "Prev Reference" })
+end, { desc = "Rename File" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),

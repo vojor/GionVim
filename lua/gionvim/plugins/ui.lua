@@ -71,7 +71,7 @@ return {
                 function()
                     require("noice").cmd("pick")
                 end,
-                desc = "Noice Pick Telescope/FzfLua",
+                desc = "Noice Pick FzfLua",
             },
         },
         config = function(_, opts)
@@ -119,8 +119,8 @@ return {
                 excluded_buftypes = { "terminal", "nofile", "prompt", "popup", "quickfix" },
                 excluded_filetypes = {
                     "noice",
-                    "TelescopePrompt",
                     "dashboard",
+                    "snacks_picker_input",
                 },
                 handlers = {
                     gitsigns = true,
@@ -130,10 +130,43 @@ return {
         end,
     },
     {
-        "folke/snacks.nvim",
+        "snacks.nvim",
+        opts = {
+            indent = { enabled = false },
+            input = { enabled = true },
+            notifier = { enabled = true },
+            scope = { enabled = false },
+            scroll = { enabled = true },
+            statuscolumn = { enabled = false },
+            toggle = { map = GionVim.safe_keymap_set },
+            words = { enabled = false },
+        },
+        keys = {
+            {
+                "<leader>uH",
+                function()
+                    Snacks.notifier.show_history()
+                end,
+                desc = "Notification History",
+            },
+            {
+                "<leader>uf",
+                function()
+                    Snacks.notifier.hide()
+                end,
+                desc = "Dismiss All Notifications",
+            },
+        },
+    },
+
+    {
+        "snacks.nvim",
         opts = {
             dashboard = {
                 preset = {
+                    pick = function(cmd, opts)
+                        return GionVim.pick(cmd, opts)()
+                    end,
                     -- https://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=gionvim
                     header = [[
    ██████╗    ██╗    ██████╗    ███╗   ██╗   ██╗   ██╗  ██╗  ███╗   ███╗
@@ -151,9 +184,12 @@ return {
                             action = ":lua Snacks.dashboard.pick('files')",
                         },
                         { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-                        { icon = " ", key = "g", desc = "Find Text", action = ":Telescope egrepify" },
-                        { icon = " ", key = "p", desc = "Projects", action = ":Telescope projects" },
-
+                        {
+                            icon = " ",
+                            key = "g",
+                            desc = "Find Text",
+                            action = ":lua Snacks.dashboard.pick('live_grep')",
+                        },
                         {
                             icon = " ",
                             key = "r",

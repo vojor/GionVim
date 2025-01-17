@@ -32,7 +32,7 @@ end
 function M.want()
     vim.g.gionvim_picker = vim.g.gionvim_picker or "auto"
     if vim.g.gionvim_picker == "auto" then
-        return GionVim.has_extra("editor.telescope") and "telescope" or "fzf"
+        return "snacks"
     end
     return vim.g.gionvim_picker
 end
