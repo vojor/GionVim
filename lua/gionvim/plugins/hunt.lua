@@ -221,6 +221,13 @@ return {
                 end,
                 desc = "LSP Symbols",
             },
+            {
+                "<leader>ft",
+                function()
+                    Snacks.picker.lsp_workspace_symbols({ filter = GionConfig.kind_filter })
+                end,
+                desc = "Lsp Workspace Symbols",
+            },
         },
     },
     {
