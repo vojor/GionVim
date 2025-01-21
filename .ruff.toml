@@ -1,7 +1,7 @@
 indent-width = 4
 line-length = 120
 show-fixes = true
-target-version = "py312"
+target-version = "py313"
 task-tags = ["FIX", "FIXME", "HACK", "NOTE", "PERF", "TODO", "WARN", "XXX"]
 unsafe-fixes = true
 
