@@ -18,6 +18,11 @@ return {
         },
         event = "InsertEnter",
         opts = {
+            snippets = {
+                expand = function(snippet, _)
+                    return GionVim.cmp.expand(snippet)
+                end,
+            },
             appearance = {
                 use_nvim_cmp_as_default = false,
                 nerd_font_variant = "mono",
