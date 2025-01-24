@@ -54,6 +54,13 @@ return {
                 desc = "Buffers",
             },
             {
+                "<leader>fJ",
+                function()
+                    Snacks.picker.buffers({ hidden = true, nofile = true })
+                end,
+                desc = "Buffers (ALL)",
+            },
+            {
                 "<leader>fC",
                 function()
                     Snacks.picker.command_history()
@@ -122,6 +129,13 @@ return {
                 GionVim.pick("grep_word", { root = false }),
                 desc = "Visual selection or word (cwd)",
                 mode = { "n", "x" },
+            },
+            {
+                "<leader>fA",
+                function()
+                    Snacks.picker.lazy()
+                end,
+                desc = "Search Plugin Spec",
             },
             {
                 "<leader>fi",
@@ -208,6 +222,13 @@ return {
                 desc = "Marks",
             },
             {
+                "<leader>fI",
+                function()
+                    Snacks.picker.icons()
+                end,
+                desc = "Icons",
+            },
+            {
                 "<leader>fu",
                 function()
                     Snacks.picker.resume()
@@ -227,6 +248,13 @@ return {
                     Snacks.picker.colorschemes()
                 end,
                 desc = "Colorschemes",
+            },
+            {
+                "<leader>fU",
+                function()
+                    Snacks.picker.undo()
+                end,
+                desc = "UndoTree",
             },
             {
                 "<leader>fp",
