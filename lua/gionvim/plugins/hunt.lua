@@ -67,6 +67,13 @@ return {
                 end,
                 desc = "Command History",
             },
+            {
+                "<leader>fN",
+                function()
+                    Snacks.picker.notifications()
+                end,
+                desc = "Notifucations History",
+            },
             { "<leader>fn", GionVim.pick.config_files(), desc = "Find Config File" },
             { "<leader>ff", GionVim.pick("files"), desc = "Find Files (Root Dir)" },
             { "<leader>fF", GionVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
@@ -78,7 +85,13 @@ return {
                 desc = "Find Files (git-files)",
             },
             { "<leader>fr", GionVim.pick("oldfiles"), desc = "Recent" },
-            { "<leader>fR", GionVim.pick("oldfiles", { filter = { cwd = true } }), desc = "Recent (cwd)" },
+            {
+                "<leader>fR",
+                function()
+                    Snacks.picker.recent({ filter = { cwd = true } })
+                end,
+                desc = "Recent (cwd)",
+            },
             -- git
             {
                 "<leader>fL",

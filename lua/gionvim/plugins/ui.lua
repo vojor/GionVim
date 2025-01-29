@@ -145,9 +145,13 @@ return {
             {
                 "<leader>uH",
                 function()
-                    Snacks.notifier.show_history()
+                    if Snacks.config.picker and Snacks.config.picker.enabled then
+                        Snacks.picker.notifications()
+                    else
+                        Snacks.notifier.show_history()
+                    end
                 end,
-                desc = "Notification History",
+                desc = "Notifications History",
             },
             {
                 "<leader>uf",
