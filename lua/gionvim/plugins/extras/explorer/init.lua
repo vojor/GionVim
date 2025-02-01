@@ -17,14 +17,14 @@ return {
                 function()
                     require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
                 end,
-                desc = "Open mini.files (Directory of Current File)",
+                desc = "Explorer mini.files",
             },
             {
                 "<leader>nM",
                 function()
                     require("mini.files").open(vim.uv.cwd(), true)
                 end,
-                desc = "Open mini.files (cwd)",
+                desc = "Explorer mini.files (cwd)",
             },
         },
         config = function(_, opts)
@@ -112,5 +112,25 @@ return {
                 end,
             })
         end,
+    },
+    {
+        "folke/snacks.nvim",
+        opts = { explorer = {} },
+        keys = {
+            {
+                "<leader>ns",
+                function()
+                    Snacks.explorer({ cwd = GionVim.root() })
+                end,
+                desc = "Explorer Snacks (root dir)",
+            },
+            {
+                "<leader>nS",
+                function()
+                    Snacks.explorer()
+                end,
+                desc = "Explorer Snacks (cwd)",
+            },
+        },
     },
 }

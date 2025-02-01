@@ -39,6 +39,9 @@ return {
                         highlight = "Directory",
                         text_align = "left",
                     },
+                    {
+                        filetype = "snacks_layout_box",
+                    },
                 },
                 get_element_icon = function(opts)
                     return GionConfig.icons.ft[opts.filetype]
