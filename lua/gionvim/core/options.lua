@@ -17,6 +17,8 @@ vim.g.deprecation_warnings = false
 vim.g.markdown_recommended_style = 0
 -- Setting lualine for trouble
 vim.g.trouble_lualine = true
+-- Disable perl provider
+vim.g.loaded_perl_provider = 0
 
 ------------ Option Configuration ------------
 
