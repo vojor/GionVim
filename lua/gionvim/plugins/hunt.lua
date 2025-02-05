@@ -114,6 +114,13 @@ return {
                 end,
                 desc = "Git Status",
             },
+            {
+                "<leader>fQ",
+                function()
+                    Snacks.picker.git_stash()
+                end,
+                desc = "Git Stash",
+            },
             -- Grep
             {
                 "<leader>fe",
@@ -184,6 +191,13 @@ return {
                     Snacks.picker.diagnostics()
                 end,
                 desc = "Diagnostics",
+            },
+            {
+                "<leader>fE",
+                function()
+                    Snacks.picker.diagnostics_buffer()
+                end,
+                desc = "Buffer Diagnostics",
             },
             {
                 "<leader>fh",
