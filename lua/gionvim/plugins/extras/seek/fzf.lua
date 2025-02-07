@@ -8,6 +8,7 @@ return {
             { "<c-j>", "<Down>", ft = "fzf", mode = "t", nowait = true },
             { "<c-k>", "<Up>", ft = "fzf", mode = "t", nowait = true },
             { "<leader>kl", "<cmd>FzfLua<CR>", desc = "Fzf Args Select List" },
+            { "<leader>ks", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Switch Buffer" },
             { "<leader>kf", "<cmd>FzfLua files<CR>", desc = "Fzf Find Files" },
             { "<leader>kg", "<cmd>FzfLua live_grep<CR>", desc = "Fzf Find Text" },
             { "<leader>kc", "<cmd>FzfLua grep_curbuf<CR>", desc = "Fzf Find Text (current buffer)" },
