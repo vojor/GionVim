@@ -1,18 +1,6 @@
 local pick = function()
-    local fzf_lua = require("fzf-lua")
-    local results = require("refactoring").get_refactors()
     local refactoring = require("refactoring")
-
-    local opts = {
-        fzf_opts = {},
-        fzf_colors = true,
-        actions = {
-            ["default"] = function(selected)
-                refactoring.refactor(selected[1])
-            end,
-        },
-    }
-    fzf_lua.fzf_exec(results, opts)
+    refactoring.select_refactor()
 end
 
 return {
