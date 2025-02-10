@@ -11,10 +11,6 @@ function M.register(picker)
         return true
     end
 
-    if M.picker and M.picker.name ~= M.want() then
-        M.picker = nil
-    end
-
     if M.picker and M.picker.name ~= picker.name then
         GionVim.warn(
             "`GionVim.pick`: picker already set to `"
@@ -27,14 +23,6 @@ function M.register(picker)
     end
     M.picker = picker
     return true
-end
-
-function M.want()
-    vim.g.gionvim_picker = vim.g.gionvim_picker or "auto"
-    if vim.g.gionvim_picker == "auto" then
-        return "snacks"
-    end
-    return vim.g.gionvim_picker
 end
 
 function M.open(command, opts)

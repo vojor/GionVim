@@ -6,7 +6,7 @@ local defaults = {
     colorscheme = function()
         require("tokyonight").load()
     end,
-
+    defaults = {},
     icons = {
         misc = {
             dots = "󰇘",
@@ -15,7 +15,7 @@ local defaults = {
             octo = "",
         },
         dap = {
-            Stopped = { " ", "DiagnosticWarn", "DapStoppedLine" },
+            Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
             Breakpoint = " ",
             BreakpointCondition = " ",
             BreakpointRejected = { " ", "DiagnosticError" },
@@ -31,15 +31,6 @@ local defaults = {
             added = " ",
             modified = " ",
             removed = " ",
-            gited = "󰊢 ",
-            branched = " ",
-            conflicted = " ",
-            ignored = "◌",
-            renamed = "➜",
-            signed = "▎",
-            staged = "✓",
-            unstaged = "✗",
-            untracked = "★",
         },
         kinds = {
             Array = " ",
@@ -72,9 +63,10 @@ local defaults = {
             Package = " ",
             Property = " ",
             Reference = " ",
-            Snippet = " ",
+            Snippet = "󱄽 ",
             String = " ",
             Struct = "󰆼 ",
+            Supermaven = " ",
             TabNine = "󰏚 ",
             Text = " ",
             TypeParameter = " ",
@@ -132,7 +124,13 @@ function M.setup(opts)
             if lazy_clipboard ~= nil then
                 vim.opt.clipboard = lazy_clipboard
             end
+
+            GionVim.format.setup()
             GionVim.root.setup()
+
+            vim.api.nvim_create_user_command("LazyExtras", function()
+                GionVim.extras.show()
+            end, { desc = "Manage GionVim extras" })
 
             vim.api.nvim_create_user_command("LazyHealth", function()
                 vim.cmd([[Lazy! load all]])
@@ -144,6 +142,29 @@ function M.setup(opts)
                 "recommended",
                 "desc",
             })
+
+            if vim.g.gionvim_check_order == false then
+                return
+            end
+
+            local imports = require("lazy.core.config").spec.modules
+            local function find(pat, last)
+                for i = last and #imports or 1, last and 1 or #imports, last and -1 or 1 do
+                    if imports[i]:find(pat) then
+                        return i
+                    end
+                end
+            end
+            local gionvim_plugins = find("^gionvim%.plugins$")
+            local extras = find("^gionvim%.plugins%.extras%.", true) or gionvim_plugins
+            local plugins = find("^plugins$") or math.huge
+            if gionvim_plugins ~= 1 or extras > plugins then
+                vim.notify(
+                    "The order of your `lazy.nvim` imports is incorrect:\n- `gionvim.plugins` should be first\n- followed by any `gionvim.plugins.extras`\n- and finally your own `plugins`",
+                    "warn",
+                    { title = "GionVim" }
+                )
+            end
         end,
     })
 
@@ -205,11 +226,14 @@ function M.init()
         return
     end
     M.did_init = true
+    local plugin = require("lazy.core.config").spec.plugins.GionVim
+    if plugin then
+        vim.opt.rtp:append(plugin.dir)
+    end
 
     GionVim.lazy_notify()
 
     M.load("options")
-
     lazy_clipboard = vim.opt.clipboard
     vim.opt.clipboard = ""
 
@@ -218,6 +242,46 @@ function M.init()
     end
 
     GionVim.plugin.setup()
+end
+
+local default_extras
+function M.get_defaults()
+    if default_extras then
+        return default_extras
+    end
+    local checks = {}
+
+    default_extras = {}
+    for name, check in pairs(checks) do
+        local valid = {}
+        for _, extra in ipairs(check) do
+            if extra.enabled ~= false then
+                valid[#valid + 1] = extra.name
+            end
+        end
+        local origin = "default"
+        local use = vim.g["gionvim_" .. name]
+        use = vim.tbl_contains(valid, use or "auto") and use or nil
+        origin = use and "global" or origin
+        for _, extra in ipairs(use and {} or check) do
+            if extra.enabled ~= false and GionVim.has_extra(extra.extra) then
+                use = extra.name
+                break
+            end
+        end
+        origin = use and "extra" or origin
+        use = use or valid[1]
+        for _, extra in ipairs(check) do
+            local import = "gionvim.plugins.extras." .. extra.extra
+            extra = vim.deepcopy(extra)
+            extra.enabled = extra.name == use
+            if extra.enabled then
+                extra.origin = origin
+            end
+            default_extras[import] = extra
+        end
+    end
+    return default_extras
 end
 
 setmetatable(M, {
