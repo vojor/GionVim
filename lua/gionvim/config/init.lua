@@ -128,15 +128,6 @@ function M.setup(opts)
             GionVim.format.setup()
             GionVim.root.setup()
 
-            vim.api.nvim_create_user_command("LazyExtras", function()
-                GionVim.extras.show()
-            end, { desc = "Manage GionVim extras" })
-
-            vim.api.nvim_create_user_command("LazyHealth", function()
-                vim.cmd([[Lazy! load all]])
-                vim.cmd([[checkhealth]])
-            end, { desc = "Load all plugins and run :checkhealth" })
-
             local health = require("lazy.health")
             vim.list_extend(health.valid, {
                 "recommended",
@@ -159,11 +150,18 @@ function M.setup(opts)
             local extras = find("^gionvim%.plugins%.extras%.", true) or gionvim_plugins
             local plugins = find("^plugins$") or math.huge
             if gionvim_plugins ~= 1 or extras > plugins then
-                vim.notify(
-                    "The order of your `lazy.nvim` imports is incorrect:\n- `gionvim.plugins` should be first\n- followed by any `gionvim.plugins.extras`\n- and finally your own `plugins`",
-                    "warn",
-                    { title = "GionVim" }
-                )
+                local msg = {
+                    "The order of your `lazy.nvim` imports is incorrect:",
+                    "- `gionvim.plugins` should be first",
+                    "- followed by any `gionvim.plugins.extras`",
+                    "- and finally your own `plugins`",
+                    "",
+                    "If you think you know what you're doing, you can disable this check with:",
+                    "```lua",
+                    "vim.g.gionvim_check_order = false",
+                    "```",
+                }
+                vim.notify(table.concat(msg, "\n"), "warn", { title = "GionVim" })
             end
         end,
     })

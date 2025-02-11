@@ -114,6 +114,7 @@ return {
         end,
     },
     {
+        recommended = true,
         "folke/snacks.nvim",
         opts = { explorer = {} },
         keys = {

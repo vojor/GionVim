@@ -18,6 +18,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
+vim.api.nvim_create_user_command("LazyHealth", function()
+    vim.cmd([[Lazy! load all]])
+    vim.cmd([[checkhealth]])
+end, { desc = "Load all plugins and run :checkhealth" })
+
 vim.api.nvim_create_autocmd({ "VimResized" }, {
     group = augroup("resize_splits"),
     callback = function()
