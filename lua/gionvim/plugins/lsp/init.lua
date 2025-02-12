@@ -5,7 +5,13 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         keys = {
             { "<leader>i", "", desc = "service", mode = "n" },
-            { "<leader>ii", "<cmd>LspInfo<CR>", desc = "LSP configuration Information" },
+            {
+                "<leader>ii",
+                function()
+                    Snacks.picker.lsp_config()
+                end,
+                desc = "Lsp Configuration Information",
+            },
             { "<leader>is", "<cmd>LspStart<CR>", desc = "Start LSP Server" },
             { "<leader>ip", "<cmd>LspStop<CR>", desc = "Stop LSP Server" },
             { "<leader>ir", "<cmd>LspRestart<CR>", desc = "Restart LSP Server" },
