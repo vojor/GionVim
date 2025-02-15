@@ -58,6 +58,7 @@ return {
     {
         "danymat/neogen",
         lazy = true,
+        dependencies = GionVim.has("mini.snippets") and { "mini.snippets" } or {},
         cmd = "Neogen",
         keys = {
             { "<leader>ef", "<cmd>Neogen func<CR>", desc = "Generate Function Comment" },
@@ -65,8 +66,25 @@ return {
             { "<leader>et", "<cmd>Neogen type<CR>", desc = "Generate Type Comment" },
             { "<leader>ei", "<cmd>Neogen file<CR>", desc = "Generate File Comment" },
         },
-        opts = {
-            snippet_engine = "nvim",
-        },
+        opts = function(_, opts)
+            if opts.snippet_engine ~= nil then
+                return
+            end
+
+            local map = {
+                ["mini.snippets"] = "mini",
+            }
+
+            for plugin, engine in pairs(map) do
+                if GionVim.has(plugin) then
+                    opts.snippet_engine = engine
+                    return
+                end
+            end
+
+            if vim.snippet then
+                opts.snippet_engine = "nvim"
+            end
+        end,
     },
 }
