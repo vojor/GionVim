@@ -49,7 +49,6 @@ return {
 
             cmdline = {
                 enabled = false,
-                sources = {},
             },
 
             keymap = {
