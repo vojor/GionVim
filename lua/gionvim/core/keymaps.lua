@@ -170,7 +170,10 @@ map("n", "<leader>K", "<cmd>norm! K<CR>", { desc = "Keywordprg" })
 -- search/highlight
 map("n", "<leader>se", "/\\<lt>\\><left><left>")
 map("n", "<leader>so", vim.show_pos, { desc = "Inspect Pos" })
-map("n", "<leader>sO", "<cmd>InspectTree<CR>", { desc = "Inspect Tree" })
+map("n", "<leader>sO", function()
+    vim.treesitter.inspect_tree()
+    vim.api.nvim_input("I")
+end, { desc = "Inspect Tree" })
 map({ "i", "n" }, "<esc>", "<cmd>noh<CR><esc>", { desc = "Escape and clear hlsearch" })
 map(
     "n",
