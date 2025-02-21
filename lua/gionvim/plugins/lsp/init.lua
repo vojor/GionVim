@@ -12,6 +12,7 @@ return {
                 end,
                 desc = "Lsp Configuration Information",
             },
+            { "<leader>iI", "<cmd>LspInfo<CR>", desc = "File Information" },
             { "<leader>is", "<cmd>LspStart<CR>", desc = "Start LSP Server" },
             { "<leader>ip", "<cmd>LspStop<CR>", desc = "Stop LSP Server" },
             { "<leader>ir", "<cmd>LspRestart<CR>", desc = "Restart LSP Server" },
