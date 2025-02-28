@@ -8,7 +8,7 @@ return {
             "sources.default",
         },
         dependencies = {
-            "rafamadriz/friendly-snippets",
+            { "rafamadriz/friendly-snippets" },
             {
                 "saghen/blink.compat",
                 optional = true,
