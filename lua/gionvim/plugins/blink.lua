@@ -16,7 +16,7 @@ return {
                 version = "*",
             },
         },
-        event = "InsertEnter",
+        event = { "InsertEnter", "CmdlineEnter" },
         opts = {
             snippets = {
                 expand = function(snippet, _)
