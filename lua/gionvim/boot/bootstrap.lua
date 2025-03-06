@@ -55,6 +55,7 @@ require("lazy").setup({
         -- labeler
         { import = "gionvim.plugins.extras.labeler.arrow" }, -- File mark
         { import = "gionvim.plugins.extras.labeler.marks" }, -- Line mark
+        { import = "gionvim.plugins.extras.labeler.buffon" }, -- buffer mark
         -- lsp
         -- -- lang
         { import = "gionvim.plugins.extras.lsp.langlarge.clangd" }, -- C/C++
