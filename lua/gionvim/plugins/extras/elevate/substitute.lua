@@ -14,6 +14,5 @@ return {
                 desc = " rip substitute",
             },
         },
-        dependencies = { "dressing.nvim" },
     },
 }
