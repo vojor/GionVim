@@ -52,9 +52,7 @@ return {
                 typescript = { "biome" },
                 typescriptreact = { "biome" },
                 lua = { "stylua" },
-                markdown = function(bufnr)
-                    return { first(bufnr, "mdformat"), "injected" }
-                end,
+                markdown = { "injected" },
                 norg = { "injected" },
                 python = { "ruff_format", "ruff_fix", "ruff_organize_imports" },
                 sh = { "shellharden", "shfmt" },
