@@ -8,28 +8,32 @@ return {
         },
         opts = {
             condition = function(buf)
-                local utils = require("auto-save.utils.data")
-                local exclude_filetypes = {
-                    "neo-tree",
-                    "noice",
-                    "notify",
-                    "NeogitStatus",
-                    "Outline",
-                    "qf",
-                    "sagaoutline",
-                    "trouble",
-                    "Trouble",
-                    "grug-far",
-                    "lazy",
-                    "mason",
-                    "lspinfo",
-                }
+                local filetype = vim.fn.getbufvar(buf, "&filetype")
+                local buftype = vim.fn.getbufvar(buf, "&buftype")
 
-                -- Not save designate file types
-                if utils.not_in(vim.fn.getbufvar(buf, "&filetype"), exclude_filetypes) then
-                    return true
+                if
+                    vim.list_contains({
+                        "neo-tree",
+                        "noice",
+                        "NeogitStatus",
+                        "Outline",
+                        "sagaoutline",
+                        "trouble",
+                        "Trouble",
+                        "grug-far",
+                        "lazy",
+                        "mason",
+                        "lspinfo",
+                    }, filetype)
+                then
+                    return false
                 end
-                return false
+
+                if buftype ~= "" then
+                    return false
+                end
+
+                return true
             end,
         },
     },
