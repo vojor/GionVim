@@ -83,10 +83,22 @@ return {
                 options = {
                     theme = "auto",
                     globalstatus = vim.o.laststatus == 3,
-                    disabled_filetypes = { statusline = { "dashboard", "snacks_dashboard" } },
+                    disabled_filetypes = { statusline = { "snacks_dashboard" } },
                 },
                 sections = {
-                    lualine_a = { "mode" },
+                    lualine_a = {
+                        { "mode" },
+                        {
+                            "lsp_status",
+                            icon = "",
+                            symbols = {
+                                spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+                                done = "✓",
+                                separator = " ",
+                            },
+                            ignore_lsp = { "null-ls" },
+                        },
+                    },
                     lualine_b = { "branch" },
 
                     lualine_c = {
