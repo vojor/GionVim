@@ -43,6 +43,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.editor.portal" }, -- Local list navigate
         { import = "gionvim.plugins.extras.editor.replacer" }, -- Factor replace
         { import = "gionvim.plugins.extras.editor.surround" }, -- Surround modify
+        { import = "gionvim.plugins.extras.editor.mini-snippets" }, -- Add mini snippets
         -- elevate
         { import = "gionvim.plugins.extras.elevate.escape" }, -- More user-friendly mode switching
         { import = "gionvim.plugins.extras.elevate.scroll" }, -- Smooth scrolling

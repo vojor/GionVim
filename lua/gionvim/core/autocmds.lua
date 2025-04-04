@@ -66,6 +66,9 @@ vim.api.nvim_create_autocmd("FileType", {
         "grug-far",
         "DiffviewFiles",
         "query",
+        "dap-view",
+        "dap-view-term",
+        "dap-repl",
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false

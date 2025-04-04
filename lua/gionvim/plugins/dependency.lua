@@ -51,6 +51,7 @@ return {
     -- Async IO library
     {
         "nvim-neotest/nvim-nio",
+        enabled = false,
         lazy = true,
     },
     -- Simply luarocks package installed
