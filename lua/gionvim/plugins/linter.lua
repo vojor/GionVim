@@ -15,7 +15,7 @@ return {
                 dependencies = { "mason.nvim" },
                 config = function()
                     require("mason-null-ls").setup({
-                        ensure_installed = { "markdownlint", "shellcheck", "biome" },
+                        ensure_installed = { "shellcheck" },
                         automatic_installation = false,
                     })
                 end,
