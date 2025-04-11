@@ -19,10 +19,6 @@ return {
             require("lazy.core.loader").add_to_rtp(plugin)
             require("nvim-treesitter.query_predicates")
         end,
-        dependencies = {
-            -- lua, vim, bash, fish files, internal function add end
-            { "RRethy/nvim-treesitter-endwise" },
-        },
         keys = {
             { "<C-space>", desc = "Increment Selection" },
             { "<bs>", mode = "x", desc = "Decrement Selection" },
@@ -37,7 +33,7 @@ return {
                 "git_config",
                 "gitcommit",
                 "gitignore",
-                "python",
+                "html",
                 "javascript",
                 "json",
                 "jsonc",
@@ -48,6 +44,7 @@ return {
                 "markdown_inline",
                 "ninja",
                 "norg",
+                "python",
                 "query",
                 "regex",
                 "toml",
@@ -62,7 +59,7 @@ return {
             ignore_install = {},
             highlight = {
                 enable = true,
-                -- filesize >= 2M, disable treesitter
+                -- If file size outweigh 2M, disable treesitter
                 disable = function(lang, buf)
                     local max_filesize = 2000 * 1024
                     local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
@@ -82,7 +79,6 @@ return {
                 },
             },
             indent = { enable = true },
-            endwise = { enable = true },
             textobjects = {
                 select = {
                     enable = true,
