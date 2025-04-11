@@ -2,6 +2,6 @@ return {
     {
         "RRethy/nvim-treesitter-endwise",
         lazy = true,
-        ft = { "lua", "vimscript", "bash", "fish" },
+        ft = { "lua", "vim", "bash", "fish" },
     },
 }
