@@ -37,7 +37,7 @@ return {
                 actions = {
                     toggle_cwd = function(p)
                         local root = GionVim.root({ buf = p.input.filter.current_buf, normalize = true })
-                        local cwd = vim.fs.normalize((vim.uv or vim.loop).cwd() or ".")
+                        local cwd = vim.fs.normalize(vim.uv.cwd() or ".")
                         local current = p:cwd()
                         p:set_cwd(current == root and cwd or root)
                         p:find()
