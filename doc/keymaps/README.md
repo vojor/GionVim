@@ -1,3 +1,3 @@
 # Description
 
-- Some plugins mappings
+- Plugins Intricate mappings
