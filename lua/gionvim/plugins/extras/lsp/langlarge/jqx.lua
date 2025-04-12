@@ -6,9 +6,8 @@ return {
         ft = { "json", "yaml" },
         cmd = { "JqxList", "JqxQuery" },
         keys = {
-            { "<leader>jl", "<cmd>JqxList<CR>", desc = "Json List" },
-            { "<leader>jn", ":JqxList ", desc = "Jqx Select" },
-            { "<leader>jq", "<cmd>JqxQuery<CR>", desc = "Json Query" },
+            { "<leader>sl", ":JqxList ", desc = "Jqx List Select" },
+            { "<leader>sq", ":JqxQuery ", desc = "Jqx Query Select" },
         },
     },
 }

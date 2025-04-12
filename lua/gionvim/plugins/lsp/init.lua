@@ -4,7 +4,7 @@ return {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         keys = {
-            { "<leader>i", "", desc = "service", mode = "n" },
+            { "<leader>i", "", desc = "serve" },
             {
                 "<leader>ii",
                 function()
@@ -12,7 +12,6 @@ return {
                 end,
                 desc = "Lsp Configuration Information",
             },
-            { "<leader>iI", "<cmd>LspInfo<CR>", desc = "File Information" },
             { "<leader>is", "<cmd>LspStart<CR>", desc = "Start LSP Server" },
             { "<leader>ip", "<cmd>LspStop<CR>", desc = "Stop LSP Server" },
             { "<leader>ir", "<cmd>LspRestart<CR>", desc = "Restart LSP Server" },
@@ -143,6 +142,13 @@ return {
                         dynamicRegistration = true,
                     },
                 },
+                textDocument = {
+                    completion = {
+                        completionItem = {
+                            snippetSupport = true,
+                        },
+                    },
+                },
             })
 
             local servers = opts.servers
@@ -169,15 +175,12 @@ return {
             })
 
             lspconfig.neocmake.setup({
-                cmd = { "neocmakelsp", "--stdio" },
-                filetypes = { "cmake" },
-                root_dir = function(fname)
-                    return lspconfig.util.find_git_ancestor(fname)
-                end,
-                single_file_support = true,
                 init_options = {
                     format = {
                         enable = false,
+                    },
+                    lint = {
+                        enable = true,
                     },
                     scan_cmake_in_package = true,
                 },

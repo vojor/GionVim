@@ -111,7 +111,7 @@ return {
                     })
                 end,
                 mode = { "n", "v" },
-                desc = "Search and Replace",
+                desc = "Grug Search and Replace",
             },
         },
     },
@@ -235,14 +235,14 @@ return {
                 function()
                     require("mini.trailspace").trim()
                 end,
-                desc = "Trail All End of Line Space",
+                desc = "Trim All Trailing Spaces",
             },
             {
                 "<leader>cB",
                 function()
                     require("mini.trailspace").trim_last_lines()
                 end,
-                desc = "Trail All Blank Line",
+                desc = "Trim All Blank Line",
             },
         },
 

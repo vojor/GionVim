@@ -88,7 +88,7 @@ return {
         config = function()
             local colors = require("tokyonight.colors").setup()
             require("scrollbar").setup({
-                -- if colorscheme not tokyonight,use custom color
+                -- Use custom color scheme
                 -- handle = { color = "#892E42" },
                 -- marks = {
                 --     Cursor = { color = "#FD5622" },
@@ -118,8 +118,10 @@ return {
                 },
                 excluded_buftypes = { "terminal", "nofile", "prompt", "popup", "quickfix" },
                 excluded_filetypes = {
+                    "lazy",
+                    "mason",
                     "noice",
-                    "dashboard",
+                    "snacks_dashboard",
                     "snacks_picker_input",
                 },
                 handlers = {

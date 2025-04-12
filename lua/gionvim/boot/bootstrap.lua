@@ -80,6 +80,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.treesitter.textobjects" }, -- Code text objects
         { import = "gionvim.plugins.extras.treesitter.treesj" }, -- Splitting or merging code
         { import = "gionvim.plugins.extras.treesitter.endwise" }, -- Wise add 'end'
+        { import = "gionvim.plugins.extras.treesitter.menu" }, -- Color menu
         -- ui
         { import = "gionvim.plugins.extras.ui.colorizer" }, -- Display hexadecimal colors
         { import = "gionvim.plugins.extras.ui.edgy" }, -- Predefined layout

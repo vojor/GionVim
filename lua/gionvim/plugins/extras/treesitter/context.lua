@@ -1,16 +1,16 @@
 return {
-    -- In function, method, etc show context virtual text
+    -- Function or method end, Trail virtual text
     {
         "andersevenrud/nvim_context_vt",
         lazy = true,
-        ft = { "c", "cpp", "java", "lua", "python", "typescript", "javascript", "typescriptreact", "javascriptreact" },
+        ft = { "c", "cpp", "lua", "python", "typescript", "javascript", "typescriptreact", "javascriptreact" },
         opts = {
             prefix = "",
             disable_virtual_lines_ft = { "yaml", "toml" },
         },
         config = function(_, opts)
             require("nvim_context_vt").setup(opts)
-            vim.keymap.set("n", "<leader>ov", "<cmd>NvimContextVtToggle<CR>", { desc = "Toggle Context Virtual Text" })
+            vim.keymap.set("n", "<leader>ov", "<cmd>NvimContextVtToggle<CR>", { desc = "Toggle Trail Virtual Text" })
         end,
     },
     -- Exhibit function head
@@ -24,7 +24,7 @@ return {
                 function()
                     require("treesitter-context").go_to_context()
                 end,
-                desc = "Goto Code Start",
+                desc = "Goto Function/Method Head",
             },
         },
         opts = function()

@@ -12,8 +12,8 @@ return {
             { "<leader>m]", desc = "Goto Next Mark" },
             { "<leader>m[", desc = "Goto Prev Mark" },
             { "<leader>m:", desc = "Preview Mark(Wait Input)" },
-            { "<leader>mt", desc = "Toggle Mark" },
-            { "<leader>mb", desc = "Delete Bookmark" },
+            { "<leader>mg", desc = "Toggle Mark" },
+            { "<leader>mD", desc = "Delete Bookmark" },
         },
         opts = {
             default_mappings = false,
@@ -26,9 +26,9 @@ return {
                 next = "<leader>m]",
                 prev = "<leader>m[",
                 preview = "<leader>m:",
-                toggle = "<leader>mt",
+                toggle = "<leader>mg",
 
-                delete_bookmark = "<leader>mb",
+                delete_bookmark = "<leader>mD",
             },
         },
         config = function(_, opts)

@@ -1,6 +1,6 @@
 return {
     {
-        "NvChad/nvim-colorizer.lua",
+        "catgoose/nvim-colorizer.lua",
         lazy = true,
         keys = {
             { "<leader>hc", "<cmd>ColorizerToggle<CR>", desc = "Toggle Display Hexadecimal Color" },
