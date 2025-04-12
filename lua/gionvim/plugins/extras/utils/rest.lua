@@ -9,7 +9,7 @@ return {
         lazy = true,
         ft = "http",
         keys = {
-            { "<leader>R", "", desc = "+Rest" },
+            { "<leader>R", "", desc = "Rest" },
             { "<leader>Rb", "<cmd>lua require('kulala').scratchpad()<CR>", desc = "Open scratchpad", ft = "http" },
             { "<leader>Rc", "<cmd>lua require('kulala').copy()<CR>", desc = "Copy as cURL", ft = "http" },
             { "<leader>RC", "<cmd>lua require('kulala').from_curl()<CR>", desc = "Paste from curl", ft = "http" },

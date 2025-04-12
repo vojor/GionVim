@@ -44,14 +44,7 @@ return {
     },
     -- Uphold json and yaml files schemastore access
     {
-
         "b0o/SchemaStore.nvim",
-        lazy = true,
-    },
-    -- Async IO library
-    {
-        "nvim-neotest/nvim-nio",
-        enabled = false,
         lazy = true,
     },
     -- Simply luarocks package installed
@@ -67,7 +60,7 @@ return {
         lazy = true,
         cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonLog", "MasonUpdate" },
         keys = {
-            { "<leader>mm", "<cmd>Mason<CR>", desc = "Open Mason Manager Interface" },
+            { "<leader>Mm", "<cmd>Mason<CR>", desc = "Services Manager" },
         },
         opts = {
             log_level = vim.log.levels.ERROR,

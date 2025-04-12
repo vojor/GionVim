@@ -3,28 +3,36 @@ return {
         "chentoast/marks.nvim",
         lazy = true,
         keys = {
-            { "mx", desc = "Set Mark X" },
-            { "m,", desc = "Set the next available alphabetical (lowercase) mark" },
-            { "m;", desc = "Toggle the next available mark at the current line" },
-            { "dmx", desc = "Delete Mark X" },
-            { "dm-", desc = "Delete all marks on the current line" },
-            { "dm<space>", desc = "Delete all marks in the current buffer" },
-            { "dm=", desc = "Delete the bookmark under the cursor." },
-            { "m]", desc = "Move to next mark" },
-            { "m[", desc = "Move to Prev mark" },
-            {
-                "m:",
-                desc = "Preview mark. This will prompt you for a specific mark to preview; press <cr> to preview the next mark.",
-            },
-            {
-                "m}",
-                desc = "Move to the next bookmark having the same type as the bookmark under the cursor. Works across buffers.",
-            },
-            {
-                "m{",
-                desc = "Move to the previous bookmark having the same type as the bookmark under the cursor. Works across buffers.",
+            { "<leader>m", "", desc = "mark" },
+            { "<leader>mx", desc = "Set Mark(Wait Input)" },
+            { "<leader>md", desc = "Delete Mark(Wait Input)" },
+            { "<leader>m,", desc = "Set Line Mark" },
+            { "<leader>m-", desc = "Delete Line Mark" },
+            { "<leader>m<space>", desc = "Delete Buffer Mark" },
+            { "<leader>m]", desc = "Goto Next Mark" },
+            { "<leader>m[", desc = "Goto Prev Mark" },
+            { "<leader>m:", desc = "Preview Mark(Wait Input)" },
+            { "<leader>mt", desc = "Toggle Mark" },
+            { "<leader>mb", desc = "Delete Bookmark" },
+        },
+        opts = {
+            default_mappings = false,
+            mappings = {
+                set = "<leader>mx",
+                delete = "<leader>md",
+                set_next = "<leader>m,",
+                delete_line = "<leader>m-",
+                delete_buf = "<leader>m<space>",
+                next = "<leader>m]",
+                prev = "<leader>m[",
+                preview = "<leader>m:",
+                toggle = "<leader>mt",
+
+                delete_bookmark = "<leader>mb",
             },
         },
-        opts = {},
+        config = function(_, opts)
+            require("marks").setup(opts)
+        end,
     },
 }

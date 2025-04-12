@@ -42,7 +42,7 @@ map("i", ".", ".<C-g>u")
 map("i", ";", ";<C-g>u")
 
 -- lazy
-map("n", "<leader>ml", "<cmd>Lazy<CR>", { desc = "Open Lazy Manager Interface" })
+map("n", "<leader>Ml", "<cmd>Lazy<CR>", { desc = "Plugins Manager" })
 
 -- Floating terminal
 map("n", "<leader>tl", function()

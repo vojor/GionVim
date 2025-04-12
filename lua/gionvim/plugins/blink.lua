@@ -28,6 +28,11 @@ return {
                 nerd_font_variant = "mono",
             },
             completion = {
+                accept = {
+                    auto_brackets = {
+                        enabled = true,
+                    },
+                },
                 menu = {
                     draw = {
                         treesitter = { "lsp" },

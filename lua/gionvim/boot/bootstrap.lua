@@ -43,7 +43,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.editor.portal" }, -- Local list navigate
         { import = "gionvim.plugins.extras.editor.replacer" }, -- Factor replace
         { import = "gionvim.plugins.extras.editor.surround" }, -- Surround modify
-        { import = "gionvim.plugins.extras.editor.mini-snippets" }, -- Add mini snippets
         -- elevate
         { import = "gionvim.plugins.extras.elevate.escape" }, -- More user-friendly mode switching
         { import = "gionvim.plugins.extras.elevate.scroll" }, -- Smooth scrolling
@@ -54,9 +53,8 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.git.diffview" }, -- Git history difference
         { import = "gionvim.plugins.extras.git.neogit" }, -- Neovim's magit
         -- labeler
-        { import = "gionvim.plugins.extras.labeler.arrow" }, -- File mark
+        { import = "gionvim.plugins.extras.labeler.arrow" }, -- File and buffer mark
         { import = "gionvim.plugins.extras.labeler.marks" }, -- Line mark
-        { import = "gionvim.plugins.extras.labeler.buffon" }, -- buffer mark
         -- lsp
         -- -- lang
         { import = "gionvim.plugins.extras.lsp.langlarge.clangd" }, -- C/C++

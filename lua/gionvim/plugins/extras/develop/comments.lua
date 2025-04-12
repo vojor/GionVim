@@ -70,7 +70,6 @@ return {
             if opts.snippet_engine ~= nil then
                 return
             end
-
             local map = {
                 ["mini.snippets"] = "mini",
             }

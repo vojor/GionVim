@@ -156,69 +156,8 @@ return {
                     })
                 end,
             },
-            {
-                "igorlfs/nvim-dap-view",
-                config = function()
-                    local dap, dv = require("dap"), require("dap-view")
-                    dap.listeners.before.attach["dap-view-config"] = function()
-                        dv.open()
-                    end
-                    dap.listeners.before.launch["dap-view-config"] = function()
-                        dv.open()
-                    end
-                    dap.listeners.before.event_terminated["dap-view-config"] = function()
-                        dv.close()
-                    end
-                    dap.listeners.before.event_exited["dap-view-config"] = function()
-                        dv.close()
-                    end
-                end,
-            },
-            {
-                "rcarriga/nvim-dap-ui",
-                enabled = false,
-                lazy = true,
-                keys = {
-                    {
-                        "<leader>du",
-                        function()
-                            require("dapui").toggle({})
-                        end,
-                        desc = "Toggle DapUI",
-                    },
-                    {
-                        "<leader>dx",
-                        function()
-                            require("dapui").eval()
-                        end,
-                        mode = { "n", "v" },
-                        desc = "Eval DapUI",
-                    },
-                },
-                dependencies = { "nvim-nio" },
-                config = function()
-                    local dap, dapui = require("dap"), require("dapui")
-
-                    dapui.setup()
-                    dap.listeners.after.event_initialized["dapui_config"] = function()
-                        dapui.open()
-                    end
-                    dap.listeners.before.event_terminated["dapui_config"] = function()
-                        dapui.close()
-                    end
-                    dap.listeners.before.event_exited["dapui_config"] = function()
-                        dapui.close()
-                    end
-                    dap.listeners.before.disconnect["dapui_config"] = function()
-                        dapui.close()
-                    end
-                end,
-            },
-            {
-                "theHamsta/nvim-dap-virtual-text",
-                lazy = true,
-                opts = {},
-            },
+            { "igorlfs/nvim-dap-view", opts = {} },
+            { "theHamsta/nvim-dap-virtual-text", opts = {} },
         },
         config = function()
             vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
@@ -234,6 +173,25 @@ return {
                 )
             end
             require("gionvim.debugger.dapstart")
+        end,
+    },
+    {
+        "igorlfs/nvim-dap-view",
+        lazy = true,
+        config = function()
+            local dap, dv = require("dap"), require("dap-view")
+            dap.listeners.before.attach["dap-view-config"] = function()
+                dv.open()
+            end
+            dap.listeners.before.launch["dap-view-config"] = function()
+                dv.open()
+            end
+            dap.listeners.before.event_terminated["dap-view-config"] = function()
+                dv.close()
+            end
+            dap.listeners.before.event_exited["dap-view-config"] = function()
+                dv.close()
+            end
         end,
     },
 }
