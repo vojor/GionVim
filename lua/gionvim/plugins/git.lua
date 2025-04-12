@@ -50,31 +50,43 @@ return {
                 map("n", "[H", function()
                     gitsigns.nav_hunk("first")
                 end, "First Hunk")
+
                 map("n", "<leader>gs", gitsigns.stage_hunk, "Stage Hunk")
                 map("n", "<leader>gr", gitsigns.reset_hunk, "Reset Hunk")
+
                 map("v", "<leader>gs", function()
                     gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
                 end, "Stage Hunk")
                 map("v", "<leader>gr", function()
                     gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
                 end, "Reset Hunk")
+
                 map("n", "<leader>gS", gitsigns.stage_buffer, "Stage Buffer")
-                map("n", "<leader>gu", gitsigns.undo_stage_hunk, "Undo Stage Hunk")
                 map("n", "<leader>gR", gitsigns.reset_buffer, "Reset Buffer")
                 map("n", "<leader>gp", gitsigns.preview_hunk, "Preview Hunk")
                 map("n", "<leader>gP", gitsigns.preview_hunk_inline, "Preview Hunk Inline")
+
                 map("n", "<leader>gb", function()
                     gitsigns.blame_line({ full = true })
                 end, "Blame Line")
-                map("n", "<leader>gf", function()
+                map("n", "<leader>gB", function()
                     gitsigns.blame()
                 end, "Blame buffer")
-                map("n", "<leader>gB", gitsigns.toggle_current_line_blame, "Current Blame Line")
+
                 map("n", "<leader>gd", gitsigns.diffthis, "Diff This")
                 map("n", "<leader>gD", function()
                     gitsigns.diffthis("~")
                 end, "Diff This ~")
-                map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+
+                map("n", "<leader>gQ", function()
+                    gitsigns.setqflist("all")
+                end, "Set Qf List(All)")
+                map("n", "<leader>gq", gitsigns.setqflist, "Set Qf List")
+
+                map("n", "<leader>ge", gitsigns.toggle_current_line_blame, "Current Blame Line")
+                map("n", "<leader>gw", gitsigns.toggle_word_diff, "Word Diff")
+
+                map({ "o", "x" }, "ih", gitsigns.select_hunk, "GitSigns Select Hunk")
             end,
         },
         config = function(_, opts)

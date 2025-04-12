@@ -157,12 +157,15 @@ return {
             { "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put before applying a filter" },
         },
         dependencies = { "sqlite.lua" },
-        opts = {
-            ring = {
-                history_length = 200,
-                storage = "sqlite",
-            },
-            highlight = { timer = 150 },
-        },
+        config = function()
+            require("yanky").setup({
+                ring = {
+                    history_length = 200,
+                    permanent_wrapper = require("yanky.wrappers").remove_carriage_return,
+                    storage = "sqlite",
+                },
+                highlight = { timer = 150 },
+            })
+        end,
     },
 }

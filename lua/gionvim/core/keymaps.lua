@@ -5,7 +5,8 @@ local map = GionVim.safe_keymap_set
 map("n", "<leader>ce", "<cmd>enew<CR>", { desc = "New File" })
 map("n", "<leader>cw", "<cmd>w<CR>", { desc = "Buffer Write File" })
 map("n", "<leader>cW", "<cmd>wa<CR>", { desc = "Write All File" })
-map("n", "<leader>cE", "<cmd>e!<CR>", { desc = "Revoke all file changes" })
+map("n", "<leader>cE", "<cmd>e!<CR>", { desc = "Revoke All File Changes" })
+map("n", "<leader>cf", "<cmd>echo &filetype<CR>", { desc = "Confirm File Type" })
 map("n", "<leader>cq", "<cmd>q<CR>", { desc = "Quit" })
 map("n", "<leader>cQ", "<cmd>q!<CR>", { desc = "Force Quit" })
 map("n", "<leader>cx", "<cmd>x<CR>", { desc = "Save And Quit" })
@@ -121,8 +122,8 @@ if vim.lsp.inlay_hint then
     Snacks.toggle.inlay_hints():map("<leader>oh")
 end
 
--- checkhealth
-map("n", "<leader>ch", "<cmd>checkhealth<CR>", { desc = "Neovim Health Check" })
+-- check health
+map("n", "<leader>ch", "<cmd>LazyHealth<CR>", { desc = "Health Check" })
 
 -- commenting
 map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<CR>fxa<bs>", { desc = "Add Comment Below" })

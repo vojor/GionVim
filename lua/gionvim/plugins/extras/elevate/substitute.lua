@@ -14,5 +14,6 @@ return {
                 desc = " rip substitute",
             },
         },
+        opts = {},
     },
 }
