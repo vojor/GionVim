@@ -1,0 +1,52 @@
+{
+    "#!": {
+        "prefix": "#!",
+        "body": [
+            "#!/usr/bin/env bash"
+        ],
+        "description": ""
+    },
+    "s#!": {
+        "prefix": "s#!",
+        "body": [
+            "#!/usr/bin/env bash",
+            "set -eu"
+        ],
+        "description": ""
+    },
+    "if": {
+        "prefix": "if",
+        "body": [
+            "if [[ $1 ]]; then",
+            "${0:${VISUAL}}",
+            "fi"
+        ],
+        "description": ""
+    },
+    "elif": {
+        "prefix": "elif",
+        "body": [
+            "elif [[ $1 ]]; then",
+            "${0:${VISUAL}}"
+        ],
+        "description": ""
+    },
+    "wh": {
+        "prefix": "wh",
+        "body": [
+            "while [[ $1 ]]; do",
+            "${0:${VISUAL}}",
+            "done"
+        ],
+        "description": ""
+    },
+    "until": {
+        "prefix": "until",
+        "body": [
+            "until [[ $1 ]]; do",
+            "${0:${VISUAL}}",
+            "done"
+        ],
+        "description": ""
+    }
+}

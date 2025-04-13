@@ -1,0 +1,90 @@
+{
+    "name": "custom-snippets",
+    "engines": {
+        "vscode": "^1.11.0"
+    },
+    "contributes": {
+        "snippets": [
+            {
+                "language": ["global", "all"],
+                "path": "./snippets/all.json"
+            },
+            {
+                "language": "asm",
+                "path": "./snippets/asm.json"
+            },
+            {
+                "language": "awk",
+                "path": "./snippets/awk.json"
+            },
+            {
+                "language": "c",
+                "path": "./snippets/c.json"
+            },
+            {
+                "language": "cpp",
+                "path": "./snippets/cpp.json"
+            },
+            {
+                "language": ["shellscript", "shell", "sh"],
+                "path": "./snippets/sh.json"
+            },
+            {
+                "language": "zsh",
+                "path": "./snippets/zsh.json"
+            },
+            {
+                "language": "bash",
+                "path": "./snippets/bash.json"
+            },
+            {
+                "language": "diff",
+                "path": "./snippets/diff.json"
+            },
+            {
+                "language": "markdown",
+                "path": "./snippets/markdown.json"
+            },
+            {
+                "language": "rmd",
+                "path": "./snippets/rmd.json"
+            },
+            {
+                "language": "java",
+                "path": "./snippets/java.json"
+            },
+            {
+                "language": ["typescript", "typescriptreact"],
+                "path": "./snippets/typescript.json"
+            },
+            {
+                "language": "typescriptreact",
+                "path": "./snippets/typescriptreact.json"
+            },
+            {
+                "language": "python",
+                "path": "./snippets/python.json"
+            },
+            {
+                "language": "make",
+                "path": "./snippets/make.json"
+            },
+            {
+                "language": "vim",
+                "path": "./snippets/vim.json"
+            },
+            {
+                "language": "xml",
+                "path": "./snippets/xml.json"
+            },
+            {
+                "language": "cmake",
+                "path": "./snippets/cmake.json"
+            },
+            {
+                "language": ["ps1", "powershell"],
+                "path": "./snippets/ps1.json"
+            }
+        ]
+    }
+}

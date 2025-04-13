@@ -1,0 +1,37 @@
+{
+    "base": {
+        "prefix": "base",
+        "body": [
+            ".PHONY: clean, mrproper",
+            "CC = gcc",
+            "CFLAGS = -g -Wall",
+            "all: $1",
+            "%.o: %.c",
+            "$(CC) $(CFLAGS) -c -o $@ $<",
+            "${1:out}: $1.o",
+            "$(CC) $(CFLAGS) -o $@ $+",
+            "clean:",
+            "rm -f *.o core.*",
+            "mrproper: clean",
+            "rm -f $1",
+            "# add"
+        ],
+        "description": ""
+    },
+    "add": {
+        "prefix": "add",
+        "body": [
+            "${1:out}: $1.o",
+            "$(CC) $(CFLAGS) -o $@ $+",
+            "# .DEFAULT_GOAL := target"
+        ],
+        "description": ""
+    },
+    "default": {
+        "prefix": "default",
+        "body": [
+            ".DEFAULT_GOAL := ${1}"
+        ],
+        "description": ""
+    }
+}

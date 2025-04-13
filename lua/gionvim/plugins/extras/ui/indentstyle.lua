@@ -50,6 +50,7 @@ return {
     {
         "echasnovski/mini.indentscope",
         version = false,
+        lazy = true,
         event = { "BufReadPost", "BufNewFile" },
         opts = {
             symbol = "│",

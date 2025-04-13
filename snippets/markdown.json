@@ -1,0 +1,360 @@
+{
+    "[": {
+        "prefix": "[",
+        "body": [
+            "[${1:text}](https://${2:address})"
+        ],
+        "description": ""
+    },
+    "[*": {
+        "prefix": "[*",
+        "body": [
+            "[${1:link}](${2:`@*`})"
+        ],
+        "description": ""
+    },
+    "[c": {
+        "prefix": "[c",
+        "body": [
+            "[${1:link}](${2:`@+`})"
+        ],
+        "description": ""
+    },
+    "[\"": {
+        "prefix": "[\"",
+        "body": [
+            "[${1:text}](https://${2:address} \"${3:title}\")"
+        ],
+        "description": ""
+    },
+    "[\"*": {
+        "prefix": "[\"*",
+        "body": [
+            "[${1:link}](${2:`@*`} \"${3:title}\")"
+        ],
+        "description": ""
+    },
+    "[\"c": {
+        "prefix": "[\"c",
+        "body": [
+            "[${1:link}](${2:`@+`} \"${3:title}\")"
+        ],
+        "description": ""
+    },
+    "[:": {
+        "prefix": "[:",
+        "body": [
+            "[${1:id}]: https://${2:url}"
+        ],
+        "description": ""
+    },
+    "[:*": {
+        "prefix": "[:*",
+        "body": [
+            "[${1:id}]: ${2:`@*`}"
+        ],
+        "description": ""
+    },
+    "[:c": {
+        "prefix": "[:c",
+        "body": [
+            "[${1:id}]: ${2:`@+`}"
+        ],
+        "description": ""
+    },
+    "[:\"": {
+        "prefix": "[:\"",
+        "body": [
+            "[${1:id}]: https://${2:url} \"${3:title}\""
+        ],
+        "description": ""
+    },
+    "[:\"*": {
+        "prefix": "[:\"*",
+        "body": [
+            "[${1:id}]: ${2:`@*`} \"${3:title}\""
+        ],
+        "description": ""
+    },
+    "[:\"c": {
+        "prefix": "[:\"c",
+        "body": [
+            "[${1:id}]: ${2:`@+`} \"${3:title}\""
+        ],
+        "description": ""
+    },
+    "![": {
+        "prefix": "![",
+        "body": [
+            "![${1:alttext}](${2:/images/image.jpg})"
+        ],
+        "description": ""
+    },
+    "![*": {
+        "prefix": "![*",
+        "body": [
+            "![${1:alt}](${2:`@*`})"
+        ],
+        "description": ""
+    },
+    "![c": {
+        "prefix": "![c",
+        "body": [
+            "![${1:alt}](${2:`@+`})"
+        ],
+        "description": ""
+    },
+    "![\"": {
+        "prefix": "![\"",
+        "body": [
+            "![${1:alttext}](${2:/images/image.jpg} \"${3:title}\")"
+        ],
+        "description": ""
+    },
+    "![\"*": {
+        "prefix": "![\"*",
+        "body": [
+            "![${1:alt}](${2:`@*`} \"${3:title}\")"
+        ],
+        "description": ""
+    },
+    "![\"c": {
+        "prefix": "![\"c",
+        "body": [
+            "![${1:alt}](${2:`@+`} \"${3:title}\")"
+        ],
+        "description": ""
+    },
+    "![:": {
+        "prefix": "![:",
+        "body": [
+            "![${1:id}]: ${2:url}"
+        ],
+        "description": ""
+    },
+    "![:*": {
+        "prefix": "![:*",
+        "body": [
+            "![${1:id}]: ${2:`@*`}"
+        ],
+        "description": ""
+    },
+    "![:\"": {
+        "prefix": "![:\"",
+        "body": [
+            "![${1:id}]: ${2:url} \"${3:title}\""
+        ],
+        "description": ""
+    },
+    "![:\"*": {
+        "prefix": "![:\"*",
+        "body": [
+            "![${1:id}]: ${2:`@*`} \"${3:title}\""
+        ],
+        "description": ""
+    },
+    "![:\"c": {
+        "prefix": "![:\"c",
+        "body": [
+            "![${1:id}]: ${2:`@+`} \"${3:title}\""
+        ],
+        "description": ""
+    },
+    "<": {
+        "prefix": "<",
+        "body": [
+            "<http://${1:url}>"
+        ],
+        "description": ""
+    },
+    "<*": {
+        "prefix": "<*",
+        "body": [
+            "<`@*`>"
+        ],
+        "description": ""
+    },
+    "<c": {
+        "prefix": "<c",
+        "body": [
+            "<`@+`>"
+        ],
+        "description": ""
+    },
+    "**": {
+        "prefix": "**",
+        "body": [
+            "**$0**"
+        ],
+        "description": "Bold"
+    },
+    "__": {
+        "prefix": "__",
+        "body": [
+            "__$0__"
+        ],
+        "description": "Bold"
+    },
+    "---": {
+        "prefix": "---",
+        "body": [
+            "---",
+            "$0",
+            "---"
+        ],
+        "description": "Front matter"
+    },
+    "====": {
+        "prefix": "====",
+        "body": [
+            "`repeat('=', strlen(getline(line('.') - 3)))`",
+            "${0}"
+        ],
+        "description": ""
+    },
+    "-": {
+        "prefix": "-",
+        "body": [
+            "-   ${0}"
+        ],
+        "description": ""
+    },
+    "----": {
+        "prefix": "----",
+        "body": [
+            "`repeat('-', strlen(getline(line('.') - 3)))`",
+            "${0}"
+        ],
+        "description": ""
+    },
+    "blockquote": {
+        "prefix": "blockquote",
+        "body": [
+            "{% blockquote %}",
+            "${0:quote}",
+            "{% endblockquote %}"
+        ],
+        "description": ""
+    },
+    "blockquote-author": {
+        "prefix": "blockquote-author",
+        "body": [
+            "{% blockquote ${1:author}, ${2:title} %}",
+            "${0:quote}",
+            "{% endblockquote %}"
+        ],
+        "description": ""
+    },
+    "blockquote-link": {
+        "prefix": "blockquote-link",
+        "body": [
+            "{% blockquote ${1:author} ${2:URL} ${3:link_text} %}",
+            "${0:quote}",
+            "{% endblockquote %}"
+        ],
+        "description": ""
+    },
+    "```": {
+        "prefix": "```",
+        "body": [
+            "\\`\\`\\`${1}",
+            "${0:${VISUAL}}",
+            "\\`\\`\\`",
+            "# Language."
+        ],
+        "description": ""
+    },
+    "```l": {
+        "prefix": "```l",
+        "body": [
+            "\\`\\`\\`${1:language}",
+            "${2:code}",
+            "\\`\\`\\`"
+        ],
+        "description": ""
+    },
+    "codeblock-short": {
+        "prefix": "codeblock-short",
+        "body": [
+            "{% codeblock %}",
+            "${0:code_snippet}",
+            "{% endcodeblock %}"
+        ],
+        "description": ""
+    },
+    "codeblock-full": {
+        "prefix": "codeblock-full",
+        "body": [
+            "{% codeblock ${1:title} lang:${2:language} ${3:URL} ${4:link_text} %}",
+            "${0:code_snippet}",
+            "{% endcodeblock %}"
+        ],
+        "description": ""
+    },
+    "gist-full": {
+        "prefix": "gist-full",
+        "body": [
+            "{% gist ${1:gist_id} ${0:filename} %}"
+        ],
+        "description": ""
+    },
+    "gist-short": {
+        "prefix": "gist-short",
+        "body": [
+            "{% gist ${0:gist_id} %}"
+        ],
+        "description": ""
+    },
+    "img": {
+        "prefix": "img",
+        "body": [
+            "{% img ${1:class} ${2:URL} ${3:width} ${4:height} ${5:title_text} ${0:alt_text} %}"
+        ],
+        "description": ""
+    },
+    "youtube": {
+        "prefix": "youtube",
+        "body": [
+            "{% youtube ${0:video_id} %}"
+        ],
+        "description": ""
+    },
+    "tb": {
+        "prefix": "tb",
+        "body": [
+            "|  ${0:factors}      |    ${1:a}       |  ${2:b}   \t|",
+            "| ------------- |-------------  | ------- |",
+            "|    ${3:f1}    |    Y          | N       |",
+            "|    ${4:f2}    |    Y          | N       |",
+            "# The quote should appear only once in the text. It is inherently part of it.",
+            "# See http://octopress.org/docs/plugins/pullquote/ for more info."
+        ],
+        "description": ""
+    },
+    "pullquote": {
+        "prefix": "pullquote",
+        "body": [
+            "{% pullquote %}",
+            "${1:text} {\" ${2:quote} \"} ${0:text}",
+            "{% endpullquote %}",
+            "# Definition lists"
+        ],
+        "description": ""
+    },
+    ":": {
+        "prefix": ":",
+        "body": [
+            "$1",
+            ": $0"
+        ],
+        "description": "Definition list"
+    },
+    "::": {
+        "prefix": "::",
+        "body": [
+            "$1",
+            "- $0"
+        ],
+        "description": "Alternate definition list"
+    }
+}

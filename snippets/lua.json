@@ -1,0 +1,169 @@
+{
+    "#!": {
+        "prefix": "#!",
+        "body": [
+            "#!/usr/bin/env lua",
+            "$1"
+        ],
+        "description": ""
+    },
+    "local": {
+        "prefix": "local",
+        "body": [
+            "local ${1:x} = ${0:1}"
+        ],
+        "description": ""
+    },
+    "fun": {
+        "prefix": "fun",
+        "body": [
+            "function ${1:fname}(${2:...})",
+            "$0",
+            "end"
+        ],
+        "description": ""
+    },
+    "forp": {
+        "prefix": "forp",
+        "body": [
+            "for ${1:i},${2:v} in pairs(${3:table_name}) do",
+            "$0",
+            "end"
+        ],
+        "description": ""
+    },
+    "fori": {
+        "prefix": "fori",
+        "body": [
+            "for ${1:i},${2:v} in ipairs(${3:table_name}) do",
+            "$0",
+            "end"
+        ],
+        "description": ""
+    },
+    "ife": {
+        "prefix": "ife",
+        "body": [
+            "if $1 then",
+            "${2:-- if condition}",
+            "else",
+            "${0:-- else}",
+            "end"
+        ],
+        "description": ""
+    },
+    "elif": {
+        "prefix": "elif",
+        "body": [
+            "elseif $1 then",
+            "$0"
+        ],
+        "description": ""
+    },
+    "repeat": {
+        "prefix": "repeat",
+        "body": [
+            "repeat",
+            "$1",
+            "until $0"
+        ],
+        "description": ""
+    },
+    "while": {
+        "prefix": "while",
+        "body": [
+            "while $1 do",
+            "$0",
+            "end"
+        ],
+        "description": ""
+    },
+    "wh": {
+        "prefix": "wh",
+        "body": [
+            "while ${1:true} do",
+            "${0}",
+            "end"
+        ],
+        "description": ""
+    },
+    "wht": {
+        "prefix": "wht",
+        "body": [
+            "while true do",
+            "${0}",
+            "end"
+        ],
+        "description": ""
+    },
+    "print": {
+        "prefix": "print",
+        "body": [
+            "print(\"${1:string}\")"
+        ],
+        "description": ""
+    },
+    "pr": {
+        "prefix": "pr",
+        "body": [
+            "print($0)"
+        ],
+        "description": ""
+    },
+    "prs": {
+        "prefix": "prs",
+        "body": [
+            "print(\"$0\")"
+        ],
+        "description": ""
+    },
+    "prf": {
+        "prefix": "prf",
+        "body": [
+            "print(string.format(\"${1:%s}\"$0))"
+        ],
+        "description": ""
+    },
+    "wr": {
+        "prefix": "wr",
+        "body": [
+            "io.write($0)"
+        ],
+        "description": ""
+    },
+    "wrs": {
+        "prefix": "wrs",
+        "body": [
+            "io.write(\"$0\")"
+        ],
+        "description": ""
+    },
+    "wrf": {
+        "prefix": "wrf",
+        "body": [
+            "io.write(string.format(\"${1:%s}\"$0))"
+        ],
+        "description": ""
+    },
+    "fwr": {
+        "prefix": "fwr",
+        "body": [
+            "io.${1:stderr}:write($0)"
+        ],
+        "description": ""
+    },
+    "fwrs": {
+        "prefix": "fwrs",
+        "body": [
+            "io.${1:stderr}:write(\"$0\")"
+        ],
+        "description": ""
+    },
+    "fwrf": {
+        "prefix": "fwrf",
+        "body": [
+            "io.${1:stderr}:write(string.format(\"${2:%s}\"$0))"
+        ],
+        "description": ""
+    }
+}

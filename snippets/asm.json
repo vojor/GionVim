@@ -1,0 +1,366 @@
+{
+    "scode": {
+        "prefix": "scode",
+        "body": [
+            ".data",
+            ".text",
+            ".global main",
+            "main:"
+        ],
+        "description": "Start basic code for assembly"
+    },
+    "scodes": {
+        "prefix": "scodes",
+        "body": [
+            ".data",
+            ".text",
+            ".globl _start",
+            "_start:"
+        ],
+        "description": "Start basic code for assembly with _start label"
+    },
+    "lo": {
+        "prefix": "lo",
+        "body": [
+            "$1: .long $2"
+        ],
+        "description": "Long"
+    },
+    "wo": {
+        "prefix": "wo",
+        "body": [
+            "$1: .word $2"
+        ],
+        "description": "Word"
+    },
+    "by": {
+        "prefix": "by",
+        "body": [
+            "$1: .byte $2"
+        ],
+        "description": "Byte"
+    },
+    "sp": {
+        "prefix": "sp",
+        "body": [
+            "$1: .space $2"
+        ],
+        "description": "Space"
+    },
+    "ai": {
+        "prefix": "ai",
+        "body": [
+            "$1: .ascii \"$2\""
+        ],
+        "description": "Ascii"
+    },
+    "az": {
+        "prefix": "az",
+        "body": [
+            "$1: .asciz \"$2\""
+        ],
+        "description": "Asciz"
+    },
+    "ze": {
+        "prefix": "ze",
+        "body": [
+            "$1: .zero \"$2\""
+        ],
+        "description": "Zero"
+    },
+    "qu": {
+        "prefix": "qu",
+        "body": [
+            "$1: .quad \"$2\""
+        ],
+        "description": "Quad"
+    },
+    "si": {
+        "prefix": "si",
+        "body": [
+            "$1: .single \"$2\""
+        ],
+        "description": "Single"
+    },
+    "do": {
+        "prefix": "do",
+        "body": [
+            "$1: .single \"$2\""
+        ],
+        "description": "Double"
+    },
+    "fl": {
+        "prefix": "fl",
+        "body": [
+            "$1: .single \"$2\""
+        ],
+        "description": "Float"
+    },
+    "oc": {
+        "prefix": "oc",
+        "body": [
+            "$1: .single \"$2\""
+        ],
+        "description": "Octa"
+    },
+    "sh": {
+        "prefix": "sh",
+        "body": [
+            "$1: .single \"$2\""
+        ],
+        "description": "Short"
+    },
+    "exit0": {
+        "prefix": "exit0",
+        "body": [
+            "movl \\$1, %eax",
+            "xorl %ebx, %ebx",
+            "int \\$0x80"
+        ],
+        "description": "Exit without error"
+    },
+    "exit": {
+        "prefix": "exit",
+        "body": [
+            "mov \\$1, %eax",
+            "mov $1, %ebx",
+            "int \\$0x80"
+        ],
+        "description": "Exit with error"
+    },
+    "readfstdin": {
+        "prefix": "readfstdin",
+        "body": [
+            "mov \\$3, %eax",
+            "mov \\$2, %ebx",
+            "mov $1, %ecx",
+            "mov $2, %edx",
+            "int \\$0x80"
+        ],
+        "description": "Read fixed length text from stdin"
+    },
+    "writestdout": {
+        "prefix": "writestdout",
+        "body": [
+            "mov \\$4, %eax",
+            "mov \\$1, %ebx",
+            "mov $1, %ecx",
+            "mov $2, %edx",
+            "int \\$0x80"
+        ],
+        "description": "Write text to stdout"
+    },
+    "writestderr": {
+        "prefix": "writestderr",
+        "body": [
+            "mov \\$4, %eax",
+            "mov \\$2, %ebx",
+            "mov $1, %ecx",
+            "mov $2, %edx",
+            "int \\$0x80"
+        ],
+        "description": "Write text to stderr"
+    },
+    "*": {
+        "prefix": "*",
+        "body": [
+            "mov $1, %eax",
+            "mul $2"
+        ],
+        "description": "Multiplication"
+    },
+    "/": {
+        "prefix": "/",
+        "body": [
+            "mov $1, %eax",
+            "div $2"
+        ],
+        "description": "Division"
+    },
+    "jmpl": {
+        "prefix": "jmpl",
+        "body": [
+            "cmp $1, $2",
+            "jl $3"
+        ],
+        "description": "Conditional lower jump"
+    },
+    "jmple": {
+        "prefix": "jmple",
+        "body": [
+            "cmp $1, $2",
+            "jle $3"
+        ],
+        "description": "Conditional lower or equal jump"
+    },
+    "jmpe": {
+        "prefix": "jmpe",
+        "body": [
+            "cmp $1, $2",
+            "je $3"
+        ],
+        "description": "Conditional equal jump"
+    },
+    "jmpn": {
+        "prefix": "jmpn",
+        "body": [
+            "cmp $1, $2",
+            "jn $3"
+        ],
+        "description": "Conditional not equal jump"
+    },
+    "jmpg": {
+        "prefix": "jmpg",
+        "body": [
+            "cmp $1, $2",
+            "jg $3"
+        ],
+        "description": "Conditional greater jump"
+    },
+    "jmpge": {
+        "prefix": "jmpge",
+        "body": [
+            "cmp $1, $2",
+            "je $3"
+        ],
+        "description": "Conditional greater or equal jump"
+    },
+    "loopn": {
+        "prefix": "loopn",
+        "body": [
+            "mov $1, %ecx",
+            "et_for:",
+            "$2",
+            "loop et_for"
+        ],
+        "description": "Loop n times"
+    },
+    "loopnn": {
+        "prefix": "loopnn",
+        "body": [
+            "mov $1, %ecx",
+            "dec %ecx",
+            "et_for:",
+            "$2",
+            "loop et_for"
+        ],
+        "description": "Loop n-1 times"
+    },
+    "loopv": {
+        "prefix": "loopv",
+        "body": [
+            "lea $1, %edi",
+            "xor %ecx, %ecx",
+            "et_for:",
+            "cmp %ecx, $2",
+            "je $3",
+            "$4",
+            "inc %ecx",
+            "jmp et_for"
+        ],
+        "description": "Loop through a vector"
+    },
+    "mul": {
+        "prefix": "mul",
+        "body": [
+            "xor %edx, %edx",
+            "mov $1, %eax",
+            "mul $2"
+        ],
+        "description": "Multiply"
+    },
+    "mul64": {
+        "prefix": "mul64",
+        "body": [
+            "mov $1, %edx",
+            "mov $2, %eax",
+            "mul $3"
+        ],
+        "description": "Multiply numbers greater than 2^32"
+    },
+    "div": {
+        "prefix": "div",
+        "body": [
+            "xor %edx, %edx",
+            "mov $1, %eax",
+            "div $2"
+        ],
+        "description": "Divide"
+    },
+    "div64": {
+        "prefix": "div64",
+        "body": [
+            "mov $1, %edx",
+            "mov $2, %eax",
+            "div $3"
+        ],
+        "description": "Divide numbers greater than 2^32"
+    },
+    "pr": {
+        "prefix": "pr",
+        "body": [
+            "pushl $1",
+            "call printf",
+            "popl $2"
+        ],
+        "description": "Call printf"
+    },
+    "sc": {
+        "prefix": "sc",
+        "body": [
+            "pushl $1",
+            "call scanf",
+            "popl $2"
+        ],
+        "description": "Call scanf"
+    },
+    "mindex": {
+        "prefix": "mindex",
+        "body": [
+            "xor %edx, %edx",
+            "movl $1, %eax",
+            "mull $2",
+            "addl $3, %eax"
+        ],
+        "description": "Current index from a matrix"
+    },
+    "ffl": {
+        "prefix": "ffl",
+        "body": [
+            "pushl \\$0",
+            "call fflush",
+            "popl $1"
+        ],
+        "description": "Call fflush"
+    },
+    "at": {
+        "prefix": "at",
+        "body": [
+            "pushl $1",
+            "call atoi",
+            "popl $2"
+        ],
+        "description": "Call atoi"
+    },
+    "len": {
+        "prefix": "len",
+        "body": [
+            "pushl $1",
+            "call strlen",
+            "popl $2"
+        ],
+        "description": "Call strlen"
+    },
+    "proc": {
+        "prefix": "proc",
+        "body": [
+            "$1:",
+            "pushl %ebp",
+            "movl %esp, %ebp",
+            "$2",
+            "popl %ebp",
+            "ret"
+        ],
+        "description": "Basic procedure"
+    }
+}

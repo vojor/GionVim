@@ -1,0 +1,83 @@
+{
+    "function": {
+        "prefix": "function",
+        "body": [
+            "function ${1:name} {",
+            "[CmdletBinding()]",
+            "param (",
+            "[Parameter(Mandatory = $true)]",
+            "[string] ${2:Param}",
+            ")",
+            "begin {",
+            "}",
+            "process {",
+            "}",
+            "end {",
+            "}",
+            "}",
+            "# PowerShell Splatting"
+        ],
+        "description": ""
+    },
+    "splatting": {
+        "prefix": "splatting",
+        "body": [
+            "$Params = @{",
+            "${1:Param1} = '${2:Value1}'",
+            "${3:Param2} = '${4:Value2}'",
+            "}",
+            "${5:CommandName} @Params",
+            "# PowerShell if..else"
+        ],
+        "description": ""
+    },
+    "ife": {
+        "prefix": "ife",
+        "body": [
+            "if ( $1 ) {",
+            "${2}",
+            "}",
+            "else {",
+            "${3}",
+            "}",
+            "# PowerShell Filter..Sort"
+        ],
+        "description": ""
+    },
+    "filtersort": {
+        "prefix": "filtersort",
+        "body": [
+            "${1:command} | Where-Object -FilterScript { $PSItem.${2:property} -${3:operator} '${4:expression}' } | Sort-Object -Property ${5:sortproperty}",
+            "# PowerShell export-csv"
+        ],
+        "description": ""
+    },
+    "epcsv": {
+        "prefix": "epcsv",
+        "body": [
+            "Export-CSV -NoTypeInformation -Path ${1:path}",
+            "# Powershell Comment Based Help"
+        ],
+        "description": ""
+    },
+    "help": {
+        "prefix": "help",
+        "body": [
+            "<#",
+            ".SYNOPSIS",
+            "${1:Short Description}",
+            ".DESCRIPTION",
+            "${2:Full Description}",
+            ".PARAMETER ${3:Param1}",
+            "${4: $3 usage}",
+            ".EXAMPLE",
+            "${5:Example}",
+            ".NOTES",
+            "${6:notes}",
+            ".LINK",
+            "${7:online help}",
+            "#>"
+        ],
+        "description": ""
+    }
+}

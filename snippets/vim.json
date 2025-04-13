@@ -1,0 +1,147 @@
+{
+    "header": {
+        "prefix": "header",
+        "body": [
+            "\" File: ${1:`expand('%:t')`}",
+            "\" Author: ${2:`g:snips_author`}",
+            "\" Description: ${3}",
+            "${0:\" Last Modified: `strftime(\"%B %d, %Y\")`}"
+        ],
+        "description": "standard Vim script file header"
+    },
+    "guard": {
+        "prefix": "guard",
+        "body": [
+            "if exists('${1:did_`vim_snippets#Filename()`}') || &cp${2: || version < 700}",
+            "finish",
+            "endif",
+            "let $1 = 1${0}"
+        ],
+        "description": "script reload guard"
+    },
+    "t": {
+        "prefix": "t",
+        "body": ["try", "${1:${VISUAL}}", "catch ${2}", "${0}", "endtry"],
+        "description": "try ... catch statement"
+    },
+    "for": {
+        "prefix": "for",
+        "body": ["for ${1} in ${2}", "${0:${VISUAL}}", "endfor"],
+        "description": "for ... in loop"
+    },
+    "forkv": {
+        "prefix": "forkv",
+        "body": ["for [${1},${2}] in items(${3})", "${0}", "unlet $1 $2", "endfor"],
+        "description": "for [key, value] in loop"
+    },
+    "wh": {
+        "prefix": "wh",
+        "body": ["while ${1}", "${0:${VISUAL}}", "endw"],
+        "description": "while loop"
+    },
+    "if": {
+        "prefix": "if",
+        "body": ["if ${1}", "${0:${VISUAL}}", "endif"],
+        "description": "if statement"
+    },
+    "ife": {
+        "prefix": "ife",
+        "body": ["if ${1}", "${2:${VISUAL}}", "else", "${0}", "endif"],
+        "description": "if ... else statement"
+    },
+    "au": {
+        "prefix": "au",
+        "body": [
+            "augroup ${1:AU_NAME}",
+            "autocmd!",
+            "autocmd ${2:BufRead,BufNewFile} ${3:*.ext,*.ext3|<buffer[=N]>} ${0}",
+            "augroup END"
+        ],
+        "description": "augroup ... autocmd block"
+    },
+    "auv": {
+        "prefix": "auv",
+        "body": ["augroup ${1:AU_NAME}", "autocmd!", "${0:${VISUAL}}", "augroup END"],
+        "description": "augroupvisual ... autocmd block with visual placeholder"
+    },
+    "bun": {
+        "prefix": "bun",
+        "body": ["Plugin '${0}'"],
+        "description": "Vundle.vim Plugin definition"
+    },
+    "plug": {
+        "prefix": "plug",
+        "body": ["Plug '${0}'"],
+        "description": "vim-plug Plugin definition"
+    },
+    "plugdo": {
+        "prefix": "plugdo",
+        "body": ["Plug '${1}', { 'do': '${0}' }"],
+        "description": "vim-plug Plugin definition with { 'do': '' }"
+    },
+    "plugon": {
+        "prefix": "plugon",
+        "body": ["Plug '${1}', { 'on': '${0}' }"],
+        "description": "vim-plug Plugin definition with { 'on': '' }"
+    },
+    "plugfor": {
+        "prefix": "plugfor",
+        "body": ["Plug '${1}', { 'for': '${0}' }"],
+        "description": "vim-plug Plugin definition with { 'for': '' }"
+    },
+    "plugbr": {
+        "prefix": "plugbr",
+        "body": ["Plug '${1}', { 'branch': '${0}' }"],
+        "description": "vim-plug Plugin definition with { 'branch': '' }"
+    },
+    "plugtag": {
+        "prefix": "plugtag",
+        "body": ["Plug '${1}', { 'tag': '${0}' }"],
+        "description": "vim-plug Plugin definition with { 'tag': '' }"
+    },
+    "let": {
+        "prefix": "let",
+        "body": ["let ${1:variable} = ${0: value}"],
+        "description": ""
+    },
+    "se": {
+        "prefix": "se",
+        "body": ["set ${1:setting};"],
+        "description": ""
+    },
+    "set": {
+        "prefix": "set",
+        "body": ["set ${1:setting} = ${0:value}"],
+        "description": ""
+    },
+    "nn": {
+        "prefix": "nn",
+        "body": ["nnoremap ${1} ${2}<CR>"],
+        "description": ""
+    },
+    "no": {
+        "prefix": "no",
+        "body": ["noremap ${1} ${2}"],
+        "description": ""
+    },
+    "vm": {
+        "prefix": "vm",
+        "body": ["vmap ${1} ${2}"],
+        "description": ""
+    },
+    "im": {
+        "prefix": "im",
+        "body": ["imap ${1} ${2}"],
+        "description": ""
+    },
+    "exe": {
+        "prefix": "exe",
+        "body": ["execute ${1}"],
+        "description": ""
+    },
+    "filename": {
+        "prefix": "filename",
+        "body": ["`Filename()`"],
+        "description": ""
+    }
+}

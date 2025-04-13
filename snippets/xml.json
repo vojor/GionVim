@@ -1,0 +1,27 @@
+{
+    "xml": {
+        "prefix": "xml",
+        "body": [
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+            "# tag"
+        ],
+        "description": ""
+    },
+    "t": {
+        "prefix": "t",
+        "body": [
+            "<${1:}>",
+            "${2}",
+            "</$1>",
+            "# inline tag"
+        ],
+        "description": ""
+    },
+    "ti": {
+        "prefix": "ti",
+        "body": [
+            "<${1:}>${2}</$1>"
+        ],
+        "description": ""
+    }
+}

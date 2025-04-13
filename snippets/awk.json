@@ -1,0 +1,183 @@
+{
+    "#!": {
+        "prefix": "#!",
+        "body": [
+            "#!/usr/bin/awk -f",
+            "# @include is a gawk extension"
+        ],
+        "description": "#!/usr/bin/awk -f"
+    },
+    "inc": {
+        "prefix": "inc",
+        "body": [
+            "@include \"${1}\"${0}",
+            "# @load is a gawk extension"
+        ],
+        "description": "@include"
+    },
+    "loa": {
+        "prefix": "loa",
+        "body": [
+            "@load \"${1}\"${0}"
+        ],
+        "description": "@load"
+    },
+    "beg": {
+        "prefix": "beg",
+        "body": [
+            "BEGIN {",
+            "${0}",
+            "}",
+            "# BEGINFILE is a gawk extension"
+        ],
+        "description": "BEGIN { ... }"
+    },
+    "begf": {
+        "prefix": "begf",
+        "body": [
+            "BEGINFILE {",
+            "${0}",
+            "}"
+        ],
+        "description": "BEGINFILE { ... }"
+    },
+    "end": {
+        "prefix": "end",
+        "body": [
+            "END {",
+            "${0}",
+            "}",
+            "# ENDFILE is a gawk extension"
+        ],
+        "description": "END { ... }"
+    },
+    "endf": {
+        "prefix": "endf",
+        "body": [
+            "ENDFILE {",
+            "${0}",
+            "}"
+        ],
+        "description": "ENDFILE { ... }"
+    },
+    "pri": {
+        "prefix": "pri",
+        "body": [
+            "print ${1:\"${2}\"}${0}"
+        ],
+        "description": "print"
+    },
+    "printf": {
+        "prefix": "printf",
+        "body": [
+            "printf(\"${1:%s}\\n\", ${2})${0}"
+        ],
+        "description": "printf"
+    },
+    "ign": {
+        "prefix": "ign",
+        "body": [
+            "IGNORECASE = ${1:1}"
+        ],
+        "description": "IGNORECASE"
+    },
+    "if": {
+        "prefix": "if",
+        "body": [
+            "if (${1}) {",
+            "${0:${VISUAL}}",
+            "}"
+        ],
+        "description": "if {...}"
+    },
+    "ife": {
+        "prefix": "ife",
+        "body": [
+            "if (${1}) {",
+            "${2:${VISUAL}}",
+            "} else {",
+            "${0}",
+            "}"
+        ],
+        "description": "if ... else ..."
+    },
+    "eif": {
+        "prefix": "eif",
+        "body": [
+            "else if (${1}) {",
+            "${0}",
+            "}"
+        ],
+        "description": "else if ..."
+    },
+    "el": {
+        "prefix": "el",
+        "body": [
+            "else {",
+            "${0}",
+            "}"
+        ],
+        "description": "else {...}"
+    },
+    "wh": {
+        "prefix": "wh",
+        "body": [
+            "while (${1}) {",
+            "${2}",
+            "}"
+        ],
+        "description": "while"
+    },
+    "do": {
+        "prefix": "do",
+        "body": [
+            "do {",
+            "${0}",
+            "} while (${1})"
+        ],
+        "description": "do ... while"
+    },
+    "for": {
+        "prefix": "for",
+        "body": [
+            "for (${2:i} = 0; i < ${1:n}; ${3:++i}) {",
+            "${0}",
+            "}"
+        ],
+        "description": "for"
+    },
+    "fore": {
+        "prefix": "fore",
+        "body": [
+            "for (${1:i} in ${2:array}) {",
+            "${0}",
+            "}",
+            "# the switch is a gawk extension"
+        ],
+        "description": "for each"
+    },
+    "sw": {
+        "prefix": "sw",
+        "body": [
+            "switch (${1}) {",
+            "case ${2}:",
+            "${3}",
+            "break",
+            "default:",
+            "${0}",
+            "break",
+            "}",
+            "# the switch is a gawk extension"
+        ],
+        "description": "switch"
+    },
+    "case": {
+        "prefix": "case",
+        "body": [
+            "case ${1}:",
+            "${0}",
+            "break"
+        ],
+        "description": "case"
+    }
+}

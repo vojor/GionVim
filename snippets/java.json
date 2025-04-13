@@ -1,0 +1,780 @@
+{
+    "po": {
+        "prefix": "po",
+        "body": [
+            "protected ${0}"
+        ],
+        "description": ""
+    },
+    "pu": {
+        "prefix": "pu",
+        "body": [
+            "public ${0}"
+        ],
+        "description": ""
+    },
+    "pr": {
+        "prefix": "pr",
+        "body": [
+            "private ${0}",
+            "##",
+            "## Annotations"
+        ],
+        "description": ""
+    },
+    "before": {
+        "prefix": "before",
+        "body": [
+            "@Before",
+            "static void ${1:intercept}(${2:args}) { ${0} }"
+        ],
+        "description": ""
+    },
+    "mm": {
+        "prefix": "mm",
+        "body": [
+            "@ManyToMany",
+            "${0}"
+        ],
+        "description": ""
+    },
+    "mo": {
+        "prefix": "mo",
+        "body": [
+            "@ManyToOne",
+            "${0}"
+        ],
+        "description": ""
+    },
+    "om": {
+        "prefix": "om",
+        "body": [
+            "@OneToMany${1:(cascade=CascadeType.ALL)}",
+            "${0}"
+        ],
+        "description": ""
+    },
+    "oo": {
+        "prefix": "oo",
+        "body": [
+            "@OneToOne",
+            "${1}",
+            "##",
+            "## Basic Java packages and import"
+        ],
+        "description": ""
+    },
+    "im": {
+        "prefix": "im",
+        "body": [
+            "import ${0}"
+        ],
+        "description": ""
+    },
+    "j.b": {
+        "prefix": "j.b",
+        "body": [
+            "java.beans."
+        ],
+        "description": ""
+    },
+    "j.i": {
+        "prefix": "j.i",
+        "body": [
+            "java.io."
+        ],
+        "description": ""
+    },
+    "j.m": {
+        "prefix": "j.m",
+        "body": [
+            "java.math."
+        ],
+        "description": ""
+    },
+    "j.n": {
+        "prefix": "j.n",
+        "body": [
+            "java.net."
+        ],
+        "description": ""
+    },
+    "j.u": {
+        "prefix": "j.u",
+        "body": [
+            "java.util.",
+            "##",
+            "## Class"
+        ],
+        "description": ""
+    },
+    "cl": {
+        "prefix": "cl",
+        "body": [
+            "class ${1:`vim_snippets#Filename(\"$1\", \"untitled\")`} ${0}"
+        ],
+        "description": ""
+    },
+    "pcl": {
+        "prefix": "pcl",
+        "body": [
+            "public class ${1:`vim_snippets#Filename(\"$1\", \"untitled\")`} ${0}"
+        ],
+        "description": ""
+    },
+    "in": {
+        "prefix": "in",
+        "body": [
+            "interface ${1:`vim_snippets#Filename(\"$1\", \"untitled\")`} ${2:extends Parent}"
+        ],
+        "description": ""
+    },
+    "tc": {
+        "prefix": "tc",
+        "body": [
+            "public class ${1:`vim_snippets#Filename(\"$1\")`} extends ${0:TestCase}",
+            "##",
+            "## Class Enhancements"
+        ],
+        "description": ""
+    },
+    "ext": {
+        "prefix": "ext",
+        "body": [
+            "extends ${0}"
+        ],
+        "description": ""
+    },
+    "imp": {
+        "prefix": "imp",
+        "body": [
+            "implements ${0}",
+            "##",
+            "## Comments"
+        ],
+        "description": ""
+    },
+    "/*": {
+        "prefix": "/*",
+        "body": [
+            "/*",
+            "* ${0}",
+            "*/",
+            "##",
+            "## Constants"
+        ],
+        "description": ""
+    },
+    "co": {
+        "prefix": "co",
+        "body": [
+            "static public final ${1:String} ${2:var} = ${3};"
+        ],
+        "description": ""
+    },
+    "cos": {
+        "prefix": "cos",
+        "body": [
+            "static public final String ${1:var} = \"${2}\";",
+            "##",
+            "## Control Statements"
+        ],
+        "description": ""
+    },
+    "case": {
+        "prefix": "case",
+        "body": [
+            "case ${1}:",
+            "${0}"
+        ],
+        "description": ""
+    },
+    "def": {
+        "prefix": "def",
+        "body": [
+            "default:",
+            "${0}"
+        ],
+        "description": ""
+    },
+    "el": {
+        "prefix": "el",
+        "body": [
+            "else"
+        ],
+        "description": ""
+    },
+    "eif": {
+        "prefix": "eif",
+        "body": [
+            "else if (${1}) ${0}"
+        ],
+        "description": ""
+    },
+    "sw": {
+        "prefix": "sw",
+        "body": [
+            "switch (${1}) {",
+            "${0}",
+            "}",
+            "##",
+            "## Create a Method"
+        ],
+        "description": ""
+    },
+    "m": {
+        "prefix": "m",
+        "body": [
+            "${1:void} ${2:method}(${3}) ${4:throws }",
+            "##",
+            "## Create a Variable"
+        ],
+        "description": ""
+    },
+    "v": {
+        "prefix": "v",
+        "body": [
+            "${1:String} ${2:var}${3: = null}${4};",
+            "##",
+            "## Declaration for ArrayList"
+        ],
+        "description": ""
+    },
+    "d.al": {
+        "prefix": "d.al",
+        "body": [
+            "List<${1:Object}> ${2:list} = new ArrayList<$1>();${0}",
+            "## Declaration for HashMap"
+        ],
+        "description": ""
+    },
+    "d.hm": {
+        "prefix": "d.hm",
+        "body": [
+            "Map<${1:Object}, ${2:Object}> ${3:map} = new HashMap<$1, $2>();${0}",
+            "## Declaration for HashSet"
+        ],
+        "description": ""
+    },
+    "d.hs": {
+        "prefix": "d.hs",
+        "body": [
+            "Set<${1:Object}> ${2:set} = new HashSet<$1>();${0}",
+            "## Declaration for Stack"
+        ],
+        "description": ""
+    },
+    "d.st": {
+        "prefix": "d.st",
+        "body": [
+            "Stack<${1:Object}> ${2:stack} = new Stack<$1>();${0}",
+            "##",
+            "## Singleton Pattern"
+        ],
+        "description": ""
+    },
+    "singlet": {
+        "prefix": "singlet",
+        "body": [
+            "private static class Holder {",
+            "private static final ${1:`vim_snippets#Filename(\"$1\")`} INSTANCE = new $1();",
+            "}",
+            "private $1() { }",
+            "public static $1 getInstance() {",
+            "return Holder.INSTANCE;",
+            "}",
+            "##",
+            "## Enhancements to Methods, variables, classes, etc."
+        ],
+        "description": ""
+    },
+    "ab": {
+        "prefix": "ab",
+        "body": [
+            "abstract ${0}"
+        ],
+        "description": ""
+    },
+    "fi": {
+        "prefix": "fi",
+        "body": [
+            "final ${0}"
+        ],
+        "description": ""
+    },
+    "st": {
+        "prefix": "st",
+        "body": [
+            "static ${0}"
+        ],
+        "description": ""
+    },
+    "sy": {
+        "prefix": "sy",
+        "body": [
+            "synchronized ${0}",
+            "##",
+            "## Error Methods"
+        ],
+        "description": ""
+    },
+    "err": {
+        "prefix": "err",
+        "body": [
+            "System.err.print(\"${0:Message}\");"
+        ],
+        "description": ""
+    },
+    "errf": {
+        "prefix": "errf",
+        "body": [
+            "System.err.printf(\"${1:Message}\", ${0:exception});"
+        ],
+        "description": ""
+    },
+    "errln": {
+        "prefix": "errln",
+        "body": [
+            "System.err.println(\"${0:Message}\");",
+            "##",
+            "## Exception Handling"
+        ],
+        "description": ""
+    },
+    "as": {
+        "prefix": "as",
+        "body": [
+            "assert ${1:test} : \"${2:Failure message}\";"
+        ],
+        "description": ""
+    },
+    "ae": {
+        "prefix": "ae",
+        "body": [
+            "assertEquals(\"${1:Failure message}\", ${2:expected}, ${3:actual});"
+        ],
+        "description": ""
+    },
+    "aae": {
+        "prefix": "aae",
+        "body": [
+            "assertArrayEquals(\"${1:Failure message}\", ${2:expecteds}, ${3:actuals});"
+        ],
+        "description": ""
+    },
+    "af": {
+        "prefix": "af",
+        "body": [
+            "assertFalse(\"${1:Failure message}\", $2);"
+        ],
+        "description": ""
+    },
+    "at": {
+        "prefix": "at",
+        "body": [
+            "assertTrue(\"${1:Failure message}\", $2);"
+        ],
+        "description": ""
+    },
+    "an": {
+        "prefix": "an",
+        "body": [
+            "assertNull(\"${1:Failure message}\", ${2:object});"
+        ],
+        "description": ""
+    },
+    "ann": {
+        "prefix": "ann",
+        "body": [
+            "assertNotNull(\"${1:Failure message}\", ${2:object});"
+        ],
+        "description": ""
+    },
+    "ass": {
+        "prefix": "ass",
+        "body": [
+            "assertSame(\"${1:Failure message}\", ${2:expected}, ${3:actual});"
+        ],
+        "description": ""
+    },
+    "asns": {
+        "prefix": "asns",
+        "body": [
+            "assertNotSame(\"${1:Failure message}\", ${2:expected}, ${3:actual});"
+        ],
+        "description": ""
+    },
+    "fa": {
+        "prefix": "fa",
+        "body": [
+            "fail(\"${1:Failure message}\");"
+        ],
+        "description": ""
+    },
+    "ca": {
+        "prefix": "ca",
+        "body": [
+            "catch(${1:Exception} ${2:e}) ${0}"
+        ],
+        "description": ""
+    },
+    "thr": {
+        "prefix": "thr",
+        "body": [
+            "throw ${0}"
+        ],
+        "description": ""
+    },
+    "ths": {
+        "prefix": "ths",
+        "body": [
+            "throws ${0}"
+        ],
+        "description": ""
+    },
+    "try": {
+        "prefix": "try",
+        "body": [
+            "try {",
+            "${0:${VISUAL}}",
+            "} catch(${1:Exception} ${2:e}) {",
+            "}"
+        ],
+        "description": ""
+    },
+    "tryf": {
+        "prefix": "tryf",
+        "body": [
+            "try {",
+            "${0:${VISUAL}}",
+            "} catch(${1:Exception} ${2:e}) {",
+            "} finally {",
+            "}",
+            "##",
+            "## Find Methods"
+        ],
+        "description": ""
+    },
+    "findall": {
+        "prefix": "findall",
+        "body": [
+            "List<${1:listName}> ${2:items} = $1.findAll();"
+        ],
+        "description": ""
+    },
+    "findbyid": {
+        "prefix": "findbyid",
+        "body": [
+            "${1:var} ${2:item} = $1.findById(${3});",
+            "##",
+            "## Javadocs"
+        ],
+        "description": ""
+    },
+    "/**": {
+        "prefix": "/**",
+        "body": [
+            "/**",
+            "* ${0}",
+            "*/"
+        ],
+        "description": ""
+    },
+    "@au": {
+        "prefix": "@au",
+        "body": [
+            "@author `system(\"grep \\`id -un\\` /etc/passwd | cut -d \\\":\\\" -f5 | cut -d \\\",\\\" -f1\")`"
+        ],
+        "description": ""
+    },
+    "@br": {
+        "prefix": "@br",
+        "body": [
+            "@brief ${0:Description}"
+        ],
+        "description": ""
+    },
+    "@fi": {
+        "prefix": "@fi",
+        "body": [
+            "@file ${0:`vim_snippets#Filename(\"$1\")`}.java"
+        ],
+        "description": ""
+    },
+    "@pa": {
+        "prefix": "@pa",
+        "body": [
+            "@param ${0:param}"
+        ],
+        "description": ""
+    },
+    "@re": {
+        "prefix": "@re",
+        "body": [
+            "@return ${0:param}",
+            "##",
+            "## Logger Methods"
+        ],
+        "description": ""
+    },
+    "debug": {
+        "prefix": "debug",
+        "body": [
+            "Logger.debug(${1:param});"
+        ],
+        "description": ""
+    },
+    "error": {
+        "prefix": "error",
+        "body": [
+            "Logger.error(${1:param});"
+        ],
+        "description": ""
+    },
+    "info": {
+        "prefix": "info",
+        "body": [
+            "Logger.info(${1:param});"
+        ],
+        "description": ""
+    },
+    "warn": {
+        "prefix": "warn",
+        "body": [
+            "Logger.warn(${1:param});",
+            "##",
+            "## Loops"
+        ],
+        "description": ""
+    },
+    "enfor": {
+        "prefix": "enfor",
+        "body": [
+            "for (${1} : ${2}) ${0}"
+        ],
+        "description": ""
+    },
+    "for": {
+        "prefix": "for",
+        "body": [
+            "for (${1}; ${2}; ${3}) ${0}"
+        ],
+        "description": ""
+    },
+    "wh": {
+        "prefix": "wh",
+        "body": [
+            "while (${1:true}) ${0}"
+        ],
+        "description": ""
+    },
+    "wht": {
+        "prefix": "wht",
+        "body": [
+            "while (true) ${0}",
+            "##",
+            "## Main method"
+        ],
+        "description": ""
+    },
+    "psvm": {
+        "prefix": "psvm",
+        "body": [
+            "public static void main (String[] args) {",
+            "${0}",
+            "}",
+            "##",
+            "## Print Methods"
+        ],
+        "description": ""
+    },
+    "sout": {
+        "prefix": "sout",
+        "body": [
+            "System.out.println(${0});"
+        ],
+        "description": ""
+    },
+    "serr": {
+        "prefix": "serr",
+        "body": [
+            "System.err.println(${0});"
+        ],
+        "description": ""
+    },
+    "print": {
+        "prefix": "print",
+        "body": [
+            "System.out.print(\"${0:Message}\");"
+        ],
+        "description": ""
+    },
+    "printf": {
+        "prefix": "printf",
+        "body": [
+            "System.out.printf(\"${1:Message}\", ${0:args});"
+        ],
+        "description": ""
+    },
+    "println": {
+        "prefix": "println",
+        "body": [
+            "System.out.println(${0});"
+        ],
+        "description": ""
+    },
+    "printlna": {
+        "prefix": "printlna",
+        "body": [
+            "System.out.println(Arrays.toString(${0}));",
+            "##",
+            "## Render Methods"
+        ],
+        "description": ""
+    },
+    "ren": {
+        "prefix": "ren",
+        "body": [
+            "render(${1:param});"
+        ],
+        "description": ""
+    },
+    "rena": {
+        "prefix": "rena",
+        "body": [
+            "renderArgs.put(\"${1}\", ${2});"
+        ],
+        "description": ""
+    },
+    "renb": {
+        "prefix": "renb",
+        "body": [
+            "renderBinary(${1:param});"
+        ],
+        "description": ""
+    },
+    "renj": {
+        "prefix": "renj",
+        "body": [
+            "renderJSON(${1:param});"
+        ],
+        "description": ""
+    },
+    "renx": {
+        "prefix": "renx",
+        "body": [
+            "renderXml(${1:param});",
+            "##",
+            "## Setter and Getter Methods"
+        ],
+        "description": ""
+    },
+    "set": {
+        "prefix": "set",
+        "body": [
+            "${1:public} void set${3:}(${2:String} ${0:}){",
+            "this.$4 = $4;",
+            "}"
+        ],
+        "description": ""
+    },
+    "get": {
+        "prefix": "get",
+        "body": [
+            "${1:public} ${2:String} get${3:}(){",
+            "return this.${0:};",
+            "}",
+            "##",
+            "## Terminate Methods or Loops"
+        ],
+        "description": ""
+    },
+    "re": {
+        "prefix": "re",
+        "body": [
+            "return ${0}"
+        ],
+        "description": ""
+    },
+    "br": {
+        "prefix": "br",
+        "body": [
+            "break;",
+            "##",
+            "## Test Methods"
+        ],
+        "description": ""
+    },
+    "t": {
+        "prefix": "t",
+        "body": [
+            "public void test${1:Name}() throws Exception {",
+            "${0}",
+            "}"
+        ],
+        "description": ""
+    },
+    "test": {
+        "prefix": "test",
+        "body": [
+            "@Test",
+            "public void test${1:Name}() throws Exception {",
+            "${0}",
+            "}",
+            "##",
+            "## Utils"
+        ],
+        "description": ""
+    },
+    "Sc": {
+        "prefix": "Sc",
+        "body": [
+            "Scanner",
+            "##",
+            "## Miscellaneous"
+        ],
+        "description": ""
+    },
+    "action": {
+        "prefix": "action",
+        "body": [
+            "public static void ${1:index}(${2:args}) { ${0} }"
+        ],
+        "description": ""
+    },
+    "rnf": {
+        "prefix": "rnf",
+        "body": [
+            "notFound(${1:param});"
+        ],
+        "description": ""
+    },
+    "rnfin": {
+        "prefix": "rnfin",
+        "body": [
+            "notFoundIfNull(${1:param});"
+        ],
+        "description": ""
+    },
+    "rr": {
+        "prefix": "rr",
+        "body": [
+            "redirect(${1:param});"
+        ],
+        "description": ""
+    },
+    "ru": {
+        "prefix": "ru",
+        "body": [
+            "unauthorized(${1:param});"
+        ],
+        "description": ""
+    },
+    "unless": {
+        "prefix": "unless",
+        "body": [
+            "(unless=${1:param});"
+        ],
+        "description": ""
+    }
+}
