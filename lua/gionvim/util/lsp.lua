@@ -157,13 +157,7 @@ function M.formatter(opts)
 end
 
 function M.format(opts)
-    opts = vim.tbl_deep_extend(
-        "force",
-        {},
-        opts or {},
-        GionVim.opts("nvim-lspconfig").format or {},
-        GionVim.opts("conform.nvim").format or {}
-    )
+    opts = vim.tbl_deep_extend("force", {}, opts or {}, GionVim.opts("conform.nvim").format or {})
     local ok, conform = pcall(require, "conform")
     if ok then
         opts.formatters = {}

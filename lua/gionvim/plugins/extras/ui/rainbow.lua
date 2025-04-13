@@ -9,12 +9,17 @@ return {
                 strategy = {
                     [""] = rainbow_delimiters.strategy["global"],
                     vim = rainbow_delimiters.strategy["local"],
+                    html = rainbow_delimiters.strategy["local"],
                 },
                 query = {
                     [""] = "rainbow-delimiters",
                     lua = "rainbow-blocks",
                     javascript = "rainbow-delimiters-react",
-                    -- tsx = "rainbow-parens",
+                    typescript = "rainbow-parens",
+                    query = function(bufnr)
+                        local is_nofile = vim.bo[bufnr].buftype == "nofile"
+                        return is_nofile and "rainbow-blocks" or "rainbow-delimiters"
+                    end,
                 },
                 highlight = {
                     "RainbowDelimiterRed",

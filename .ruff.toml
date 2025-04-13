@@ -1,19 +1,30 @@
+fix = true
 indent-width = 4
 line-length = 120
 show-fixes = true
 target-version = "py313"
-task-tags = ["FIX", "FIXME", "HACK", "NOTE", "PERF", "TODO", "WARN", "XXX"]
-unsafe-fixes = true
 
-[lint]
-extend-select = ["UP"]
-select = ["B", "E", "F", "Q"]
+[analyze]
+detect-string-imports = true
 
 [format]
 docstring-code-format = true
-docstring-code-line-length = "dynamic"
+exclude = ["*.pyi"]
 indent-style = "space"
 line-ending = "lf"
 
+[lint]
+extend-fixable = ["B"]
+extend-select = ["B", "Q"]
+external = ["V"]
+select = ["B", "E", "F", "Q"]
+task-tags = ["FIX", "FIXME", "HACK", "NOTE", "PERF", "TODO", "WARN", "XXX"]
+typing-modules = ["airflow.typing_compat"]
+
+[lint.flake8-gettext]
+function-names = ["_", "gettext", "ngettext", "ugettetxt"]
+
 [lint.isort]
 case-sensitive = true
+from-first = true
+no-lines-before = ["future", "standard-library"]

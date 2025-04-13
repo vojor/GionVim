@@ -35,7 +35,6 @@ return {
             -- terminal
             { "<leader>lgm", "<cmd>Lspsaga term_toggle<CR>", desc = "Float Terminal" },
         },
-        dependencies = { "nvim-treesitter" },
         config = function()
             require("lspsaga").setup({
                 symbol_in_winbar = {

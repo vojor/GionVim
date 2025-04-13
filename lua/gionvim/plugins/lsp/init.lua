@@ -42,32 +42,11 @@ return {
                     underline = true,
                     update_in_insert = false,
                     severity_sort = true,
-                    -- virtual_text = false,
-                    virtual_text = {
-                        spacing = 4,
-                        prefix = "●",
-                        source = "if_many",
-                    },
-                    float = {
-                        source = "if_many",
-                    },
+                    virtual_text = { spacing = 4, prefix = "●", source = "if_many" },
+                    float = { source = "if_many" },
                 },
-                inlay_hints = {
-                    enabled = true,
-                    exclude = {},
-                },
-                codelens = {
-                    enabled = false,
-                },
-                capabilities = {
-                    workspace = {
-                        fileOperations = {
-                            didRename = true,
-                            willRename = true,
-                        },
-                    },
-                },
-                servers = { "vimls", "bashls", "marksman", "lemminx", "taplo" },
+                inlay_hints = { enabled = true, exclude = {} },
+                codelens = { enabled = false },
             }
             return ret
         end,
@@ -108,162 +87,27 @@ return {
             end
 
             vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
-
             vim.lsp.set_log_level("error")
 
-            local lspconfig = require("lspconfig")
+            local filename = {
+                "basedpy",
+                "bashls",
+                "clangd",
+                "jsonls",
+                "lemminx",
+                "luals",
+                "marksman",
+                "neocmake",
+                "sqls",
+                "taplo",
+                "vimls",
+                "yamlls",
+            }
 
-            local capabilities = require("blink.cmp").get_lsp_capabilities()
-            local new_capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {})
-
-            local clangd_capabilities = vim.tbl_deep_extend("force", vim.deepcopy(new_capabilities), {
-                offsetEncoding = { "utf-16" },
-            })
-            local json_capabilities = vim.tbl_deep_extend("force", vim.deepcopy(new_capabilities), {
-                textDocument = {
-                    completion = {
-                        completionItem = {
-                            snippetSupport = true,
-                        },
-                    },
-                },
-            })
-            local yaml_capabilities = vim.tbl_deep_extend("force", vim.deepcopy(new_capabilities), {
-                textDocument = {
-                    foldingRange = {
-                        dynamicRegistration = false,
-                        lineFoldingOnly = true,
-                    },
-                },
-            })
-            local neocmake_capabilities = vim.tbl_deep_extend("force", vim.deepcopy(new_capabilities), {
-                workspace = {
-                    didChangeWatchedFiles = {
-                        dynamicRegistration = true,
-                    },
-                },
-                textDocument = {
-                    completion = {
-                        completionItem = {
-                            snippetSupport = true,
-                        },
-                    },
-                },
-            })
-
-            local servers = opts.servers
-
-            lspconfig.clangd.setup({
-                cmd = {
-                    "clangd",
-                    "--background-index",
-                    "--clang-tidy",
-                    "--header-insertion=iwyu",
-                    "--header-insertion-decorators",
-                    "--function-arg-placeholders",
-                    "--log=verbose",
-                    "--enable-config",
-                    "--all-scopes-completion",
-                    "--clang-tidy-checks=bugprone-*, cert-*, clang-analyzer-*, concurrency-*, cppcoreguidelines-*, google-*, hicpp-*, misc-*, modernize-*, performance-*, portability-*, readability-*",
-                },
-                init_options = {
-                    usePlaceholders = true,
-                    completeUnimported = true,
-                    clangdFileStatus = true,
-                },
-                capabilities = clangd_capabilities,
-            })
-
-            lspconfig.neocmake.setup({
-                init_options = {
-                    format = {
-                        enable = false,
-                    },
-                    lint = {
-                        enable = true,
-                    },
-                    scan_cmake_in_package = true,
-                },
-                capabilities = neocmake_capabilities,
-            })
-
-            lspconfig.jsonls.setup({
-                settings = {
-                    json = {
-                        schemas = require("schemastore").json.schemas(),
-                        validate = { enable = true },
-                    },
-                },
-                capabilities = json_capabilities,
-            })
-
-            lspconfig.yamlls.setup({
-                settings = {
-                    yaml = {
-                        schemaStore = {
-                            enable = false,
-                            url = "",
-                        },
-                        schemas = require("schemastore").yaml.schemas(),
-                        validate = true,
-                    },
-                },
-                capabilities = yaml_capabilities,
-            })
-
-            lspconfig.basedpyright.setup({
-                settings = {
-                    basedpyright = {
-                        analysis = {
-                            autoSearchPaths = true,
-                            diagnosticMode = "workspace",
-                            typeCheckingMode = "strict",
-                            useLibraryCodeForTypes = true,
-                        },
-                    },
-                },
-                capabilities = vim.deepcopy(new_capabilities),
-            })
-
-            lspconfig.lua_ls.setup({
-                settings = {
-                    Lua = {
-                        workspace = {
-                            checkThirdParty = false,
-                        },
-                        runtime = {
-                            version = "LuaJIT",
-                        },
-                        codeLens = {
-                            enable = true,
-                        },
-                        completion = {
-                            callSnippet = "Both",
-                            keywordSnippet = "Both",
-                        },
-                        doc = {
-                            privateName = { "^_" },
-                        },
-                        hint = {
-                            enable = true,
-                            setType = false,
-                            paramType = true,
-                            paramName = "Disable",
-                            semicolon = "Disable",
-                            arrayIndex = "Disable",
-                        },
-                    },
-                },
-                capabilities = vim.deepcopy(new_capabilities),
-            })
-
-            for _, lsp in ipairs(servers) do
-                lspconfig[lsp].setup({
-                    capabilities = vim.deepcopy(new_capabilities),
-                })
+            for _, name in ipairs(filename) do
+                require("gionvim.plugins.lsp.lang." .. name)
             end
 
-            -- Transfer keybinds
             require("gionvim.plugins.lsp.keymaps")
         end,
     },

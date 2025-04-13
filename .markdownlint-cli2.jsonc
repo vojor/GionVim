@@ -1,0 +1,19 @@
+{
+    "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/main/schema/markdownlint-cli2-config-schema.json",
+    "globs": ["*.md", "!node_modules"],
+    "config": {
+        "default": true,
+        "ul-style": {
+            "style": "plus"
+        },
+        "ul-indent": {
+            "indent": 4
+        },
+        "ol-prefix": {
+            "style": "ordered"
+        },
+        "emphasis-style": {
+            "style": "underscore"
+        }
+    }
+}

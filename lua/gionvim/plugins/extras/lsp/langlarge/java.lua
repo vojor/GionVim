@@ -4,22 +4,12 @@ return {
         lazy = true,
         ft = "java",
         config = function()
-            local capabilities = require("blink.cmp").get_lsp_capabilities()
-            local jdtls_capabilities = vim.tbl_deep_extend("force", capabilities, {
-                workspace = {
-                    configuration = true,
-                },
-                textDocument = {
-                    completion = {
-                        completionItem = {
-                            snippetSupport = true,
-                        },
-                    },
-                },
-            })
-
             local config = {
-                capabilities = jdtls_capabilities,
+
+                capabilities = require("blink.cmp").get_lsp_capabilities({
+                    workspace = { fileOperations = { didRename = true, willRename = true }, configuration = true },
+                }),
+
                 cmd = {
                     "java",
                     "-Declipse.application=org.eclipse.jdt.ls.core.id1",

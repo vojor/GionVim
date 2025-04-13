@@ -5,9 +5,6 @@ return {
         ft = { "c", "cpp" },
         config = function()
             require("clangd_extensions").setup({
-                inlay_hints = {
-                    inline = true,
-                },
                 ast = {
                     role_icons = {
                         type = "",
@@ -27,18 +24,13 @@ return {
                         TemplateParamObject = "",
                     },
                 },
-                memory_usage = {
-                    border = "rounded",
-                },
-                symbol_info = {
-                    border = "single",
-                },
+                memory_usage = { border = "rounded" },
+                symbol_info = { border = "single" },
             })
-            vim.keymap.set("n", "<leader>jcs", "<cmd>ClangdSymbolInfo<CR>", { desc = "Show Cursor Local Symbol Info" })
-            -- stylua: ignore
-            vim.keymap.set("n", "<leader>jcl", "<cmd>ClangdTypeHierarchy<CR>", { desc = "Show Cursor Local Type Hierarchy" })
-            -- stylua: ignore
-            vim.keymap.set("n", "<leader>jcg", "<cmd>ClangdMemoryUsage expand_preamble<CR>", { desc = "Show Memory Use Status" })
+            vim.keymap.set("n", "<leader>scs", "<cmd>ClangdSymbolInfo<CR>", { desc = "Symbol Info" })
+            vim.keymap.set("n", "<leader>sca", "<cmd>ClangdAST<CR>", { desc = "AST Status" })
+            vim.keymap.set("n", "<leader>scl", "<cmd>ClangdTypeHierarchy<CR>", { desc = "Type Hierarchy" })
+            vim.keymap.set("n", "<leader>scg", "<cmd>ClangdMemoryUsage expand_preamble<CR>", { desc = "Memory Status" })
         end,
     },
     {
@@ -46,7 +38,7 @@ return {
         optional = true,
         opts = {
             spec = { {
-                { "<leader>jc", group = "clangd" },
+                { "<leader>sc", group = "clangd" },
             } },
         },
     },

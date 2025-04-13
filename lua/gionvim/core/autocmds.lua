@@ -61,6 +61,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "startuptime",
         "OverseerList",
         "jqx",
+        "ClangdAST",
         "checkhealth",
         "gitsigns-blame",
         "grug-far",
