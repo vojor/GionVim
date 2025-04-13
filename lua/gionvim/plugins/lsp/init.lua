@@ -1,20 +1,20 @@
 return {
-    -- LSP basic service
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         keys = {
-            { "<leader>i", "", desc = "serve" },
+            { "<leader>i", "", desc = "relay" },
             {
                 "<leader>ii",
                 function()
                     Snacks.picker.lsp_config()
                 end,
-                desc = "Lsp Configuration Information",
+                desc = "Server Status",
             },
-            { "<leader>is", "<cmd>LspStart<CR>", desc = "Start LSP Server" },
-            { "<leader>ip", "<cmd>LspStop<CR>", desc = "Stop LSP Server" },
-            { "<leader>ir", "<cmd>LspRestart<CR>", desc = "Restart LSP Server" },
+            { "<leader>if", "<cmd>LspInfo<CR>", desc = "Server Information" },
+            { "<leader>is", "<cmd>LspStart<CR>", desc = "Start Server" },
+            { "<leader>ip", "<cmd>LspStop<CR>", desc = "Stop Server" },
+            { "<leader>ir", "<cmd>LspRestart<CR>", desc = "Restart Server" },
         },
         dependencies = {
             {
@@ -98,7 +98,6 @@ return {
                 "luals",
                 "marksman",
                 "neocmake",
-                "sqls",
                 "taplo",
                 "vimls",
                 "yamlls",

@@ -1,5 +1,5 @@
 return {
-    -- Reduce lua function writing
+    -- Reduce lua function wrote
     {
         "nvim-lua/plenary.nvim",
         lazy = true,
@@ -37,7 +37,7 @@ return {
             end
         end,
     },
-    -- Sqlite operate
+    -- Operate SQLite
     {
         "kkharji/sqlite.lua",
         lazy = true,
@@ -47,20 +47,20 @@ return {
         "b0o/SchemaStore.nvim",
         lazy = true,
     },
-    -- Simply luarocks package installed
+    -- Simply luarocks package mechanism
     {
         "vhyrro/luarocks.nvim",
         priority = 1000,
         config = true,
     },
-    -- Manage lsp,dap,diagnostics,formatting serve install
+    -- Manage code server mechanism
     {
         "williamboman/mason.nvim",
         build = ":MasonUpdate",
         lazy = true,
         cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonLog", "MasonUpdate" },
         keys = {
-            { "<leader>Mm", "<cmd>Mason<CR>", desc = "Services Manager" },
+            { "<leader>jm", "<cmd>Mason<CR>", desc = "Manage Server" },
         },
         opts = {
             log_level = vim.log.levels.ERROR,

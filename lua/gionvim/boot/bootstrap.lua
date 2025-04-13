@@ -28,7 +28,7 @@ require("lazy").setup({
 
         ---- Extras plugin ----
         -- colorscheme
-        -- { import = "gionvim.plugins.extras.colorscheme.nightfox" },
+        { import = "gionvim.plugins.extras.colorscheme.nightfox" },
         -- dap
         { import = "gionvim.plugins.extras.dap.luadap" }, -- Neovim lua debug
         -- develop
@@ -56,15 +56,14 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.labeler.arrow" }, -- File and buffer mark
         { import = "gionvim.plugins.extras.labeler.marks" }, -- Line mark
         -- lsp
-        -- -- lang
-        { import = "gionvim.plugins.extras.lsp.langlarge.clangd" }, -- C/C++
-        -- { import = "gionvim.plugins.extras.lsp.langlarge.java" }, -- Java
-        { import = "gionvim.plugins.extras.lsp.langlarge.jqx" }, -- Json/Yaml
+        -- -- lang extension
+        { import = "gionvim.plugins.extras.lsp.langlarge.clangd" }, -- C or C++
+        { import = "gionvim.plugins.extras.lsp.langlarge.java" }, -- Java
+        { import = "gionvim.plugins.extras.lsp.langlarge.jqx" }, -- Json or Yaml
         { import = "gionvim.plugins.extras.lsp.langlarge.markdown" }, -- Markdown
         { import = "gionvim.plugins.extras.lsp.langlarge.sqls" }, -- SQL or MySQL
-        { import = "gionvim.plugins.extras.lsp.langlarge.typescript" }, -- Javascript/Typescript
+        { import = "gionvim.plugins.extras.lsp.langlarge.typescript" }, -- Javascript or Typescript
         -- -- util
-        -- { import = "gionvim.plugins.extras.lsp.boost.better-diagnostic-virtual-text" }, -- improve diagnostic virtual text
         { import = "gionvim.plugins.extras.lsp.boost.dropbar" }, -- Code navigate
         { import = "gionvim.plugins.extras.lsp.boost.fidget" }, -- Progress prompt
         { import = "gionvim.plugins.extras.lsp.boost.garbage" }, -- Disable unfocused serve
@@ -89,7 +88,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.ui.indentstyle" }, -- Indent format
         { import = "gionvim.plugins.extras.ui.rainbow" }, -- Rainbow brackets
         -- utils
-        { import = "gionvim.plugins.extras.utils.dot" }, -- Add more file types
+        { import = "gionvim.plugins.extras.utils.dot" }, -- Add more file type
         { import = "gionvim.plugins.extras.utils.startuptime" }, -- Measure startup time
         { import = "gionvim.plugins.extras.utils.rest" }, -- Http client
     },

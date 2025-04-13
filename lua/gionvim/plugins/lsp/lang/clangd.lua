@@ -11,7 +11,7 @@ vim.lsp.config("clangd", {
         "--all-scopes-completion",
         "--clang-tidy-checks=bugprone-*, cert-*, clang-analyzer-*, concurrency-*, cppcoreguidelines-*, google-*, hicpp-*, misc-*, modernize-*, performance-*, portability-*, readability-*",
     },
-    filetypes = { "c", "cpp" },
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
     init_options = {
         usePlaceholders = true,
         completeUnimported = true,
@@ -19,7 +19,6 @@ vim.lsp.config("clangd", {
     },
 
     capabilities = require("blink.cmp").get_lsp_capabilities({
-        offsetEncoding = { "utf-16" },
         workspace = { fileOperations = { didRename = true, willRename = true } },
     }),
 })

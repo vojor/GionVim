@@ -94,33 +94,33 @@ vim.opt.fillchars = { foldopen = "", foldclose = "", fold = " ", foldsep =
 --------  Indent  --------
 -- Keep indentation unchanged
 vim.opt.breakindent = true
--- -- 根据上一行决定新行的缩进
+-- -- Smart indent
 vim.opt.smartindent = true
--- -- tab 占用的空格数量
+-- -- One tab replace space number
 vim.opt.tabstop = 4
--- -- 缩进的空白长度指示
+-- -- Indent space indicator
 vim.opt.shiftwidth = 4
--- -- 编辑时 tab 使用的空格数
+-- -- Editing tab use space number
 vim.opt.softtabstop = 4
--- Expand tab to space
+-- -- Expand tab to space
 vim.opt.expandtab = true
--- -- 缩进列数对齐到 shiftwidth 的整数倍
+-- -- Indent align at shiftwidth integral multiple
 vim.opt.shiftround = true
--- 插入括号时短暂跳转到另一半括号
+-- Insert bracket transience jump side
 vim.opt.showmatch = true
--- 光标在行首尾时<Left><Right>可以跳到下一行
+-- Cursor in head or end,allow <Left><Right> jump next line
 vim.opt.whichwrap = "<,>,[,]"
--- 在视觉块模式下，允许光标在没有文字的地方移动
+-- In visual block mode，allow cursor to move in areas without text
 vim.opt.virtualedit = "block"
 
 --------  Completion  --------
--- 补全菜单背景透明
+-- Po-pup menu transparency
 vim.opt.pumblend = 10
--- 补全菜单长度
+-- Po-pup menu max row number
 vim.opt.pumheight = 12
---'wildchar' 命令行扩展所用的模式
+-- Curb behavior for command completion
 vim.opt.wildmode = "longest:full,full"
--- 增强模式的命令行补全
+-- Strengthen mode command line completion
 vim.opt.wildmenu = true
 
 --------  Fold  --------
