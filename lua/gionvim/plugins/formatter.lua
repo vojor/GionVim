@@ -41,7 +41,7 @@ return {
                 typescript = { "biome" },
                 typescriptreact = { "biome" },
                 lua = { "stylua" },
-                markdown = { "injected" },
+                markdown = { "mdsf", "injected" },
                 norg = { "injected" },
                 python = { "ruff_format", "ruff_organize_imports", "ruff_fix" },
                 sh = { "shfmt", "shellharden" },
