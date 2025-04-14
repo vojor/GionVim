@@ -1,5 +1,5 @@
 {
-    "name": "custom-snippets",
+    "name": "extra-snippets",
     "engines": {
         "vscode": "^1.11.0"
     },
@@ -52,6 +52,10 @@
             {
                 "language": "java",
                 "path": "./snippets/java.json"
+            },
+            {
+                "language": "jsp",
+                "path": "./snippets/jsp.json"
             },
             {
                 "language": ["typescript", "typescriptreact"],

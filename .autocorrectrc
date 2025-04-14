@@ -1,19 +1,23 @@
-# yaml-language-server: $schema=https://huacnlee.github.io/autocorrect/schema.json
+---
 rules:
-  # Default rules: https://github.com/huacnlee/autocorrect/raw/main/autocorrect/.autocorrectrc.default
+  space-word: 1
+  space-punctuation: 1
+  space-bracket: 1
+  space-backticks: 1
+  space-dash: 0
+  fullwidth: 1
+  no-space-fullwidth: 1
+  halfwidth-word: 1
+  halfwidth-punctuation: 1
   spellcheck: 2
+context:
+  codeblock: 1
 textRules:
-  # Config some special rule for some texts
-  # For example, if we wants to let "Hello 你好" just warning, and "Hi 你好" to ignore
-  # "Hello 你好": 2
-  # "Hi 你好": 0
 fileTypes:
-  # Config the files associations, you config is higher priority than default.
+  "*.js": javascript
   ".mdx": markdown
 spellcheck:
   words:
-    # Please do not add a general English word (eg. apple, python) here.
-    # Users can add their special words to their .autocorrectrc file by their need.
     - ActiveMQ
     - AirPods
     - Aliyun
@@ -33,7 +37,7 @@ spellcheck:
     - ESLint
     - Facebook
     - GeForce
-    - GitHub = github
+    - GitHub
     - Google
     - GPU
     - H5
@@ -96,7 +100,7 @@ spellcheck:
     - Tesla
     - TikTok
     - tvOS
-    - TypeScript = typescript
+    - TypeScript
     - Ubuntu
     - UML
     - URI

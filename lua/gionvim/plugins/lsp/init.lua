@@ -42,11 +42,12 @@ return {
                     underline = true,
                     update_in_insert = false,
                     severity_sort = true,
+                    virtual_lines = { current_line = true },
                     virtual_text = { spacing = 4, prefix = "●", source = "if_many" },
                     float = { source = "if_many" },
                 },
                 inlay_hints = { enabled = true, exclude = {} },
-                codelens = { enabled = false },
+                codelens = { enabled = true },
             }
             return ret
         end,

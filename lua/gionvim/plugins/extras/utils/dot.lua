@@ -18,6 +18,7 @@ return {
                 extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi" },
                 filename = {
                     ["vifmrc"] = "vim",
+                    [".autocorrectrc"] = "yaml",
                 },
                 pattern = {
                     ["%.env%.[%w_.-]+"] = "sh",
