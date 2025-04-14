@@ -68,9 +68,7 @@ return {
             sources = {
                 compat = {},
                 default = { "lsp", "path", "snippets", "buffer" },
-                per_filetype = {
-                    lua = { "lazydev", "lsp", "path", "snippets", "buffer" },
-                },
+                per_filetype = { lua = { "lazydev", "lsp", "path", "snippets", "buffer" } },
                 providers = {
                     lazydev = {
                         name = "LazyDev",
