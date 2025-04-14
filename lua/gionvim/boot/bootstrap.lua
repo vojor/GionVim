@@ -61,6 +61,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.lsp.langlarge.java" }, -- Java
         { import = "gionvim.plugins.extras.lsp.langlarge.jqx" }, -- Json or Yaml
         { import = "gionvim.plugins.extras.lsp.langlarge.markdown" }, -- Markdown
+        { import = "gionvim.plugins.extras.lsp.langlarge.pyvenv" }, -- python
         { import = "gionvim.plugins.extras.lsp.langlarge.sqls" }, -- SQL or MySQL
         { import = "gionvim.plugins.extras.lsp.langlarge.typescript" }, -- Javascript or Typescript
         -- -- util
