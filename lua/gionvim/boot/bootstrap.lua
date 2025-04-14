@@ -88,6 +88,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.ui.hlslens" }, -- Highlight entries during search
         { import = "gionvim.plugins.extras.ui.indentstyle" }, -- Indent format
         { import = "gionvim.plugins.extras.ui.rainbow" }, -- Rainbow brackets
+        { import = "gionvim.plugins.extras.ui.smear" }, -- Smear cursor
         -- utils
         { import = "gionvim.plugins.extras.utils.chainsaw" }, -- Add log
         { import = "gionvim.plugins.extras.utils.dot" }, -- Add more file type
