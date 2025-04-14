@@ -23,17 +23,10 @@ return {
                     return GionVim.cmp.expand(snippet)
                 end,
             },
-            appearance = {
-                use_nvim_cmp_as_default = false,
-                nerd_font_variant = "mono",
-            },
             completion = {
-                accept = {
-                    auto_brackets = {
-                        enabled = true,
-                    },
-                },
                 menu = {
+                    border = "rounded",
+                    winblend = 10,
                     draw = {
                         columns = { { "kind_icon" }, { "label", gap = 1 } },
                         components = {
@@ -75,10 +68,30 @@ return {
             sources = {
                 compat = {},
                 default = { "lsp", "path", "snippets", "buffer" },
+                per_filetype = {
+                    lua = { "lazydev", "lsp", "path", "snippets", "buffer" },
+                },
+                providers = {
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        score_offset = 100,
+                    },
+                },
             },
 
             cmdline = {
-                enabled = true,
+                keymap = {
+                    ["Tab"] = { "show", "accept" },
+                    ["<CR>"] = { "accept_and_enter", "fallback" },
+                },
+                completion = {
+                    menu = {
+                        auto_show = function(ctx)
+                            return vim.fn.getcmdtype() == ":"
+                        end,
+                    },
+                },
             },
 
             keymap = {
@@ -148,20 +161,5 @@ return {
             opts.appearance.kind_icons =
                 vim.tbl_extend("force", opts.appearance.kind_icons or {}, GionConfig.icons.kinds)
         end,
-    },
-    {
-        "saghen/blink.cmp",
-        opts = {
-            sources = {
-                default = { "lazydev" },
-                providers = {
-                    lazydev = {
-                        name = "LazyDev",
-                        module = "lazydev.integrations.blink",
-                        score_offset = 100,
-                    },
-                },
-            },
-        },
     },
 }
