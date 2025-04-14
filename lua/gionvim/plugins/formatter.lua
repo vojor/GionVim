@@ -45,7 +45,7 @@ return {
                 norg = { "injected" },
                 python = { "ruff_format", "ruff_organize_imports", "ruff_fix" },
                 sh = { "shfmt", "shellharden" },
-                sql = { "sqlfluff" },
+                -- sql = { "sqlfluff" },
                 toml = { "taplo" },
                 yaml = { "yamlfmt" },
                 ["_"] = { "trim_whitespace", "trim_newlines" },

@@ -75,7 +75,7 @@ return {
                 markdown = { "markdownlint-cli2" },
                 python = { "ruff" },
                 sh = { "shellcheck" },
-                sql = { "sqlfluff" },
+                -- sql = { "sqlfluff" },
                 vim = { "vint" },
                 yaml = { "yamllint" },
                 zsh = { "zsh" },
