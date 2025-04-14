@@ -82,6 +82,7 @@ return {
                 "bashls",
                 "clangd",
                 "jsonls",
+                "kulala",
                 "lemminx",
                 "luals",
                 "marksman",

@@ -224,7 +224,7 @@ return {
             end, { noremap = true })
         end,
     },
-    -- Tickle space and blank
+    -- Trim space and blank
     {
         "echasnovski/mini.trailspace",
         version = false,
