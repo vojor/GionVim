@@ -38,8 +38,10 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.develop.refactor" }, -- Refactor code
         -- diagnostics
         { import = "gionvim.plugins.extras.diagnostics.trouble" }, -- Look diagnostics result
+        { import = "gionvim.plugins.extras.diagnostics.tiny" }, -- Tiny diagnostics announce
         -- editor
         { import = "gionvim.plugins.extras.editor.autotools" }, -- Auto pairs and save
+        { import = "gionvim.plugins.extras.editor.multicursor" }, -- Multiple cursor
         { import = "gionvim.plugins.extras.editor.portal" }, -- Local list navigate
         { import = "gionvim.plugins.extras.editor.replacer" }, -- Factor replace
         { import = "gionvim.plugins.extras.editor.surround" }, -- Surround modify
@@ -88,7 +90,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.ui.hlslens" }, -- Highlight entries during search
         { import = "gionvim.plugins.extras.ui.indentstyle" }, -- Indent format
         { import = "gionvim.plugins.extras.ui.rainbow" }, -- Rainbow brackets
-        { import = "gionvim.plugins.extras.ui.smear" }, -- Smear cursor
         -- utils
         { import = "gionvim.plugins.extras.utils.chainsaw" }, -- Add log
         { import = "gionvim.plugins.extras.utils.dot" }, -- Add more file type

@@ -42,8 +42,6 @@ return {
                     underline = true,
                     update_in_insert = false,
                     severity_sort = true,
-                    virtual_lines = { current_line = true },
-                    virtual_text = { spacing = 4, prefix = "●", source = "if_many" },
                     float = { source = "if_many" },
                 },
                 inlay_hints = { enabled = true, exclude = {} },
@@ -74,17 +72,6 @@ return {
                         callback = vim.lsp.codelens.refresh,
                     })
                 end)
-            end
-
-            if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
-                opts.diagnostics.virtual_text.prefix = function(diagnostic)
-                    local icons = GionConfig.icons.diagnostics
-                    for d, icon in pairs(icons) do
-                        if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                            return icon
-                        end
-                    end
-                end
             end
 
             vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
