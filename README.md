@@ -2,18 +2,18 @@
 
 <div align="center">
 
-[![Neovim Version](https://img.shields.io/badge/Neovim-0.10%2B-brightblue?style=flat&logo=neovim&logoColor=green)](https://github.com/neovim/neovim)
-[![GitHub License](https://img.shields.io/github/license/vojor/GionVim?style=flat&logo=github&logoColor=orange&color=blue)](https://github.com/vojor/GionVim/blob/main/LICENSE)
+[![Neovim Version](https://img.shields.io/badge/Neovim-0.11%2B-brightblue?style=flat&logo=neovim&logoColor=green)](https://github.com/neovim/neovim)
+[![Github License](https://img.shields.io/github/license/vojor/GionVim?style=flat&logo=github&logoColor=orange&color=blue)](https://github.com/vojor/GionVim/blob/main/LICENSE)
 
 </div>
 
-> Summary: Excellent NeoVim Configuration, Applicable to Linux/WSL, If you are using a Windows system, there may be a slight lag.
+> Summary: Excellent Neovim Configuration, Applicable to Linux/WSL, If you are using a Windows system, there may be a slight lag.
 
 ## Features
 
 - Development
 
-  - C/C++, Java, javascript and typescript, lua, python, cmake, bash, vimscript, xml, json support.
+  - Language support: C/C++, Java, javascript and typescript, lua, python, cmake, bash, vim, xml, yaml.
 
 - ColorScheme
 
@@ -21,25 +21,25 @@
 
 - Custom
 
-  - Highly customizable configuration.
+  - Highly liberalized configuration.
 
 ## Requirement
 
-- **Notice: After configuring from GitHub clone, it is necessary to modify the configuration content inside the configuration file before using it. Directly using it may result in errors.**
+- **Notice: After configuring from github clone, it is necessary to modify the configuration content inside the configuration file before using it. Directly using it may result in errors.**
 
 - Dependent
 
-  - basic: git
+  - essential: git
 
-  - lsp: Node, Python
+  - lsp: Node and npm, Python and pip
 
   - treesitter: gcc or clang
 
-  - mason: unzip, gzip, wget, curl, tar
-
-  - telescope: make, fd, ripgrep, fzf
+  - mason: unzip, gzip, wget, curl, tar, bash, sh
 
   - database: sqlite3
+
+  - tools: fd, fzf, ripgrep, ugrep
 
 - Modify Configuration(plugin)
 
@@ -47,9 +47,9 @@
 
 - others
 
-  - Windows system: Recommend using msys2 to install dependency tools, address: [msys2](https://www.msys2.org)
+  - Windows system: Recommend using msys2 to install reliance tools, address: [msys2](https://www.msys2.org)
 
-  - The system can access GitHub normally.
+  - The system can access github normally.
 
 ## Installation
 
@@ -69,18 +69,22 @@
 
 ## Introduction to Important Plugins
 
-### nvim-lspconfig
+### nvim-lsp
 
-- The language server can be installed using Mason, and the configuration file can be found in plugins/lsp/init.lua. You can first modify the configuration, delete unnecessary language servers, or add the necessary language servers yourself.
+1. The language server can be installed using Mason.
+
+2. The configuration file locate plugins/lsp/init.lua.
+
+3.  You can delete unnecessary file, it orident plugins/lsp/lang, also add the demand language servers.
 
 ### nvim-treesitter
 
-- Treesitter supports more advanced syntax highlighting and text object processing.
+- Tree-sitter supports more advanced syntax highlight and text object processing.
 
-## Custiom Configuration
+## Own Allocation
 
 - Almost all files can be modified on their own to create the most suitable configuration for you.
 
-## More Plugin
+## Increasingly(Plugin)
 
-- Recommended plugin website: [awesome-neovim](https://github.com/rockerBOO/awesome-neovim)
+- Recommended plugins website: [awesome-neovim](https://github.com/rockerBOO/awesome-neovim)
