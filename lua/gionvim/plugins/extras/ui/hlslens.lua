@@ -34,12 +34,13 @@ return {
                 mode = "n",
             },
         },
-        config = function()
-            require("scrollbar.handlers.search").setup({
-                calm_down = true,
-                nearest_only = true,
-                nearest_float_when = "always",
-            })
+        opts = {
+            calm_down = true,
+            nearest_only = true,
+            nearest_float_when = "always",
+        },
+        config = function(_, opts)
+            require("scrollbar.handlers.search").setup(opts)
             vim.keymap.set("n", "<leader>hg", "<cmd>HlSearchLensToggle<CR>", { desc = "Toggle hlslens" })
             vim.keymap.set({ "n", "x" }, "<leader>hl", function()
                 vim.schedule(function()

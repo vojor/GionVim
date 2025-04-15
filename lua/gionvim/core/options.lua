@@ -104,7 +104,7 @@ vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 -- -- Expand tab to space
 vim.opt.expandtab = true
--- -- Indent align at shiftwidth integral multiple
+-- -- Indent align at 'shiftwidth' integral multiple
 vim.opt.shiftround = true
 -- Insert bracket transience jump side
 vim.opt.showmatch = true
