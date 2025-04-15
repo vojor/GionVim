@@ -9,7 +9,7 @@ vim.lsp.config("neocmake", {
     capabilities = require("blink.cmp").get_lsp_capabilities({
         workspace = {
             fileOperations = { didRename = true, willRename = true },
-            didChangeWatchedFiles = { dynamicRegistration = true },
+            didChangeWatchedFiles = { dynamicRegistration = true, relative_pattern_support = true },
         },
     }),
 })
