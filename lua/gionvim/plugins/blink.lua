@@ -9,12 +9,8 @@ return {
         },
         dependencies = {
             { "rafamadriz/friendly-snippets" },
-            {
-                "saghen/blink.compat",
-                optional = true,
-                opts = {},
-                version = "*",
-            },
+            { "saghen/blink.compat", optional = true, opts = {}, version = "*" },
+            { "mikavilpas/blink-ripgrep.nvim" },
         },
         event = { "InsertEnter", "CmdlineEnter" },
         opts = {
@@ -67,13 +63,43 @@ return {
 
             sources = {
                 compat = {},
-                default = { "lsp", "path", "snippets", "buffer" },
-                per_filetype = { lua = { "lazydev", "lsp", "path", "snippets", "buffer" } },
+                default = { "lsp", "path", "snippets", "buffer", "ripgrep" },
+                per_filetype = { lua = { "lazydev", "lsp", "path", "snippets", "buffer", "ripgrep" } },
                 providers = {
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
                         score_offset = 100,
+                    },
+                    ripgrep = {
+                        module = "blink-ripgrep",
+                        name = "Ripgrep",
+                        opts = {
+                            prefix_min_len = 3,
+                            context_size = 5,
+                            max_filesize = "1M",
+                            project_root_marker = ".git",
+                            project_root_fallback = true,
+                            search_casing = "--ignore-case",
+                            additional_rg_options = {},
+                            fallback_to_regex_highlighting = true,
+                            ignore_paths = {},
+                            additional_paths = {},
+                            toggles = { on_off = nil },
+                            future_features = {
+                                issue185_workaround = false,
+                                backend = { use = "ripgrep" },
+                            },
+                            debug = false,
+                        },
+                        transform_items = function(_, items)
+                            for _, item in ipairs(items) do
+                                item.labelDetails = {
+                                    description = "(rg)",
+                                }
+                            end
+                            return items
+                        end,
                     },
                 },
             },
