@@ -36,6 +36,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.develop.compiler" }, -- Code build and run
         { import = "gionvim.plugins.extras.develop.lazydev" }, -- lua development
         { import = "gionvim.plugins.extras.develop.refactor" }, -- Refactor code
+        { import = "gionvim.plugins.extras.develop.scissors" }, -- Snippets editing
         -- diagnostics
         { import = "gionvim.plugins.extras.diagnostics.trouble" }, -- Look diagnostics result
         { import = "gionvim.plugins.extras.diagnostics.tiny" }, -- Tiny diagnostics announce

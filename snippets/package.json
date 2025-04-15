@@ -1,0 +1,98 @@
+{
+    "name": "extra-snippets",
+    "engines": {
+        "vscode": "^1.11.0"
+    },
+    "contributes": {
+        "snippets": [
+            {
+                "language": "asm",
+                "path": "./asm.json"
+            },
+            {
+                "language": "awk",
+                "path": "./awk.json"
+            },
+            {
+                "language": "bash",
+                "path": "./bash.json"
+            },
+            {
+                "language": "c",
+                "path": "./c.json"
+            },
+            {
+                "language": "cpp",
+                "path": "./cpp.json"
+            },
+            {
+                "language": "cmake",
+                "path": "./cmake.json"
+            },
+            {
+                "language": "diff",
+                "path": "./diff.json"
+            },
+            {
+                "language": "java",
+                "path": "./java.json"
+            },
+            {
+                "language": "jsp",
+                "path": "./jsp.json"
+            },
+            {
+                "language": "lua",
+                "path": "./lua.json"
+            },
+            {
+                "language": "make",
+                "path": "./make.json"
+            },
+            {
+                "language": "markdown",
+                "path": "./markdown.json"
+            },
+            {
+                "language": ["ps1", "powershell"],
+                "path": "./ps1.json"
+            },
+            {
+                "language": "python",
+                "path": "./python.json"
+            },
+            {
+                "language": "rmd",
+                "path": "./rmd.json"
+            },
+            {
+                "language": ["shellscript", "shell", "sh"],
+                "path": "./sh.json"
+            },
+            {
+                "language": ["typescript", "typescriptreact"],
+                "path": "./typescript.json"
+            },
+            {
+                "language": "typescriptreact",
+                "path": "./typescriptreact.json"
+            },
+            {
+                "language": "vim",
+                "path": "./vim.json"
+            },
+            {
+                "language": "xml",
+                "path": "./xml.json"
+            },
+            {
+                "language": "zsh",
+                "path": "./zsh.json"
+            },
+            {
+                "language": ["global", "all"],
+                "path": "./all.json"
+            }
+        ]
+    }
+}
