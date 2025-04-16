@@ -2,7 +2,7 @@ vim.lsp.config("neocmake", {
     fileypes = { "cmake" },
     init_options = {
         format = { enable = false },
-        lint = { enable = true },
+        lint = { enable = false },
         scan_cmake_in_package = true,
     },
 

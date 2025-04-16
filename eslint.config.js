@@ -1,9 +1,11 @@
+import { commonConfig } from "eslint/config"
 import js from "@eslint/js"
 
-export default [
-    js.configs.recommended,
-
+export default commonConfig([
     {
+        files: ["**/*.ts", "**/*.cts", "**.*.mts"],
+        plugin: { js },
+        extends: ["js/recommended"],
         rules: {
             curly: "error",
             eqeqed: "error",
@@ -33,4 +35,4 @@ export default [
             reportUnusedDisableDirectives: "error",
         },
     },
-]
+])

@@ -11,7 +11,7 @@ vim.lsp.config("clangd", {
         "--all-scopes-completion",
         "--clang-tidy-checks=bugprone-*, cert-*, clang-analyzer-*, concurrency-*, cppcoreguidelines-*, google-*, hicpp-*, misc-*, modernize-*, performance-*, portability-*, readability-*",
     },
-    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+    filetypes = { "c", "cpp" },
     init_options = {
         usePlaceholders = true,
         completeUnimported = true,

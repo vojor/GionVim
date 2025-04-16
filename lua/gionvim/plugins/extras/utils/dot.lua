@@ -19,6 +19,7 @@ return {
                 filename = {
                     ["vifmrc"] = "vim",
                     [".autocorrectrc"] = "yaml",
+                    [".gersemirc"] = "yaml",
                 },
                 pattern = {
                     ["%.env%.[%w_.-]+"] = "sh",

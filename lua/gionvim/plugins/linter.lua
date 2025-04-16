@@ -46,12 +46,11 @@ return {
                 debug = false,
                 diagnostics_config = {
                     underline = true,
-                    virtual_text = true,
+                    virtual_text = false,
                     signs = true,
-                    update_in_insert = true,
+                    update_in_insert = false,
                     severity_sort = true,
                 },
-                diagnostics_format = "[#{c}] #{m} (#{s})",
                 log_level = "error",
             })
         end,
