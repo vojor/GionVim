@@ -8,7 +8,7 @@ return {
                 { path = "${3rd}/luv/library", words = { "vim%.uv" } },
                 { path = "GionVim", words = { "GionVim" } },
                 { path = "snacks.nvim", words = { "Snacks" } },
-                { path = "lazy.nvim", words = { "GionVim" } },
+                { path = "lazy.nvim", words = { "Lazy" } },
             },
         },
     },

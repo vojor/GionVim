@@ -62,13 +62,7 @@ return {
             sources = {
                 compat = {},
                 default = { "lsp", "path", "snippets", "buffer", "ripgrep" },
-                per_filetype = { lua = { "lazydev", "lsp", "path", "snippets", "buffer", "ripgrep" } },
                 providers = {
-                    lazydev = {
-                        name = "LazyDev",
-                        module = "lazydev.integrations.blink",
-                        score_offset = 100,
-                    },
                     ripgrep = {
                         module = "blink-ripgrep",
                         name = "Ripgrep",
@@ -183,5 +177,20 @@ return {
             opts.appearance.kind_icons =
                 vim.tbl_extend("force", opts.appearance.kind_icons or {}, GionConfig.icons.kinds)
         end,
+    },
+    {
+        "saghen/blink.cmp",
+        opts = {
+            sources = {
+                default = { "lazydev" },
+                providers = {
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        score_offset = 100,
+                    },
+                },
+            },
+        },
     },
 }
