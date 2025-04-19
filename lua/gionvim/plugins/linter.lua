@@ -63,6 +63,7 @@ return {
         opts = {
             events = { "BufWritePost", "BufReadPost", "InsertLeave" },
             linters_by_ft = {
+                bash = { "bash" },
                 javascript = { "oxlint", "biomejs" },
                 javascriptreact = { "oxlint", "biomejs" },
                 typescript = { "oxlint", "biomejs" },
@@ -73,7 +74,7 @@ return {
                 make = { "checkmake" },
                 markdown = { "markdownlint-cli2" },
                 python = { "ruff" },
-                sh = { "shellcheck" },
+                sh = { "bash", "shellcheck" },
                 -- sql = { "sqlfluff" },
                 vim = { "vint" },
                 yaml = { "yamllint" },
