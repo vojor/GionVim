@@ -23,7 +23,7 @@ return {
                 cmd = { "LspInstall", "LspUninstall" },
                 dependencies = { "mason.nvim" },
                 opts = {
-                    ensure_installed = { "marksman", "lemminx" },
+                    ensure_installed = { "marksman", "lemminx", "autotools_ls" },
                     automatic_installation = false,
                 },
             },
@@ -78,6 +78,7 @@ return {
             vim.lsp.set_log_level("error")
 
             local filename = {
+                "atls",
                 "basedpy",
                 "bashls",
                 "clangd",
