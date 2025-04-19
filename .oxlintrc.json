@@ -1,0 +1,18 @@
+{
+    "env": {
+        "node": true
+    },
+    "rules": {
+        "curly": "error",
+        "eqeqed": "error",
+        "indent": ["error", 4],
+        "linebreak-style": ["error", "unix"],
+        "no-alert": "error",
+        "no-console": "warn",
+        "no-unused-vars": "warn",
+        "oxc/approx-constant": "warn",
+        "prefer-const": "error",
+        "quotes": ["error", "double"],
+        "semi": "warn"
+    }
+}

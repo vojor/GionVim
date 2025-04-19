@@ -63,10 +63,10 @@ return {
         opts = {
             events = { "BufWritePost", "BufReadPost", "InsertLeave" },
             linters_by_ft = {
-                javascript = { "eslint", "biomejs" },
-                javascriptreact = { "eslint", "biomejs" },
-                typescript = { "eslint", "biomejs" },
-                typescriptreact = { "eslint", "biomejs" },
+                javascript = { "oxlint", "biomejs" },
+                javascriptreact = { "oxlint", "biomejs" },
+                typescript = { "oxlint", "biomejs" },
+                typescriptreact = { "oxlint", "biomejs" },
                 json = { "jsonlint", "biomejs" },
                 jsonc = { "biomejs" },
                 -- lua = { "selene" },
