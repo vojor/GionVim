@@ -114,7 +114,7 @@ return {
                 {
                     mode = { "n", "v" },
                     { "<leader><tab>", group = "tabs" },
-                    { "<leader>a", group = "object/action" },
+                    { "<leader>a", group = "action/object" },
                     {
                         "<leader>b",
                         group = "buffer",
@@ -135,7 +135,7 @@ return {
                     { "<leader>n", group = "filetree" },
                     { "<leader>o", group = "switch" },
                     { "<leader>r", group = "replace/refactor" },
-                    { "<leader>s", group = "exhibit" },
+                    { "<leader>s", group = "gallery" },
                     { "<leader>t", group = "terminal/todo" },
                     { "<leader>td", group = "todo" },
                     { "<leader>tt", group = "toggleterm" },
