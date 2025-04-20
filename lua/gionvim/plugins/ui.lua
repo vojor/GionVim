@@ -71,7 +71,31 @@ return {
                 function()
                     require("noice").cmd("pick")
                 end,
-                desc = "Noice Pick FzfLua",
+                desc = "Noice Picker (Snacks or FzfLua)",
+            },
+            {
+                "<c-f>",
+                function()
+                    if not require("noice.lsp").scroll(4) then
+                        return "<c-f>"
+                    end
+                end,
+                silent = true,
+                expr = true,
+                desc = "Scroll Forward",
+                mode = { "i", "n", "s" },
+            },
+            {
+                "<c-b>",
+                function()
+                    if not require("noice.lsp").scroll(-4) then
+                        return "<c-b>"
+                    end
+                end,
+                silent = true,
+                expr = true,
+                desc = "Scroll Backward",
+                mode = { "i", "n", "s" },
             },
         },
         config = function(_, opts)
