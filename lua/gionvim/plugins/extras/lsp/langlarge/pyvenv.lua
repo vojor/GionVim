@@ -9,10 +9,8 @@ return {
             { "<leader>sv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv", ft = "python" },
         },
         opts = {
-            settings = {
-                options = {
-                    notify_user_on_venv_activation = true,
-                },
+            options = {
+                notify_user_on_venv_activation = true,
             },
         },
     },

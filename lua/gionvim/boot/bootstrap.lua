@@ -25,7 +25,7 @@ require("lazy").setup({
         ---- Basic plugin ----
         { import = "gionvim.plugins" },
 
-        ---- Extras plugin ----
+        ---- Extra plugins ----
         -- colorscheme
         { import = "gionvim.plugins.extras.colorscheme.nightfox" },
         -- dap
