@@ -3,7 +3,7 @@ return {
         "kylechui/nvim-surround",
         version = "*",
         lazy = true,
-        event = { "BufReadPost", "BufNewFile" },
+        event = "LazyFile",
         opts = {
             keymaps = {
                 insert = "<C-g>s",

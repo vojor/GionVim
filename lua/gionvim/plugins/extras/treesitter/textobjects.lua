@@ -2,7 +2,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
         lazy = true,
-        event = { "BufReadPost", "BufNewFile" },
+        event = "LazyFile",
         config = function()
             if GionVim.is_loaded("nvim-treesitter") then
                 local opts = GionVim.opts("nvim-treesitter")

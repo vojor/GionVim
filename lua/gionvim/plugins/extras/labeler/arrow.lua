@@ -2,7 +2,7 @@ return {
     {
         "otavioschwanck/arrow.nvim",
         lazy = true,
-        event = { "BufReadPost", "BufNewFile" },
+        event = "LazyFile",
         opts = {
             show_icons = true,
             leader_key = ".",

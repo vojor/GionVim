@@ -84,7 +84,7 @@ return {
     -- Scroll bar
     {
         "petertriho/nvim-scrollbar",
-        event = { "BufReadPost", "BufNewFile" },
+        event = "LazyFile",
         config = function()
             local colors = require("tokyonight.colors").setup()
             require("scrollbar").setup({

@@ -1,7 +1,7 @@
 return {
     {
         "neovim/nvim-lspconfig",
-        event = { "BufReadPre", "BufNewFile" },
+        event = "LazyFile",
         keys = {
             { "<leader>i", "", desc = "relay" },
             {

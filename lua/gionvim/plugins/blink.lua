@@ -9,6 +9,7 @@ return {
         },
         dependencies = {
             { "rafamadriz/friendly-snippets" },
+            { "xzbdmw/colorful-menu.nvim", opts = {} },
             { "saghen/blink.compat", optional = true, opts = {}, version = "*" },
         },
         event = { "InsertEnter", "CmdlineEnter" },
