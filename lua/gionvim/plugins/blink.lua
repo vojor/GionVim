@@ -125,7 +125,7 @@ return {
                         items = transform_items and transform_items(ctx, items) or items
                         for _, item in ipairs(items) do
                             item.kind = kind_idx or item.kind
-                            item.kind_icon = GionConfig.icons.kinds[item.kind_name] or item.kind_icon or nil
+                            item.kind_icon = GionVim.config.icons.kinds[item.kind_name] or item.kind_icon or nil
                         end
                         return items
                     end
@@ -142,7 +142,7 @@ return {
         opts = function(_, opts)
             opts.appearance = opts.appearance or {}
             opts.appearance.kind_icons =
-                vim.tbl_extend("force", opts.appearance.kind_icons or {}, GionConfig.icons.kinds)
+                vim.tbl_extend("force", opts.appearance.kind_icons or {}, GionVim.config.icons.kinds)
         end,
     },
     {

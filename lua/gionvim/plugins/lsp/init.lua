@@ -33,10 +33,10 @@ return {
                 diagnostics = {
                     signs = {
                         text = {
-                            [vim.diagnostic.severity.ERROR] = GionConfig.icons.diagnostics.Error,
-                            [vim.diagnostic.severity.WARN] = GionConfig.icons.diagnostics.Warn,
-                            [vim.diagnostic.severity.HINT] = GionConfig.icons.diagnostics.Hint,
-                            [vim.diagnostic.severity.INFO] = GionConfig.icons.diagnostics.Info,
+                            [vim.diagnostic.severity.ERROR] = GionVim.config.icons.diagnostics.Error,
+                            [vim.diagnostic.severity.WARN] = GionVim.config.icons.diagnostics.Warn,
+                            [vim.diagnostic.severity.HINT] = GionVim.config.icons.diagnostics.Hint,
+                            [vim.diagnostic.severity.INFO] = GionVim.config.icons.diagnostics.Info,
                         },
                     },
                     underline = true,

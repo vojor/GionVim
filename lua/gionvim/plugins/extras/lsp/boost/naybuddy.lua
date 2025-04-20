@@ -25,7 +25,7 @@ return {
                         separator = " ",
                         highlight = true,
                         depth_limit = 5,
-                        icons = GionConfig.icons.kinds,
+                        icons = GionVim.config.icons.kinds,
                         lazy_update_context = true,
                     }
                 end,

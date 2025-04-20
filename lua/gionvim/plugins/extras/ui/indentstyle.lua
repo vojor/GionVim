@@ -3,7 +3,7 @@ return {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         lazy = true,
-        event = { "BufReadPost", "BufNewFile" },
+        event = "LazyFile",
         opts = function()
             Snacks.toggle({
                 name = "Indentation Guides",
@@ -51,7 +51,7 @@ return {
         "echasnovski/mini.indentscope",
         version = false,
         lazy = true,
-        event = { "BufReadPost", "BufNewFile" },
+        event = "LazyFile",
         opts = {
             symbol = "│",
             options = { try_as_border = true },

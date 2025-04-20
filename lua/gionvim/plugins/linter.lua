@@ -3,7 +3,7 @@ return {
     {
         "nvimtools/none-ls.nvim",
         lazy = true,
-        event = { "BufReadPost", "BufNewFile" },
+        event = "LazyFile",
         keys = {
             { "<leader>in", "<cmd>NullLsInfo<CR>", desc = "None-ls Information" },
         },
@@ -59,7 +59,7 @@ return {
     {
         "mfussenegger/nvim-lint",
         lazy = true,
-        event = { "BufReadPost", "BufNewFile" },
+        event = "LazyFile",
         opts = {
             events = { "BufWritePost", "BufReadPost", "InsertLeave" },
             linters_by_ft = {

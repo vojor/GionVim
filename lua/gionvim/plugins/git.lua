@@ -3,7 +3,7 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         lazy = true,
-        event = { "BufReadPost", "BufNewFile" },
+        event = "LazyFile",
         dependencies = { "plenary.nvim" },
         opts = {
             signs = {

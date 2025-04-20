@@ -1,3 +1,5 @@
+require("gionvim.config").init()
+
 return {
     {
         "folke/snacks.nvim",

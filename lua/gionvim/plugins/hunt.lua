@@ -293,14 +293,14 @@ return {
             {
                 "<leader>fS",
                 function()
-                    Snacks.picker.lsp_symbols({ filter = GionConfig.kind_filter })
+                    Snacks.picker.lsp_symbols({ filter = GionVim.config.kind_filter })
                 end,
                 desc = "LSP Symbols",
             },
             {
                 "<leader>ft",
                 function()
-                    Snacks.picker.lsp_workspace_symbols({ filter = GionConfig.kind_filter })
+                    Snacks.picker.lsp_workspace_symbols({ filter = GionVim.config.kind_filter })
                 end,
                 desc = "Lsp Workspace Symbols",
             },

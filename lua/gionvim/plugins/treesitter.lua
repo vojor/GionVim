@@ -13,7 +13,7 @@ return {
         version = false,
         build = { ":TSUpdate" },
         lazy = vim.fn.argc(-1) == 0,
-        event = { "BufReadPost", "BufNewFile" },
+        event = "LazyFile",
         cmd = { "TSUpdate", "TSUpdateSync", "TSUninstall" },
         init = function(plugin)
             require("lazy.core.loader").add_to_rtp(plugin)
@@ -23,6 +23,7 @@ return {
             { "<C-space>", desc = "Increment Selection" },
             { "<bs>", mode = "x", desc = "Decrement Selection" },
         },
+        opts_extend = { "ensure_installed" },
         opts = {
             ensure_installed = {
                 "bash",

@@ -165,7 +165,7 @@ return {
             vim.api.nvim_set_hl(0, "DapLogPoint", { ctermbg = 0, fg = "#61afef", bg = "#31353f" })
             vim.api.nvim_set_hl(0, "DapStopped", { ctermbg = 0, fg = "#98c379", bg = "#31353f" })
 
-            for name, sign in pairs(GionConfig.icons.dap) do
+            for name, sign in pairs(GionVim.config.icons.dap) do
                 sign = type(sign) == "table" and sign or { sign }
                 vim.fn.sign_define(
                     "Dap" .. name,
