@@ -77,25 +77,23 @@ return {
             vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
             vim.lsp.set_log_level("error")
 
-            local filename = {
-                "atls",
-                "basedpy",
-                "bashls",
-                "clangd",
-                "jsonls",
-                "kulala",
-                "lemminx",
-                "luals",
-                "marksman",
-                "neocmake",
-                "taplo",
-                "vimls",
-                "yamlls",
-            }
-
-            for _, name in ipairs(filename) do
-                require("gionvim.plugins.lsp.lang." .. name)
-            end
+            require("gionvim.config.loadpath").autoload("gionvim.plugins.lsp.lang", {
+                ignore_files = { "sqls.lua" },
+                verbose = true,
+                reload = true,
+                use_cache = true,
+                callbacks = {
+                    on_success = function(mod)
+                        print("✅ Succeed: " .. mod)
+                    end,
+                    on_error = function(mod, err)
+                        print("❌ Failure: " .. mod .. "\n" .. err)
+                    end,
+                    on_finish = function()
+                        print("🎉 All modules processed!")
+                    end,
+                },
+            })
 
             require("gionvim.plugins.lsp.keymaps")
         end,
