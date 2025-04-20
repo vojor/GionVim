@@ -114,7 +114,7 @@ return {
                 {
                     mode = { "n", "v" },
                     { "<leader><tab>", group = "tabs" },
-                    { "<leader>a", group = "action/object" },
+                    { "<leader>a", group = "swap" },
                     {
                         "<leader>b",
                         group = "buffer",
@@ -181,35 +181,13 @@ return {
             end
         end,
     },
-    -- Inactive code dimmed
-    {
-        "folke/twilight.nvim",
-        lazy = true,
-        keys = {
-            { "<leader>al", "<cmd>Twilight<CR>", desc = "Non active Code Shade" },
-        },
-        opts = {
-            dimming = {
-                inactive = true,
-            },
-            exclude = { "norg", "markdown", "tex", "text" },
-        },
-    },
-    -- Zen mode
-    {
-        "folke/zen-mode.nvim",
-        lazy = true,
-        keys = {
-            { "<leader>az", "<cmd>ZenMode<CR>", desc = "Zen Mode" },
-        },
-        opts = {},
-    },
     -- snacks utils
     {
         "snacks.nvim",
         opts = {
             bigfile = { enabled = true },
             quickfile = { enabled = true },
+            dim = { animate = { enabled = false } },
             terminal = {
                 win = {
                     keys = {

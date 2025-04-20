@@ -1,15 +1,15 @@
 local map = GionVim.safe_keymap_set
 
 -- Goto
-map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
-map("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" })
-map("n", "gr", vim.lsp.buf.references, { desc = "References" })
-map("n", "gy", vim.lsp.buf.type_definition, { desc = "Goto Type Definition" })
-map("n", "gI", vim.lsp.buf.implementation, { desc = "Goto Implementation" })
+map("n", "grD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
+map("n", "grd", vim.lsp.buf.definition, { desc = "Goto Definition" })
+map("n", "grr", vim.lsp.buf.references, { desc = "References" })
+map("n", "gry", vim.lsp.buf.type_definition, { desc = "Goto Type Definition" })
+map("n", "gri", vim.lsp.buf.implementation, { desc = "Goto Implementation" })
 
 -- Code Action
-map("n", "<leader>lc", vim.lsp.buf.code_action, { desc = "Code Action" })
-map("n", "<leader>lC", GionVim.lsp.action.source, { desc = "Source Action" })
+map("n", "gra", vim.lsp.buf.code_action, { desc = "Code Action" })
+map("n", "grA", GionVim.lsp.action.source, { desc = "Source Action" })
 
 -- Code Lens
 map("n", "<leader>le", vim.lsp.codelens.run, { desc = "Run Codelens" })
@@ -24,8 +24,8 @@ map("n", "<leader>ls", function()
 end, { desc = "Signature Help" })
 
 -- Rename
-map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename Word" })
-map("n", "<leader>lR", function()
+map("n", "grn", vim.lsp.buf.rename, { desc = "Rename Word" })
+map("n", "grN", function()
     Snacks.rename.rename_file()
 end, { desc = "Rename File" })
 
@@ -35,8 +35,12 @@ map("n", "<leader>lp", function()
 end, { desc = "Server Status Information" })
 
 -- calls
-map("n", "<leader>li", vim.lsp.buf.incoming_calls, { desc = "Incoming" })
-map("n", "<leader>lo", vim.lsp.buf.outgoing_calls, { desc = "Outgoing" })
+map("n", "<leader>li", function()
+    vim.lsp.buf.incoming_calls()
+end, { desc = "Incoming" })
+map("n", "<leader>lo", function()
+    vim.lsp.buf.outgoing_calls()
+end, { desc = "Outgoing" })
 
 -- Work space
 map("n", "<leader>la", vim.lsp.buf.add_workspace_folder, { desc = "Add Workspace Folder" })

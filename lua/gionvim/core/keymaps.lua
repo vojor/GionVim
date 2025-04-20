@@ -154,8 +154,8 @@ map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
-Snacks.toggle.zoom():map("<leader>wm"):map("<leader>wZ")
-Snacks.toggle.zen():map("<leader>wz")
+Snacks.toggle.zoom():map("<leader>oZ")
+Snacks.toggle.zen():map("<leader>oz")
 
 -- tabs
 map("n", "<leader><tab>l", "<cmd>tablast<CR>", { desc = "Last Tab" })

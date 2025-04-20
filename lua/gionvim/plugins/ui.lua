@@ -135,10 +135,10 @@ return {
     {
         "snacks.nvim",
         opts = {
-            indent = { enabled = false },
+            indent = { enabled = true },
             input = { enabled = true },
             notifier = { enabled = true },
-            scope = { enabled = false },
+            scope = { enabled = true },
             scroll = { enabled = true },
             statuscolumn = { enabled = false },
             toggle = { map = GionVim.safe_keymap_set },

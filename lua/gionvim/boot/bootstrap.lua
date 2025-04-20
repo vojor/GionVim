@@ -47,7 +47,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.editor.surround" }, -- Surround modify
         -- elevate
         { import = "gionvim.plugins.extras.elevate.escape" }, -- More user-friendly mode switching
-        { import = "gionvim.plugins.extras.elevate.scroll" }, -- Smooth scrolling
         { import = "gionvim.plugins.extras.elevate.substitute" }, -- Replace Neovim built-in 'substitute'
         -- explorer
         { import = "gionvim.plugins.extras.explorer" }, -- More explorer
@@ -87,7 +86,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.ui.colorizer" }, -- Display hexadecimal colors
         { import = "gionvim.plugins.extras.ui.edgy" }, -- Predefined layout
         { import = "gionvim.plugins.extras.ui.hlslens" }, -- Highlight entries during search
-        { import = "gionvim.plugins.extras.ui.indentstyle" }, -- Indent format
         { import = "gionvim.plugins.extras.ui.rainbow" }, -- Rainbow brackets
         -- utils
         { import = "gionvim.plugins.extras.utils.chainsaw" }, -- Add log
