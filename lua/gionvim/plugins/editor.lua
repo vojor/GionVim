@@ -142,9 +142,11 @@ return {
                     augend.constant.new({ elements = { "out", "in" }, word = true, cyclic = true }),
                     augend.constant.new({ elements = { "up", "down" }, word = true, cyclic = true }),
                     augend.constant.new({ elements = { "disable", "enable" }, word = true, cyclic = true }),
+                    augend.constant.new({ elements = { "disabled", "enabled" }, word = true, cyclic = true }),
                     augend.constant.new({ elements = { "output", "input" }, word = true, cyclic = true }),
                     augend.constant.new({ elements = { "front", "rear" }, word = true, cyclic = true }),
                     augend.constant.new({ elements = { "start", "end" }, word = true, cyclic = true }),
+                    augend.constant.new({ elements = { "top", "bottom" }, word = true, cyclic = true }),
                     augend.constant.new({
                         elements = {
                             "January",

@@ -1,5 +1,5 @@
 return {
-    -- Prefect old quickfix window
+    -- Perfect old quickfix window
     {
         "stevearc/quicker.nvim",
         lazy = true,

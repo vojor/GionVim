@@ -186,7 +186,7 @@ function M.autoload(mod_root, opts, base_path)
 
         if opts.verbose then
             notify(
-                success and ("✅ Loaded succeed: " .. modname) or ("❌ Loaded Failed: " .. modname .. "\n" .. result),
+                success and ("✅ Loaded Succeed: " .. modname) or ("❌ Loaded Failed: " .. modname .. "\n" .. result),
                 success and log.debug or log.error
             )
         end
