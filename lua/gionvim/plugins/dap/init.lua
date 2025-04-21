@@ -19,63 +19,33 @@ return {
         lazy = true,
         keys = {
             { "<leader>d", "", desc = "debug", mode = { "n", "v" } },
-            { "<leader>dw", "", desc = "Widgets Debug", mode = { "n", "v" } },
-            {
-                "<leader>dc",
-                function()
-                    require("dap").continue()
-                end,
-                desc = "Start Debug Or Gogo Next Continue",
-            },
-            {
-                "<leader>dn",
-                function()
-                    require("dap").continue({ before = get_args })
-                end,
-                desc = "Run with Args",
-            },
-            {
-                "<leader>di",
-                function()
-                    require("dap").step_into()
-                end,
-                desc = "Single Step And Into",
-            },
-            {
-                "<leader>do",
-                function()
-                    require("dap").step_over()
-                end,
-                desc = "Single Step And Over",
-            },
-            {
-                "<leader>ds",
-                function()
-                    require("dap").step_out()
-                end,
-                desc = "Step Out of Current Function",
-            },
-            {
-                "<leader>dR",
-                function()
-                    require("dap").run_to_cursor()
-                end,
-                desc = "Run to Cursor",
-            },
-            {
-                "<leader>dr",
-                function()
-                    require("dap").run_last()
-                end,
-                desc = "Restart Debug",
-            },
-            {
-                "<leader>db",
-                function()
-                    require("dap").toggle_breakpoint()
-                end,
-                desc = "Toggle Break Point",
-            },
+            { "<leader>dw", "", desc = "widgets debug", mode = { "n", "v" } },
+            -- stylua: ignore
+            { "<leader>dc", function() require("dap").continue() end, desc = "Start Debug Or Gogo Next Continue" },
+            -- stylua: ignore
+            { "<leader>dn", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
+            -- stylua: ignore
+            { "<leader>di", function() require("dap").step_into() end, desc = "Single Step And Into" },
+            -- stylua: ignore
+            { "<leader>do", function() require("dap").step_over() end, desc = "Single Step And Over" },
+            -- stylua: ignore
+            { "<leader>ds", function() require("dap").step_out() end, desc = "Step Out of Current Function" },
+            -- stylua: ignore
+            { "<leader>dR", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
+            -- stylua: ignore
+            { "<leader>dr", function() require("dap").run_last() end, desc = "Restart Debug" },
+            -- stylua: ignore
+            { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Break Point" },
+            -- stylua: ignore
+            { "<leader>da", function() require("dap").terminate() end, desc = "Dap Terminate" },
+            -- stylua: ignore
+            { "<leader>dh", function() require("dap").session() end, desc = "Dap Session" },
+            -- stylua: ignore
+            { "<leader>dt", function() require("dap").repl.toggle() end, desc = "Toggle Repl" },
+
+            { "<leader>de", ":DapSetLogLevel", desc = "Dap Setting Log Level" },
+            { "<leader>dk", "<cmd>DapRestartFrame<CR>", desc = "Dap Restart Frame" },
+            { "<leader>dj", "<cmd>DapLoadLaunchJSON<CR>", desc = "Direct Load Json File Debug" },
             {
                 "<leader>dm",
                 function()
@@ -83,31 +53,6 @@ return {
                 end,
                 desc = "Log Point Message",
             },
-            {
-                "<leader>da",
-                function()
-                    require("dap").terminate()
-                end,
-                desc = "Dap Terminate",
-            },
-            {
-                "<leader>dh",
-                function()
-                    require("dap").session()
-                end,
-                desc = "Dap Session",
-            },
-            {
-                "<leader>dt",
-                function()
-                    require("dap").repl.toggle()
-                end,
-                desc = "Toggle Repl",
-            },
-
-            { "<leader>de", ":DapSetLogLevel", desc = "Dap Setting Log Level" },
-            { "<leader>dk", "<cmd>DapRestartFrame<CR>", desc = "Dap Restart Frame" },
-            { "<leader>dj", "<cmd>DapLoadLaunchJSON<CR>", desc = "Direct Load Json File Debug" },
 
             -- Widgets UI
             {
@@ -172,7 +117,7 @@ return {
                     { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
                 )
             end
-            require("gionvim.debugger.dapstart")
+            require("gionvim.config.loadpath").autoload("gionvim.plugins.dap.lang")
         end,
     },
     {
