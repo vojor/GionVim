@@ -53,12 +53,18 @@ return {
                         pinned = true,
                         open = "Outline",
                     },
-                    right = {
-                        {
-                            title = "Grug Far",
-                            ft = "grug-far",
-                            size = { width = 0.4 },
-                        },
+                    {
+
+                        title = "Grug Far",
+                        ft = "grug-far",
+                        size = { width = 0.4 },
+                    },
+                    {
+                        title = "Overseer",
+                        ft = "OverseerList",
+                        open = function()
+                            require("overseer").open()
+                        end,
                     },
                 },
                 keys = {
