@@ -124,7 +124,7 @@ return {
                     },
                     { "<leader>c", group = "order" },
                     { "<leader>e", group = "editor/forge" },
-                    { "<leader>ep", group = "compiler" },
+                    { "<leader>ep", group = "overseer" },
                     { "<leader>f", group = "find" },
                     { "<leader>g", group = "git" },
                     { "<leader>gl", group = "lazygit" },

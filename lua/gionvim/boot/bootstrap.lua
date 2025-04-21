@@ -32,7 +32,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.dap.luadap" }, -- Neovim lua debug
         -- develop
         { import = "gionvim.plugins.extras.develop.comments" }, -- Quick comment
-        { import = "gionvim.plugins.extras.develop.compiler" }, -- Code build and run
+        { import = "gionvim.plugins.extras.develop.overseer" }, -- Code build and run
         { import = "gionvim.plugins.extras.develop.lazydev" }, -- lua development
         { import = "gionvim.plugins.extras.develop.refactor" }, -- Refactor code
         { import = "gionvim.plugins.extras.develop.scissors" }, -- Snippets editing
