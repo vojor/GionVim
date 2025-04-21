@@ -138,10 +138,7 @@ function M.setup(opts)
             GionVim.root.setup()
 
             local health = require("lazy.health")
-            vim.list_extend(health.valid, {
-                "recommended",
-                "desc",
-            })
+            vim.list_extend(health.valid, { "recommended", "desc" })
 
             if vim.g.gionvim_check_order == false then
                 return
