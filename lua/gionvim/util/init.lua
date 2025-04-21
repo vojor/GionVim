@@ -27,7 +27,7 @@ end
 function M.get_plugin_path(name, path)
     local plugin = M.get_plugin(name)
     path = path and "/" .. path or ""
-    return plugin and (plugin.dir .. path)
+    return plugin and plugin.dir and (plugin.dir .. path) or nil
 end
 
 function M.has(plugin)
