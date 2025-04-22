@@ -84,6 +84,19 @@ return {
             linters = {
                 -- selene = {
                 --     condition = function(ctx)
+                --         local dirname = vim.fn.fnamemodify(ctx.filename, ":h")
+                --         local config_path = vim.fs.find("selene.toml", { path = dirname, upward = true })[1]
+                --         if config_path then
+                --             local linter = require("lint").linters.selene
+                --             linter.args = { "--config", config_path }
+                --             return true
+                --         end
+                --         return false
+                --     end,
+                -- },
+
+                -- selene = {
+                --     condition = function(ctx)
                 --         return vim.fs.find({ "selene.toml" }, { path = ctx.filename, upward = true })[1]
                 --     end,
                 -- },
