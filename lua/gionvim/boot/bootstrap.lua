@@ -73,6 +73,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.lsp.boost.increname" }, -- Timely feedback rename
         { import = "gionvim.plugins.extras.lsp.boost.lspsaga" }, -- Strengthen LSP experience
         { import = "gionvim.plugins.extras.lsp.boost.naybuddy" }, -- Float navigate
+        { import = "gionvim.plugins.extras.lsp.boost.namu" }, -- Symbols jump
         { import = "gionvim.plugins.extras.lsp.boost.outline" }, -- Symbols Outline
         -- seek
         { import = "gionvim.plugins.extras.seek.fzf" }, -- fuzzy find
