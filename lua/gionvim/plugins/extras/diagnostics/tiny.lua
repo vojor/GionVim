@@ -2,7 +2,7 @@ return {
     {
         "rachartier/tiny-inline-diagnostic.nvim",
         lazy = true,
-        event = "VeryLazy",
+        event = "LspAttach",
         priority = 1000,
         config = function()
             require("tiny-inline-diagnostic").setup({
@@ -19,6 +19,21 @@ return {
                 },
                 disabled_ft = { "make", "cmake" },
             })
+        end,
+    },
+    {
+        "rachartier/tiny-code-action.nvim",
+        lazy = true,
+        event = "LspAttach",
+        opts = {
+            backend = "delta",
+            picker = { "snacks" },
+        },
+        config = function(_, opts)
+            require("tiny-code-action").setup(opts)
+            vim.keymap.set("n", "<leader>lc", function()
+                require("tiny-code-action").code_action()
+            end, { noremap = true, silent = true, desc = "Tiny Code Action" })
         end,
     },
 }
