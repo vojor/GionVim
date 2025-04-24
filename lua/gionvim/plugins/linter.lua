@@ -23,13 +23,9 @@ return {
         },
         config = function()
             local none_ls = require("null-ls")
-            -- local code_actions = none_ls.builtins.code_actions
             local diagnostics = none_ls.builtins.diagnostics
 
             local sources = {
-                -- Code Action
-                -- code_actions.refactoring,
-
                 -- Diagnostics
                 diagnostics.cmake_lint,
                 diagnostics.ltrs,
@@ -82,19 +78,9 @@ return {
                 ["*"] = { "typos" },
             },
             linters = {
-                -- selene = {
-                --     condition = function(ctx)
-                --         local dirname = vim.fn.fnamemodify(ctx.filename, ":h")
-                --         local config_path = vim.fs.find("selene.toml", { path = dirname, upward = true })[1]
-                --         if config_path then
-                --             local linter = require("lint").linters.selene
-                --             linter.args = { "--config", config_path }
-                --             return true
-                --         end
-                --         return false
-                --     end,
-                -- },
-
+                -- selene.toml 配置文件生效的问题 (selene.toml 在根文件夹下)
+                -- 直接在子文件夹使用 nvim 打开 lua 文件，配置文件是不生效的
+                -- 在根文件夹使用 nvim 打开子目录的 lua 文件，配置文件生效
                 -- selene = {
                 --     condition = function(ctx)
                 --         return vim.fs.find({ "selene.toml" }, { path = ctx.filename, upward = true })[1]
