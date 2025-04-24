@@ -105,11 +105,6 @@ return {
                 bind_to_cwd = false,
                 follow_current_file = { enable = true },
                 use_libuv_file_watcher = true,
-                -- filtered_items = {
-                --     hide_dotfiles = false,
-                --     hide_gitignored = true,
-                --     hide_by_name = { ".git" },
-                -- },
             },
             source_selector = {
                 winbar = true,
@@ -137,5 +132,27 @@ return {
                 end,
             })
         end,
+    },
+    {
+        desc = "Snacks File Explorer",
+        recommended = true,
+        "folke/snacks.nvim",
+        opts = { explorer = {} },
+        keys = {
+            {
+                "<leader>ns",
+                function()
+                    Snacks.explorer({ cwd = GionVim.root() })
+                end,
+                desc = "Explorer Snacks (root dir)",
+            },
+            {
+                "<leader>nS",
+                function()
+                    Snacks.explorer()
+                end,
+                desc = "Explorer Snacks (cwd)",
+            },
+        },
     },
 }

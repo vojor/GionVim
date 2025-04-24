@@ -113,25 +113,4 @@ return {
             })
         end,
     },
-    {
-        recommended = true,
-        "folke/snacks.nvim",
-        opts = { explorer = {} },
-        keys = {
-            {
-                "<leader>ns",
-                function()
-                    Snacks.explorer({ cwd = GionVim.root() })
-                end,
-                desc = "Explorer Snacks (root dir)",
-            },
-            {
-                "<leader>nS",
-                function()
-                    Snacks.explorer()
-                end,
-                desc = "Explorer Snacks (cwd)",
-            },
-        },
-    },
 }

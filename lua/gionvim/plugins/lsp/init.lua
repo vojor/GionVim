@@ -77,7 +77,7 @@ return {
             vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
             vim.lsp.set_log_level("error")
 
-            require("gionvim.config.loadpath").autoload("gionvim.plugins.lsp.lang", {
+            require("gionvim.config.loadpath").autoload("gionvim.plugins.lsp.langue", {
                 ignore_files = { "sqls.lua" },
                 verbose = true,
                 reload = true,

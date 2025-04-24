@@ -49,7 +49,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.elevate.escape" }, -- More user-friendly mode switching
         { import = "gionvim.plugins.extras.elevate.substitute" }, -- Replace Neovim built-in 'substitute'
         -- explorer
-        { import = "gionvim.plugins.extras.explorer" }, -- More explorer
+        { import = "gionvim.plugins.extras.explorer.mini-files" }, -- More explorer
         -- git
         { import = "gionvim.plugins.extras.git.diffview" }, -- Git history difference
         { import = "gionvim.plugins.extras.git.neogit" }, -- Neovim's magit
@@ -58,23 +58,23 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.labeler.marks" }, -- Line mark
         -- lsp
         -- -- lang extension
-        { import = "gionvim.plugins.extras.lsp.langlarge.clangd" }, -- C or C++
-        { import = "gionvim.plugins.extras.lsp.langlarge.java" }, -- Java
-        { import = "gionvim.plugins.extras.lsp.langlarge.jqx" }, -- Json or Yaml
-        { import = "gionvim.plugins.extras.lsp.langlarge.markdown" }, -- Markdown
-        { import = "gionvim.plugins.extras.lsp.langlarge.pyvenv" }, -- python
-        { import = "gionvim.plugins.extras.lsp.langlarge.sqls" }, -- SQL or MySQL
-        { import = "gionvim.plugins.extras.lsp.langlarge.typescript" }, -- Javascript or Typescript
-        -- -- util
-        { import = "gionvim.plugins.extras.lsp.boost.dropbar" }, -- Code navigate
-        { import = "gionvim.plugins.extras.lsp.boost.fidget" }, -- Progress prompt
-        { import = "gionvim.plugins.extras.lsp.boost.garbage" }, -- Disable unfocused serve
-        { import = "gionvim.plugins.extras.lsp.boost.illuminate" }, -- Display the same vocabulary under the cursor
-        { import = "gionvim.plugins.extras.lsp.boost.increname" }, -- Timely feedback rename
-        { import = "gionvim.plugins.extras.lsp.boost.lspsaga" }, -- Strengthen LSP experience
-        { import = "gionvim.plugins.extras.lsp.boost.naybuddy" }, -- Float navigate
-        { import = "gionvim.plugins.extras.lsp.boost.namu" }, -- Symbols jump
-        { import = "gionvim.plugins.extras.lsp.boost.outline" }, -- Symbols Outline
+        { import = "gionvim.plugins.extras.langext.clangd" }, -- C or C++
+        { import = "gionvim.plugins.extras.langext.java" }, -- Java
+        { import = "gionvim.plugins.extras.langext.jqx" }, -- Json or Yaml
+        { import = "gionvim.plugins.extras.langext.markdown" }, -- Markdown
+        { import = "gionvim.plugins.extras.langext.pyvenv" }, -- python
+        { import = "gionvim.plugins.extras.langext.sqls" }, -- SQL or MySQL
+        { import = "gionvim.plugins.extras.langext.typescript" }, -- Javascript or Typescript
+        -- -- rise capacity
+        { import = "gionvim.plugins.extras.boast.dropbar" }, -- Code navigate
+        { import = "gionvim.plugins.extras.boast.fidget" }, -- Progress prompt
+        { import = "gionvim.plugins.extras.boast.garbage" }, -- Disable unfocused serve
+        { import = "gionvim.plugins.extras.boast.illuminate" }, -- Display the same vocabulary under the cursor
+        { import = "gionvim.plugins.extras.boast.increname" }, -- Timely feedback rename
+        { import = "gionvim.plugins.extras.boast.lspsaga" }, -- Strengthen LSP experience
+        { import = "gionvim.plugins.extras.boast.naybuddy" }, -- Float navigate
+        { import = "gionvim.plugins.extras.boast.namu" }, -- Symbols jump
+        { import = "gionvim.plugins.extras.boast.outline" }, -- Symbols Outline
         -- seek
         { import = "gionvim.plugins.extras.seek.fzf" }, -- fuzzy find
         -- treesitter
