@@ -2,9 +2,8 @@ return {
     {
         "hedyhli/outline.nvim",
         lazy = true,
-        keys = {
-            { "<leader>no", "<cmd>Outline<CR>", desc = "Toggle Outline" },
-        },
+        cmd = "Outline",
+        keys = { { "<leader>no", "<cmd>Outline<CR>", desc = "Toggle Outline" } },
         opts = function()
             local defaults = require("outline.config").defaults
             local opts = {
