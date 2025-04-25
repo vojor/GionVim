@@ -12,7 +12,7 @@ return {
             { "<leader>nh", "<cmd>Namu help<CR>", desc = "Namu Help" },
         },
         opts = {
-            ui_select = { enable = false },
+            ui_select = { enable = true },
         },
     },
 }
