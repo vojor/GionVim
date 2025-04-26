@@ -1,3 +1,13 @@
+local function symbols_filter(entry, ctx)
+    if ctx.symbols_filter == nil then
+        ctx.symbols_filter = GionVim.config.get_kind_filter(ctx.bufnr) or false
+    end
+    if ctx.symbols_filter == false then
+        return true
+    end
+    return vim.tbl_contains(ctx.symbols_filter, entry.kind)
+end
+
 return {
     {
         "ibhagwan/fzf-lua",
@@ -8,11 +18,31 @@ return {
             { "<c-j>", "<Down>", ft = "fzf", mode = "t", nowait = true },
             { "<c-k>", "<Up>", ft = "fzf", mode = "t", nowait = true },
             { "<leader>kl", "<cmd>FzfLua<CR>", desc = "Fzf Args Select List" },
-            { "<leader>ks", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Switch Buffer" },
-            { "<leader>kf", "<cmd>FzfLua files<CR>", desc = "Fzf Find Files" },
-            { "<leader>kg", "<cmd>FzfLua live_grep<CR>", desc = "Fzf Find Text" },
-            { "<leader>kc", "<cmd>FzfLua grep_curbuf<CR>", desc = "Fzf Find Text (current buffer)" },
+            { "<leader>kb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Switch Buffer" },
+            { "<leader>kf", "<cmd>FzfLua files<CR>", desc = "Find Files" },
+            { "<leader>kg", "<cmd>FzfLua live_grep<CR>", desc = "Find Text" },
+            { "<leader>kc", "<cmd>FzfLua grep_curbuf<CR>", desc = "Find Text (current buffer)" },
+            { "<leader>ki", "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
+            { "<leader>ku", "<cmd>FzfLua git_status<CR>", desc = "Status" },
             { "<leader>kj", "<cmd>FzfLua jumps<CR>", desc = "Fzf Jump" },
+            {
+                "<leader>ks",
+                function()
+                    require("fzf-lua").lsp_document_symbols({
+                        regex_filter = symbols_filter,
+                    })
+                end,
+                desc = "Goto Symbol",
+            },
+            {
+                "<leader>kS",
+                function()
+                    require("fzf-lua").lsp_live_workspace_symbols({
+                        regex_filter = symbols_filter,
+                    })
+                end,
+                desc = "Goto Symbol (Workspace)",
+            },
         },
         opts = {
             fzf_bin = "sk",
