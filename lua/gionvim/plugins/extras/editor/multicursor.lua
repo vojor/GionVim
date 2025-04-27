@@ -7,39 +7,44 @@ return {
             local multicursor = require("multicursor-nvim")
             multicursor.setup()
 
-            local set = vim.keymap.set
+            local map = GionVim.safe_keymap_set
 
-            set({ "n", "x" }, "<up>", function()
+            map({ "n", "x" }, "<up>", function()
                 multicursor.lineAddCursor(-1)
             end)
-            set({ "n", "x" }, "<down>", function()
+            map({ "n", "x" }, "<down>", function()
                 multicursor.lineAddCursor(1)
             end)
-            set({ "n", "x" }, "<leader><up>", function()
+            map({ "n", "x" }, "<leader><up>", function()
                 multicursor.lineSkipCursor(-1)
             end, { desc = "Orient Up Skip Cursor" })
-            set({ "n", "x" }, "<leader><down>", function()
+            map({ "n", "x" }, "<leader><down>", function()
                 multicursor.lineSkipCursor(1)
             end, { desc = "Orient Down Skip Cursor" })
 
-            set({ "n", "x" }, "<leader>i-", function()
+            map({ "n", "x" }, "<leader>i-", function()
                 multicursor.matchAddCursor(1)
             end, { desc = "Match Add Down Cursor" })
-            set({ "n", "x" }, "<leader>ij", function()
+            map({ "n", "x" }, "<leader>ij", function()
                 multicursor.matchSkipCursor(1)
             end, { desc = "Match Skip Down Cursor" })
-            set({ "n", "x" }, "<leader>i+", function()
+            map({ "n", "x" }, "<leader>i+", function()
                 multicursor.matchAddCursor(-1)
             end, { desc = "Match Add Up Curslor" })
-            set({ "n", "x" }, "<leader>ik", function()
+            map({ "n", "x" }, "<leader>ik", function()
                 multicursor.matchSkipCursor(-1)
             end, { desc = "Match Skip Up Cursor" })
 
-            set("n", "<c-leftmouse>", multicursor.handleMouse)
-            set("n", "<c-leftdrag>", multicursor.handleMouseDrag)
-            set("n", "<c-leftrelease>", multicursor.handleMouseRelease)
+            map("n", "<c-leftmouse>", multicursor.handleMouse)
+            map("n", "<c-leftdrag>", multicursor.handleMouseDrag)
+            map("n", "<c-leftrelease>", multicursor.handleMouseRelease)
 
-            set({ "n", "x" }, "<c-q>", multicursor.toggleCursor)
+            map("n", "gb", multicursor.addCursorOperator, { desc = "add Cursor Operate" })
+
+            map({ "n", "x" }, "<c-q>", multicursor.toggleCursor)
+
+            map("x", "I", multicursor.insertVisual)
+            map("x", "A", multicursor.appendVisual)
 
             multicursor.addKeymapLayer(function(layerSet)
                 layerSet({ "n", "x" }, "<left>", multicursor.prevCursor)
