@@ -5,6 +5,15 @@ return {
         lazy = true,
         ft = "java",
         config = function()
+            local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
+            local launcher_path = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
+            local config_path = jdtls_path .. "/config_linux"
+            local workspace_dir = vim.fn.stdpath("data")
+                .. "/workspace/jdtls-workspace/"
+                .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+
+            vim.fn.mkdir(workspace_dir, "p")
+
             local config = {
 
                 capabilities = require("blink.cmp").get_lsp_capabilities({
@@ -25,24 +34,23 @@ return {
                     "--add-opens",
                     "java.base/java.lang=ALL-UNNAMED",
                     "-jar",
-                    vim.fn.stdpath("data")
-                        .. "/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar",
+                    launcher_path,
                     "-configuration",
-                    vim.fn.stdpath("data") .. "/mason/packages/jdtls/config_linux",
+                    config_path,
                     "-data",
-                    vim.fn.stdpath("data")
-                        .. "/workspace/jdtls-workspace"
-                        .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"),
+                    workspace_dir,
                 },
-                root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", ".gradlew" }),
+                root_dir = require("jdtls.setup").find_root({
+                    ".git",
+                    "mvnw",
+                    "gradlew",
+                    "pom.xml",
+                    "build.gradle",
+                }),
                 settings = {
                     java = {
-                        signatureHelp = {
-                            enable = true,
-                        },
-                        contentProvider = {
-                            preferred = "fernflower",
-                        },
+                        signatureHelp = { enable = true },
+                        contentProvider = { preferred = "fernflower" },
                         completion = {
                             favoriteStaticMembers = {
                                 "org.junit.Assert.*",
@@ -84,7 +92,7 @@ return {
                     },
                 },
                 init_options = {
-                    extendedClientCapabilities = require("jdtls").extendedClientCapabilities,
+                    extendedClientCapabilities = { resolveAdditionalTextEditsSupport = true },
                 },
             }
             require("jdtls").start_or_attach(config)
