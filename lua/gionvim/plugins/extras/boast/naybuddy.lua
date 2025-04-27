@@ -2,9 +2,7 @@ return {
     {
         "SmiteshP/nvim-navbuddy",
         lazy = true,
-        keys = {
-            { "<leader>ny", "<cmd>Navbuddy<CR>", desc = "Navbuddy Float Outline" },
-        },
+        keys = { { "<leader>ny", "<cmd>Navbuddy<CR>", desc = "Navbuddy Float Outline" } },
         dependencies = {
             {
                 "SmiteshP/nvim-navic",
@@ -30,7 +28,6 @@ return {
                     }
                 end,
             },
-            { "nvim-lspconfig" },
         },
         opts = {
             window = {
