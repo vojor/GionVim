@@ -4,7 +4,6 @@ return {
         "lewis6991/gitsigns.nvim",
         lazy = true,
         event = "LazyFile",
-        dependencies = { "plenary.nvim" },
         opts = {
             signs = {
                 add = { text = "▎" },
