@@ -5,6 +5,21 @@ return {
         opts = {},
     },
     {
+        "soemre/commentless.nvim",
+        lazy = true,
+        cmd = "Commentless",
+        keys = {
+            {
+                "<leader>sb",
+                function()
+                    require("commentless").toggle()
+                end,
+                desc = "Toggle Comments",
+            },
+        },
+        opts = {},
+    },
+    {
         "folke/todo-comments.nvim",
         lazy = true,
         cmd = "TodoTrouble",
