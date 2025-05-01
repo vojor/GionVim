@@ -4,7 +4,7 @@ return {
         lazy = true,
         keys = {
             { "<leader>rn", desc = "Rename (Reserve Cursor Word)" },
-            { "<leader>rN", ":IncRename ", desc = "Rename (Not Retained Cursor Word)" },
+            { "<leader>rN", desc = "Rename (Not Retained Cursor Word)" },
         },
         opts = {
             preview_empty_name = true,
