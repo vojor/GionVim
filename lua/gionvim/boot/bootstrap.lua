@@ -72,7 +72,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.boast.illuminate" }, -- Display the same vocabulary under the cursor
         { import = "gionvim.plugins.extras.boast.increname" }, -- Timely feedback rename
         { import = "gionvim.plugins.extras.boast.lspsaga" }, -- Strengthen LSP experience
-        { import = "gionvim.plugins.extras.boast.naybuddy" }, -- Float navigate
+        { import = "gionvim.plugins.extras.boast.navbuddy" }, -- Float navigate
         { import = "gionvim.plugins.extras.boast.namu" }, -- Symbols jump
         { import = "gionvim.plugins.extras.boast.outline" }, -- Symbols Outline
         -- seek

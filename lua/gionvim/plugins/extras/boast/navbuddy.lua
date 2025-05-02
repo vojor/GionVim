@@ -1,6 +1,6 @@
 return {
     {
-        "SmiteshP/nvim-navbuddy",
+        "hasansujon786/nvim-navbuddy",
         lazy = true,
         keys = { { "<leader>ny", "<cmd>Navbuddy<CR>", desc = "Navbuddy Float Outline" } },
         dependencies = {
