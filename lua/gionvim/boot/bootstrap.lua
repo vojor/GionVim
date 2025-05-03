@@ -27,44 +27,44 @@ require("lazy").setup({
 
         ---- Extra plugins ----
         -- colorscheme
-        { import = "gionvim.plugins.extras.colorscheme.nightfox" },
+        { import = "gionvim.plugins.extras.colorscheme.nightfox" }, -- Diverse theme
         -- dap
         { import = "gionvim.plugins.extras.dap.luadap" }, -- Neovim lua debug
         -- develop
-        { import = "gionvim.plugins.extras.develop.comments" }, -- Quick comment
+        { import = "gionvim.plugins.extras.develop.comments" }, -- Optimize comment
         { import = "gionvim.plugins.extras.develop.overseer" }, -- Code build and run
-        { import = "gionvim.plugins.extras.develop.lazydev" }, -- lua development
+        { import = "gionvim.plugins.extras.develop.lazydev" }, -- lua develop
         { import = "gionvim.plugins.extras.develop.refactor" }, -- Refactor code
         { import = "gionvim.plugins.extras.develop.scissors" }, -- Snippets editing
         -- diagnostics
-        { import = "gionvim.plugins.extras.diagnostics.trouble" }, -- Look diagnostics result
-        { import = "gionvim.plugins.extras.diagnostics.tiny" }, -- Tiny diagnostics announce
+        { import = "gionvim.plugins.extras.diagnostics.trouble" }, -- Look better diagnostics result
+        { import = "gionvim.plugins.extras.diagnostics.tiny" }, -- Tiny diagnostics and code action
         -- editor
         { import = "gionvim.plugins.extras.editor.autotools" }, -- Auto pairs and save
         { import = "gionvim.plugins.extras.editor.multicursor" }, -- Multiple cursor
         { import = "gionvim.plugins.extras.editor.portal" }, -- Local list navigate
         { import = "gionvim.plugins.extras.editor.replacer" }, -- Factor replace
-        { import = "gionvim.plugins.extras.editor.surround" }, -- Surround modify
+        { import = "gionvim.plugins.extras.editor.surround" }, -- Tackle surround
         -- elevate
         { import = "gionvim.plugins.extras.elevate.escape" }, -- More user-friendly mode switching
         { import = "gionvim.plugins.extras.elevate.substitute" }, -- Replace Neovim built-in 'substitute'
         -- explorer
         { import = "gionvim.plugins.extras.explorer.mini-files" }, -- More explorer
         -- git
-        { import = "gionvim.plugins.extras.git.diffview" }, -- Git history difference
+        { import = "gionvim.plugins.extras.git.diffview" }, -- Git history differ view
         { import = "gionvim.plugins.extras.git.neogit" }, -- Neovim's magit
         -- labeler
         { import = "gionvim.plugins.extras.labeler.arrow" }, -- File and buffer mark
         { import = "gionvim.plugins.extras.labeler.marks" }, -- Line mark
         -- lsp
         -- -- lang extension
-        { import = "gionvim.plugins.extras.langext.clangd" }, -- C or C++
+        { import = "gionvim.plugins.extras.langext.clangd" }, -- C and C++
         { import = "gionvim.plugins.extras.langext.java" }, -- Java
-        { import = "gionvim.plugins.extras.langext.jqx" }, -- Json or Yaml
+        { import = "gionvim.plugins.extras.langext.jqx" }, -- Json and Yaml
         { import = "gionvim.plugins.extras.langext.markdown" }, -- Markdown
-        { import = "gionvim.plugins.extras.langext.pyvenv" }, -- python
-        { import = "gionvim.plugins.extras.langext.sqls" }, -- SQL or MySQL
-        { import = "gionvim.plugins.extras.langext.typescript" }, -- Javascript or Typescript
+        { import = "gionvim.plugins.extras.langext.pyvenv" }, -- Python
+        { import = "gionvim.plugins.extras.langext.sqls" }, -- SQL and MySQL
+        { import = "gionvim.plugins.extras.langext.typescript" }, -- Javascript and Typescript
         -- -- rise capacity
         { import = "gionvim.plugins.extras.boast.dropbar" }, -- Code navigate
         { import = "gionvim.plugins.extras.boast.fidget" }, -- Progress prompt
@@ -81,15 +81,15 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.treesitter.autotag" }, -- Auto close tag
         { import = "gionvim.plugins.extras.treesitter.context" }, -- Code context
         { import = "gionvim.plugins.extras.treesitter.textobjects" }, -- Code text objects
-        { import = "gionvim.plugins.extras.treesitter.treesj" }, -- Splitting or merging code
+        { import = "gionvim.plugins.extras.treesitter.treesj" }, -- Splitting and merging code
         { import = "gionvim.plugins.extras.treesitter.endwise" }, -- Wise add 'end'
         -- ui
-        { import = "gionvim.plugins.extras.ui.colorizer" }, -- Display hexadecimal colors
+        { import = "gionvim.plugins.extras.ui.colorizer" }, -- Exhibit hexadecimal colors
         { import = "gionvim.plugins.extras.ui.edgy" }, -- Predefined layout
         { import = "gionvim.plugins.extras.ui.hlslens" }, -- Highlight entries during search
         { import = "gionvim.plugins.extras.ui.rainbow" }, -- Rainbow brackets
         -- utils
-        { import = "gionvim.plugins.extras.utils.chainsaw" }, -- Add log
+        { import = "gionvim.plugins.extras.utils.chainsaw" }, -- Add log discourse
         { import = "gionvim.plugins.extras.utils.dot" }, -- Add more file type
         { import = "gionvim.plugins.extras.utils.startuptime" }, -- Measure startup time
         { import = "gionvim.plugins.extras.utils.rest" }, -- Http client
