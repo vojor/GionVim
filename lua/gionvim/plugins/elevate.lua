@@ -8,16 +8,31 @@ return {
             {
                 "<leader>cC",
                 function()
-                    require("quicker").toggle()
+                    require("quicker").toggle({ open_cmd_mods = { split = "botright" } })
                 end,
-                desc = "Toggle quickfix",
+                desc = "Toggle [Q]uickfix",
             },
             {
                 "<leader>cL",
                 function()
                     require("quicker").toggle({ loclist = true })
                 end,
-                desc = "Toggle loclist",
+                desc = "Toggle [L]oclist",
+            },
+            {
+                "<leader>cA",
+                function()
+                    vim.fn.setqflist({}, "a", {
+                        items = {
+                            {
+                                bufnr = vim.api.nvim_get_current_buf(),
+                                lnum = vim.api.nvim_win_get_cursor(0)[1],
+                                text = vim.api.nvim_get_current_line(),
+                            },
+                        },
+                    })
+                end,
+                desc = "Add to [Q]uickfix",
             },
         },
         config = function()
