@@ -88,6 +88,17 @@ return {
                         max_items = 8,
                         opts = {
                             dictionary_directories = { vim.fn.expand(vim.fn.stdpath("config") .. "/dictionary") },
+                            separate_output = function(output)
+                                if not output or output == "" then
+                                    return {}
+                                end
+
+                                local items = {}
+                                for line in output:gmatch("([^\r\n]+)") do
+                                    items[#items + 1] = line
+                                end
+                                return items
+                            end,
                         },
                     },
                 },
