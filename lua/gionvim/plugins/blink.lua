@@ -25,7 +25,7 @@ return {
                     border = "rounded",
                     winblend = 10,
                     draw = {
-                        columns = { { "kind_icon" }, { "label", gap = 1 } },
+                        columns = { { "kind_icon" }, { "label", gap = 1 }, { "source_id" } },
                         components = {
                             label = {
                                 width = { fill = true, max = 60 },
