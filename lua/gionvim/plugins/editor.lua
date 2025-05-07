@@ -113,6 +113,13 @@ return {
                 mode = { "n", "v" },
                 desc = "Grug Search and Replace",
             },
+            {
+                "<leader>rG",
+                function()
+                    require("grug-far").open({ engine = "astgrep", transient = true })
+                end,
+                desc = "Grug Use Ast-Grep",
+            },
         },
     },
     -- character、color、number increment or decrement
