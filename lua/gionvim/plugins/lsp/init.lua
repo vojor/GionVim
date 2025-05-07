@@ -18,13 +18,12 @@ return {
         },
         dependencies = {
             {
-                "williamboman/mason-lspconfig.nvim",
+                "mason-org/mason-lspconfig.nvim",
                 lazy = true,
                 cmd = { "LspInstall", "LspUninstall" },
                 dependencies = { "mason.nvim" },
                 opts = {
                     ensure_installed = { "marksman", "lemminx", "autotools_ls" },
-                    automatic_installation = false,
                 },
             },
         },
