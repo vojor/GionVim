@@ -5,6 +5,7 @@ vim.lsp.config("neocmake", {
         lint = { enable = true },
         scan_cmake_in_package = true,
     },
+    single_file_support = true,
 
     capabilities = require("blink.cmp").get_lsp_capabilities({
         workspace = {
