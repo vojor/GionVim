@@ -101,7 +101,7 @@ return {
                     })
                 end,
             },
-            { "igorlfs/nvim-dap-view", opts = {} },
+            { "miroshQa/debugmaster.nvim" },
             { "theHamsta/nvim-dap-virtual-text", opts = {} },
         },
         config = function()
@@ -121,22 +121,12 @@ return {
         end,
     },
     {
-        "igorlfs/nvim-dap-view",
+        "miroshQa/debugmaster.nvim",
         lazy = true,
+        keys = { { "<leader>df", mode = { "n", "v" }, desc = "Debug Mode" } },
         config = function()
-            local dap, dv = require("dap"), require("dap-view")
-            dap.listeners.before.attach["dap-view-config"] = function()
-                dv.open()
-            end
-            dap.listeners.before.launch["dap-view-config"] = function()
-                dv.open()
-            end
-            dap.listeners.before.event_terminated["dap-view-config"] = function()
-                dv.close()
-            end
-            dap.listeners.before.event_exited["dap-view-config"] = function()
-                dv.close()
-            end
+            local dm = require("debugmaster")
+            vim.keymap.set({ "n", "v" }, "<leader>df", dm.mode.toggle, { nowait = true })
         end,
     },
 }
