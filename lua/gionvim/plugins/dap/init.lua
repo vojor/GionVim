@@ -101,7 +101,18 @@ return {
                     })
                 end,
             },
-            { "miroshQa/debugmaster.nvim" },
+            {
+                "miroshQa/debugmaster.nvim",
+                lazy = true,
+                config = function()
+                    vim.keymap.set(
+                        { "n", "v" },
+                        "<leader>df",
+                        require("debugmaster").mode.toggle,
+                        { nowait = true, desc = "Debug Mode" }
+                    )
+                end,
+            },
             { "theHamsta/nvim-dap-virtual-text", opts = {} },
         },
         config = function()
@@ -118,15 +129,6 @@ return {
                 )
             end
             require("gionvim.config.loadpath").autoload("gionvim.plugins.dap.lang")
-        end,
-    },
-    {
-        "miroshQa/debugmaster.nvim",
-        lazy = true,
-        keys = { { "<leader>df", mode = { "n", "v" }, desc = "Debug Mode" } },
-        config = function()
-            local dm = require("debugmaster")
-            vim.keymap.set({ "n", "v" }, "<leader>df", dm.mode.toggle, { nowait = true })
         end,
     },
 }
