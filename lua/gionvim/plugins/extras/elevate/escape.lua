@@ -9,7 +9,7 @@ return {
             local map_combo = require("mini.keymap").map_combo
 
             map_combo(mode, "jk", "<BS><BS><Esc>")
-
+            map_combo(mode, "jj", "<BS><BS><Esc>")
             map_combo(mode, "kj", "<BS><BS><Esc>")
 
             map_combo("t", "jk", "<BS><BS><C-\\><C-n>")
