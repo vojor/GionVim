@@ -72,19 +72,27 @@ return {
         lazy = true,
         cmd = "Genghis",
         keys = {
-            {
-                "<leader>yu",
-                function()
-                    require("genghis").duplicateFile()
-                end,
-                desc = "Duplicate File",
-            },
+            -- copy
             {
                 "<leader>yp",
                 function()
-                    require("genghis").copyFilepath()
+                    require("genghis").copyFilepathWithTilde()
                 end,
-                desc = "Copy File Path",
+                desc = "Copy File Absolute Path",
+            },
+            {
+                "<leader>yP",
+                function()
+                    require("genghis").copyRelativePath()
+                end,
+                desc = "Copy File Relative Path",
+            },
+            {
+                "<leader>yd",
+                function()
+                    require("genghis").copyDirectoryPath()
+                end,
+                desc = "Copy Directory Absolute path",
             },
             {
                 "<leader>ym",
@@ -92,6 +100,15 @@ return {
                     require("genghis").copyFilename()
                 end,
                 desc = "Copy File Name",
+            },
+
+            -- others
+            {
+                "<leader>yu",
+                function()
+                    require("genghis").duplicateFile()
+                end,
+                desc = "Duplicate File",
             },
             {
                 "<leader>yx",
@@ -143,8 +160,27 @@ return {
                 end,
                 desc = "Move File To Current CWD",
             },
+            {
+                "<leader>ya",
+                function()
+                    require("genghis").navigateToFileInFolder("next")
+                end,
+                desc = "󰖽 Next file in folder",
+            },
+            {
+                "<leader>yA",
+                function()
+                    require("genghis").navigateToFileInFolder("prev")
+                end,
+                desc = "󰖿 Prev file in folder",
+            },
         },
-        opts = {},
+        opts = {
+            navigation = {
+                onlySameExtAsCurrentFile = false,
+                ignoreDotfiles = true,
+            },
+        },
     },
     -- Enhance Yank and Put function
     {
