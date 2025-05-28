@@ -17,7 +17,7 @@ return {
                         return diagnostic.message .. " [ " .. diagnostic.source .. "]"
                     end,
                 },
-                disabled_ft = { "make", "cmake" },
+                disabled_ft = { "make", "cmake", "toml" },
             })
         end,
     },
