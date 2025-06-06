@@ -53,6 +53,8 @@
 
 ## Installation
 
+- Premise: Own Configuration is none.
+
 - Linux:
 
   - Terminal command: `git clone https://github.com/vojor/GionVim.git ~/.config/nvim`
@@ -65,7 +67,7 @@
 
 - Terminal enter nvim, plugin will automatically install.
 
-- After the plugin installation is completed, use the `checkhealth ` command in neovim to check for any errors. Note: Due to the use of lazy loading in many plugins, to complete the configuration check, all plugins need to be started.
+- After the plugin installation is completed, use the `checkhealth ` command in neovim to check for any errors.
 
 ## Introduction to Important Plugins
 
@@ -75,7 +77,7 @@
 
 2. The configuration file locate plugins/lsp/init.lua.
 
-3.  You can delete unnecessary file, it orident plugins/lsp/lang, also add the demand language servers.
+3. You can delete unnecessary file, it orident plugins/lsp/langue, also add the demand language servers.
 
 ### nvim-treesitter
 
