@@ -2,6 +2,7 @@ return {
     -- Structure notes、manage project and task, etc
     {
         "nvim-neorg/neorg",
+        enabled = false, -- tree-sitter not norg
         version = "*",
         ft = "norg",
         cmd = "Neorg",
