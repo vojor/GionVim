@@ -118,6 +118,20 @@ return {
                 },
             },
 
+            term = {
+                enabled = true,
+                completion = {
+                    list = {
+                        selection = {
+                            preselect = true,
+                            auto_insert = true,
+                        },
+                    },
+                    menu = { auto_show = true },
+                    ghost_text = { enabled = true },
+                },
+            },
+
             keymap = {
                 preset = "enter",
                 ["<C-y>"] = { "select_and_accept" },
