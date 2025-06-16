@@ -31,4 +31,39 @@ return {
             }):map("<leader>um")
         end,
     },
+    {
+        "bngarren/checkmate.nvim",
+        enabled = false,
+        lazy = true,
+        ft = "markdown",
+        keys = {
+            { "<leader>T", "", desc = "TODO", ft = "markdown" },
+            { "<leader>Tt", "<cmd>CheckmateToggle<CR>", mode = { "n", "v" }, desc = "Toggle TODO", ft = "markdown" },
+            { "<leader>Tc", "<cmd>CheckmateCreate<CR>", mode = { "n", "v" }, desc = "Line To TODO", ft = "markdown" },
+            { "<leader>Tu", "<cmd>CheckmateCheck<CR>", mode = { "n", "v" }, desc = "Aim TODO", ft = "markdown" },
+            { "<leader>Tn", "<cmd>CheckmateUncheck<CR>", mode = { "n", "v" }, desc = "Unpack TODO", ft = "markdown" },
+            {
+                "<leader>Tr",
+                "<cmd>CheckmateRemoveAllMetadata<CR>",
+                mode = { "n", "v" },
+                desc = "Delete TODO Meta",
+                ft = "markdown",
+            },
+            { "<leader>Ta", "<cmd>CheckmateArchive<CR>", mode = { "n", "v" }, desc = "Low TODO", ft = "markdown" },
+            { "<leader>Tl", "<cmd>CheckmateLint<CR>", mode = { "n", "v" }, desc = "Lint TODO", ft = "markdown" },
+        },
+        opts = {
+            log = {
+                level = "error",
+            },
+            keys = {
+                ["<leader>Tt"] = "toggle",
+                ["<leader>Tc"] = "check",
+                ["<leader>Tu"] = "uncheck",
+                ["<leader>Tn"] = "create",
+                ["<leader>TR"] = "remove_all_metadata",
+                ["<leader>Ta"] = "archive",
+            },
+        },
+    },
 }
