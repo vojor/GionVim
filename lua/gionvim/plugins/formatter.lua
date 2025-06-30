@@ -45,7 +45,7 @@ return {
                 norg = { "injected" },
                 python = { "ruff_format", "ruff_organize_imports", "ruff_fix" },
                 sh = { "shfmt", "shellharden" },
-                toml = { "taplo" },
+                toml = { "tombi" },
                 yaml = { "yamlfmt" },
                 ["_"] = { "trim_whitespace", "trim_newlines" },
                 ["*"] = { "autocorrect" },
