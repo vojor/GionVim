@@ -1,12 +1,11 @@
 return {
     {
         "linux-cultist/venv-selector.nvim",
-        branch = "regexp",
         lazy = true,
         ft = "python",
         cmd = "VenvSelect",
         keys = {
-            { "<leader>sv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv", ft = "python" },
+            { "<leader>sv", "<cmd>VenvSelect<CR>", desc = "Select VirtualEnv", ft = "python" },
         },
         opts = {
             options = {
