@@ -1,6 +1,6 @@
 return {
     {
-        "echasnovski/mini.keymap",
+        "nvim-mini/mini.keymap",
         version = false,
         lazy = true,
         event = { "InsertEnter", "CmdlineEnter" },

@@ -235,7 +235,7 @@ return {
     },
     -- Trim space and blank
     {
-        "echasnovski/mini.trailspace",
+        "nvim-mini/mini.trailspace",
         version = false,
         lazy = true,
         keys = {

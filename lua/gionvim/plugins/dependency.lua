@@ -10,7 +10,7 @@ return {
         lazy = true,
     },
     {
-        "echasnovski/mini.icons",
+        "nvim-mini/mini.icons",
         lazy = true,
         opts = {
             file = {
