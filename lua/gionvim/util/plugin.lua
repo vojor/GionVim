@@ -1,6 +1,7 @@
 local M = {}
 
 M.core_imports = {}
+M.handle_defaults = true
 
 M.lazy_file_events = { "BufReadPost", "BufNewFile", "BufWritePre" }
 
@@ -15,6 +16,18 @@ end
 
 function M.setup()
     M.lazy_file()
+    table.insert(package.loaders, function(module)
+        if M.deprecated_modules[module] then
+            GionVim.warn(
+                ("`%s` is no longer included by default in **GionVim**.\nPlease install the `%s` extra if you still want to use it."):format(
+                    module,
+                    M.deprecated_modules[module]
+                ),
+                { title = "GionVim" }
+            )
+            return function() end
+        end
+    end)
 end
 
 function M.lazy_file()

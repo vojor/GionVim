@@ -125,8 +125,7 @@ vim.opt.wildmenu = true
 
 --------  Fold  --------
 vim.opt.foldenable = true
-vim.opt.foldexpr = "v:lua.require'gionvim.util'.ui.foldexpr()"
-vim.opt.foldmethod = "expr"
+vim.opt.foldmethod = "indent"
 vim.opt.foldtext = ""
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
@@ -142,7 +141,7 @@ vim.opt.grepformat = "%f:%l:%c:%m,%f+%l+%c+%m,%-G%f\\|%l\\|%c\\|%m"
 
 --------  Format  --------
 -- Format behavior
-vim.opt.formatexpr = "v:lua.require'gionvim.util'.format.formatexpr()"
+vim.opt.formatexpr = "v:lua.GionVim.format.formatexpr()"
 vim.opt.formatoptions = "jcroqlnt"
 
 --------  Message and Session

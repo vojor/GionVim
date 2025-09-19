@@ -1,20 +1,5 @@
 local M = {}
 
-function M.get_clients(opts)
-    local ret = {}
-    if vim.lsp.get_clients then
-        ret = vim.lsp.get_clients(opts)
-    else
-        ret = vim.lsp.get_active_clients(opts)
-        if opts and opts.method then
-            ret = vim.tbl_filter(function(client)
-                return client.supports_method(opts.method, { bufnr = opts.bufnr })
-            end, ret)
-        end
-    end
-    return opts and opts.filter and vim.tbl_filter(opts.filter, ret) or ret
-end
-
 function M.on_attach(on_attach, name)
     return vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
@@ -61,7 +46,7 @@ function M._check_methods(client, buffer)
     for method, clients in pairs(M._supports_method) do
         clients[client] = clients[client] or {}
         if not clients[client][buffer] then
-            if client.supports_method and client.supports_method(method, { bufnr = buffer }) then
+            if client.supports_method and client:supports_method(method, buffer) then
                 clients[client][buffer] = true
                 vim.api.nvim_exec_autocmds("User", {
                     pattern = "LspSupportsMethod",
@@ -100,37 +85,6 @@ function M.on_supports_method(method, fn)
     })
 end
 
-function M.get_config(server)
-    local configs = require("lspconfig.configs")
-    return rawget(configs, server)
-end
-
-function M.get_raw_config(server)
-    local ok, ret = pcall(require, "lspconfig.configs." .. server)
-    if ok then
-        return ret
-    end
-    return require("lspconfig.server_configurations." .. server)
-end
-
-function M.is_enabled(server)
-    local c = M.get_config(server)
-    return c and c.enabled ~= false
-end
-
-function M.disable(server, cond)
-    local util = require("lspconfig.util")
-    local def = M.get_config(server)
-    def.document_config.on_new_config = util.add_hook_before(
-        def.document_config.on_new_config,
-        function(config, root_dir)
-            if cond(root_dir, config) then
-                config.enabled = false
-            end
-        end
-    )
-end
-
 function M.formatter(opts)
     opts = opts or {}
     local filter = opts.filter or {}
@@ -143,10 +97,10 @@ function M.formatter(opts)
             M.format(GionVim.merge({}, filter, { bufnr = buf }))
         end,
         sources = function(buf)
-            local clients = M.get_clients(GionVim.merge({}, filter, { bufnr = buf }))
+            local clients = vim.lsp.get_clients(GionVim.merge({}, filter, { bufnr = buf }))
             local ret = vim.tbl_filter(function(client)
-                return client.supports_method("textDocument/formatting")
-                    or client.supports_method("textDocument/rangeFormatting")
+                return client:supports_method("textDocument/formatting")
+                    or client:supports_method("textDocument/rangeFormatting")
             end, clients)
             return vim.tbl_map(function(client)
                 return client.name
@@ -157,7 +111,13 @@ function M.formatter(opts)
 end
 
 function M.format(opts)
-    opts = vim.tbl_deep_extend("force", {}, opts or {}, GionVim.opts("conform.nvim").format or {})
+    opts = vim.tbl_deep_extend(
+        "force",
+        {},
+        opts or {},
+        GionVim.opts("nvim-lspconfig").format or {},
+        GionVim.opts("conform.nvim").format or {}
+    )
     local ok, conform = pcall(require, "conform")
     if ok then
         opts.formatters = {}

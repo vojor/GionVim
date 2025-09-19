@@ -13,54 +13,62 @@ return {
             {
                 "<leader>rfs",
                 pick,
-                mode = "v",
+                mode = { "n", "x" },
                 desc = "Refactor",
             },
             {
                 "<leader>rfe",
                 function()
-                    require("refactoring").refactor("Extract Function")
+                    return require("refactoring").refactor("Extract Function")
                 end,
-                mode = "x",
+                mode = { "n", "x" },
                 desc = "Extract Function",
+                expr = true,
             },
             {
                 "<leader>rft",
                 function()
-                    require("refactoring").refactor("Extract Function To File")
+                    return require("refactoring").refactor("Extract Function To File")
                 end,
-                mode = "x",
+                mode = { "n", "x" },
                 desc = "Extract Function To File",
+                expr = true,
             },
             {
                 "<leader>rfv",
                 function()
-                    require("refactoring").refactor("Extract Variable")
+                    return require("refactoring").refactor("Extract Variable")
                 end,
-                mode = "x",
+                mode = { "n", "x" },
                 desc = "Extract Variable",
+                expr = true,
             },
             {
                 "<leader>rfi",
                 function()
-                    require("refactoring").refactor("Inline Variable")
+                    return require("refactoring").refactor("Inline Variable")
                 end,
                 mode = { "n", "x" },
                 desc = "Inline Variable",
+                expr = true,
             },
             {
                 "<leader>rfb",
                 function()
-                    require("refactoring").refactor("Extract Block")
+                    return require("refactoring").refactor("Extract Block")
                 end,
+                mode = { "n", "x" },
                 desc = "Extract Block",
+                expr = true,
             },
             {
                 "<leader>rfk",
                 function()
-                    require("refactoring").refactor("Extract Block To File")
+                    return require("refactoring").refactor("Extract Block To File")
                 end,
+                mode = { "n", "x" },
                 desc = "Extract Block To File",
+                expr = true,
             },
         },
         dependencies = { { "plenary.nvim" }, { "nvim-treesitter" } },

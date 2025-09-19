@@ -1,13 +1,14 @@
 local LazyUtil = require("lazy.core.util")
 
 local M = {}
+M.deprecated = require("gionvim.util.deprecated")
 
 setmetatable(M, {
     __index = function(t, k)
         if LazyUtil[k] then
             return LazyUtil[k]
         end
-        if k == "lazygit" or k == "toggle" then
+        if M.deprecated[k] then
             return M.deprecated[k]()
         end
         t[k] = require("gionvim.util." .. k)
@@ -27,7 +28,7 @@ end
 function M.get_plugin_path(name, path)
     local plugin = M.get_plugin(name)
     path = path and "/" .. path or ""
-    return plugin and plugin.dir and (plugin.dir .. path) or nil
+    return plugin and (plugin.dir .. path)
 end
 
 function M.has(plugin)
@@ -65,13 +66,16 @@ function M.opts(name)
     return Plugin.values(plugin, "opts", false)
 end
 
-function M.deprecate(old, new)
-    M.warn(("`%s` is deprecated. Please use `%s` instead"):format(old, new), {
-        title = "GionVim",
-        once = true,
-        stacktrace = true,
-        stacklevel = 6,
-    })
+function M.deprecate(old, new, opts)
+    M.warn(
+        ("`%s` is deprecated. Please use `%s` instead"):format(old, new),
+        vim.tbl_extend("force", {
+            title = "GionVim",
+            once = true,
+            stacktrace = true,
+            stacklevel = 6,
+        }, opts or {})
+    )
 end
 
 function M.lazy_notify()
@@ -171,14 +175,18 @@ function M.get_pkg_path(pkg, path, opts)
     opts = opts or {}
     opts.warn = opts.warn == nil and true or opts.warn
     path = path or ""
-    local ret = root .. "/packages/" .. pkg .. "/" .. path
-    if opts.warn and not vim.uv.fs_stat(ret) and not require("lazy.core.config").headless() then
-        M.warn(
-            ("Mason package path not found for **%s**:\n- `%s`\nYou may need to force update the package."):format(
-                pkg,
-                path
-            )
-        )
+    local ret = vim.fs.normalize(root .. "/packages/" .. pkg .. "/" .. path)
+    if opts.warn then
+        vim.schedule(function()
+            if not require("lazy.core.config").headless() and not vim.loop.fs_stat(ret) then
+                M.warn(
+                    ("Mason package path not found for **%s**:\n- `%s`\nYou may need to force update the package."):format(
+                        pkg,
+                        path
+                    )
+                )
+            end
+        end)
     end
     return ret
 end
@@ -201,6 +209,47 @@ function M.memoize(fn)
         end
         return cache[fn][key]
     end
+end
+
+function M.statuscolumn()
+    return package.loaded.snacks and require("snacks.statuscolumn").get() or ""
+end
+
+local _defaults = {}
+
+function M.set_default(option, value)
+    local l = vim.api.nvim_get_option_value(option, { scope = "local" })
+    local g = vim.api.nvim_get_option_value(option, { scope = "global" })
+
+    _defaults[("%s=%s"):format(option, value)] = true
+    local key = ("%s=%s"):format(option, l)
+
+    if l ~= g and not _defaults[key] then
+        local info = vim.api.nvim_get_option_info2(option, { scope = "local" })
+        local scriptinfo = vim.tbl_filter(function(e)
+            return e.sid == info.last_set_sid
+        end, vim.fn.getscriptinfo())
+        local by_rtp = #scriptinfo == 1 and vim.startswith(scriptinfo[1].name, vim.fn.expand("$VIMRUNTIME"))
+        if not by_rtp then
+            if vim.g.gionvim_debug_set_default then
+                GionVim.warn(
+                    ("Not setting option `%s` to `%s` because it was changed by a filetype plugin."):format(
+                        option,
+                        value
+                    ),
+                    { title = "GionVim", once = true }
+                )
+            end
+            return false
+        end
+    end
+
+    if vim.g.gionvim_debug_set_default then
+        GionVim.info(("Setting option `%s` to `%s`"):format(option, value), { title = "GionVim", once = true })
+    end
+
+    vim.api.nvim_set_option_value(option, value, { scope = "local" })
+    return true
 end
 
 return M

@@ -45,10 +45,11 @@ return {
                 },
                 inlay_hints = { enabled = true, exclude = {} },
                 codelens = { enabled = true },
+                folds = { enabled = true },
             }
             return ret
         end,
-        config = function(_, opts)
+        config = vim.schedule_wrap(function(_, opts)
             GionVim.lsp.setup()
 
             if opts.inlay_hints.enabled then
@@ -70,6 +71,14 @@ return {
                         buffer = buffer,
                         callback = vim.lsp.codelens.refresh,
                     })
+                end)
+            end
+
+            if opts.folds.enabled then
+                GionVim.lsp.on_supports_method("textDocument/foldingRange", function(client, buffer)
+                    if GionVim.set_default("foldmethod", "expr") then
+                        GionVim.set_default("foldexpr", "v:lua.vim.lsp.foldexpr()")
+                    end
                 end)
             end
 
@@ -95,6 +104,6 @@ return {
             })
 
             require("gionvim.plugins.lsp.keymaps")
-        end,
+        end),
     },
 }
