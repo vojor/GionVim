@@ -219,24 +219,23 @@ local _defaults = {}
 
 function M.set_default(option, value)
     local l = vim.api.nvim_get_option_value(option, { scope = "local" })
-    local g = vim.api.nvim_get_option_value(option, { scope = "global" })
+    local g = GionVim.config._options[option] or vim.api.nvim_get_option_value(option, { scope = "global" })
 
     _defaults[("%s=%s"):format(option, value)] = true
     local key = ("%s=%s"):format(option, l)
 
+    local source = ""
     if l ~= g and not _defaults[key] then
         local info = vim.api.nvim_get_option_info2(option, { scope = "local" })
         local scriptinfo = vim.tbl_filter(function(e)
             return e.sid == info.last_set_sid
         end, vim.fn.getscriptinfo())
+        source = scriptinfo[1] and scriptinfo[1].name or ""
         local by_rtp = #scriptinfo == 1 and vim.startswith(scriptinfo[1].name, vim.fn.expand("$VIMRUNTIME"))
         if not by_rtp then
             if vim.g.gionvim_debug_set_default then
                 GionVim.warn(
-                    ("Not setting option `%s` to `%s` because it was changed by a filetype plugin."):format(
-                        option,
-                        value
-                    ),
+                    ("Not setting option `%s` to `%q` because it was changed by a plugin."):format(option, value),
                     { title = "GionVim", once = true }
                 )
             end
@@ -245,7 +244,13 @@ function M.set_default(option, value)
     end
 
     if vim.g.gionvim_debug_set_default then
-        GionVim.info(("Setting option `%s` to `%s`"):format(option, value), { title = "GionVim", once = true })
+        GionVim.info({
+            ("Setting option `%s` to `%q`"):format(option, value),
+            ("Was: %q"):format(l),
+            ("Global: %q"):format(g),
+            source ~= "" and ("Last set by: %s"):format(source) or "",
+            "buf: " .. vim.api.nvim_buf_get_name(0),
+        }, { title = "GionVim", once = true })
     end
 
     vim.api.nvim_set_option_value(option, value, { scope = "local" })

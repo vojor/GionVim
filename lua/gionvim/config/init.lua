@@ -112,6 +112,7 @@ local defaults = {
             "Method",
             "Module",
             "Namespace",
+            -- "Package",
             "Property",
             "Struct",
             "Trait",
@@ -225,6 +226,8 @@ function M.load(name)
 end
 
 M.did_init = false
+M._options = {}
+
 function M.init()
     if M.did_init then
         return
@@ -238,6 +241,11 @@ function M.init()
     GionVim.lazy_notify()
 
     M.load("options")
+
+    M._options.indentexpr = vim.o.indentexpr
+    M._options.foldmethod = vim.o.foldmethod
+    M._options.foldexpr = vim.o.foldexpr
+
     lazy_clipboard = vim.opt.clipboard
     vim.opt.clipboard = ""
 

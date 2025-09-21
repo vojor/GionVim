@@ -54,6 +54,19 @@ return {
         },
         config = function(_, opts)
             local TS = require("nvim-treesitter")
+
+            setmetatable(require("nvim-treesitter.install"), {
+                __newindex = function(_, k)
+                    if k == "compilers" then
+                        vim.schedule(function()
+                            GionVim.error({
+                                "Setting custom compilers for `nvim-treesitter` is no longer supported.",
+                            })
+                        end)
+                    end
+                end,
+            })
+
             if not TS.get_installed then
                 return GionVim.error("Please use `:Lazy` and update `nvim-treesitter`")
             elseif type(opts.ensure_installed) ~= "table" then
@@ -87,12 +100,15 @@ return {
                     end
 
                     -- indents
-                    if vim.tbl_get(opts, "indent", "enable") ~= false then
+                    if
+                        vim.tbl_get(opts, "indent", "enable") ~= false
+                        and GionVim.treesitter.have(ev.match, "indents")
+                    then
                         GionVim.set_default("indentexpr", "v:lua.GionVim.treesitter.indentexpr()")
                     end
 
                     -- folds
-                    if vim.tbl_get(opts, "folds", "enable") ~= false then
+                    if vim.tbl_get(opts, "folds", "enable") ~= false and GionVim.treesitter.have(ev.match, "folds") then
                         if GionVim.set_default("foldmethod", "expr") then
                             GionVim.set_default("foldexpr", "v:lua.GionVim.treesitter.foldexpr()")
                         end
