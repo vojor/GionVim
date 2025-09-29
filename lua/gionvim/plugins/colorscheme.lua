@@ -7,7 +7,7 @@ return {
             styles = {
                 comments = { italic = true },
                 keywords = { italic = false, bold = true },
-                functions = { bold = true },
+                functions = { italic = true, bold = true },
                 variables = { bold = true },
             },
             sidebars = { "qf", "terminal", "neo-tree", "toggleterm" },
