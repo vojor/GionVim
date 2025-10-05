@@ -49,7 +49,8 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.elevate.escape" }, -- More user-friendly mode switching
         { import = "gionvim.plugins.extras.elevate.substitute" }, -- Replace Neovim built-in 'substitute'
         -- explorer
-        { import = "gionvim.plugins.extras.explorer.mini-files" }, -- More explorer
+        { import = "gionvim.plugins.extras.explorer.mini-files" }, -- Mini explorer
+        { import = "gionvim.plugins.extras.explorer.fyler" }, -- Buffer explorer
         -- git
         { import = "gionvim.plugins.extras.git.diffview" }, -- Git history differ view
         { import = "gionvim.plugins.extras.git.neogit" }, -- Neovim's magit
