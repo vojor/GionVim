@@ -90,25 +90,30 @@ return {
             vim.api.nvim_create_autocmd("FileType", {
                 group = vim.api.nvim_create_augroup("gionvim_treesitter", { clear = true }),
                 callback = function(ev)
-                    if not GionVim.treesitter.have(ev.match) then
+                    local ft, lang = ev.match, vim.treesitter.language.get_lang(ev.match)
+                    if not GionVim.treesitter.have(ft) then
                         return
                     end
 
-                    -- highlighting
-                    if vim.tbl_get(opts, "highlight", "enable") ~= false then
+                    local function enabled(feat, query)
+                        local f = opts[feat] or {}
+                        return f.enable ~= false
+                            and not (type(f.disable) == "table" and vim.tbl_contains(f.disable, lang))
+                            and GionVim.treesitter.have(ft, query)
+                    end
+
+                    -- highlights
+                    if enabled("highlight", "highlights") then
                         pcall(vim.treesitter.start)
                     end
 
                     -- indents
-                    if
-                        vim.tbl_get(opts, "indent", "enable") ~= false
-                        and GionVim.treesitter.have(ev.match, "indents")
-                    then
+                    if enabled("indent", "indents") then
                         GionVim.set_default("indentexpr", "v:lua.GionVim.treesitter.indentexpr()")
                     end
 
                     -- folds
-                    if vim.tbl_get(opts, "folds", "enable") ~= false and GionVim.treesitter.have(ev.match, "folds") then
+                    if enabled("folds", "folds") then
                         if GionVim.set_default("foldmethod", "expr") then
                             GionVim.set_default("foldexpr", "v:lua.GionVim.treesitter.foldexpr()")
                         end
