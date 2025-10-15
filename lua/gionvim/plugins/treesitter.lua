@@ -8,7 +8,7 @@ return {
                 GionVim.error("Please restart Neovim and run `:TSUpdate` to use the `nvim-treesitter` **main** branch.")
                 return
             end
-            GionVim.treesitter.ensure_treesitter_cli(function()
+            GionVim.treesitter.build(function()
                 TS.update(nil, { summary = true })
             end)
         end,
@@ -55,6 +55,15 @@ return {
         config = function(_, opts)
             local TS = require("nvim-treesitter")
 
+            if
+                not vim.env.CC
+                and vim.fn.has("win32") == 1
+                and vim.fn.executable("cl") == 0
+                and vim.fn.executable("gcc") == 1
+            then
+                vim.env.CC = "gcc"
+            end
+
             setmetatable(require("nvim-treesitter.install"), {
                 __newindex = function(_, k)
                     if k == "compilers" then
@@ -80,7 +89,7 @@ return {
                 return not GionVim.treesitter.have(lang)
             end, opts.ensure_installed or {})
             if #install > 0 then
-                GionVim.treesitter.ensure_treesitter_cli(function()
+                GionVim.treesitter.build(function()
                     TS.install(install, { summary = true }):await(function()
                         GionVim.treesitter.get_installed(true)
                     end)
