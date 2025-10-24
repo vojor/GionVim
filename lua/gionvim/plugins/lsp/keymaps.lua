@@ -35,12 +35,18 @@ map("n", "<leader>lp", function()
 end, { desc = "Server Status Information" })
 
 -- calls
+map("n", "<leader>lI", function()
+    Snacks.picker.lsp_incoming_calls()
+end, { desc = "C[a]lls Incoming (Snacks)" })
+map("n", "<leader>lO", function()
+    Snacks.picker.lsp_outgoing_calls()
+end, { desc = "C[a]lls Outgoing (Snacks)" })
 map("n", "<leader>li", function()
     vim.lsp.buf.incoming_calls()
-end, { desc = "Incoming" })
+end, { desc = "C[a]lls Incoming" })
 map("n", "<leader>lo", function()
     vim.lsp.buf.outgoing_calls()
-end, { desc = "Outgoing" })
+end, { desc = "C[a]lls Outgoing" })
 
 -- Work space
 map("n", "<leader>la", vim.lsp.buf.add_workspace_folder, { desc = "Add Workspace Folder" })

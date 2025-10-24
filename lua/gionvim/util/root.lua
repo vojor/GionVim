@@ -66,7 +66,7 @@ function M.realpath(path)
     if path == "" or path == nil then
         return nil
     end
-    path = vim.uv.fs_realpath(path) or path
+    path = vim.fn.has("win32") == 0 and vim.uv.fs_realpath(path) or path
     return GionVim.norm(path)
 end
 

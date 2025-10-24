@@ -8,11 +8,11 @@ return {
                 GionVim.error("Please restart Neovim and run `:TSUpdate` to use the `nvim-treesitter` **main** branch.")
                 return
             end
+            package.loaded["gionvim.util.treesitter"] = nil
             GionVim.treesitter.build(function()
                 TS.update(nil, { summary = true })
             end)
         end,
-        lazy = vim.fn.argc(-1) == 0,
         event = { "LazyFile", "VeryLazy" },
         cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
         opts_extend = { "ensure_installed" },
@@ -102,9 +102,9 @@ return {
                             and GionVim.treesitter.have(ft, query)
                     end
 
-                    -- highlights
+                    -- highlighting
                     if enabled("highlight", "highlights") then
-                        pcall(vim.treesitter.start)
+                        pcall(vim.treesitter.start, ev.buf)
                     end
 
                     -- indents

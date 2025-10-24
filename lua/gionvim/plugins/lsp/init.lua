@@ -4,13 +4,6 @@ return {
         event = "LazyFile",
         keys = {
             { "<leader>i", "", desc = "relay" },
-            {
-                "<leader>ii",
-                function()
-                    Snacks.picker.lsp_config()
-                end,
-                desc = "Server Status",
-            },
             { "<leader>if", "<cmd>LspInfo<CR>", desc = "Server Information" },
             { "<leader>is", "<cmd>LspStart<CR>", desc = "Start Server" },
             { "<leader>ip", "<cmd>LspStop<CR>", desc = "Stop Server" },

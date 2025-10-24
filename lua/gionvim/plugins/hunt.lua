@@ -108,6 +108,13 @@ return {
                 desc = "Git Diff (hunks)",
             },
             {
+                "<leader>fO",
+                function()
+                    Snacks.picker.git_diff({ base = "origin" })
+                end,
+                desc = "Git Diff (origin)",
+            },
+            {
                 "<leader>fs",
                 function()
                     Snacks.picker.git_status()
