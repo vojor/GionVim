@@ -187,3 +187,8 @@ map({ "i", "n", "s" }, "<esc>", function()
     GionVim.cmp.actions.snippet_stop()
     return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
+
+-- lua
+map({ "n", "x" }, "<localleader>r", function()
+    Snacks.debug.run()
+end, { desc = "Run Lua", ft = "lua" })

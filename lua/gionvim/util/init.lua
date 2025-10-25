@@ -146,7 +146,7 @@ function M.safe_keymap_set(mode, lhs, rhs, opts)
         if opts.remap and not vim.g.vscode then
             opts.remap = nil
         end
-        vim.keymap.set(modes, lhs, rhs, opts)
+        Snacks.keymap.set(modes, lhs, rhs, opts)
     end
 end
 

@@ -43,10 +43,11 @@ return {
             return ret
         end,
         config = vim.schedule_wrap(function(_, opts)
-            GionVim.lsp.setup()
+            GionVim.format.register(GionVim.lsp.formatter())
 
+            -- inlay hints
             if opts.inlay_hints.enabled then
-                GionVim.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
+                Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer)
                     if
                         vim.api.nvim_buf_is_valid(buffer)
                         and vim.bo[buffer].buftype == ""
@@ -57,8 +58,9 @@ return {
                 end)
             end
 
+            -- code lens
             if opts.codelens.enabled and vim.lsp.codelens then
-                GionVim.lsp.on_supports_method("textDocument/codeLens", function(client, buffer)
+                Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function(buffer)
                     vim.lsp.codelens.refresh()
                     vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
                         buffer = buffer,
@@ -67,8 +69,9 @@ return {
                 end)
             end
 
+            -- folds
             if opts.folds.enabled then
-                GionVim.lsp.on_supports_method("textDocument/foldingRange", function(client, buffer)
+                Snacks.util.lsp.on({ method = "textDocument/foldingRange" }, function(buffer)
                     if GionVim.set_default("foldmethod", "expr") then
                         GionVim.set_default("foldexpr", "v:lua.vim.lsp.foldexpr()")
                     end
