@@ -11,6 +11,9 @@ return {
                     vim.g.navic_silence = true
                 end,
                 opts = function()
+                    Snacks.util.lsp.on({ method = "textDocument/documentSymbol" }, function(buffer, client)
+                        require("nvim-navic").attach(client, buffer)
+                    end)
                     return {
                         lsp = {
                             auto_attach = true,
