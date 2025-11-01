@@ -110,7 +110,7 @@ return {
             {
                 "<leader>fO",
                 function()
-                    Snacks.picker.git_diff({ base = "origin" })
+                    Snacks.picker.git_diff({ base = "origin", group = true })
                 end,
                 desc = "Git Diff (origin)",
             },
