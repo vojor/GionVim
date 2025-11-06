@@ -50,6 +50,7 @@ return {
                 "vimdoc",
                 "xml",
                 "yaml",
+                "zsh",
             },
         },
         config = function(_, opts)
