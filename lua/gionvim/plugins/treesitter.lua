@@ -34,7 +34,7 @@ return {
                 "http",
                 "javascript",
                 "json",
-                "jsonc",
+                "json5",
                 "lua",
                 "luadoc",
                 "make",
