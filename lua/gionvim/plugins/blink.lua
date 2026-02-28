@@ -9,7 +9,7 @@ return {
         },
         dependencies = {
             { "rafamadriz/friendly-snippets" },
-            { "Kaiser-Yang/blink-cmp-dictionary" },
+            { "xieyonn/blink-cmp-dat-word" },
             { "xzbdmw/colorful-menu.nvim", opts = {} },
             { "saghen/blink.compat", optional = true, opts = {}, version = "*" },
         },
@@ -68,7 +68,7 @@ return {
                         vim.tbl_contains({ "markdown", "text", "tex", "norg" }, vim.bo.filetype)
                         or require("gionvim.config.inscomt").inside_comment_block()
                     then
-                        table.insert(result, "dictionary")
+                        table.insert(result, "datword")
                     end
                     return result
                 end,
@@ -81,24 +81,12 @@ return {
                         module = "lazydev.integrations.blink",
                         score_offset = 100,
                     },
-                    dictionary = {
-                        module = "blink-cmp-dictionary",
-                        name = "Dict",
-                        min_keyword_length = 3,
-                        max_items = 8,
+                    datword = {
+                        name = "Word",
+                        module = "blink-cmp-dat-word",
                         opts = {
-                            dictionary_directories = { vim.fn.expand(vim.fn.stdpath("config") .. "/dictionary") },
-                            separate_output = function(output)
-                                if not output or output == "" then
-                                    return {}
-                                end
-
-                                local items = {}
-                                for line in output:gmatch("([^\r\n]+)") do
-                                    items[#items + 1] = line
-                                end
-                                return items
-                            end,
+                            paths = { vim.fs.normalize(vim.fn.stdpath("config") .. "/dictionary/words.txt") },
+                            spellsuggest = true,
                         },
                     },
                 },
