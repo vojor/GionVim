@@ -27,7 +27,6 @@ return {
 
             local sources = {
                 -- Diagnostics
-                diagnostics.cmake_lint,
                 diagnostics.ltrs,
                 diagnostics.selene,
                 diagnostics.dotenv_linter,
@@ -60,6 +59,7 @@ return {
             events = { "BufWritePost", "BufReadPost", "InsertLeave" },
             linters_by_ft = {
                 bash = { "bash" },
+                cmake = { "cmake_lint" },
                 javascript = { "oxlint", "biomejs" },
                 javascriptreact = { "oxlint", "biomejs" },
                 typescript = { "oxlint", "biomejs" },
