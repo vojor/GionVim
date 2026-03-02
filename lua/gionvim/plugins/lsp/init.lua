@@ -1,7 +1,7 @@
 return {
     {
         "neovim/nvim-lspconfig",
-        event = "LazyFile",
+        event = { "BufReadPre", "BufNewFile" },
         keys = {
             { "<leader>i", "", desc = "relay" },
             { "<leader>if", "<cmd>LspInfo<CR>", desc = "Server Information" },
@@ -42,7 +42,7 @@ return {
             }
             return ret
         end,
-        config = vim.schedule_wrap(function(_, opts)
+        config = function(_, opts)
             GionVim.format.register(GionVim.lsp.formatter())
 
             -- inlay hints
@@ -100,6 +100,6 @@ return {
             })
 
             require("gionvim.plugins.lsp.keymaps")
-        end),
+        end,
     },
 }
