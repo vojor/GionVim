@@ -14,6 +14,11 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local treesitterpath = vim.fn.stdpath("data") .. "/site"
+if vim.uv.fs_stat(treesitterpath) then
+    vim.opt.rtp:prepend(treesitterpath)
+end
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
@@ -64,7 +69,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.langext.jqx" }, -- Json and Yaml
         { import = "gionvim.plugins.extras.langext.markdown" }, -- Markdown
         { import = "gionvim.plugins.extras.langext.pyvenv" }, -- Python
-        { import = "gionvim.plugins.extras.langext.sqls" }, -- SQL and MySQL
         { import = "gionvim.plugins.extras.langext.typescript" }, -- Javascript and Typescript
         -- -- rise capacity
         { import = "gionvim.plugins.extras.boast.dropbar" }, -- Code navigate
@@ -74,10 +78,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.boast.increname" }, -- Timely feedback rename
         { import = "gionvim.plugins.extras.boast.lspsaga" }, -- Strengthen LSP experience
         { import = "gionvim.plugins.extras.boast.navbuddy" }, -- Float navigate
-        { import = "gionvim.plugins.extras.boast.namu" }, -- Symbols jump
         { import = "gionvim.plugins.extras.boast.outline" }, -- Symbols Outline
-        -- seek
-        { import = "gionvim.plugins.extras.seek.fzf" }, -- fuzzy find
         -- treesitter
         { import = "gionvim.plugins.extras.treesitter.autotag" }, -- Auto close tag
         { import = "gionvim.plugins.extras.treesitter.context" }, -- Code context

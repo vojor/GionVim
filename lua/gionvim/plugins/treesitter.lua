@@ -28,7 +28,6 @@ return {
                 "diff",
                 "editorconfig",
                 "git_config",
-                "gitcommit",
                 "gitignore",
                 "html",
                 "http",
