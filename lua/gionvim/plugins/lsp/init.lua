@@ -16,7 +16,7 @@ return {
                 cmd = { "LspInstall", "LspUninstall" },
                 dependencies = { "mason.nvim" },
                 opts = {
-                    ensure_installed = { "marksman", "lemminx", "autotools_ls" },
+                    ensure_installed = { "marksman", "lemminx", "autotools_ls", "basedpyright" },
                 },
             },
         },
