@@ -15,7 +15,12 @@ return {
             end
 
             vim.filetype.add({
-                extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi" },
+                extension = {
+                    ["rasi"] = "rasi",
+                    ["rofi"] = "rasi",
+                    ["wofi"] = "rasi",
+                    ["http"] = "http",
+                },
                 filename = {
                     ["vifmrc"] = "vim",
                     [".autocorrectrc"] = "yaml",

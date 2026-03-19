@@ -14,11 +14,6 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local treesitterpath = vim.fn.stdpath("data") .. "/site"
-if vim.uv.fs_stat(treesitterpath) then
-    vim.opt.rtp:prepend(treesitterpath)
-end
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
@@ -31,8 +26,6 @@ require("lazy").setup({
         { import = "gionvim.plugins" },
 
         ---- Extra plugins ----
-        -- colorscheme
-        { import = "gionvim.plugins.extras.colorscheme.nightfox" }, -- Diverse theme
         -- dap
         { import = "gionvim.plugins.extras.dap.luadap" }, -- Neovim lua debug
         -- develop
@@ -52,10 +45,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.editor.surround" }, -- Tackle surround
         -- elevate
         { import = "gionvim.plugins.extras.elevate.escape" }, -- More user-friendly mode switching
-        { import = "gionvim.plugins.extras.elevate.substitute" }, -- Replace Neovim built-in 'substitute'
-        -- explorer
-        { import = "gionvim.plugins.extras.explorer.mini-files" }, -- Mini explorer
-        { import = "gionvim.plugins.extras.explorer.fyler" }, -- Buffer explorer
         -- git
         { import = "gionvim.plugins.extras.git.diffview" }, -- Git history differ view
         { import = "gionvim.plugins.extras.git.neogit" }, -- Neovim's magit
@@ -97,7 +86,7 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.utils.rest" }, -- Http client
     },
     defaults = { version = false },
-    install = { colorscheme = { "tokyonight", "nightfox", "habamax" } },
+    install = { colorscheme = { "tokyonight", "habamax" } },
     ui = {
         border = "rounded",
         icons = {

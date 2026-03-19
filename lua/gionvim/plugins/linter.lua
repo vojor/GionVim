@@ -7,27 +7,15 @@ return {
         keys = {
             { "<leader>in", "<cmd>NullLsInfo<CR>", desc = "None-ls Information" },
         },
-        dependencies = {
-            {
-                "jay-babu/mason-null-ls.nvim",
-                lazy = true,
-                cmd = { "NoneLsInstall", "NoneLsUninstall" },
-                dependencies = { "mason.nvim" },
-                config = function()
-                    require("mason-null-ls").setup({
-                        ensure_installed = { "shellcheck" },
-                        automatic_installation = false,
-                    })
-                end,
-            },
-        },
         config = function()
             local none_ls = require("null-ls")
             local diagnostics = none_ls.builtins.diagnostics
 
             local sources = {
                 -- Diagnostics
-                diagnostics.ltrs,
+                diagnostics.ltrs.with({
+                    disabled_filetypes = { "text" },
+                }),
                 diagnostics.selene,
                 diagnostics.dotenv_linter,
                 diagnostics.editorconfig_checker.with({

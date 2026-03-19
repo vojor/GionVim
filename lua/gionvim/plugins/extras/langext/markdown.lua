@@ -33,7 +33,6 @@ return {
     },
     {
         "bngarren/checkmate.nvim",
-        enabled = false,
         lazy = true,
         ft = "markdown",
         keys = {
@@ -55,14 +54,6 @@ return {
         opts = {
             log = {
                 level = "error",
-            },
-            keys = {
-                ["<leader>Tt"] = "toggle",
-                ["<leader>Tc"] = "check",
-                ["<leader>Tu"] = "uncheck",
-                ["<leader>Tn"] = "create",
-                ["<leader>TR"] = "remove_all_metadata",
-                ["<leader>Ta"] = "archive",
             },
         },
     },
