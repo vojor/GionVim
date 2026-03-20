@@ -9,6 +9,7 @@ return {
                 { path = "GionVim", words = { "GionVim" } },
                 { path = "snacks.nvim", words = { "Snacks" } },
                 { path = "lazy.nvim", words = { "Lazy" } },
+                { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
             },
         },
     },
