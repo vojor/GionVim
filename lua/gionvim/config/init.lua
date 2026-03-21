@@ -248,7 +248,7 @@ function M.init()
     M._options.foldmethod = vim.o.foldmethod
     M._options.foldexpr = vim.o.foldexpr
 
-    lazy_clipboard = vim.opt.clipboard
+    lazy_clipboard = vim.opt.clipboard:get()
     vim.opt.clipboard = ""
 
     if vim.g.deprecation_warnings == false then
@@ -259,42 +259,80 @@ function M.init()
 end
 
 local default_extras
+
+function M.register_defaults(name, extras)
+    assert(default_extras, "defaults should be loaded by now, this should never happen")
+    local valid = vim.tbl_map(function(extra)
+        return extra.name
+    end, extras)
+
+    local origin = "default"
+    local ret
+    local use
+
+    local global = vim.g["gionvim_" .. name]
+    if vim.tbl_contains(valid, global) then
+        origin = "global"
+        use = global
+    else
+        if global and global ~= "auto" then
+            vim.notify(
+                ("Invalid value for `vim.g.gionvim_%s`: `%s`\nValid options are: %s"):format(
+                    name,
+                    global,
+                    table.concat(valid, ", ")
+                ),
+                vim.log.levels.ERROR,
+                { title = "GionVim" }
+            )
+        end
+        for _, extra in ipairs(extras) do
+            if GionVim.has_extra(extra.extra) then
+                use = extra.name
+                origin = "extra"
+                break
+            end
+        end
+    end
+
+    use = use or valid[1]
+
+    for _, extra in ipairs(extras) do
+        local import = "gionvim.plugins.extras." .. extra.extra
+        extra = vim.deepcopy(extra)
+        extra.enabled = extra.name == use
+        extra.import = import
+        extra.group = name
+        if extra.enabled then
+            extra.origin = origin
+            ret = extra
+        end
+        default_extras[import] = extra
+    end
+
+    return assert(ret, "One of the extras should be enabled, this should never happen")
+end
+
+function M.get_default(group)
+    for _, extra in pairs(M.get_defaults()) do
+        if extra.group == group and extra.enabled then
+            return extra
+        end
+    end
+end
+
 function M.get_defaults()
     if default_extras then
         return default_extras
     end
+    default_extras = {}
+
     local checks = {}
 
-    default_extras = {}
-    for name, check in pairs(checks) do
-        local valid = {}
-        for _, extra in ipairs(check) do
-            if extra.enabled ~= false then
-                valid[#valid + 1] = extra.name
-            end
-        end
-        local origin = "default"
-        local use = vim.g["gionvim_" .. name]
-        use = vim.tbl_contains(valid, use or "auto") and use or nil
-        origin = use and "global" or origin
-        for _, extra in ipairs(use and {} or check) do
-            if extra.enabled ~= false and GionVim.has_extra(extra.extra) then
-                use = extra.name
-                break
-            end
-        end
-        origin = use and "extra" or origin
-        use = use or valid[1]
-        for _, extra in ipairs(check) do
-            local import = "gionvim.plugins.extras." .. extra.extra
-            extra = vim.deepcopy(extra)
-            extra.enabled = extra.name == use
-            if extra.enabled then
-                extra.origin = origin
-            end
-            default_extras[import] = extra
-        end
+    for name, extras in pairs(checks) do
+        M.register_defaults(name, extras)
     end
+
     return default_extras
 end
 
