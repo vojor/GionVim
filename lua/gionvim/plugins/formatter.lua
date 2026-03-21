@@ -34,6 +34,7 @@ return {
                 c = { "clang-format" },
                 cpp = { "clang-format" },
                 cmake = { "gersemi" },
+                html = { "biome" },
                 json = { "biome" },
                 jsonc = { "biome" },
                 javascript = { "biome" },

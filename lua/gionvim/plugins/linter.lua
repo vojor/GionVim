@@ -48,6 +48,7 @@ return {
             linters_by_ft = {
                 bash = { "bash" },
                 cmake = { "cmake_lint" },
+                html = { "biomejs" },
                 javascript = { "oxlint", "biomejs" },
                 javascriptreact = { "oxlint", "biomejs" },
                 typescript = { "oxlint", "biomejs" },

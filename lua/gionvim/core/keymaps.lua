@@ -53,10 +53,10 @@ map({ "n", "t" }, "<leader>tL", function()
     Snacks.terminal(nil, { cwd = GionVim.root() })
 end, { desc = "Terminal (Root Dir)" })
 map({ "n", "t" }, "<c-/>", function()
-    Snacks.terminal(nil, { cwd = GionVim.root() })
+    Snacks.terminal.focus(nil, { cwd = GionVim.root() })
 end, { desc = "Terminal (Root Dir)" })
 map({ "n", "t" }, "<c-_>", function()
-    Snacks.terminal(nil, { cwd = GionVim.root() })
+    Snacks.terminal.focus(nil, { cwd = GionVim.root() })
 end, { desc = "which_key_ignore" })
 
 -- terminal mappings
