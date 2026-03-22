@@ -1,14 +1,12 @@
-import { commonConfig } from "eslint/config"
 import js from "@eslint/js"
 
-export default commonConfig([
+export default [
     {
-        files: ["**/*.ts", "**/*.cts", "**.*.mts"],
-        plugin: { js },
-        extends: ["js/recommended"],
+        files: ["**./*.js", "**/*.ts", "**/*.cts", "**/*.cjs", "**/.*.mjs", "**./*.mts"],
+        plugins: { js },
         rules: {
             curly: "error",
-            eqeqed: "error",
+            eqeqeq: "error",
             indent: ["error", 4],
             "linebreak-style": ["error", "unix"],
             "no-console": "warn",
@@ -22,11 +20,6 @@ export default commonConfig([
         languageOptions: {
             ecmaVersion: "latest",
             sourceType: "module",
-            parserOptions: {
-                ecmaFeatures: {
-                    jsx: true,
-                },
-            },
         },
     },
     {
@@ -35,4 +28,4 @@ export default commonConfig([
             reportUnusedDisableDirectives: "error",
         },
     },
-])
+]

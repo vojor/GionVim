@@ -2,7 +2,7 @@ fix = true
 indent-width = 4
 line-length = 120
 show-fixes = true
-target-version = "py313"
+target-version = "py314"
 
 [analyze]
 detect-string-imports = true
