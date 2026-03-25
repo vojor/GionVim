@@ -14,7 +14,8 @@ return {
             local sources = {
                 -- Diagnostics
                 diagnostics.ltrs.with({
-                    disabled_filetypes = { "text" },
+                    args = { "check", "--text", "$TEXT" },
+                    disabled_filetypes = { "markdown" },
                 }),
                 diagnostics.selene,
                 diagnostics.dotenv_linter,
