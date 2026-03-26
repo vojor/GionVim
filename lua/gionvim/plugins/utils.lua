@@ -20,7 +20,7 @@ return {
             { "<leader>ttv", "<cmd>ToggleTerm direction=vertical size=45<CR>", desc = "Open Vertical Terminal" },
             { "<leader>tth", "<cmd>ToggleTerm direction=horizontal<CR>", desc = "Open Horizontal Terminal" },
             { "<leader>ttb", "<cmd>ToggleTerm direction=tab<CR>", desc = "Open Tab Terminal" },
-            { "<leader>ttp", "<cmd>lua _htop_toggle()<CR>", desc = "Open Htop Terminal" },
+            { "<leader>ttp", "<cmd>lua _bottom_toggle()<CR>", desc = "Open Bottom Terminal" },
             { "<leader>ttr", "<cmd>lua _procs_toggle()<CR>", desc = "Open Procs Terminal" },
             { "<leader>tte", ":TermExec ", desc = "Use Custom Operate Open Terminal" },
             { "<leader>ttc", ":ToggleTermSendCurrentLine ", desc = "Send Current Line To The Terminal" },
@@ -30,9 +30,9 @@ return {
         config = function()
             local Terminal = require("toggleterm.terminal").Terminal
 
-            -- htop
-            local htop = Terminal:new({
-                cmd = "htop",
+            -- bottom
+            local bottom = Terminal:new({
+                cmd = "btm",
                 hidden = true,
                 direction = "float",
                 float_opts = {
@@ -52,8 +52,8 @@ return {
                     vim.cmd("startinsert!")
                 end,
             })
-            function _htop_toggle()
-                htop:toggle()
+            function _bottom_toggle()
+                bottom:toggle()
             end
 
             -- procs
