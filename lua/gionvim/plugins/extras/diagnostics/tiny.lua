@@ -27,7 +27,7 @@ return {
         event = "LspAttach",
         opts = {
             backend = "delta",
-            picker = { "snacks" },
+            picker = "snacks",
         },
         config = function(_, opts)
             require("tiny-code-action").setup(opts)

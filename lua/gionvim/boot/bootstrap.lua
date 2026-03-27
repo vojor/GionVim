@@ -80,7 +80,6 @@ require("lazy").setup({
         -- utils
         { import = "gionvim.plugins.extras.utils.chainsaw" }, -- Add log discourse
         { import = "gionvim.plugins.extras.utils.dot" }, -- Add more file type
-        { import = "gionvim.plugins.extras.utils.startuptime" }, -- Measure startup time
         { import = "gionvim.plugins.extras.utils.rest" }, -- Http client
     },
     defaults = { version = false },
