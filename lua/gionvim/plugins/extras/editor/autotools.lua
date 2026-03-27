@@ -16,7 +16,6 @@ return {
                         "neo-tree",
                         "noice",
                         "NeogitStatus",
-                        "Outline",
                         "sagaoutline",
                         "trouble",
                         "Trouble",

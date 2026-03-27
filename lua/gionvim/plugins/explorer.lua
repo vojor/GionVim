@@ -63,7 +63,6 @@ return {
                 "Trouble",
                 "trouble",
                 "qf",
-                "Outline",
             },
             default_component_configs = {
                 indent = {

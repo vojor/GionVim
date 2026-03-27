@@ -276,13 +276,11 @@ return {
                 pattern = {
                     "checkhealth",
                     "help",
-                    "jqx",
                     "lazy",
                     "lspinfo",
                     "mason",
                     "neo-tree",
                     "notify",
-                    "Outline",
                     "grug-far",
                     "qf",
                     "Trouble",

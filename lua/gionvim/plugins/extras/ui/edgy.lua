@@ -41,12 +41,6 @@ return {
                 left = {},
                 right = {
                     {
-                        title = "Outline",
-                        ft = "Outline",
-                        pinned = true,
-                        open = "Outline",
-                    },
-                    {
 
                         title = "Grug Far",
                         ft = "grug-far",
@@ -141,7 +135,7 @@ return {
         optional = true,
         opts = function(_, opts)
             opts.open_files_do_not_replace_types = opts.open_files_do_not_replace_types
-                or { "Outline", "terminal", "Trouble", "trouble", "qf" }
+                or { "terminal", "Trouble", "trouble", "qf" }
             table.insert(opts.open_files_do_not_replace_types, "edgy")
         end,
     },

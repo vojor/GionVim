@@ -55,7 +55,6 @@ require("lazy").setup({
         -- -- lang extension
         { import = "gionvim.plugins.extras.langext.clangd" }, -- C and C++
         { import = "gionvim.plugins.extras.langext.java" }, -- Java
-        { import = "gionvim.plugins.extras.langext.jqx" }, -- Json and Yaml
         { import = "gionvim.plugins.extras.langext.markdown" }, -- Markdown
         { import = "gionvim.plugins.extras.langext.pyvenv" }, -- Python
         { import = "gionvim.plugins.extras.langext.typescript" }, -- Javascript and Typescript
@@ -67,7 +66,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.boast.increname" }, -- Timely feedback rename
         { import = "gionvim.plugins.extras.boast.lspsaga" }, -- Strengthen LSP experience
         { import = "gionvim.plugins.extras.boast.navbuddy" }, -- Float navigate
-        { import = "gionvim.plugins.extras.boast.outline" }, -- Symbols Outline
         -- treesitter
         { import = "gionvim.plugins.extras.treesitter.autotag" }, -- Auto close tag
         { import = "gionvim.plugins.extras.treesitter.context" }, -- Code context
