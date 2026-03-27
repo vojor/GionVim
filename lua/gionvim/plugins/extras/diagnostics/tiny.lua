@@ -17,7 +17,7 @@ return {
                         return diagnostic.message .. " [ " .. diagnostic.source .. "]"
                     end,
                 },
-                disabled_ft = { "make", "toml" },
+                disabled_ft = { "make", "toml", "cmake" },
             })
         end,
     },
@@ -31,7 +31,7 @@ return {
         },
         config = function(_, opts)
             require("tiny-code-action").setup(opts)
-            vim.keymap.set("n", "<leader>lc", function()
+            vim.keymap.set({ "n", "x" }, "<leader>lc", function()
                 require("tiny-code-action").code_action()
             end, { noremap = true, silent = true, desc = "Tiny Code Action" })
         end,
