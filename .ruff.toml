@@ -17,7 +17,7 @@ line-ending = "lf"
 extend-fixable = ["B"]
 extend-select = ["B", "Q"]
 external = ["V"]
-select = ["B", "E", "F", "Q"]
+select = ["B", "E", "F", "I", "N", "Q", "UP", "RUF", "ASYNC"]
 task-tags = ["FIX", "FIXME", "HACK", "NOTE", "PERF", "TODO", "WARN", "XXX"]
 typing-modules = ["airflow.typing_compat"]
 
