@@ -20,12 +20,15 @@ repos:
       - id: check-xml
       # 加载所有yaml文件验证语法
       - id: check-yaml
+        args: [--allow-multiple-documents]
       # 检测符号链接是否更改为常规文件
       - id: destroyed-symlinks
       # 确保文件以换行符结尾
       - id: end-of-file-fixer
       # 删除UTF-8字节标记
       - id: fix-byte-order-marker
+      - id: mixed-line-ending
+        args: [--fix=lf]
       # 修剪尾随空格
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
