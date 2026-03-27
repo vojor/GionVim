@@ -10,7 +10,10 @@ return {
                 width = "block",
                 right_pad = 1,
             },
-            completions = { blink = { enabled = true } },
+            checkbox = { enabled = false },
+            completions = {
+                blink = { enabled = true },
+            },
             latex = { enabled = false },
         },
         config = function(_, opts)
