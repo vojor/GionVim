@@ -12,15 +12,12 @@
 ## Features
 
 - Development
-
   - Language support: C/C++, Java, javascript and typescript, lua, python, cmake, bash, vim, xml, yaml.
 
 - ColorScheme
-
   - Carefully selected themes.
 
 - Custom
-
   - Highly liberalized configuration.
 
 ## Requirement
@@ -28,7 +25,6 @@
 - **Notice: After configuring from github clone, it is necessary to modify the configuration content inside the configuration file before using it. Directly using it may result in errors.**
 
 - Dependent
-
   - essential: git
 
   - lsp: Node and npm, Python and pip
@@ -42,25 +38,17 @@
   - tools: fd, fzf, ripgrep, ugrep
 
 - Modify Configuration(plugin)
-
   - sqlite.lua: Go to [sqlite.lua](https://github.com/kkharji/sqlite.lua) to view detailed configurations.
 
 - others
-
   - Windows system: Recommend using msys2 to install reliance tools, address: [msys2](https://www.msys2.org)
 
-  - The system can access github normally.
-
-## Installation
-
-- Premise: Own Configuration is none.
+  - The system can access github normally
 
 - Linux:
-
   - Terminal command: `git clone https://github.com/vojor/GionVim.git ~/.config/nvim`
 
 - Windows:
-
   - Windows PowerShell: `git clone https://github.com/vojor/GionVim.git $env:LOCALAPPDATA\nvim`
 
 - Access the nvim directory: `rm -rf .git`, You can manage projects on your own.
