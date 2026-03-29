@@ -71,7 +71,7 @@ return {
                 function()
                     require("noice").cmd("pick")
                 end,
-                desc = "Noice Picker (Snacks or FzfLua)",
+                desc = "Noice Snacks",
             },
             {
                 "<c-f>",
