@@ -55,7 +55,7 @@
 
 - Terminal enter nvim, plugin will automatically install.
 
-- After the plugin installation is completed, use the `checkhealth ` command in neovim to check for any errors.
+- After the plugin installation is completed, use the `checkhealth` command in neovim to check for any errors.
 
 ## Introduction to Important Plugins
 

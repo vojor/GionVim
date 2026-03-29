@@ -1,19 +1,16 @@
 {
     "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/main/schema/markdownlint-cli2-config-schema.json",
-    "globs": ["*.md", "!node_modules"],
+    "globs": ["**/*.md", "!node_modules", "!.git", "!dist"],
     "config": {
         "default": true,
-        "ul-style": {
-            "style": "plus"
-        },
-        "ul-indent": {
-            "indent": 4
-        },
-        "ol-prefix": {
-            "style": "ordered"
-        },
-        "emphasis-style": {
-            "style": "underscore"
-        }
+        "ul-style": { "style": "dash" },
+        "ul-indent": { "indent": 2 },
+        "ol-prefix": { "style": "ordered" },
+        "emphasis-style": { "style": "underscore" },
+        "line-length": false,
+        "no-duplicate-heading": { "siblings_only": true },
+        "no-inline-html": false,
+        "first-line-heading": false,
+        "no-emphasis-as-heading": false
     }
 }
