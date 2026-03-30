@@ -109,6 +109,11 @@ return {
         cmd = "GrugFar",
         opts = {
             headerMaxWidth = 80,
+            engines = {
+                ripgrep = {
+                    extraArgs = "--pcre2",
+                },
+            },
         },
         keys = {
             {
