@@ -61,11 +61,11 @@ return {
                 desc = "Buffers (ALL)",
             },
             {
-                "<leader>fC",
+                "<leader>fK",
                 function()
-                    Snacks.picker.command_history()
+                    Snacks.picker.search_history()
                 end,
-                desc = "Command History",
+                desc = "Search History",
             },
             {
                 "<leader>fN",
@@ -78,7 +78,7 @@ return {
             { "<leader>ff", GionVim.pick("files"), desc = "Find Files (Root Dir)" },
             { "<leader>fF", GionVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
             {
-                "<leader>fg",
+                "<leader>fP",
                 function()
                     Snacks.picker.git_files()
                 end,
