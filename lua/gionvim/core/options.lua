@@ -186,3 +186,7 @@ vim.opt.winminwidth = 5
 -- Default new window in blow and right
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+-- File diff
+vim.cmd("packadd! nvim.difftool")
+-- File undo tree
+vim.cmd("packadd! nvim.undotree")
