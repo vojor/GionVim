@@ -121,12 +121,5 @@ return {
                 end,
             })
         end,
-        init = function()
-            local tsrpath = vim.fn.stdpath("data") .. "/site"
-            if not vim.uv.fs_stat(tsrpath) then
-                vim.fn.mkdir(tsrpath, "p")
-            end
-            vim.opt.rtp:prepend(tsrpath)
-        end,
     },
 }
