@@ -6,6 +6,7 @@ vim.filetype.add({
 return {
     {
         "mistweaverco/kulala.nvim",
+        enabled = false,
         lazy = true,
         ft = { "http", "rest" },
         keys = {
