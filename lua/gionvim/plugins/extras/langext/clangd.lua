@@ -1,6 +1,6 @@
 return {
     {
-        "p00f/clangd_extensions.nvim",
+        "dchinmay2/clangd_extensions.nvim",
         lazy = true,
         ft = { "c", "cpp" },
         config = function()
