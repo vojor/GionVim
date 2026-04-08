@@ -14,14 +14,9 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = augroup("highlight_yank"),
     callback = function()
-        (vim.hl or vim.highlight).on_yank()
+        vim.hl.on_yank({ higroup = "Visual", timeout = 200 })
     end,
 })
-
-vim.api.nvim_create_user_command("LazyHealth", function()
-    vim.cmd([[Lazy! load all]])
-    vim.cmd([[checkhealth]])
-end, { desc = "Load all plugins and run :checkhealth" })
 
 vim.api.nvim_create_autocmd({ "VimResized" }, {
     group = augroup("resize_splits"),
@@ -35,9 +30,13 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 vim.api.nvim_create_autocmd("BufReadPost", {
     group = augroup("last_loc"),
     callback = function(event)
-        local exclude = { "gitcommit" }
+        local exclude = { "gitcommit", "commit", "rebase" }
         local buf = event.buf
-        if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].gionvim_last_loc then
+        if
+            not vim.api.nvim_buf_is_valid(buf)
+            or vim.tbl_contains(exclude, vim.bo[buf].filetype)
+            or vim.b[buf].gionvim_last_loc
+        then
             return
         end
         vim.b[buf].gionvim_last_loc = true
@@ -58,7 +57,6 @@ vim.api.nvim_create_autocmd("FileType", {
         "man",
         "notify",
         "qf",
-        "startuptime",
         "OverseerList",
         "ClangdAST",
         "checkhealth",
@@ -69,6 +67,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "dap-view",
         "dap-view-term",
         "dap-repl",
+        "oil",
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false
@@ -79,6 +78,7 @@ vim.api.nvim_create_autocmd("FileType", {
             end, {
                 buffer = event.buf,
                 silent = true,
+                nowait = true,
                 desc = "Quit buffer",
             })
         end)
@@ -117,6 +117,35 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
             return
         end
         local file = vim.uv.fs_realpath(event.match) or event.match
-        vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+        local dir = vim.fn.fnamemodify(file, ":p:h")
+        if vim.fn.isdirectory(dir) == 0 then
+            vim.fn.mkdir(dir, "p")
+        end
     end,
+})
+
+vim.api.nvim_create_user_command("LazyHealth", function()
+    vim.cmd([[Lazy! load all]])
+    vim.cmd([[checkhealth]])
+end, { desc = "Load all plugins and run :checkhealth" })
+
+vim.api.nvim_create_user_command("LspInfo", "checkhealth vim.lsp", {
+    desc = "Show LSP Info",
+})
+
+vim.api.nvim_create_user_command("LspLog", function(_)
+    local state_path = vim.fn.stdpath("state")
+    local log_path = vim.fs.joinpath(state_path, "lsp.log")
+
+    vim.cmd(string.format("edit %s", log_path))
+end, {
+    desc = "Show LSP log",
+})
+
+vim.api.nvim_create_user_command("LspRestart", "lsp restart", {
+    desc = "Restart LSP",
+})
+
+vim.api.nvim_create_user_command("LspStop", "lsp stop", {
+    desc = "Stop LSP",
 })
