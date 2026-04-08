@@ -8,6 +8,7 @@ return {
             { "<leader>is", "<cmd>LspStart<CR>", desc = "Start Server" },
             { "<leader>ip", "<cmd>LspStop<CR>", desc = "Stop Server" },
             { "<leader>ir", "<cmd>LspRestart<CR>", desc = "Restart Server" },
+            { "<leader>il", "<cmd>LspLog<CR>", desc = "Show Lsp Log" },
         },
         dependencies = {
             {
@@ -61,10 +62,10 @@ return {
             -- code lens
             if opts.codelens.enabled and vim.lsp.codelens then
                 Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function(buffer)
-                    vim.lsp.codelens.refresh()
+                    vim.lsp.codelens.get()
                     vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
                         buffer = buffer,
-                        callback = vim.lsp.codelens.refresh,
+                        callback = vim.lsp.codelens.get,
                     })
                 end)
             end
@@ -79,7 +80,7 @@ return {
             end
 
             vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
-            vim.lsp.set_log_level("error")
+            vim.lsp.log.set_level(vim.log.levels.ERROR)
 
             require("gionvim.config.loadpath").autoload("gionvim.plugins.lsp.langue", {
                 ignore_files = { "kulala.lua" },
