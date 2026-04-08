@@ -1,4 +1,4 @@
--- Experimental lua loader
-vim.loader.enable()
--- Start configuration
+-- Experimental feature
+require("vim._core.ui2").enable()
+-- Startup
 require("gionvim.core")
