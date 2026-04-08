@@ -5,4 +5,4 @@ vim.lsp.config("kulala_ls", {
     }),
 })
 
-vim.lsp.enable("kulala-ls")
+vim.lsp.enable("kulala_ls")

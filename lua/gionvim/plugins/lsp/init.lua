@@ -82,6 +82,7 @@ return {
             vim.lsp.set_log_level("error")
 
             require("gionvim.config.loadpath").autoload("gionvim.plugins.lsp.langue", {
+                ignore_files = { "kulala.lua" },
                 verbose = true,
                 reload = true,
                 use_cache = true,
