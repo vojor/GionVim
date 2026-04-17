@@ -166,7 +166,7 @@ return {
             scroll = { enabled = true },
             statuscolumn = { enabled = false },
             toggle = { map = GionVim.safe_keymap_set },
-            words = { enabled = false },
+            words = { enabled = true },
         },
         keys = {
             {

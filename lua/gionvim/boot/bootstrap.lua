@@ -61,7 +61,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.boast.dropbar" }, -- Code navigate
         { import = "gionvim.plugins.extras.boast.fidget" }, -- Progress prompt
         { import = "gionvim.plugins.extras.boast.garbage" }, -- Disable unfocused serve
-        { import = "gionvim.plugins.extras.boast.illuminate" }, -- Display the same vocabulary under the cursor
         { import = "gionvim.plugins.extras.boast.increname" }, -- Timely feedback rename
         { import = "gionvim.plugins.extras.boast.lspsaga" }, -- Strengthen LSP experience
         -- treesitter

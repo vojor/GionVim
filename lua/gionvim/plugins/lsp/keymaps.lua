@@ -56,3 +56,17 @@ map("n", "<leader>lm", vim.lsp.buf.remove_workspace_folder, { desc = "Remove Wor
 map("n", "<leader>lf", function()
     vim.lsp.buf.format({ async = true })
 end, { desc = "LSP Async Format" })
+
+-- Word jump
+map("n", "]]", function()
+    Snacks.words.jump(vim.v.count1)
+end, { desc = "Next Reference" })
+map("n", "[[", function()
+    Snacks.words.jump(-vim.v.count1)
+end, { desc = "Prev Reference" })
+map("n", "<M-n>", function()
+    Snacks.words.jump(vim.v.count1, true)
+end, { desc = "Next Reference" })
+map("n", "<M-p>", function()
+    Snacks.words.jump(-vim.v.count1, true)
+end, { desc = "Prev Reference" })
