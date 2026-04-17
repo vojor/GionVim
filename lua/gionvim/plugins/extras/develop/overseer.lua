@@ -2,9 +2,10 @@ return {
     {
         "stevearc/overseer.nvim",
         keys = {
-            { "<leader>epw", "<cmd>OverseerToggle<cr>", desc = "Task list" },
-            { "<leader>epo", "<cmd>OverseerRun<cr>", desc = "Run task" },
-            { "<leader>ept", "<cmd>OverseerTaskAction<cr>", desc = "Task action" },
+            { "<leader>p", "", desc = "task" },
+            { "<leader>pw", "<cmd>OverseerToggle<cr>", desc = "Task list" },
+            { "<leader>po", "<cmd>OverseerRun<cr>", desc = "Run task" },
+            { "<leader>pt", "<cmd>OverseerTaskAction<cr>", desc = "Task action" },
         },
         opts = {
             dap = false,

@@ -40,7 +40,6 @@ require("lazy").setup({
         -- editor
         { import = "gionvim.plugins.extras.editor.autotools" }, -- Auto pairs and save
         { import = "gionvim.plugins.extras.editor.multicursor" }, -- Multiple cursor
-        { import = "gionvim.plugins.extras.editor.portal" }, -- Local list navigate
         { import = "gionvim.plugins.extras.editor.replacer" }, -- Factor replace
         { import = "gionvim.plugins.extras.editor.surround" }, -- Tackle surround
         -- elevate
@@ -65,7 +64,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.boast.illuminate" }, -- Display the same vocabulary under the cursor
         { import = "gionvim.plugins.extras.boast.increname" }, -- Timely feedback rename
         { import = "gionvim.plugins.extras.boast.lspsaga" }, -- Strengthen LSP experience
-        { import = "gionvim.plugins.extras.boast.navbuddy" }, -- Float navigate
         -- treesitter
         { import = "gionvim.plugins.extras.treesitter.autotag" }, -- Auto close tag
         { import = "gionvim.plugins.extras.treesitter.context" }, -- Code context
