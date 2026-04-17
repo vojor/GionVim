@@ -82,21 +82,41 @@ return {
             vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
             vim.lsp.log.set_level(vim.log.levels.ERROR)
 
-            require("gionvim.config.loadpath").autoload("gionvim.plugins.lsp.langue", {
-                ignore_files = { "kulala.lua" },
-                verbose = true,
-                reload = true,
-                use_cache = true,
+            require("gionvim.config.lazyloadpath").setup("gionvim.plugins.lsp.langue", {
+                rules = {
+                    {
+                        pattern = ".*",
+                        event = "FileType",
+                        ft_map = {
+                            cmake = "neocmake",
+                            lua = "luals",
+                            html = "html",
+                            python = "basedpy",
+                            toml = "tombi",
+                            vim = "vimls",
+                            xml = "lemminx",
+                            yaml = "yamlls",
+                        },
+                    },
+                },
+                mappings = {
+                    atls = { "config", "automake", "make" },
+                    bashls = { "bash", "sh" },
+                    clangd = { "c", "cpp" },
+                    jsonls = { "json", "jsonc" },
+                    marksman = { "markdown", "markdown.mdx" },
+                },
                 callbacks = {
-                    on_success = function(mod)
-                        print("✅ Succeed: " .. mod)
+                    on_load = function(mod, time)
+                        print(("✅ %s (%.2fms)"):format(mod, time))
                     end,
-                    on_error = function(mod, err)
-                        print("❌ Failure: " .. mod .. "\n" .. err)
+                    on_error = function(mod, err, time)
+                        vim.notify(("❌ %s (%.2fms)\n%s"):format(mod, time, err))
                     end,
-                    on_finish = function()
-                        print("🎉 All modules processed!")
-                    end,
+                },
+                profile = {
+                    top = 5,
+                    delay = 2000,
                 },
             })
 
