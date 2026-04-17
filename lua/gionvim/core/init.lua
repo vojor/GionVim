@@ -8,3 +8,5 @@ require("gionvim.core.options")
 require("gionvim.core.autocmds")
 -- Suitable key binds
 require("gionvim.core.keymaps")
+-- Add filetype
+require("gionvim.core.filetypes")

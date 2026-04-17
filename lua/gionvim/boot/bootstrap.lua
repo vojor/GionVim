@@ -79,7 +79,6 @@ require("lazy").setup({
         { import = "gionvim.plugins.extras.ui.rainbow" }, -- Rainbow brackets
         -- utils
         { import = "gionvim.plugins.extras.utils.chainsaw" }, -- Add log discourse
-        { import = "gionvim.plugins.extras.utils.dot" }, -- Add more file type
         { import = "gionvim.plugins.extras.utils.rest" }, -- Http client
     },
     defaults = { version = false },

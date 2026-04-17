@@ -71,7 +71,7 @@ return {
                 expr = true,
             },
         },
-        dependencies = { { "plenary.nvim" }, { "nvim-treesitter" } },
+        dependencies = { { "plenary.nvim" } },
         opts = {
             prompt_func_return_type = {
                 go = false,
