@@ -46,7 +46,7 @@ require("lazy").setup({
         -- elevate
         { import = "gionvim.plugins.extras.elevate.escape" }, -- More user-friendly mode switching
         -- git
-        { import = "gionvim.plugins.extras.git.diffview" }, -- Git history differ view
+        { import = "gionvim.plugins.extras.git.codediff" }, -- Git history differ view
         { import = "gionvim.plugins.extras.git.neogit" }, -- Neovim's magit
         -- labeler
         { import = "gionvim.plugins.extras.labeler.arrow" }, -- File and buffer mark

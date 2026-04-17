@@ -76,7 +76,7 @@ return {
                 desc = "Open Neogit Auto Popup",
             },
         },
-        dependencies = { { "plenary.nvim" }, { "diffview.nvim" } },
+        dependencies = { { "plenary.nvim" }, { "codediff.nvim" } },
         opts = {
             integrations = {
                 diffview = true,
