@@ -290,7 +290,6 @@ return {
                     "qf",
                     "Trouble",
                     "trouble",
-                    "toggleterm",
                 },
                 callback = function()
                     vim.b.minitrailspace_disable = true

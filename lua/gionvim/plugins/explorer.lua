@@ -59,7 +59,6 @@ return {
             sources = { "filesystem", "buffers", "git_status" },
             open_files_do_not_replace_types = {
                 "terminal",
-                "toggleterm",
                 "Trouble",
                 "trouble",
                 "qf",

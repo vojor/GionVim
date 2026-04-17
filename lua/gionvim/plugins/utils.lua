@@ -8,100 +8,6 @@ local function term_nav(dir)
 end
 
 return {
-    -- Terminal
-    {
-        "akinsho/toggleterm.nvim",
-        version = "*",
-        lazy = true,
-        cmd = "ToggleTerm",
-        keys = {
-            { "<leader>ttg", "<cmd>ToggleTerm<CR>", desc = "Toggle Terminal" },
-            { "<leader>tta", "<cmd>ToggleTermToggleAll<CR>", desc = "Toggle All Terminal" },
-            { "<leader>ttv", "<cmd>ToggleTerm direction=vertical size=45<CR>", desc = "Open Vertical Terminal" },
-            { "<leader>tth", "<cmd>ToggleTerm direction=horizontal<CR>", desc = "Open Horizontal Terminal" },
-            { "<leader>ttb", "<cmd>ToggleTerm direction=tab<CR>", desc = "Open Tab Terminal" },
-            { "<leader>ttp", "<cmd>lua _bottom_toggle()<CR>", desc = "Open Bottom Terminal" },
-            { "<leader>ttr", "<cmd>lua _procs_toggle()<CR>", desc = "Open Procs Terminal" },
-            { "<leader>tte", ":TermExec ", desc = "Use Custom Operate Open Terminal" },
-            { "<leader>ttc", ":ToggleTermSendCurrentLine ", desc = "Send Current Line To The Terminal" },
-            { "<leader>tts", ":ToggleTermSendVisualLines ", desc = "Send Visual Line To The Terminal" },
-            { "<leader>ttn", ":ToggleTermSendVisualSelection ", desc = "Send Visual Select Line To The Terminal" },
-        },
-        config = function()
-            local Terminal = require("toggleterm.terminal").Terminal
-
-            -- bottom
-            local bottom = Terminal:new({
-                cmd = "btm",
-                hidden = true,
-                direction = "float",
-                float_opts = {
-                    border = "curved",
-                },
-                on_open = function(term)
-                    vim.cmd("startinsert!")
-                    vim.api.nvim_buf_set_keymap(
-                        term.bufnr,
-                        "n",
-                        "q",
-                        "<cmd>close<CR>",
-                        { noremap = true, silent = true }
-                    )
-                end,
-                on_close = function(term)
-                    vim.cmd("startinsert!")
-                end,
-            })
-            function _bottom_toggle()
-                bottom:toggle()
-            end
-
-            -- procs
-            local procs = Terminal:new({
-                cmd = "procs -t",
-                hidden = true,
-                direction = "float",
-                float_opts = {
-                    border = "curved",
-                },
-                on_open = function(term)
-                    vim.cmd("startinsert!")
-                    vim.api.nvim_buf_set_keymap(
-                        term.bufnr,
-                        "n",
-                        "q",
-                        "<cmd>close<CR>",
-                        { noremap = true, silent = true }
-                    )
-                end,
-                on_close = function(term)
-                    vim.cmd("startinsert!")
-                end,
-            })
-            function _procs_toggle()
-                procs:toggle()
-            end
-
-            require("toggleterm").setup({
-                highlights = {
-                    Normal = { link = "Normal" },
-                    NormalNC = { link = "NormalNC" },
-                    NormalFloat = { link = "NormalFloat" },
-                    FloatBorder = { link = "FloatBorder" },
-                    StatusLine = { link = "StatusLine" },
-                    StatusLineNC = { link = "StatusLineNC" },
-                    WinBar = { link = "WinBar" },
-                    WinBarNC = { link = "WinBarNC" },
-                },
-                shading_factor = 2,
-                persist_size = false,
-                direction = "float",
-                float_opts = {
-                    border = "shadow",
-                },
-            })
-        end,
-    },
     -- Pop-up key bindings and command window
     {
         "folke/which-key.nvim",
@@ -137,7 +43,6 @@ return {
                     { "<leader>s", group = "gallery" },
                     { "<leader>t", group = "terminal/todo" },
                     { "<leader>td", group = "todo" },
-                    { "<leader>tt", group = "toggleterm" },
                     { "<leader>u", group = "ui/message" },
                     {
                         "<leader>w",

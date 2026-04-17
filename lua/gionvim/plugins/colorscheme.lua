@@ -10,7 +10,7 @@ return {
                 functions = { italic = true, bold = true },
                 variables = { bold = true },
             },
-            sidebars = { "qf", "terminal", "neo-tree", "toggleterm" },
+            sidebars = { "qf", "terminal", "neo-tree" },
         },
         config = function(_, opts)
             require("tokyonight").setup(opts)
