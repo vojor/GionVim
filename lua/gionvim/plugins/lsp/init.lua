@@ -108,7 +108,15 @@ return {
                 callbacks = {
                     on_load = function(mod, time) end,
                     on_error = function(mod, err, time)
-                        Snacks.notify(("❌ %s (%.2fms)\n%s"):format(mod, time, err), { level = "error" })
+                        Snacks.notify(
+                            string.format(
+                                "# ❌ LSP Load Error\n- **Module**: `%s` \n- **Time**: `%.2fms` \n\n> %s",
+                                mod,
+                                time,
+                                err
+                            ),
+                            { level = "error", title = "󱐋 LSP Manager" }
+                        )
                     end,
                 },
                 profile = {
