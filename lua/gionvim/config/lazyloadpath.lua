@@ -62,6 +62,7 @@ end
 local function create_profiler(opts)
     local stats = {}
     local total_time, total, failed = 0, 0, 0
+    local batch_msgs = {}
 
     return {
         record = function(mod, time, ok)
@@ -71,7 +72,9 @@ local function create_profiler(opts)
                 failed = failed + 1
             end
             table.insert(stats, { mod, time, ok })
+            table.insert(batch_msgs, string.format("%s %s (%.2fms)", ok and "✅" or "❌", mod, time))
         end,
+
         report = function()
             if not opts.profile then
                 return
@@ -80,14 +83,30 @@ local function create_profiler(opts)
                 return a[2] > b[2]
             end)
 
-            print("\n🚀 ===== Loader Profiling Report =====")
-            print(string.format("Total: %d | Failed: %d | Time: %.2fms", total, failed, total_time))
-            print("\n🐢 Top Slow Modules:")
+            if Snacks then
+                Snacks.notify(table.concat(batch_msgs, "\n"), {
+                    title = "🚀LazyLoad Report",
+                    level = "info",
+                    timeout = 3000,
+                })
+            else
+                print(table.concat(batch_msgs, "\n"))
+            end
+
+            local lines = {}
             for i = 1, math.min(opts.profile.top or 5, #stats) do
                 local item = stats[i]
-                print(string.format("%d. %s (%.2fms)", i, item[1], item[2]))
+                table.insert(lines, string.format("%d. %s (%.2fms)", i, item[1], item[2]))
             end
-            print("=====================================\n")
+
+            if Snacks then
+                Snacks.notify(table.concat(lines, "\n"), {
+                    title = "🐢Top Slow Modules",
+                    level = "warn",
+                })
+            else
+                print(table.concat(lines, "\n"))
+            end
         end,
     }
 end
@@ -124,6 +143,25 @@ function M.setup(mod_root, opts)
         if mod_part then
             local modname = mod_root .. "." .. mod_part
             local filename = vim.fn.fnamemodify(filepath, ":t:r")
+            if module_map[filename] and module_map[filename] ~= modname then
+                if Snacks then
+                    Snacks.notify(
+                        string.format(
+                            "Module name conflict for **%s**:\n- Old: `%s` \n- New: `%s`",
+                            filename,
+                            module_map[filename],
+                            modname
+                        ),
+                        {
+                            title = "⚠️ LazyLoad Conflict",
+                            level = "warn",
+                            icon = "󱓞 ",
+                        }
+                    )
+                else
+                    vim.notify("LazyLoad Conflict: " .. filename, vim.log.levels.WARN)
+                end
+            end
             module_map[filename] = modname
         end
     end
@@ -146,8 +184,10 @@ function M.setup(mod_root, opts)
             elseif not ok and opts.callbacks.on_error then
                 opts.callbacks.on_error(mod_name, err, elapsed)
             end
-        elseif opts.verbose then
-            vim.notify(string.format("✔ %s (%.2fms)", mod_name, elapsed))
+        end
+
+        if opts.verbose then
+            vim.notify(string.format("%s %s (%.2fms)", ok and "✔" or "✘", mod_name, elapsed))
         end
     end
 
@@ -161,6 +201,19 @@ function M.setup(mod_root, opts)
                     end
                 end,
             })
+        elseif rule.keys and type(rule.keys) == "table" then
+            for _, key in ipairs(rule.keys) do
+                vim.keymap.set("n", key, function()
+                    for name, mod_name in pairs(module_map) do
+                        if not rule.pattern or name:match(rule.pattern) then
+                            perform_load(mod_name)
+                        end
+                    end
+                    if rule.post_action then
+                        rule.post_action()
+                    end
+                end, { desc = "Lazy load by key: " .. (rule.pattern or "all") })
+            end
         elseif rule.pattern and rule.event then
             for name, mod_name in pairs(module_map) do
                 if name:match(rule.pattern) then

@@ -128,12 +128,8 @@ return {
                     { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
                 )
             end
-            require("gionvim.config.lazyloadpath").setup("gionvim.plugins.dap.lang", {
-                mappings = {
-                    dapcpp = { "c", "cpp" },
-                    dapbash = { "bash", "sh" },
-                },
-            })
+            pcall(require, "gionvim.plugins.dap.lang.dapcpp")
+            pcall(require, "gionvim.plugins.dap.lang.dapbash")
         end,
     },
 }

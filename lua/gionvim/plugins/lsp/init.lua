@@ -85,7 +85,6 @@ return {
             require("gionvim.config.lazyloadpath").setup("gionvim.plugins.lsp.langue", {
                 rules = {
                     {
-                        pattern = ".*",
                         event = "FileType",
                         ft_map = {
                             cmake = "neocmake",
@@ -107,11 +106,9 @@ return {
                     marksman = { "markdown", "markdown.mdx" },
                 },
                 callbacks = {
-                    on_load = function(mod, time)
-                        print(("✅ %s (%.2fms)"):format(mod, time))
-                    end,
+                    on_load = function(mod, time) end,
                     on_error = function(mod, err, time)
-                        vim.notify(("❌ %s (%.2fms)\n%s"):format(mod, time, err))
+                        Snacks.notify(("❌ %s (%.2fms)\n%s"):format(mod, time, err), { level = "error" })
                     end,
                 },
                 profile = {
