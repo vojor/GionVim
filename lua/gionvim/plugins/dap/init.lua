@@ -90,30 +90,19 @@ return {
         },
         dependencies = {
             {
-                "jay-babu/mason-nvim-dap.nvim",
+                "theHamsta/nvim-dap-virtual-text",
                 lazy = true,
-                cmd = { "DapInstall", "DapUninstall" },
-                dependencies = { "mason.nvim" },
-                config = function()
-                    require("mason-nvim-dap").setup({
-                        ensure_installed = { "bash" },
-                        automatic_installation = false,
-                    })
-                end,
+                opts = {},
             },
             {
-                "miroshQa/debugmaster.nvim",
+                "jay-babu/mason-nvim-dap.nvim",
                 lazy = true,
-                config = function()
-                    vim.keymap.set(
-                        { "n", "v" },
-                        "<leader>df",
-                        require("debugmaster").mode.toggle,
-                        { nowait = true, desc = "Debug Mode" }
-                    )
-                end,
+                dependencies = { "mason.nvim" },
+                opts = {
+                    ensure_installed = { "bash" },
+                    automatic_installation = false,
+                },
             },
-            { "theHamsta/nvim-dap-virtual-text", opts = {} },
         },
         config = function()
             vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
@@ -131,5 +120,20 @@ return {
             pcall(require, "gionvim.plugins.dap.lang.dapcpp")
             pcall(require, "gionvim.plugins.dap.lang.dapbash")
         end,
+    },
+    {
+        "miroshQa/debugmaster.nvim",
+        lazy = true,
+        keys = {
+            {
+                "<leader>df",
+                function()
+                    require("debugmaster").mode.toggle()
+                end,
+                mode = { "n", "v" },
+                desc = "Debug Mode",
+            },
+        },
+        dependencies = { "nvim-dap" },
     },
 }
