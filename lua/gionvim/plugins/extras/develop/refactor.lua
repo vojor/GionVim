@@ -1,8 +1,3 @@
-local pick = function()
-    local refactoring = require("refactoring")
-    refactoring.select_refactor()
-end
-
 return {
     {
         "ThePrimeagen/refactoring.nvim",
@@ -12,14 +7,16 @@ return {
             { "<leader>rf", "", desc = "refactoring", mode = { "n", "x" } },
             {
                 "<leader>rfs",
-                pick,
+                function()
+                    return require("refactoring").select_refactor()
+                end,
                 mode = { "n", "x" },
                 desc = "Refactor",
             },
             {
                 "<leader>rfe",
                 function()
-                    return require("refactoring").refactor("Extract Function")
+                    return require("refactoring").extract_func()
                 end,
                 mode = { "n", "x" },
                 desc = "Extract Function",
@@ -28,7 +25,7 @@ return {
             {
                 "<leader>rft",
                 function()
-                    return require("refactoring").refactor("Extract Function To File")
+                    return require("refactoring").extract_func_to_file()
                 end,
                 mode = { "n", "x" },
                 desc = "Extract Function To File",
@@ -37,7 +34,7 @@ return {
             {
                 "<leader>rfv",
                 function()
-                    return require("refactoring").refactor("Extract Variable")
+                    return require("refactoring").extract_var()
                 end,
                 mode = { "n", "x" },
                 desc = "Extract Variable",
@@ -46,59 +43,13 @@ return {
             {
                 "<leader>rfi",
                 function()
-                    return require("refactoring").refactor("Inline Variable")
+                    return require("refactoring").inline_var()
                 end,
                 mode = { "n", "x" },
                 desc = "Inline Variable",
                 expr = true,
             },
-            {
-                "<leader>rfb",
-                function()
-                    return require("refactoring").refactor("Extract Block")
-                end,
-                mode = { "n", "x" },
-                desc = "Extract Block",
-                expr = true,
-            },
-            {
-                "<leader>rfk",
-                function()
-                    return require("refactoring").refactor("Extract Block To File")
-                end,
-                mode = { "n", "x" },
-                desc = "Extract Block To File",
-                expr = true,
-            },
         },
-        dependencies = { { "plenary.nvim" } },
-        opts = {
-            prompt_func_return_type = {
-                go = false,
-                java = false,
-
-                cpp = false,
-                c = false,
-                h = false,
-                hpp = false,
-                cxx = false,
-            },
-            prompt_func_param_type = {
-                go = false,
-                java = false,
-
-                cpp = false,
-                c = false,
-                h = false,
-                hpp = false,
-                cxx = false,
-            },
-            printf_statements = {},
-            print_var_statements = {},
-            show_success_message = true,
-        },
-        config = function(_, opts)
-            require("refactoring").setup(opts)
-        end,
+        opts = {},
     },
 }

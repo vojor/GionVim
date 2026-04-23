@@ -53,6 +53,10 @@ return {
         priority = 1000,
         config = true,
     },
+    {
+        "lewis6991/async.nvim",
+        lazy = true,
+    },
     -- Manage code server mechanism
     {
         "mason-org/mason.nvim",
