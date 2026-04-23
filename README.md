@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Neovim Version](https://img.shields.io/badge/Neovim-0.11%2B-brightblue?style=flat&logo=neovim&logoColor=green)](https://github.com/neovim/neovim)
+[![Neovim Version](https://img.shields.io/badge/Neovim-0.12%2B-brightblue?style=flat&logo=neovim&logoColor=green)](https://github.com/neovim/neovim)
 [![Github License](https://img.shields.io/github/license/vojor/GionVim?style=flat&logo=github&logoColor=orange&color=blue)](https://github.com/vojor/GionVim/blob/main/LICENSE)
 
 </div>
@@ -67,7 +67,7 @@
 
 3. You can delete unnecessary file, it orident plugins/lsp/langue, also add the demand language servers.
 
-### nvim-treesitter
+### tree-sitter
 
 - Tree-sitter supports more advanced syntax highlight and text object processing.
 
