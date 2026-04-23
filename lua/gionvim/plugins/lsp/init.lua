@@ -82,49 +82,30 @@ return {
             vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
             vim.lsp.log.set_level(vim.log.levels.ERROR)
 
-            require("gionvim.config.lazyloadpath").setup("gionvim.plugins.lsp.langue", {
-                rules = {
-                    {
-                        event = "FileType",
-                        ft_map = {
-                            cmake = "neocmake",
-                            lua = "luals",
-                            html = "html",
-                            python = "basedpy",
-                            toml = "tombi",
-                            vim = "vimls",
-                            xml = "lemminx",
-                            yaml = "yamlls",
-                        },
-                    },
-                },
-                mappings = {
-                    atls = { "config", "automake", "make" },
-                    bashls = { "bash", "sh" },
-                    clangd = { "c", "cpp" },
-                    jsonls = { "json", "jsonc" },
-                    marksman = { "markdown", "markdown.mdx" },
-                },
-                callbacks = {
-                    on_load = function(mod, time) end,
-                    on_error = function(mod, err, time)
-                        Snacks.notify(
-                            string.format(
-                                "# ❌ LSP Load Error\n- **Module**: `%s` \n- **Time**: `%.2fms` \n\n> %s",
-                                mod,
-                                time,
-                                err
-                            ),
-                            { level = "error", title = "󱐋 LSP Manager" }
-                        )
-                    end,
-                },
+            local lazyload = require("gionvim.config.pathload")
+            local mappings = lazyload.build_mappings({
+                atls = { "config", "automake", "make" },
+                basedpy = { "python" },
+                bashls = { "bash", "sh" },
+                clangd = { "c", "cpp" },
+                html = { "html" },
+                jsonls = { "json", "jsonc" },
+                lemminx = { "xml" },
+                luals = { "lua" },
+                marksman = { "markdown", "markdown.mdx" },
+                neocmake = { "cmake" },
+                tombi = { "toml" },
+                vimls = { "vim" },
+                yamlls = { "yaml" },
+            })
+            lazyload.setup("gionvim.plugins.lsp.langue", {
+                mappings = mappings,
                 profile = {
+                    mode = "dev",
                     top = 5,
-                    delay = 2000,
+                    delay = 3000,
                 },
             })
-
             require("gionvim.plugins.lsp.keymaps")
         end,
     },
