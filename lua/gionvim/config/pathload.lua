@@ -6,7 +6,7 @@ local function notify(msg, level, opts)
     if Snacks then
         Snacks.notify(msg, vim.tbl_extend("force", { level = level }, opts or {}))
     else
-        vim.notify(msg, vim.log.levels[level:upper()] or vim.log.levels.INFO)
+        vim.notify(msg, vim.log.levels[level:upper()] or vim.log.levels.INFO, opts)
     end
 end
 
@@ -16,15 +16,16 @@ local function safe_require(mod)
     end
 
     return xpcall(function()
-        require(mod)
-    end, debug.traceback)
+        return require(mod)
+    end, function(err)
+        return debug.traceback(err)
+    end)
 end
 
 local function create_profiler(opts)
     local stats = {}
     local batch_msgs = {}
     local total_time, total, failed = 0, 0, 0
-
     local mode = opts.profile and opts.profile.mode or "prod"
 
     return {
@@ -50,7 +51,6 @@ local function create_profiler(opts)
 
             vim.schedule(function()
                 local final_report = {}
-
                 table.insert(final_report, "# 📊 Summary")
                 table.insert(final_report, string.format("- **Total Modules** : `%d`", total))
                 table.insert(final_report, string.format("- **Failed** : `%d`", failed))
@@ -82,9 +82,8 @@ local function create_profiler(opts)
                     end
                 end
 
-                Snacks.notify(table.concat(final_report, "\n"), {
+                notify(table.concat(final_report, "\n"), failed > 0 and "error" or "info", {
                     title = "LazyLoad Insights",
-                    level = failed > 0 and "error" or "info",
                     timeout = mode == "dev" and 5000 or 3000,
                 })
             end)
@@ -126,7 +125,7 @@ local function create_loader(mod_root, opts, profiler)
         end
 
         if opts.verbose then
-            vim.notify(string.format("%s %s (%.2fms)", ok and "✔" or "✘", mod_name, elapsed))
+            notify(string.format("%s %s (%.2fms)", ok and "✔" or "✘", mod_name, elapsed), "info")
         end
 
         return ok
@@ -134,13 +133,12 @@ local function create_loader(mod_root, opts, profiler)
 end
 
 function M.build_mappings(groups)
-    local map = {}
-    for target, fts in pairs(groups) do
+    return vim.iter(groups):fold({}, function(acc, target, fts)
         for _, ft in ipairs(fts) do
-            map[ft] = target
+            acc[ft] = target
         end
-    end
-    return map
+        return acc
+    end)
 end
 
 function M.setup(mod_root, opts)
@@ -148,6 +146,14 @@ function M.setup(mod_root, opts)
 
     local profiler = create_profiler(opts)
     local load = create_loader(mod_root, opts, profiler)
+
+    local function try_load(sub_mod)
+        local full_mod = mod_root:gsub("%.$", "") .. "." .. sub_mod
+        if not package.loaded[full_mod] then
+            return load(full_mod)
+        end
+        return true
+    end
 
     if opts.mappings then
         vim.api.nvim_create_autocmd("FileType", {
@@ -157,42 +163,31 @@ function M.setup(mod_root, opts)
                 if not target then
                     return
                 end
-
-                local function try(mod)
-                    return load(mod_root .. "." .. mod)
-                end
-
                 if type(target) == "table" then
                     for _, mod in ipairs(target) do
-                        if try(mod) then
-                            break
-                        end
+                        try_load(mod)
                     end
                 else
-                    try(target)
+                    try_load(target)
                 end
             end,
         })
     end
 
     for _, rule in ipairs(opts.rules or {}) do
-        local full_mod = mod_root .. "." .. rule.module
-
         if rule.event then
             vim.api.nvim_create_autocmd(rule.event, {
                 pattern = rule.pattern,
                 once = rule.once ~= false,
                 callback = function()
-                    load(full_mod)
+                    try_load(rule.module)
                 end,
             })
         end
-
         if rule.keys then
             for _, key in ipairs(rule.keys) do
                 vim.keymap.set("n", key, function()
-                    load(full_mod)
-                    if rule.post_action then
+                    if try_load(rule.module) and rule.post_action then
                         rule.post_action()
                     end
                 end, { desc = "LazyLoad: " .. rule.module, silent = true })
