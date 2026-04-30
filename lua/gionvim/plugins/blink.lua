@@ -8,6 +8,7 @@ return {
             "sources.default",
         },
         dependencies = {
+            { "saghen/blink.lib" },
             { "rafamadriz/friendly-snippets" },
             { "xieyonn/blink-cmp-dat-word" },
             { "xzbdmw/colorful-menu.nvim", opts = {} },
