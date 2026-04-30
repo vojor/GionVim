@@ -6,7 +6,8 @@ local function notify(msg, level, opts)
     if Snacks then
         Snacks.notify(msg, vim.tbl_extend("force", { level = level }, opts or {}))
     else
-        vim.notify(msg, vim.log.levels[level:upper()] or vim.log.levels.INFO, opts)
+        local log_level = vim.log.levels[level:upper()] or vim.log.levels.INFO
+        vim.notify(msg, log_level, opts)
     end
 end
 
@@ -42,7 +43,7 @@ local function create_profiler(opts)
         end,
 
         report = function()
-            if not opts.profile then
+            if not opts.profile or total == 0 then
                 return
             end
             table.sort(stats, function(a, b)
