@@ -1,9 +1,11 @@
+import { defineConfig } from "eslint/config"
 import js from "@eslint/js"
 
-export default [
+export default defineConfig([
     {
         files: ["**./*.js", "**/*.ts", "**/*.cts", "**/*.cjs", "**/.*.mjs", "**./*.mts"],
         plugins: { js },
+        extends: ["js/recommended"],
         rules: {
             curly: "error",
             eqeqeq: "error",
@@ -18,14 +20,18 @@ export default [
     },
     {
         languageOptions: {
-            ecmaVersion: "latest",
-            sourceType: "module",
+            parserOptions: {
+                ecmaFeatures: {
+                    jsx: true,
+                },
+            },
         },
     },
     {
         linterOptions: {
             noInlineConfig: true,
             reportUnusedDisableDirectives: "error",
+            reportUnusedInlineConfigs: "error",
         },
     },
-]
+])
