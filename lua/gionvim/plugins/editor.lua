@@ -87,6 +87,42 @@ return {
         },
         opts = {},
     },
+    -- Text objects
+    {
+        "nvim-mini/mini.ai",
+        lazy = true,
+        event = "VeryLazy",
+        opts = function()
+            local ai = require("mini.ai")
+            return {
+                n_lines = 500,
+                custom_textobjects = {
+                    t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
+                    d = { "%f[%d]%d+" },
+                    e = {
+                        {
+                            "%u[%l%d]+%f[^%l%d]",
+                            "%f[%S][%l%d]+%f[^%l%d]",
+                            "%f[%P][%l%d]+%f[^%l%d]",
+                            "^[%l%d]+%f[^%l%d]",
+                        },
+                        "^().*()$",
+                    },
+                    g = GionVim.mini.ai_buffer,
+                    u = ai.gen_spec.function_call(),
+                    U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }),
+                },
+            }
+        end,
+        config = function(_, opts)
+            require("mini.ai").setup(opts)
+            GionVim.on_load("which-key.nvim", function()
+                vim.schedule(function()
+                    GionVim.mini.ai_whichkey(opts)
+                end)
+            end)
+        end,
+    },
     -- Text replace
     {
         "MagicDuck/grug-far.nvim",
