@@ -72,6 +72,7 @@ require("lazy").setup({
         -- ui
         { import = "gionvim.plugins.extras.ui.colorizer" }, -- Exhibit hexadecimal colors
         { import = "gionvim.plugins.extras.ui.edgy" }, -- Predefined layout
+        { import = "gionvim.plugins.extras.ui.glimmer" }, -- smooth animate
         { import = "gionvim.plugins.extras.ui.hlslens" }, -- Highlight entries during search
         { import = "gionvim.plugins.extras.ui.rainbow" }, -- Rainbow brackets
         -- utils
