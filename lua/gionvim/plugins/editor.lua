@@ -77,30 +77,15 @@ return {
     },
     -- Text Move
     {
-        "hinell/move.nvim",
+        "nvim-mini/mini.move",
         lazy = true,
         keys = {
-            { "<M-j>", mode = { "n", "x" }, desc = "Down Move" },
-            { "<M-k>", mode = { "n", "x" }, desc = "Up Move" },
-            { "<M-l>", mode = { "n", "v" }, desc = "Right Move" },
-            { "<M-h>", mode = { "n", "v" }, desc = "Left Move" },
-            { "<leader>wl", desc = "Char Right Move" },
-            { "<leader>wh", desc = "Char Left Move" },
+            { "<M-j>", mode = { "n", "x" } },
+            { "<M-k>", mode = { "n", "x" } },
+            { "<M-l>", mode = { "n", "v" } },
+            { "<M-h>", mode = { "n", "v" } },
         },
-        config = function()
-            local kopts = { noremap = true, silent = true }
-            vim.keymap.set("n", "<M-j>", ":MoveLine 1<CR>", kopts)
-            vim.keymap.set("n", "<M-k>", ":MoveLine -1<CR>", kopts)
-            vim.keymap.set("n", "<M-l>", ":MoveHchar 1", kopts)
-            vim.keymap.set("n", "<M-h>", ":MoveHchar -1<CR>", kopts)
-            vim.keymap.set("n", "<leader>wl", ":MoveWord 1<CR>", kopts)
-            vim.keymap.set("n", "<leader>wh", ":MoveWord -1<CR>", kopts)
-
-            vim.keymap.set("x", "<M-j>", ":MoveBlock 1<CR>", kopts)
-            vim.keymap.set("x", "<M-k>", ":MoveBlock -1<CR>", kopts)
-            vim.keymap.set("v", "<M-l>", ":MoveHBlock 1<CR>", kopts)
-            vim.keymap.set("v", "<M-h>", ":MoveHBlock -1<CR>", kopts)
-        end,
+        opts = {},
     },
     -- Text replace
     {
