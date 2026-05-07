@@ -40,8 +40,9 @@ return {
             nearest_float_when = "always",
         },
         config = function(_, opts)
-            require("scrollbar.handlers.search").setup(opts)
-            vim.keymap.set("n", "<leader>hg", "<cmd>HlSearchLensToggle<CR>", { desc = "Toggle hlslens" })
+            -- require("scrollbar.handlers.search").setup(opts)
+            require("hlslens").setup(opts)
+            vim.keymap.set("n", "<leader>hg", "<cmd>HlSearchLensToggle<CR>", { desc = "Toggle Hlslens" })
             vim.keymap.set({ "n", "x" }, "<leader>hl", function()
                 vim.schedule(function()
                     if require("hlslens").exportLastSearchToQuickfix() then
