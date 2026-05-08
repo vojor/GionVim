@@ -15,10 +15,8 @@ local function flush_notify(opts)
 
     local lines = {}
     local level = "info"
-
     for _, item in ipairs(notify_queue) do
         table.insert(lines, item.msg)
-
         if item.level == "error" then
             level = "error"
         elseif item.level == "warn" and level ~= "error" then
@@ -71,6 +69,7 @@ local function safe_require(mod)
     return ok, result
 end
 
+local report_timer = nil
 local function create_profiler(opts)
     if not opts.profile then
         return {
@@ -80,9 +79,11 @@ local function create_profiler(opts)
     end
 
     local stats = {}
-    local batch_msgs = {}
     local total_time, total, failed = 0, 0, 0
     local mode = opts.profile.mode or "prod"
+    local function get_short_name(fullname)
+        return fullname:match("([^.]+)$") or fullname
+    end
 
     return {
         record = function(mod, time, ok)
@@ -91,58 +92,69 @@ local function create_profiler(opts)
             if not ok then
                 failed = failed + 1
             end
-            table.insert(stats, { mod, time, ok })
-            if mode == "dev" then
-                table.insert(batch_msgs, string.format("%s %s (%.2fms)", ok and "✅" or "❌", mod, time))
-            end
+            table.insert(stats, { mod, time, ok, get_short_name(mod) })
         end,
 
         report = function()
             if total == 0 then
                 return
             end
-            table.sort(stats, function(a, b)
-                return a[2] > b[2]
-            end)
 
-            vim.schedule(function()
-                local final_report = {}
-                table.insert(final_report, "# 📊 Summary")
-                table.insert(final_report, string.format("- **Total Modules** : `%d`", total))
-                table.insert(final_report, string.format("- **Failed** : `%d`", failed))
-                table.insert(final_report, string.format("- **Total Time** : `%.2fms`", total_time))
+            if report_timer then
+                report_timer:stop()
+            end
+            report_timer = vim.defer_fn(function()
+                vim.schedule(function()
+                    local sorted_stats = {}
+                    for _, v in ipairs(stats) do
+                        table.insert(sorted_stats, v)
+                    end
+                    table.sort(sorted_stats, function(a, b)
+                        return a[2] > b[2]
+                    end)
 
-                if mode == "dev" then
-                    if #batch_msgs > 0 then
-                        table.insert(final_report, "\n---")
-                        table.insert(final_report, "## 🚀 Load Report")
+                    local final_report = {}
+                    table.insert(final_report, "📊 **Summary**")
+                    table.insert(final_report, string.format("- *Total Modules* : `%d`", total))
+                    table.insert(final_report, string.format("- *Failed* : `%d`", failed))
+                    table.insert(final_report, string.format("- *Total Time* : `%.2fms`", total_time))
+
+                    if mode == "dev" then
+                        table.insert(final_report, "\n" .. string.rep("━", 10) .. " 📦 " .. string.rep("━", 10))
+                        table.insert(final_report, "🚀 ***Load Report***")
+
                         local max_details = 15
-                        for i = 1, math.min(#batch_msgs, max_details) do
-                            table.insert(final_report, "- " .. batch_msgs[i])
-                        end
-                        if #batch_msgs > max_details then
-                            table.insert(
-                                final_report,
-                                string.format("\n*... and %d more items*", #batch_msgs - max_details)
-                            )
+                        for i = 1, math.min(#stats, max_details) do
+                            local item = stats[i]
+                            local icon = item[3] and "✅" or "❌"
+                            table.insert(final_report, string.format("%d. %s %s (%.2fms)", i, icon, item[4], item[2]))
                         end
                     end
 
-                    table.insert(final_report, "\n---")
-                    table.insert(final_report, "## 🐢 Top Slow Modules")
+                    table.insert(final_report, "\n" .. string.rep("━", 10) .. " 🚥 " .. string.rep("━", 10))
+                    table.insert(final_report, "🐢 ***Slow Modules***")
 
-                    local top_n = math.min(opts.profile.top or 5, #stats)
-                    for i = 1, top_n do
-                        local item = stats[i]
-                        table.insert(final_report, string.format("%d. %s (`%.2fms`)", i, item[1], item[2]))
+                    local threshold = opts.profile.threshold or 10
+                    local slow_count = 0
+                    local max_top = opts.profile.top or 5
+                    for i = 1, #sorted_stats do
+                        local item = sorted_stats[i]
+                        if item[2] > threshold and slow_count < max_top then
+                            slow_count = slow_count + 1
+                            table.insert(final_report, string.format("%d. %s (`%.2fms`)", slow_count, item[4], item[2]))
+                        end
                     end
-                end
+                    if slow_count == 0 then
+                        table.insert(final_report, "✨ *All modules loaded fast*")
+                    end
 
-                notify(table.concat(final_report, "\n"), failed > 0 and "error" or "info", {
-                    title = "LazyLoad Insights",
-                    timeout = mode == "dev" and 5000 or 3000,
-                })
-            end)
+                    notify(table.concat(final_report, "\n"), failed > 0 and "error" or "info", {
+                        title = "LazyLoad Insights",
+                        timeout = mode == "dev" and 5000 or 3000,
+                    })
+                end)
+                report_timer = nil
+            end, 200)
         end,
     }
 end
@@ -189,6 +201,10 @@ local function create_loader(root, opts, profiler)
 
         if opts.verbose then
             notify(string.format("%s %s (%.2fms)", ok and "✔" or "✘", full_mod_name, elapsed), "info")
+        end
+
+        if opts.profile then
+            profiler.report()
         end
 
         return ok
@@ -250,16 +266,6 @@ function M.setup(mod_root, opts)
                 end, { desc = "LazyLoad: " .. rule.module, silent = true })
             end
         end
-    end
-    if opts.profile then
-        vim.api.nvim_create_autocmd("VimEnter", {
-            once = true,
-            callback = function()
-                vim.defer_fn(function()
-                    profiler.report()
-                end, opts.profile.delay or 2000)
-            end,
-        })
     end
 end
 
