@@ -6,6 +6,8 @@ local notify_queue = {}
 local notify_timer = nil
 local notify_seen = {}
 
+local loading_status = {}
+
 local gion_group = vim.api.nvim_create_augroup("GionLazyLoad", { clear = true })
 
 local function flush_notify(opts)
@@ -186,9 +188,15 @@ local function create_loader(root, opts, profiler)
     return function(mod_name)
         local full_mod_name = mod_name:find(root, 1, true) == 1 and mod_name or (root .. "." .. mod_name)
 
+        if loading_status[full_mod_name] then
+            return false
+        end
+
         if package.loaded[full_mod_name] then
             return true, package.loaded[full_mod_name]
         end
+
+        loading_status[full_mod_name] = true
 
         if opts.callbacks and opts.callbacks.before_load then
             opts.callbacks.before_load(full_mod_name)
@@ -212,6 +220,8 @@ local function create_loader(root, opts, profiler)
                 notify(err_msg, "error", { title = "LazyLoad" })
             end
         end
+
+        loading_status[full_mod_name] = true
 
         if opts.callbacks and opts.callbacks.after_load then
             opts.callbacks.after_load(full_mod_name, ok)
@@ -281,8 +291,14 @@ function M.setup(mod_root, opts)
         if rule.keys then
             for _, key in ipairs(rule.keys) do
                 vim.keymap.set("n", key, function()
-                    if load(rule.module) and rule.post_action then
-                        rule.post_action()
+                    if load(rule.module) then
+                        vim.keymap.del("n", key)
+                        if rule.post_action then
+                            rule.post_action()
+                        else
+                            local feed = vim.api.nvim_replace_termcodes(key, true, true, true)
+                            vim.api.nvim_feedkeys(feed, "m", true)
+                        end
                     end
                 end, { desc = "LazyLoad: " .. rule.module, silent = true })
             end

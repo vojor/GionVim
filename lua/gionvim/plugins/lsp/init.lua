@@ -92,13 +92,14 @@ return {
                 jsonls = { "json", "jsonc" },
                 lemminx = { "xml" },
                 luals = { "lua" },
-                marksman = { "markdown", "markdown.mdx" },
+                marksman = { "markdown", "mdx" },
                 neocmake = { "cmake" },
                 tombi = { "toml" },
                 vimls = { "vim" },
                 yamlls = { "yaml" },
             })
             lazyload.setup("gionvim.plugins.lsp.langue", {
+                verbose = false,
                 mappings = mappings,
                 profile = {
                     mode = "dev",
