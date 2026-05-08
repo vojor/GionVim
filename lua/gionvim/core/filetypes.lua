@@ -4,6 +4,8 @@ vim.filetype.add({
         ["rofi"] = "rasi",
         ["wofi"] = "rasi",
         ["http"] = "http",
+        ["mdx"] = "mdx",
+        ["xsl"] = "xsl",
     },
     filename = {
         ["vifmrc"] = "vim",
