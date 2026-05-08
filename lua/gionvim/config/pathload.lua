@@ -1,10 +1,10 @@
 local M = {}
 
-local loaded = {}
 local cache = {}
 
 local notify_queue = {}
 local notify_timer = nil
+local notify_seen = {}
 
 local gion_group = vim.api.nvim_create_augroup("GionLazyLoad", { clear = true })
 
@@ -15,6 +15,7 @@ local function flush_notify(opts)
 
     local lines = {}
     local level = "info"
+
     for _, item in ipairs(notify_queue) do
         table.insert(lines, item.msg)
         if item.level == "error" then
@@ -25,6 +26,8 @@ local function flush_notify(opts)
     end
 
     notify_queue = {}
+    notify_seen = {}
+
     local msg = table.concat(lines, "\n")
 
     local final_opts = vim.tbl_extend("force", opts or {}, {
@@ -43,6 +46,12 @@ local function notify(msg, level, opts)
     opts = opts or {}
     opts.level = level or "info"
 
+    local key = opts.level .. ":" .. msg
+    if notify_seen[key] then
+        return
+    end
+    notify_seen[key] = true
+
     table.insert(notify_queue, { msg = msg, level = opts.level })
 
     if notify_timer then
@@ -55,7 +64,7 @@ local function notify(msg, level, opts)
     end, 100)
 end
 
-local function safe_require(mod)
+local function safe_require(mod, opts)
     if package.loaded[mod] then
         return true, package.loaded[mod]
     end
@@ -65,7 +74,13 @@ local function safe_require(mod)
     end
 
     local ok, result = xpcall(require, debug.traceback, mod)
-    cache[mod] = { ok = ok, res = result }
+
+    if ok or opts.cache_errors then
+        cache[mod] = {
+            ok = ok,
+            res = result,
+        }
+    end
     return ok, result
 end
 
@@ -127,7 +142,7 @@ local function create_profiler(opts)
                         for i = 1, math.min(#stats, max_details) do
                             local item = stats[i]
                             local icon = item[3] and "✅" or "❌"
-                            table.insert(final_report, string.format("%d. %s %s (%.2fms)", i, icon, item[4], item[2]))
+                            table.insert(final_report, string.format("%d. %s %s (`%.2fms`)", i, icon, item[4], item[2]))
                         end
                     end
 
@@ -152,6 +167,12 @@ local function create_profiler(opts)
                         title = "LazyLoad Insights",
                         timeout = mode == "dev" and 5000 or 3000,
                     })
+                    if mode ~= "dev" then
+                        stats = {}
+                        total_time = 0
+                        total = 0
+                        failed = 0
+                    end
                 end)
                 report_timer = nil
             end, 200)
@@ -165,31 +186,28 @@ local function create_loader(root, opts, profiler)
     return function(mod_name)
         local full_mod_name = mod_name:find(root, 1, true) == 1 and mod_name or (root .. "." .. mod_name)
 
-        if loaded[full_mod_name] then
-            return true
+        if package.loaded[full_mod_name] then
+            return true, package.loaded[full_mod_name]
         end
+
         if opts.callbacks and opts.callbacks.before_load then
             opts.callbacks.before_load(full_mod_name)
         end
 
         local start = vim.uv.hrtime()
-        local ok, err = safe_require(full_mod_name)
+        local ok, result = safe_require(full_mod_name, opts)
         local elapsed = (vim.uv.hrtime() - start) / 1e6
 
         profiler.record(full_mod_name, elapsed, ok)
-
-        if ok then
-            loaded[full_mod_name] = true
-        end
 
         if ok then
             if opts.callbacks and opts.callbacks.on_load then
                 opts.callbacks.on_load(full_mod_name, elapsed)
             end
         else
-            local err_msg = "LazyLoad Error: " .. full_mod_name .. "\n" .. (err or "")
+            local err_msg = "LazyLoad Error: " .. full_mod_name .. "\n" .. (result or "")
             if opts.callbacks and opts.callbacks.on_error then
-                opts.callbacks.on_error(full_mod_name, err, elapsed)
+                opts.callbacks.on_error(full_mod_name, result, elapsed)
             else
                 notify(err_msg, "error", { title = "LazyLoad" })
             end
@@ -200,7 +218,10 @@ local function create_loader(root, opts, profiler)
         end
 
         if opts.verbose then
-            notify(string.format("%s %s (%.2fms)", ok and "✔" or "✘", full_mod_name, elapsed), "info")
+            notify(
+                string.format("%s %s (`%.2fms`)", ok and "✔" or "✘", full_mod_name, elapsed),
+                ok and "info" or "error"
+            )
         end
 
         if opts.profile then
