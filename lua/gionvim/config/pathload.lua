@@ -7,8 +7,21 @@ local notify_timer = nil
 local notify_seen = {}
 
 local loading_status = {}
+local loaded_modules = {}
+
+local report_timer = nil
 
 local gion_group = vim.api.nvim_create_augroup("GionLazyLoad", { clear = true })
+
+local function safe_stop_timer(timer)
+    if timer then
+        if not timer:is_closing() then
+            timer:stop()
+            timer:close()
+        end
+    end
+    return nil
+end
 
 local function flush_notify(opts)
     if #notify_queue == 0 then
@@ -47,23 +60,23 @@ end
 local function notify(msg, level, opts)
     opts = opts or {}
     opts.level = level or "info"
-
     local key = opts.level .. ":" .. msg
+
     if notify_seen[key] then
         return
     end
     notify_seen[key] = true
-
     table.insert(notify_queue, { msg = msg, level = opts.level })
 
     if notify_timer then
         return
     end
 
+    local current_opts = vim.deepcopy(opts)
     notify_timer = vim.defer_fn(function()
-        flush_notify(opts)
+        flush_notify(current_opts)
         notify_timer = nil
-    end, 100)
+    end, 120)
 end
 
 local function safe_require(mod, opts)
@@ -77,6 +90,10 @@ local function safe_require(mod, opts)
 
     local ok, result = xpcall(require, debug.traceback, mod)
 
+    if ok then
+        result = package.loaded[mod]
+    end
+
     if ok or opts.cache_errors then
         cache[mod] = {
             ok = ok,
@@ -86,7 +103,6 @@ local function safe_require(mod, opts)
     return ok, result
 end
 
-local report_timer = nil
 local function create_profiler(opts)
     if not opts.profile then
         return {
@@ -118,8 +134,9 @@ local function create_profiler(opts)
             end
 
             if report_timer then
-                report_timer:stop()
+                report_timer = safe_stop_timer(report_timer)
             end
+
             report_timer = vim.defer_fn(function()
                 vim.schedule(function()
                     local sorted_stats = {}
@@ -140,7 +157,7 @@ local function create_profiler(opts)
                         table.insert(final_report, "\n" .. string.rep("━", 10) .. " 📦 " .. string.rep("━", 10))
                         table.insert(final_report, "🚀 ***Load Report***")
 
-                        local max_details = 15
+                        local max_details = opts.profile.max_details or 15
                         for i = 1, math.min(#stats, max_details) do
                             local item = stats[i]
                             local icon = item[3] and "✅" or "❌"
@@ -166,7 +183,7 @@ local function create_profiler(opts)
                     end
 
                     notify(table.concat(final_report, "\n"), failed > 0 and "error" or "info", {
-                        title = "LazyLoad Insights",
+                        title = "GionLazyLoad Insights",
                         timeout = mode == "dev" and 5000 or 3000,
                     })
                     if mode ~= "dev" then
@@ -185,61 +202,88 @@ end
 local function create_loader(root, opts, profiler)
     root = root:gsub("%.$", "")
 
-    return function(mod_name)
+    local function load(mod_name)
         local full_mod_name = mod_name:find(root, 1, true) == 1 and mod_name or (root .. "." .. mod_name)
 
+        if loaded_modules[full_mod_name] then
+            return true, package.loaded[full_mod_name]
+        end
         if loading_status[full_mod_name] then
+            notify("Check circular dependency: " .. full_mod_name, "warn")
             return false
         end
 
         if package.loaded[full_mod_name] then
+            loaded_modules[full_mod_name] = true
             return true, package.loaded[full_mod_name]
         end
 
-        loading_status[full_mod_name] = true
+        loading_status[full_mod_name] = "loading"
 
-        if opts.callbacks and opts.callbacks.before_load then
-            opts.callbacks.before_load(full_mod_name)
-        end
-
-        local start = vim.uv.hrtime()
-        local ok, result = safe_require(full_mod_name, opts)
-        local elapsed = (vim.uv.hrtime() - start) / 1e6
-
-        profiler.record(full_mod_name, elapsed, ok)
-
-        if ok then
-            if opts.callbacks and opts.callbacks.on_load then
-                opts.callbacks.on_load(full_mod_name, elapsed)
+        local success, load_ok, load_result = pcall(function()
+            local deps = opts.dependencies and opts.dependencies[mod_name]
+            if deps then
+                for _, dep in ipairs(deps) do
+                    local val_ok = load(dep)
+                    if not val_ok then
+                        error("Dependency failed: " .. dep)
+                    end
+                end
             end
-        else
-            local err_msg = "LazyLoad Error: " .. full_mod_name .. "\n" .. (result or "")
-            if opts.callbacks and opts.callbacks.on_error then
-                opts.callbacks.on_error(full_mod_name, result, elapsed)
+
+            if opts.callbacks and opts.callbacks.before_load then
+                opts.callbacks.before_load(full_mod_name)
+            end
+
+            local start = vim.uv.hrtime()
+            local _ok, _result = safe_require(full_mod_name, opts)
+            local elapsed = (vim.uv.hrtime() - start) / 1e6
+
+            profiler.record(full_mod_name, elapsed, _ok)
+
+            if _ok then
+                loaded_modules[full_mod_name] = true
+
+                if opts.callbacks and opts.callbacks.on_load then
+                    opts.callbacks.on_load(full_mod_name, elapsed)
+                end
             else
-                notify(err_msg, "error", { title = "LazyLoad" })
+                local err_msg = "LazyLoad Error: " .. full_mod_name .. "\n" .. (_result or "")
+                if opts.callbacks and opts.callbacks.on_error then
+                    opts.callbacks.on_error(full_mod_name, _result, elapsed)
+                else
+                    notify(err_msg, "error", { title = "GionLazyLoad" })
+                end
             end
-        end
 
-        loading_status[full_mod_name] = true
+            if opts.verbose then
+                notify(
+                    string.format("%s %s (`%.2fms`)", _ok and "✔" or "✘", full_mod_name, elapsed),
+                    _ok and "info" or "error"
+                )
+            end
+            return _ok, _result
+        end)
+
+        loading_status[full_mod_name] = nil
+
+        if not success then
+            notify("Loader Critical Error: " .. tostring(load_ok), "error")
+            return false
+        end
 
         if opts.callbacks and opts.callbacks.after_load then
-            opts.callbacks.after_load(full_mod_name, ok)
-        end
-
-        if opts.verbose then
-            notify(
-                string.format("%s %s (`%.2fms`)", ok and "✔" or "✘", full_mod_name, elapsed),
-                ok and "info" or "error"
-            )
+            opts.callbacks.after_load(full_mod_name, load_ok)
         end
 
         if opts.profile then
             profiler.report()
         end
 
-        return ok
+        return load_ok, load_result
     end
+
+    return load
 end
 
 function M.build_mappings(groups)
@@ -292,15 +336,15 @@ function M.setup(mod_root, opts)
             for _, key in ipairs(rule.keys) do
                 vim.keymap.set("n", key, function()
                     if load(rule.module) then
-                        vim.keymap.del("n", key)
+                        pcall(vim.keymap.del, "n", key)
                         if rule.post_action then
                             rule.post_action()
                         else
                             local feed = vim.api.nvim_replace_termcodes(key, true, true, true)
-                            vim.api.nvim_feedkeys(feed, "m", true)
+                            vim.api.nvim_feedkeys(feed, "nt", true)
                         end
                     end
-                end, { desc = "LazyLoad: " .. rule.module, silent = true })
+                end, { desc = "GionLazyLoad: " .. rule.module, silent = true })
             end
         end
     end
