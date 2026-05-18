@@ -58,7 +58,7 @@ return {
                 jsonc = { "biomejs" },
                 -- lua = { "selene" },
                 make = { "checkmake" },
-                markdown = { "markdownlint-cli2" },
+                markdown = { "markdownlint-cli2", "panache" },
                 python = { "ruff" },
                 sh = { "bash", "shellcheck" },
                 -- sql = { "sqlfluff" },
