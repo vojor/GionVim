@@ -67,7 +67,7 @@ return {
                     local result = { "lsp", "path", "snippets", "buffer" }
                     if
                         vim.tbl_contains({ "markdown", "text", "tex", "norg", "conf" }, vim.bo.filetype)
-                        or require("gionvim.config.inscomt").inside_comment_block()
+                        or require("gionvim.config.comment_inside").is_inside()
                     then
                         table.insert(result, "datword")
                     end
